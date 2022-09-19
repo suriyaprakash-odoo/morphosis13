@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="view_stock_container_valuation" model="ir.ui.view">
+		<field name="name">stock.container.valuation.view.form</field>
+		<field name="model">stock.container.valuation</field>
+		<field name="arch" type="xml">
+			<form string="Stock Container Valuation">
+				<sheet>
+					<group>
+							
+						<!-- <field name="picking_container_ids" style="pointer-events: none;" widget="many2many_tags"/> -->
+					
+						<field name="loaded_container_ids" options="{'no_create_edit': True}" widget="many2many_tags"  />	
+						<!-- domain="[('state','not in',['open','to_be_sold'])]" -->
+
+						<field name="loaded_donar_container_ids" options="{'no_create_edit': True}" widget="many2many_tags" domain="[('project_id','!=',False)]" />	
+
+						<!-- domain="[('state','not in',['new','cancel']),('project_id','!=',False)]" -->
+
+					</group>
+
+					<group>
+						<field name="show_missing_containers" invisible="1"/>
+						<field name="warehouse_done_containers" invisible="1"/>
+						<field name="show_missing_donar_containers" invisible="1"/>
+						<field name="warehouse_done_donar_containers" invisible="1"/>
+
+						<button name="check_missing_containers" string="Check Missing Containers" type="object" class="btn-primary"/>
+
+						<div stirng="color:darkgreen;font-size:15px;font-weight:bold;" attrs="{'invisible': ['|', '&amp;', ('message','=',False),('show_missing_containers', '=', True),('warehouse_done_containers', '=', True)]}">
+							<field name="message" readonly="1" force_save="1"/>
+						</div>
+					</group>
+
+					<notebook attrs="{'invisible': [('show_missing_containers', '=', False),('warehouse_done_containers', '=', False),('show_missing_donar_containers', '=', False),('warehouse_done_donar_containers', '=', False)]}">
+
+						<page string="Missing Stock Containers" attrs="{'invisible': [('show_missing_containers', '=', False)]}">
+							<group>
+							
+								<group>
+									<field name="select_all"/>
+								</group>
+
+								<group>
+									<button name="update_to_open1" string="Open" type="object" class="btn-secondary"/>
+
+									<button name="update_to_sale1" string="Closed/To Sale" type="object" class="btn-secondary"/>
+
+									<button name="update_to_done_stock_container" string="Done" type="object" class="btn-secondary"/>
+								</group>
+							</group>
+							<field name="container_missing_ids">
+								<tree create="0" editable="bottom">
+									<field name="select_field" string="Select"/>
+									<field name="name" readonly="1"/>
+									<field name="state"/>
+									<field name="content_type"/>
+									<field name="container_type"/>
+									<field name="project_id"/>
+									<field name="picking_id"/>
+									
+								</tree>
+								<form create="0">
+									<sheet>
+										<group>
+											<field name="name" readonly="1"/>
+											<field name="content_type"/>
+											<field name="container_type"/>
+											<field name="project_id"/>
+											<field name="picking_id"/>
+										</group>
+									</sheet>
+								</form>
+							</field>
+						</page>
+
+						<page string="Missing Warehouse Stock Containers" attrs="{'invisible': [('warehouse_done_containers', '=', False)]}">
+							<group>
+								<group>
+									<field name="select_all_warehouse"/>
+								</group>
+								<group>
+									<button name="update_to_open" string="Open" type="object" class="btn-secondary"/>
+
+									<button name="update_to_sale" string="Closed/To Sale" type="object" class="btn-secondary"/>
+								</group>
+							</group>
+							<field name="warehouse_missing_ids">
+								<tree create="0" editable="bottom">
+									<field name="select_field" string="Select"/>
+									<field name="name" readonly="1"/>
+									<field name="state"/>
+									<field name="content_type"/>
+									<field name="container_type"/>
+									<field name="project_id"/>
+									<field name="picking_id"/>
+								</tree>
+								<form create="0">
+									<sheet>
+										<group>
+											<field name="name" readonly="1"/>
+											<field name="content_type"/>
+											<field name="container_type"/>
+											<field name="project_id"/>
+											<field name="picking_id"/>
+										</group>
+									</sheet>
+								</form>
+							</field>
+						</page>
+
+						<page string="Missing Donar Containers" attrs="{'invisible': [('show_missing_donar_containers', '=', False)]}">
+							<group>
+								
+								<group>
+									<field name="select_all_donar"/>
+								</group>
+								<group>
+									<button name="update_to_confirm_donar" string="Confirm" type="object" class="btn-secondary"/>
+
+									<button name="update_to_close_donar" string="Close" type="object" class="btn-secondary"/>
+								</group>
+							</group>
+							<field name="project_container_missing_ids">
+								<tree create="0" editable="bottom">
+									<field name="select_field" string="Select"/>
+									<field name="name" readonly="1"/>
+									<field name="state"/>
+									<field name="content_type"/>
+									<field name="container_type_id"/>
+									<field name="project_id"/>
+									<field name="picking_id"/>
+								</tree>
+								<form create="0">
+									<sheet>
+										<group>
+											<field name="name" readonly="1"/>
+											<field name="content_type"/>
+											<field name="container_type_id"/>
+											<field name="project_id"/>
+											<field name="picking_id"/>
+										</group>
+									</sheet>
+								</form>
+							</field>
+						</page>
+
+						<page string="Missing Warehouse Donar Containers" attrs="{'invisible': [('warehouse_done_donar_containers', '=', False)]}">
+							<group>
+								<group>
+									<field name="select_all_warehouse_donar"/>
+								</group>
+								<group>
+									<button name="update_to_confirm_warehouse_donar" string="Confirm" type="object" class="btn-secondary"/>
+
+									<button name="update_to_close_warehouse_donar" string="Close" type="object" class="btn-secondary"/>
+								</group>
+							</group>
+							<field name="project_warehouse_missing_ids">
+								<tree create="0" editable="bottom">
+									<field name="select_field" string="Select"/>
+									<field name="name" readonly="1"/>
+									<field name="state"/>
+									<field name="content_type"/>
+									<field name="container_type_id"/>
+									<field name="project_id"/>
+									<field name="picking_id"/>
+								</tree>
+								<form create="0">
+									<sheet>
+										<group>
+											<field name="name" readonly="1"/>
+											<field name="content_type"/>
+											<field name="container_type_id"/>
+											<field name="project_id"/>
+											<field name="picking_id"/>
+										</group>
+									</sheet>
+								</form>
+							</field>
+						</page>
+						
+
+					</notebook>
+
+				</sheet>
+				<footer>
+					<!-- <button name="complete_process" string="Complete Process" type="object" class="btn-primary"/> -->
+					<button name="stock_container_tree_view" string="Open Stock Container View" type="object" class="btn-primary"/>
+					<button name="project_container_tree_view" string="Open Donar Container View" type="object" class="btn-primary"/>
+
+					<button string="Close" class="btn-secondary" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="action_stock_container_valuation" model="ir.actions.act_window">
+		<field name="name">Stock Container Valuation</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">stock.container.valuation</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_stock_container_valuation"/>
+		<field name="target">new</field>
+	</record>
+
+
+    <menuitem name="Stock Container Valuation" id="menu_stock_container_valuation_report" parent="ppts_inventory_customization.menu_project_report" action="ppts_inventory_customization.action_stock_container_valuation"
+	groups='ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager' sequence="3"/>
+
+
+	<!-- <record id="view_stock_container_missing_form" model="ir.ui.view">
+		<field name="name">stock.container.missing.view.form</field>
+		<field name="model">stock.container.missing</field>
+		<field name="arch" type="xml">
+			<form string="Stock Container Missing">
+				<sheet>
+					<group>
+						
+						<field name="name" readonly="1" force_save="1"/>
+						<field name="content_type"/>
+						<field name="container_type"/>
+						<field name="project_id"/>
+						<field name="picking_id"/>
+						<field name="state"/>
+									
+					</group>
+
+
+				</sheet>
+				
+			</form>
+		</field>
+	</record>
+
+	<record id="view_stock_container_missing_tree" model="ir.ui.view">
+		<field name="name">stock.container.missing.view.tree</field>
+		<field name="model">stock.container.missing</field>
+		<field name="arch" type="xml">
+			<tree string="Stock Container Missing">
+		
+				<field name="name" readonly="1" force_save="1"/>
+				<field name="content_type"/>
+				<field name="container_type"/>
+				<field name="project_id"/>
+				<field name="picking_id"/>
+				<field name="state"/>
+			
+			</tree>
+		</field>
+	</record> -->
+	
+
+
+</odoo>

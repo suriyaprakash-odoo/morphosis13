@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="seq_refining_containers" model="ir.sequence">
+		<field name="name">Refining Container Seq</field>
+		<field name="code">refining.container.seq</field>
+		<field name="prefix">CA/%(y)s/%(woy)s/</field>
+		<field name="padding">3</field>
+		<field name="company_id" eval="False"/>
+	</record>
+
+	<record id="project_entries_form_view_inherit_refining" model="ir.ui.view">
+		<field name="name">project.entries.form</field>
+		<field name="model">project.entries</field>
+		<field name="inherit_id" ref="ppts_project_entries.project_entries_form_view"/>
+		<field name="arch" type="xml">
+			<!--<xpath expr="//div[@name='button_box']" position="inside">
+				<button name="create_sub_contract" string="Subcontract" class="oe_stat_button" icon="fa-retweet" type="object"/>
+				<button name="create_manufacturing" string="Create MO" class="oe_stat_button" icon="fa-cogs" type="object"/>
+			</xpath>-->
+			<xpath expr="//page[2]" position="after">
+				<page string="Refining Containers" attrs="{'invisible':[('project_type','!=','refine')]}">
+					<field name="refining_containers">
+						<tree editable="bottom">
+							<field name='project_id' invisible='1' />
+							<field name="refining_sample_id" options="{'no_create_edit': True}" />
+							<field name="product_id" required="1" options="{'no_create_edit': True}"/>
+							<field name="container_type_id" required="1" options="{'no_create_edit': True}"/>
+							<field name="gross_weight" required="1"/>
+							<field name="tare_weight" required="1"/>
+							<field name="net_weight" required="1"/>
+							<!-- <field name="adr_id" options="{'no_create_edit': True}"/>
+							<field name="un_id" options="{'no_create_edit': True}"/> -->
+							<field name="seal_number"/>
+							<field name="name" readonly="1"/>
+						</tree>
+					</field>
+				</page>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

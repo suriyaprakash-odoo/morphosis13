@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="assets_backend1" name="web_widget_color assets1" inherit_id="web.assets_backend">
+		<xpath expr="." position="inside">
+			<script type="text/javascript" src="/ppts_inventory_customization/static/src/js/timer.js"></script>
+		</xpath>
+	</template>
+
+
+	<menuitem name="Production" id="menu_project_production" parent="ppts_project_entries.menu_project_custom" groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="03"/>
+	<menuitem name="Report" id="menu_project_report" parent="ppts_project_entries.menu_project_custom" groups="ppts_inventory_customization.group_production_manager"/>
+
+	<record id="seq_containers" model="ir.sequence">
+		<field name="name">Project Container Sequence</field>
+		<field name="code">project.container.seq</field>
+		<field name="prefix">C</field>
+		<field name="padding">5</field>
+		<field name="company_id" eval="False"/>
+	</record>
+
+	<record id="action_close_fractions" model="ir.actions.server">
+		<field name="name">Close Fractions</field>
+		<field name="model_id" ref="ppts_inventory_customization.model_project_container"/>
+		<field name="binding_model_id" ref="ppts_inventory_customization.model_project_container"/>
+		<field name="state">code</field>
+		<field name="code">
+			if record:
+			action = record.close_fractions_bulk()
+		</field>
+	</record>
+
+	<record id="action_create_actions" model="ir.actions.server">
+		<field name="name">Create Action Plan</field>
+		<field name="model_id" ref="ppts_inventory_customization.model_project_container"/>
+		<field name="binding_model_id" ref="ppts_inventory_customization.model_project_container"/>
+		<field name="state">code</field>
+		<field name="code">
+			if record:
+			action = record.create_container_actions()
+		</field>
+	</record>
+
+	<record id="close_container_sever_action" model="ir.actions.server">
+		<field name="name">Close Container</field>
+		<field name="model_id" ref="ppts_inventory_customization.model_project_container"/>
+		<field name="binding_model_id" ref="ppts_inventory_customization.model_project_container"/>
+		<field name="state">code</field>
+		<field name="code">
+			if record:
+			action = record.close_container_wizard()
+		</field>
+	</record>
+
+	<record id="group_container_sever_action" model="ir.actions.server">
+		<field name="name">Group Containers</field>
+		<field name="model_id" ref="ppts_inventory_customization.model_project_container"/>
+		<field name="binding_model_id" ref="ppts_inventory_customization.model_project_container"/>
+		<field name="state">code</field>
+		<field name="code">
+			if record:
+			action = record.group_container_wizard()
+		</field>
+	</record>
+
+	<record id="create_lead_from_rc" model="ir.actions.server">
+		<field name="name">Create Lead</field>
+		<field name="model_id" ref="ppts_inventory_customization.model_stock_container"/>
+		<field name="binding_model_id" ref="ppts_inventory_customization.model_stock_container"/>
+		<field name="state">code</field>
+		<field name="code">
+			if record:
+			action = record.create_lead_from_rc()
+		</field>
+	</record>
+
+	<record id="second_process_from_rc" model="ir.actions.server">
+		<field name="name">Second Process</field>
+		<field name="model_id" ref="ppts_inventory_customization.model_stock_container"/>
+		<field name="binding_model_id" ref="ppts_inventory_customization.model_stock_container"/>
+		<field name="state">code</field>
+		<field name="code">
+			if record:
+			action = record.second_process_from_rc()
+		</field>
+	</record>
+
+	<record id="project_container_form_view" model="ir.ui.view">
+		<field name="name">project.container.form</field>
+		<field name="model">project.container</field>
+		<field name="arch" type="xml">
+			<form string="Project Container">
+				<header>
+					<button name="print_barcode" type="object" string="Print Label" class="oe_highlight" />
+					<button name="confirm_container" type="object" string="Confirm Container" class="oe_highlight" states="new" attrs="{'invisible':['|',('is_child_container','!=',False)]}"/>
+					<!--<button name="calculate_gross_weight" type="object" string="Calculate Gross" class="oe_highlight" attrs="{'invisible':['|',('is_child_container','==',True),('state' , 'not in' , 'new')]}"/>-->
+					<button name="re_confirm_container" type="object" string="Reconfirm/Return Container" class="oe_highlight" states="non_conformity,dangerous" attrs="{'invisible':['|',('is_child_container','!=',False)]}"/>
+					<!--<button name="send_back_to_vendor" type="object" string="Return Container" class="oe_highlight" states="non_conformity,dangerous"/>-->
+					<button name="%(action_container_to_inprogress)d" type="action" string="Move to Production" class="oe_highlight" attrs="{'invisible':['|','|',('state','not in',['confirmed','planned']),('is_child_container','!=',False)]}"/>
+					<button name="close_container_wizard_button" type="object" string="Close Container" class="oe_highlight" states="in_progress" attrs="{'invisible':['|',('is_child_container','!=',False)]}"/>
+					<field name="state" widget="statusbar" statusbar_visible="new,confirmed,planned,in_progress,close"/>
+					<button name="complete_non_conformity_cross_dock" string="Complete Cross Dock" class="oe_highlight" type="object" attrs="{'invisible': ['|',('cross_dock', '=', False),('state', 'not in', ['confirmed','close'])]}"/>
+					
+				</header>
+				<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button class="oe_stat_button" type="object" states="in_progress" style="width: 145px;"
+								name="create_fractions" icon="fa-th-large" string="PSM Fraction">
+								<!-- Fraction PSM(FR)/PSM Fraction(EN) -->
+						</button>
+
+						<button class="oe_stat_button" type="object" states="in_progress,close"
+								name="action_create_fractions" icon="fa-th">
+							<field name="fraction_count" widget="statinfo" string="Fractions"/>
+						</button>
+
+						<button class="oe_stat_button" type="object" states="return" string="Create Return Order" name="action_create_return_order" icon="fa-arrow-circle-left">
+						</button>
+					</div>
+					<div style="margin-top:0px;">
+						<widget name="web_ribbon" text="Time Updated" attrs="{'invisible': [('is_time_updated', '=', False)]}"/>
+					</div>
+					<h1 class="d-none d-md-block">
+						<field name="name" readonly="1"/>
+					</h1>
+
+					<group>
+						<group>
+							<field name='project_id' attrs="{
+								'readonly':[('state','not in',('new','confirmed'))],
+								'required':[('second_process' , '=' , False)],
+								'invisible':[('second_process' , '!=' , False)]
+								}" options="{'no_create_edit': True}"/>
+							<field name='partner_ref'/>
+							<!-- <field name='project_entry_line_id' attrs="{								'invisible':[('second_process' , '!=' , False)]
+								}" options="{'no_create_edit': True}"/> -->
+							<field name='picking_id' attrs="{
+								'readonly':[('state','not in',('new','confirmed'))],
+								'required':[('second_process' , '=' , False)],
+								'invisible':[('second_process' , '!=' , False)]
+								}" options="{'no_create_edit': True}"/>
+							<field name="partner_id" attrs="{'readonly':[('state','not in',('new','confirmed'))]}" options="{'no_create_edit': True}"/>
+							<field name="vendor_ref" attrs="{'readonly':[('state','not in',('new','confirmed'))]}"/>
+							<!--<field name="fifteen_day_notice" attrs="{-->
+								<!--'readonly':[('state','not in',('new','confirmed'))],-->
+								<!--'required':[('second_process' , '=' , False)],-->
+								<!--'invisible':[('second_process' , '!=' , False)]-->
+								<!--}"/>-->
+							<field name="pricing_type" invisible="1"/>
+							<field name="fifteen_days_date" attrs="{
+								'readonly':[('state','not in',('new','confirmed'))],
+								'invisible':[('pricing_type' , '!=' , 'variable')]
+								}"/>
+							<field name='container_type_id' attrs="{'readonly':[('state','=','close')]}" options="{'no_create_edit': True}"/>
+							<field name="gross_weight" attrs="{'readonly':[('state','=','close')]}"/>
+							<field name="extra_tare"/>
+							<field name="net_gross_weight"/>
+							<field name="quantity" attrs="{'readonly':[('state','not in',('new','confirmed','in_progress'))]}"/>
+							<field name="cross_dock" invisible="1"/>
+							<field name="second_process" attrs="{'readonly':[('state','=','close')]}" invisible="1"/>
+							<field name="is_time_updated" invisible="1"/>
+							<field name="remaining_weight"/>
+							<field name="description"/>
+							<!--<field name='content_type' attrs="{'readonly':[('state','not in',('new','confirmed'))]}" options="{'no_create_edit': True}"/>-->
+							<field name="container_cost" string='Estimated Container Cost' />
+							<field name="actual_container_cost" />
+							<field name="declared" />
+						</group>
+						<group>
+							<field name="company_id" invisible="0"/>
+							<field name="return_shipment_id" states="return" readonly="1"/>
+							<field name='main_product_id' required="1" attrs="{'readonly':[('state','=','close')]}" options="{'no_create_edit': True,'no_open': True}"/>
+							<field name="sub_product_id" required="1" attrs="{'readonly':[('state','=','close')]}" options="{'no_create_edit': True,'no_open': True}"/>
+							<field name="action_type" attrs="{'required': [('second_process', '=', 'False')],'readonly':[('state','=','close')]}"/>
+							<field name="external_action_type" attrs="{'required': [('action_type', '=', 'external')],'invisible': [('action_type', '!=', 'external')],'readonly':[('state','=','close')]}" />
+							<field name="second_process_action_type" attrs="{'invisible': [('second_process', '=', 'False')],'readonly':[('state','=','close')]}" />
+							<field name='confirmation' attrs="{'readonly':[('state','=','close')]}"/>
+							<field name="location_id" attrs="{'readonly':[('state','=','close')]}" options="{'no_create_edit': True}"/>
+							<field name="returnable_container" string="Reusable Container"/>
+							<!--<field name="reuse_barcode" attrs="{'invisible':[('returnable_container' , '=' ,False)]}"/>-->
+							<field name="is_registered_package"/>
+							<field name="chronopost_number" attrs="{
+									'invisible':[('is_registered_package' , '=' , False)],
+									'required':[('is_registered_package' , '!=' , False)],
+									'readonly':[('state','not in',('new','confirmed'))]
+									}"/>
+							<label for="is_child_container" attrs="{
+									'invisible':[('child_count' , '!=' , 0)]
+									}"/>
+							<div attrs="{
+									'invisible':[('child_count' , '!=' , 0)]
+									}">
+								<field name="is_child_container" attrs="{
+									'readonly':[('state','=','close')],
+									'invisible':[('child_count' , '!=' , 0)]
+									}"/>
+								<field name="parent_container_id" placeholder="Select Parent Container" style="width:90%"
+									   attrs="{'required': [('is_child_container', '=', True)],'invisible':[('is_child_container','!=',True)],'readonly':[('state','=','close')]}"/>
+							</div>
+							<field name="child_count" invisible="1"/>
+							<field name="cnt_type" invisible="1"/>
+							<field name="reconfirmed" invisible="1"/>
+							<field name="penalty_amount" attrs="{'invisible':[('reconfirmed','!=',True)]}" readonly="1"/>
+							<field name="non_conformity_type" readonly="1" attrs="{'invisible':[('state','not in',('non_conformity','return'))]}"/>
+							<field name="net_weight" readonly="1" attrs="{'invisible':[('state','!=','close')]}"/>
+							<!-- <field name="container_cost" /> -->
+							<field name="spot_value"/>
+							<field name="have_batteries" attrs="{'invisible':[('is_registered_package','=',False)]}"/>
+							<field name="batteries_weight" attrs="{'invisible':[('have_batteries','=',False)],'required':[('have_batteries','!=',False)]}"/>
+							<field name="not_received" attrs="{'invisible':[('is_registered_package','=',False)]}"/>
+							<field name="not_received_reason" attrs="{'invisible':[('not_received','=',False)],'required':[('not_received','!=',False)]}"/>
+
+						</group>
+					</group>
+					<group style="border: 2px solid #1d8e10;; background: #fcfcfc; box-shadow: 1px 1px 5px 1px #88ce00;" attrs="{'invisible': [('state', 'not in', ('in_progress','close'))]}">
+						<div class="col-12">
+							<div class="col-6" style="float:left;padding:10px;text-align: center;margin-top: 4px;">
+								<label for="task_timer" style="width: 125px; font-weight: bold;"/>
+								<div class="o_row" style="display: inline-block;">
+									<field name="task_timer" widget="boolean_toggle" attrs="{'readonly':[('state','=','close')]}"/>
+								</div>
+							</div>
+							<div class="col-6" style="float:left;padding:10px;">
+								<field name="is_user_working" invisible="1"/>
+								<div>
+									<label for="duration" style="width: 110px; font-weight: bold;"/>
+									<button style="pointer-events: none;" class="oe_inline label label-default">
+										<field name="duration" id="real_duration" widget="timesheet_uoms" style="color: red;"/>
+									</button>
+								</div>
+							</div>
+						</div>
+					</group>
+					<group>
+						<group>
+							<label for="total_time" string="Work Duration(Minutes)" style="width: 150px;"/>
+							<div>
+								<field name="total_time" widget="float_time" class="oe_inline"/>
+								<button name="update_work_time" type="object" string="Update Time" class="oe_link" groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager"/>
+							</div>
+						</group>
+						<group><field name="operator_ids" widget="many2many_tags" options="{'no_create_edit':True}" /></group>
+					</group>
+
+					<notebook>
+						<page string="Cross Dock" invisible="1">
+							<field name="cross_dock_lines" context="{'default_sub_product_id': sub_product_id,'default_container_type_id': container_type_id,'default_location_id':location_id}">
+								<tree editable="bottom">
+									<field name="weight" required="1"/>
+									<field name="container_type_id" invisible="1"/>
+									<field name="location_id" invisible="1"/>
+									<field name="sub_product_id" invisible="1"/>
+									<field name="cross_dock" invisible="1"/>
+									<field name="recp_id" required="1"
+										   context="{'default_container_type_id': container_type_id,'default_location_id':location_id,'default_content_type_id': sub_product_id,'default_cross_dock':True}"/>
+									<field name="rcp_name"/>
+								</tree>
+							</field>
+						</page>
+						<page string="Grouped Containers" attrs="{'invisible': [('child_count', '=', 0)]}">
+							<field name="child_container_ids" nolabel="1">
+								<tree>
+									<field name="name"/>
+									<field name="partner_id"/>
+									<field name="net_gross_weight"/>
+								</tree>
+							</field>
+						</page>
+						<page string="Notes">
+							<group>
+								<field name="notes" nolabel="1" placeholder="Notes"/>
+							</group>
+						</page>
+						<page string="Action Plan" attrs="{'invisible': ['|',('cross_dock','!=',False),('state', 'not in', ('confirmed','planned','in_progress','close'))]}">
+							<group>
+								<group>
+									<field name="action_date" attrs="{'readonly':[('state','=','close')]}"/>
+
+								</group>
+								<group>
+									<field name="action_date_end" attrs="{'readonly':[('state','=','close')]}"/>
+									<!--<field name="supervisor_id" attrs="{'readonly':[('state','=','close')]}" options="{'no_create_edit': True}"/>-->
+									<!--<field name="worker_ids" widget="many2many_tags" attrs="{'readonly':[('state','=','close')]}" options="{'no_create_edit': True}"/>-->
+								</group>
+							</group>
+						</page>
+						<page string="Work Duration" attrs="{'invisible': [('state', 'not in', ('in_progress','close'))]}">
+							<div style="margin-top:7px;">
+								<widget name="web_ribbon" text="Started" attrs="{'invisible': [('task_timer', '=', False)]}"/>
+							</div>
+							<group>
+								<field name="contractor_rate" invisible="1"/>
+								<field name="ea_rate" invisible="1"/>
+								<field name="standard_rate" invisible="1"/>
+							</group>
+
+							<group string="Timings">
+								<field name="timesheet_ids" nolabel="1" readonly="1">
+									<tree>
+										<field name="date_start" required="1"/>
+										<field name="date_end"/>
+										<field name="timer_duration" invisible="1"/>
+										<field name="unit_amount" invisible="1"/>
+										<field name="user_id" invisible="1"/>
+										<field name="container_id" invisible="1"/>
+									</tree>
+								</field>
+							</group>
+							<group>
+								<field name="currency_id" invisible="1"/>
+								<field name="fr_count" invisible="1"/>
+							</group>
+						</page>
+					</notebook>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+					<field name="message_ids" widget="mail_thread"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="container_work_order_calendar" model="ir.ui.view">
+		<field name="name">project.container.calendar</field>
+		<field name="model">project.container</field>
+		<field name="arch" type="xml">
+			<calendar date_stop="action_date_end" date_start="action_date" string="Actions" color="project_id" mode="month" quick_add="False" event_limit="5">
+				<field name="project_id"/>
+				<field name="main_product_id"/>
+				<field name="action_type"/>
+				<!--<field name="supervisor_id"/>-->
+				<!--<field name="worker_ids"/>-->
+				<field name="state"/>
+			</calendar>
+		</field>
+	</record>
+
+
+	<record id="project_container_tree_view" model="ir.ui.view">
+		<field name="name">project.container.tree</field>
+		<field name="model">project.container</field>
+		<field name="arch" type="xml">
+			<tree string="Project Container">
+				<field name='name'/>
+				<field name='project_id'/>
+				<field name='picking_id'/>
+				<field name="partner_id"/>
+				<field name='container_type_id'/>
+				<field name="main_product_id"/>
+				<field name="sub_product_id"/>
+				<field name='gross_weight' sum="Gross Weight"/>
+				<field name='net_weight' sum="Fraction Net Weight"/>
+				<field name="volume" sum="Volume"/>
+				<field name="supervisor_id"/>
+				<field name="location_id"/>
+				<field name="action_date"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="project_container_filters" model="ir.ui.view">
+		<field name="name">project.container.search</field>
+		<field name="model">project.container</field>
+		<field name="arch" type="xml">
+			<search string="Project Container">
+				<field name="name" string="Sequence"/>
+				<field name="project_id" string="Project"/>
+				<field name="container_type_id" string="Container Type"/>
+				<field name='content_type' string="Content Type"/>
+				<separator/>
+				<filter string="15 Day Notice" name="fifteen_day_notice" domain="[('fifteen_day_notice','!=', False)]"/>
+				<group expand="1" string="Group By">
+					<filter string="Sequence" name="group_by_name" domain="[]" context="{'group_by':'name'}"/>
+					<filter string="Project" name="group_project_id" domain="[]" context="{'group_by':'project_id'}"/>
+					<field string="15 Day Notice" name="fifteen_day_notice" domain="[]" context="{'group_by':'fifteen_day_notice'}"/>
+					<filter string="Primary Type" name="group_main_product_id" domain="[]" context="{'group_by':'main_product_id'}"/>
+					<filter string="Secondary Type" name="group_sub_product_id" domain="[]" context="{'group_by':'sub_product_id'}"/>
+					<filter string="Container Type" name="container_type_id" domain="[]" context="{'group_by':'container_type_id'}"/>
+					<field string="Supervisor" name="supervisor_id" domain="[]" context="{'group_by':'supervisor_id'}"/>
+					<field string="Child/Parent" name="cnt_type" domain="[]" context="{'group_by':'cnt_type'}"/>
+					<field string="Status" name="state" domain="[]" context="{'group_by':'state'}"/>
+				</group>
+			</search>
+		</field>
+	</record>
+
+	<record id="action_containers_list_main_view" model="ir.actions.act_window">
+		<field name="name">Containers</field>
+		<field name="res_model">project.container</field>
+		<field name="view_mode">tree,form,calendar</field>
+		<field name="search_view_id" ref="project_container_filters"/>
+		<field name="view_id" ref="project_container_tree_view"/>
+		<field name="context">{"search_default_group_project_id":True}</field>
+		<field name="domain">[('is_child_container','=',False)]</field>
+	</record>
+
+
+	<record id="action_create_containers" model="ir.actions.act_window">
+		<field name="name">Containers</field>
+		<field name="res_model">project.container</field>
+		<field name="view_mode">tree,form,calendar</field>
+		<field name="search_view_id" ref="project_container_filters"/>
+		<field name="view_id" ref="project_container_tree_view"/>
+		<field name="context">{"search_default_group_project_id":True}</field>
+	</record>
+
+	<!-- <record id="action_view_calendar_container" model="ir.actions.act_window.view">
+		<field name="act_window_id" ref="action_containers_list_main_view"/>
+		<field name="sequence" eval="1"/>
+		<field name="view_mode">calendar</field>
+		<field name="view_id" ref="container_work_order_calendar"/>
+	</record>
+
+	<record id="action_view_calendar_container_tree" model="ir.actions.act_window.view">
+		<field name="act_window_id" ref="action_containers_list_main_view"/>
+		<field name="sequence" eval="2"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="project_container_tree_view"/>
+	</record>
+
+	<record id="action_view_calendar_container_form" model="ir.actions.act_window.view">
+		<field name="act_window_id" ref="action_containers_list_main_view"/>
+		<field name="sequence" eval="3"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="project_container_form_view"/>
+	</record> -->
+
+
+	<record id="action_create_action_container" model="ir.actions.act_window">
+		<field name="name">Create Action Plan</field>
+		<field name="res_model">project.container</field>
+		<field name="view_mode">tree,form,calendar</field>
+		<field name="search_view_id" ref="project_container_filters"/>
+		<field name="view_id" ref="project_container_tree_view"/>
+		<field name="domain">[('state','=','confirmed'),('is_child_container','=',False)]</field>
+		<field name="context">{"search_default_group_project_id":True}</field>
+	</record>
+
+
+	<record id="action_open_containers_menu" model="ir.actions.act_window">
+		<field name="name">Open/Close Containers</field>
+		<field name="res_model">project.container</field>
+		<field name="view_mode">tree,form,calendar</field>
+		<field name="search_view_id" ref="project_container_filters"/>
+		<field name="view_id" ref="project_container_tree_view"/>
+		<field name="domain">[('state','=','in_progress'),('is_child_container','=',False)]</field>
+		<field name="context">{"search_default_group_project_id":True}</field>
+	</record>
+
+	<!--<record id="action_close_containers_menu" model="ir.actions.act_window">
+		<field name="name">Close Containers</field>
+		<field name="res_model">project.container</field>
+		<field name="view_mode">tree,form,calendar</field>
+		<field name="search_view_id" ref="project_container_filters"/>
+		<field name="view_id" ref="project_container_tree_view"/>
+		<field name="domain">[('state','=','in_progress'),('is_child_container','=',False)]</field>
+		<field name="context">{"search_default_group_project_id":True}</field>
+	</record>-->
+
+	<record id="action_non_confirmed_containers" model="ir.actions.act_window">
+		<field name="name">Non Confirmed Containers</field>
+		<field name="res_model">project.container</field>
+		<field name="view_mode">tree,form,calendar</field>
+		<field name="search_view_id" ref="project_container_filters"/>
+		<field name="view_id" ref="project_container_tree_view"/>
+		<field name="domain">[('state','=','non_conformity'),('is_child_container','=',False)]</field>
+		<field name="context">{"search_default_group_project_id":True}</field>
+	</record>
+
+	<record id="action_create_new_containers" model="ir.actions.act_window">
+		<field name="name">Create Containers</field>
+		<field name="res_model">project.container</field>
+		<field name="view_mode">tree,form,calendar</field>
+		<field name="search_view_id" ref="project_container_filters"/>
+		<field name="view_id" ref="project_container_tree_view"/>
+		<field name="domain">[('state','=','new'),('is_child_container','=',False)]</field>
+		<field name="context">{"search_default_group_project_id":True}</field>
+	</record>
+
+	<record id="action_planned_container" model="ir.actions.act_window">
+		<field name="name">Planned Containers</field>
+		<field name="res_model">project.container</field>
+		<field name="view_mode">tree,form,calendar</field>
+		<field name="search_view_id" ref="project_container_filters"/>
+		<field name="view_id" ref="project_container_tree_view"/>
+		<field name="domain">[('state','=','planned'),('is_child_container','=',False)]</field>
+		<field name="context">{"search_default_group_project_id":True}</field>
+	</record>
+
+
+
+	<menuitem name="Containers" id="menu_project_containers_main" parent="menu_project_production" groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="02"/>
+	<menuitem name="Containers List" id="menu_create_project_containers" parent="menu_project_containers_main" action="action_containers_list_main_view"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="01"/>
+	<menuitem name="Create Containers" id="menu_create_containers_bulk" parent="menu_project_containers_main" action="create_container_action"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="02"/>
+	<menuitem name="Update Chronopost" id="menu_update_chronopost" parent="menu_project_containers_main" action="action_update_chronopost"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="03"/>
+	<!--<menuitem name="Create Containers" id="menu_create_containers" parent="menu_project_containers_main" action="action_create_new_containers"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="02"/>-->
+	<menuitem name="Create Action Plan" id="menu_close_actions_containers" parent="menu_project_containers_main" action="action_create_action_container"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="04"/>
+	<menuitem name="Planned Containers" id="menu_open_planned_containers" parent="menu_project_containers_main" action="action_planned_container"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="05"/>
+	<menuitem name="Open/Close Containers" id="menu_open_project_containers" parent="menu_project_containers_main" action="action_open_containers_menu"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="06"/>
+	<!--<menuitem name="Close Containers" id="menu_close_project_containers" parent="menu_project_containers_main" action="action_close_containers_menu"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="05"/>-->
+	<menuitem name="Non Confirmed Containers" id="menu_non_confirmed_containers" parent="menu_project_containers_main" action="action_non_confirmed_containers"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="07"/>
+
+
+	<!-- Incoming Shipment Menu action -->
+
+	<record id="action_production_incoming_shipment_view" model="ir.actions.act_window">
+		<field name="name">Incoming Shipment</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">stock.picking</field>
+		<field name="view_mode">tree,kanban,form,calendar</field>
+		<field name="domain">[('picking_type_code','=','incoming'),('state','not in',('done','cancel'))]</field>
+		<field name="context">{"search_default_status":True}</field>
+	</record>
+
+
+	<!-- Outgoing Shipment Menu action -->
+
+	<record id="action_production_outgoing_shipment_view" model="ir.actions.act_window">
+		<field name="name">Outgoing Shipment</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">stock.picking</field>
+		<field name="view_mode">tree,kanban,form,calendar</field>
+		<field name="domain">[('picking_type_code','=','outgoing'),('state','not in',('done','cancel'))]</field>
+		<field name="context">{"search_default_status":True}</field>
+	</record>
+
+
+	<menuitem name="Shipments" id="menu_shipments_main" parent="menu_project_production" groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="03"/>
+	<menuitem name="Incoming Shipment" id="menu_incoming_shipment" parent="menu_shipments_main" action="action_production_incoming_shipment_view"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="01"/>
+	<menuitem name="Outgoing Shipment" id="menu_outgoing_shipment" parent="menu_shipments_main" action="action_production_outgoing_shipment_view"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="02"/>
+
+	<menuitem name="Search" id="menu_search_main_project" parent="menu_project_production" groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="10"/>
+	<menuitem name="Search Project" id="menu_search_project" parent="menu_search_main_project" action="ppts_logistics.action_search_chronopost_project" groups='ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager' sequence="1"/>
+
+	<record id="container_type_master_form_view" model="ir.ui.view">
+		<field name="name">container.type.form</field>
+		<field name="model">container.type</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<group>
+							<field name="name" required="1"/>
+							<field name="tare_weight"/>
+							<field name="capacity_weight" string="Capacity Weight(kg)"/>
+						</group>
+						<group>
+							<!-- <field name="container_dimentions" placeholder="80x120"/> -->
+							<field name="reusable_container"/>
+							<field name="stock_volume"/>
+						</group>
+						<group string="Dimensions">
+							<field name="container_length"/>
+							<field name="container_width"/>
+							<field name="container_height"/>
+						</group>
+						<group string="Multi-Product">
+							<field name="is_multi_product" />
+							<field name="primary_content_type_id" attrs="{'invisible':[('is_multi_product','=', False)],'required':[('is_multi_product','!=', False)]}" />
+							<field name="secondary_content_type_id" widget="many2many_tags" attrs="{'invisible':[('is_multi_product','=', False)],'required':[('is_multi_product','!=', False)]}" />
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="container_type_master_tree_view" model="ir.ui.view">
+		<field name="name">container.type.tree</field>
+		<field name="model">container.type</field>
+		<field name="arch" type="xml">
+			<tree string="Container Type">
+				<field name="name"/>
+				<field name="tare_weight"/>
+				<field name="capacity_weight"/>
+				<field name="container_length"/>
+				<field name="container_width"/>
+				<field name="container_height"/>
+				<!--<field name="reusable_container"/>-->
+				<field name="stock_volume"/>
+				<field name="is_multi_product"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_container_type_master" model="ir.actions.act_window">
+		<field name="name">Container Type</field>
+		<field name="res_model">container.type</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem name="Container Type" id="menu_container_type_master" parent="stock.menu_stock_inventory_control" action="action_container_type_master" groups="stock.group_stock_manager"/>
+
+
+	<record id="seq_recipient_containers" model="ir.sequence">
+		<field name="name">Recipient Container Sequence</field>
+		<field name="code">recipient.container.seq</field>
+		<field name="prefix">CS/%(y)s/%(woy)s/</field>
+		<field name="padding">4</field>
+		<field name="company_id" eval="False"/>
+	</record>
+
+
+	<record id="stock_container_form_view" model="ir.ui.view">
+		<field name="name">stock.container.form</field>
+		<field name="model">stock.container</field>
+		<field name="arch" type="xml">
+			<form>
+				<header>
+					<field name="state" widget="statusbar"/>
+					<button name="close_container" string="Close Container" class="btn-primary" type="object" attrs="{'invisible': [('state', '!=', 'open')]}"/>
+					
+					<button name="%(action_update_stock_container_weight)d" string="Update Weight" class="btn-primary" type="action" attrs="{'invisible': [('state','not in',('open','to_be_sold'))]}"/>
+
+					<button name="%(action_partially_sell_containers)d" string="Sell Partially"
+							context="{'default_container_id':active_id}" class="btn-primary" type="action" states="to_be_sold,second_process"
+							attrs="{'invisible': [('is_scrap_container', '=', False),('is_vrac' , '=' , False)]}"/>
+				</header>	
+				<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button class="oe_stat_button" type="object" name="open_sale_orders"
+								icon="fa-eur" string="Sale Orders" attrs="{'invisible': [('so_count', '=', 0)]}">
+						</button>
+					</div>
+					<widget name="web_ribbon" text="Sold" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>	
+					<h1>
+						<field name="name" readonly="1"/>
+					</h1>
+					<group>
+						<group>
+							<field name="active" invisible="1"/>
+							<field name="is_multi_product_container" />
+							<field name="content_type_id" attrs="{
+								'invisible':[('is_multi_product_container','!=',False)],
+								'required':[('is_multi_product_container','=',False)]
+								}" />
+							<field name='sub_product_name' />
+							<field name="primary_content_type_id" attrs="{
+								'invisible':[('is_multi_product_container','=',False)],
+								'required':[('is_multi_product_container','!=',False)]
+								}" />
+							<field name="secondary_content_type_id" attrs="{
+								'invisible':[('is_multi_product_container','=',False)],
+								'required':[('is_multi_product_container','!=',False)]
+								}" widget="many2many_tags" />
+							<field name="container_type_id" required="1"/>
+							<field name="tare_weight"/>
+							<field name="absolute_tare_weight"/>
+							<field name="net_weight_dup" invisible="1"/>
+							<field name="total_number_of_pieces_dup" invisible="1"/>
+							<field name="forecast_sale_price_dup" invisible="1"/>
+							<field name="cross_dock" invisible="0"/>
+							<field name="potential_sales_cost"/>
+							<field name="is_imported_stock" invisible="1"/>
+							<field name="existing_barcode" attrs="{'invisible':[('is_imported_stock','=',False)]}"/>
+							<field name="client_name" attrs="{'invisible':[('is_imported_stock','=',False)]}"/>
+							<field name="sale_order_ids" invisible="1"/>
+							<field name="so_count" invisible="1"/>
+						</group>
+						<group>
+							<field name="max_weight" string="Maximum Load" required="1"/>
+							<field name="gross_weight" />
+							<field name="currency_id" invisible="1"/>
+							<field name="created_date" readonly="1"/>
+							<field name="is_scrap_container"/>
+							<field name="is_vrac"/>
+							<field name="container_specific" required="1"/>
+							<field name="location_id" required="1"/>
+							<field name="related_company_id" required="1"/>
+							<field name="is_container_full" invisible="1"/>
+							<field name="is_first_tare_update" invisible="1"/>
+						</group>
+						<group string="Cross Dock Details" attrs="{'invisible':[('cross_dock','=',False)]}">
+							<field name="project_id" style="pointer-events: none;" />
+							<!-- <field name="project_entry_line_id" style="pointer-events: none;" /> -->
+							<field name="picking_id" style="pointer-events: none;" />
+							<field name="estimated_container_cost" />
+							<field name="container_cost" string='Actual Container Cost'/>
+							<!-- <field name="container_cost" style="pointer-events: none;" /> -->
+							<field name="partner_id" style="pointer-events: none;" />
+							<field name="source_container_id" style="pointer-events: none;" />
+							<field name="penalty_amount" style="pointer-events: none;" />
+						</group>
+					</group>
+					<notebook>
+						<page string="Fractions">
+							<field name="fraction_line_ids" readonly="1" style="pointer-events: none;" nolabel="1">
+								<tree>
+									<field name="name" invisible="1"/>
+									<field name="fraction_id"/>
+									<field name="supplier_id"/>
+									<field name="weight"/>
+									<field name="number_of_pieces"/>
+									<field name="uom_id"/>
+									<field name="currency_id" invisible="1"/>
+									<field name="production_cost"/>
+									<field name="is_to_sell" invisible="1"/>
+									<field name="sale_order_id" invisible="1"/>
+								</tree>
+							</field>
+							<group class="oe_subtotal_footer oe_right" name="rc_weight">
+								<field name="volume" class="oe_subtotal_footer_separator"/>
+								<field name="net_weight" class="oe_subtotal_footer_separator" attrs="{'invisible': [('container_specific', '=', 'count')]}"/>
+								<field name="total_number_of_pieces" class="oe_subtotal_footer_separator" attrs="{'invisible': [('container_specific', '=', 'weight')]}"/>
+								<field name="forecast_sale_price" class="oe_subtotal_footer_separator"/>
+							</group>
+							<div class="oe_clear"/>
+						</page>
+					</notebook>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+					<field name="message_ids" widget="mail_thread"/>
+				</div>
+			</form>
+		</field>
+	</record>
+
+	<record id="stock_container_tree_view" model="ir.ui.view">
+		<field name="name">stock.container.tree</field>
+		<field name="model">stock.container</field>
+		<field name="arch" type="xml">
+			<tree string="Stock Container">
+				<field name="name"/>
+				<field name="content_type_id"/>
+				<field name='partner_id'/>
+				<field name="tare_weight" sum="Tare Weight"/>
+				<field name="gross_weight" sum="Gross Weight"/>
+				<field name="net_weight" sum="Net Weight" invisible="1"/>
+				<field name="net_weight_dup" sum="Net Weight"/>
+				<field name="total_number_of_pieces" sum="Number of Pieces" invisible="1"/>
+				<field name="total_number_of_pieces_dup" sum="Number of Pieces"/>
+				<field name="volume"/>
+				<field name="forecast_sale_price_dup" sum="Production Cost" widget = "monetary" invisible="1"/>
+				<field name="forecast_sale_price" sum="Production Cost" widget = "monetary"/>
+				<field name="cost_per_ton" sum="Cost per Tonne" widget = "monetary" invisible="1"/>
+				<field name="cost_per_ton_dup" sum="Cost per Tonne" widget = "monetary"/>
+				<field name="currency_id" invisible="1"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="stock_container_filters" model="ir.ui.view">
+		<field name="name">stock.container.search</field>
+		<field name="model">stock.container</field>
+		<field name="arch" type="xml">
+			<search string="Stock Container">
+				<field name="name" string="Sequence"/>
+				<field name="container_type_id" string="Container Type"/>
+				<field name='content_type_id' string="Content Type"/>
+				<field name='sub_product_name' string="Product Name"/>
+				<field name='partner_id' string="Client"/>
+				<separator/>
+				<group expand="1" string="Group By">
+					<filter string="Container Type" name="container_type_id" domain="[]" context="{'group_by':'container_type_id'}"/>
+					<filter string="Content Type" name="content_type" domain="[]" context="{'group_by':'content_type_id'}"/>
+					<filter string="Product Name" name="sub_product_name" domain="[]" context="{'group_by':'sub_product_name'}"/>
+					<filter string="Client" name="partner_id" domain="[]" context="{'group_by':'partner_id'}"/>
+					<field name="state" string="State" domain="[]" context="{'group_by':'state'}"/>
+				</group>
+				<filter string="Sold" name="sold" domain="[('active','=',False)]"/>
+			</search>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="purchase_order_pivot">
+		<field name="name">stock.container.pivot</field>
+		<field name="model">stock.container</field>
+		<field name="arch" type="xml">
+			<pivot string="Stock Container">
+				<field name="create_date" interval="week" type="row"/>
+				<field name="name" type="row"/>
+				<field name="net_weight_dup" type="measure"/>
+				<field name="forecast_sale_price_dup" type="measure"/>
+			</pivot>
+		</field>
+	</record>
+
+
+	<record id="action_stock_container" model="ir.actions.act_window">
+		<field name="name">Stock Container</field>
+		<field name="res_model">stock.container</field>
+		<field name="view_mode">tree,form,pivot</field>
+		<field name="search_view_id" ref="stock_container_filters"/>
+		<field name="view_id" ref="stock_container_tree_view"/>
+		<field name="domain">[('is_vrac','=',False),('location_id.access_user_ids','=',uid)]</field>
+	</record>
+
+	<menuitem name="Stock" id="menu_stock_container_main" parent="ppts_project_entries.menu_project_custom" groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager"/>
+	<menuitem name="Stock Container" id="menu_stock_container_master" parent="menu_stock_container_main" action="action_stock_container"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager"/>
+
+
+	<record id="action_vrac_container" model="ir.actions.act_window">
+		<field name="name">Vrac Containers</field>
+		<field name="res_model">stock.container</field>
+		<field name="view_mode">tree,form</field>
+		<field name="search_view_id" ref="stock_container_filters"/>
+		<field name="view_id" ref="stock_container_tree_view"/>
+		<field name="domain">[('is_vrac','=',True),('location_id.access_user_ids','=',uid)]</field>
+		<field name="context"></field>
+	</record>
+
+	<menuitem name="Vrac Container" id="menu_vrac_container_master" parent="menu_stock_container_main" action="action_vrac_container"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager"/>
+
+	<record id="action_production_load_unload" model="ir.actions.act_window">
+		<field name="name">Load/Unload Truck</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">stock.picking</field>
+		<field name="view_mode">tree,kanban,form,calendar</field>
+		<field name="domain">[('state','=','load_unload'),('is_unloaded','=',False)]</field>
+	</record>
+
+	<menuitem name="Load/Unload Truck" id="menu_load_unload" action="ppts_inventory_customization.action_production_load_unload" parent="ppts_logistics.menu_logistics_custom"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" sequence="4"/>
+
+</odoo>

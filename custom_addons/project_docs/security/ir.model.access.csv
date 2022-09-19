@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_docs_user,project.docs,project_docs.model_project_docs,ppts_inventory_customization.group_production_supervisor,1,1,1,0
+access_project_docs_manager,project.docs,project_docs.model_project_docs,ppts_inventory_customization.group_production_manager,1,1,1,1

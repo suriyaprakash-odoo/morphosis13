@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="stock_barcode.assets_backend" name="stock_barcode assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/ppts_custom_barcode/static/src/js/stock_barcode.js"></script>
+                <script type="text/javascript" src="/stock_barcode/static/src/js/forms/picking_barcode_handler.js"></script>
+                <script type="text/javascript" src="/stock_barcode/static/src/js/forms/lot_barcode_handler.js"></script>
+                <script type="text/javascript" src="/stock_barcode/static/src/js/stock_picking_type.js"></script>
+                <script type="text/javascript" src="/stock_barcode/static/src/js/stock_picking.js"></script>
+                <script type="text/javascript" src="/stock_barcode/static/src/js/tours/running_tour_action_helper.js"></script>
+                <script type="text/javascript" src="/stock_barcode/static/src/js/tours/tour_test_barcode_flows.js"></script>
+                <script type="text/javascript" src="/stock_barcode/static/src/js/client_action/header_widget.js"></script>
+                <script type="text/javascript" src="/stock_barcode/static/src/js/client_action/lines_widget.js"></script>
+                <script type="text/javascript" src="/stock_barcode/static/src/js/client_action/views_widget.js"></script>
+                <script type="text/javascript" src="/stock_barcode/static/src/js/client_action/settings_widget.js"></script>
+                <script type="text/javascript" src="/ppts_custom_barcode/static/src/js/abstract_client_action.js"></script>
+                
+                <script type="text/javascript" src="/stock_barcode/static/src/js/client_action/picking_client_action.js"></script>
+                <script type="text/javascript" src="/stock_barcode/static/src/js/client_action/inventory_client_action.js"></script>
+                <link rel="stylesheet" type="text/scss" href="/stock_barcode/static/src/scss/stock_barcode.scss"/>
+                <link rel="stylesheet" type="text/scss" href="/stock_barcode/static/src/scss/client_action.scss"/>
+            </xpath>
+
+        </template>
+        <!-- <template id="assets_backend_mobile_barcode_inherit" name="stock_barcode assets" inherit_id="stock_barcode.assets_backend">
+            <xpath expr="//script" position="replace">
+                <script type="text/javascript" src="/ppts_custom_barcode/static/src/js/stock_mobile_barcode.js"></script>
+            </xpath>
+            <xpath expr="//script[12]" position="replace">
+                <script type="text/javascript" src="/ppts_custom_barcode/static/src/js/abstract_client_action.js"></script>
+            </xpath>
+        </template> -->
+	</data>
+</odoo>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="psm_pricelist_form_view" model="ir.ui.view">
+		<field name="name">psm_pricelist.form</field>
+		<field name="model">psm.pricelist</field>
+		<field name="arch" type="xml">
+			<form string="PSM Pricelist">
+				<sheet>
+					<widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+					<div class="oe_title">
+						<label for="name"/>
+						<h1>
+							<field name="name" placeholder="Pricelist Name" required="1"/>
+						</h1>
+					</div>
+					<group>
+						<group>
+							<field name="start_date" required="1"/>
+							<field name="end_date" required="1"/>
+						</group>
+						<group>
+							<field name="active"/>
+							<field name="company_id"/>
+						</group>
+					</group>
+
+					<notebook>
+						<page string="Pricelist Line">
+							<field name="pricelist_line">
+								<tree editable="bottom">
+									<field name="product_id" required="1"/>
+									<field name="price" required="1"/>
+								</tree>
+								<form>
+									<group>
+										<field name="product_id" required="1"/>
+										<field name="price" required="1"/>
+									</group>
+								</form>
+							</field>
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="psm_pricelist_tree_view" model="ir.ui.view">
+		<field name="name">psm_pricelist.tree</field>
+		<field name="model">psm.pricelist</field>
+		<field name="arch" type="xml">
+			<tree string="PSM Pricelist">
+				<field name="name"/>
+				<field name="start_date"/>
+				<field name="end_date"/>
+				<field name="company_id"/>
+			</tree>
+		</field>
+	</record>
+
+	<!--<record id="psm_pricelist_search_view" model="ir.ui.view">
+		<field name="name">psm_pricelist.search</field>
+		<field name="model">psm.pricelist</field>
+		<field name="arch" type="xml">
+			<search string="ModelTitle">
+				<group expand="1" string="Group By">
+					<filter string="Example Field" name="example_field" domain="[]" context="{'group_by':'example_field'}"/>
+				</group>
+			</search>
+		</field>
+	</record>-->
+
+	<record id="psm_pricelist_act_window" model="ir.actions.act_window">
+		<field name="name">PSM Pricelists</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">psm.pricelist</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="oe_view_nocontent_create">
+				There is no examples click here to add new ModelTitle.
+			</p>
+		</field>
+	</record>
+
+	<menuitem name="PSM Pricelists" id="psm_pricelist_menu" parent="purchase.menu_purchase_config" action="psm_pricelist_act_window"/>
+
+
+	<record id="psm_view_update_purchase_order" model="ir.ui.view">
+		<field name="name">update.purchase.order.form</field>
+		<field name="model">update.purchase.order</field>
+		<field name="inherit_id" ref="ppts_inventory_customization.view_update_purchase_order"/>
+		<field name="arch" type="xml">
+			<xpath expr="//group/group[1]" position="after">
+				<group>
+					<field name="psm_pricelist" options="{'no_create_edit': True}"/>
+				</group>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

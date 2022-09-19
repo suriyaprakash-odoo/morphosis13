@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_order_form_logistics_inherited" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button type="object" name="action_view_transport_rfq"
+                    class="oe_stat_button"
+                    icon="fa-bus" attrs="{'invisible': [('transport_rfq_count', '=', 0)]}">
+                    <field name="transport_rfq_count" widget="statinfo" string="Transport RFQ" nolable="1"/>
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="is_transport_rfq" invisible="1" />
+                <field name="logistics_id" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

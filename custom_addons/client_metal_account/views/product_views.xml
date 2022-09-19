@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="product_template_form_view_inherited_new" model="ir.ui.view">
+		<field name="name">product.template.customization</field>
+		<field name="model">product.template</field>
+		<field name="inherit_id" ref="product.product_template_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='categ_id']" position="after">
+				<field name="is_metal" invisible="1"/>
+				<field name="precious_metal" attrs="{'invisible': [('is_metal', '=', False)]}"/>
+				<field name="reuse_container" invisible="1"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="product_category_form_view_new" model="ir.ui.view">
+		<field name="name">product.category.customization</field>
+		<field name="model">product.category</field>
+		<field name="inherit_id" ref="product.product_category_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='parent_id']" position="after">
+				<field name="is_metal"/>
+				<field name="precious_location_id"  style="width: 265px;"
+					   attrs="{'invisible': [('is_metal', '=', False)],'required': [('is_metal', '!=', False)]}"/>
+				<field name="reuse_container"/>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

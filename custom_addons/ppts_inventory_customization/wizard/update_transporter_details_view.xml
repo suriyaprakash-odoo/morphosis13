@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_update_transport_details" model="ir.ui.view">
+        <field name="name">update.transporter.details.view.form</field>
+        <field name="model">update.transporter.details</field>
+        <field name="arch" type="xml">
+            <form string="Update Transporter Details">
+            	<sheet>
+					<group>
+						<group>
+							<field name="partner_id" required="1"/>	
+							<field name="date_of_pickup" required="1"/>	
+							<field name="no_of_containers" required="1"/>	
+						</group>
+						<group>
+							<field name="gross_weight" required="1" />
+							<field name="expected_delivery" required="1"/>	
+							
+							<label for='expected_delivery_start_time' string="Time Duration"/>
+							<div>
+								<field name='expected_delivery_start_time' style="width:15%" widget="float_time"/>
+								-
+								<field name='expected_delivery_end_time' style="width:15%" widget="float_time"/>
+							</div>
+						</group>
+					</group>
+				</sheet>
+                <footer>
+                    <button name="update_transport_details" string="Update" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="action_update_transport_details" model="ir.actions.act_window">
+		<field name="name">Update Transporter Details</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">update.transporter.details</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_update_transport_details" />
+		<field name="target">new</field>
+	</record>
+
+</odoo>

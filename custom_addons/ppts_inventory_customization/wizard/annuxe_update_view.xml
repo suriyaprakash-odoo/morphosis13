@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="annexe_update_view" model="ir.ui.view">
+        <field name="name">update.annexe.wizard</field>
+        <field name="model">update.annexe.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Update Annexe">
+                <group>
+                    <!--<separator string='Section1'/>-->
+                    <group>
+                        <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 1 Emetteur</span>
+                        <field name="number_bsd"/>
+                        <field name="company_id"/>
+                        <label for="pickup_street" string="Pickup Address"/>
+                        <div class="o_address_format">
+                            <field name="pickup_street" class="o_address_street"/>
+                            <field name="pickup_zip" class="o_address_zip"/>
+                            <field name="pickup_city" class="o_address_city"/>
+                            <field name="pickup_state_id" class="o_address_state"/>
+                            <field name="pickup_countries_id" class="o_address_country"/>
+                        </div>
+                        <field name="phone"/>
+                        <field name="email"/>
+                        <field name="contact_person_in"/>
+                        <field name="contact_person_out"/>
+                    </group>
+                    <group>
+                        <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 2 Importer/Consignee</span>
+                        <field name="delivery_partner_id"/>
+                        <label for="delivery_street" string="Pickup Address"/>
+                        <div class="o_address_format">
+                            <field name="delivery_street" class="o_address_street"/>
+                            <field name="delivery_zip" class="o_address_zip"/>
+                            <field name="delivery_city" class="o_address_city"/>
+                        </div>
+                        <field name="delivery_phone"/>
+                        <field name="delivery_email"/>
+                    </group>
+                </group>
+                <group>
+                    <!--<separator string='Section2'/>-->
+
+                    <group>
+                        <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 3 Actual Quantity</span>
+                        <field name="gross_weight_on_bridge"/>
+                    </group>
+                    <group>
+                        <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 4 Actual Date of Shipment</span>
+                        <field name="expected_delivery"/>
+                    </group>
+                </group>
+                <group>
+                    <!--<separator string='Section3'/>-->
+                    <group>
+                        <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 5a Transporter 1</span>
+                        <field name="transporter1"/>
+                        <label for="transporter1_street" string="Pickup Address"/>
+                        <div class="o_address_format">
+                            <field name="transporter1_street" class="o_address_street"/>
+                            <field name="transporter1_zip" class="o_address_zip"/>
+                            <field name="transporter1_city" class="o_address_city"/>
+                        </div>
+                        <field name="transporter1_phone"/>
+                        <field name="transporter1_email"/>
+                        <field name="transport1_contact"/>
+                        <field name="scheduled_date"/>
+
+                    </group>
+
+                    <group>
+                        <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 5b Transporter 2</span>
+                        <field name="is_transporter2" string="Include Transporter2"/>
+                        <field name="transporter2" attrs="{'invisible': [('is_transporter2', '=', False)]}"/>
+                        <label for="transporter2_street" string="Pickup Address"  attrs="{'invisible': [('is_transporter2', '=', False)]}"/>
+                        <div class="o_address_format"  attrs="{'invisible': [('is_transporter2', '=', False)]}">
+                            <field name="transporter2_street" class="o_address_street"/>
+                            <field name="transporter2_zip" class="o_address_zip"/>
+                            <field name="transporter2_city" class="o_address_city"/>
+                        </div>
+                        <field name="transporter2_phone"  attrs="{'invisible': [('is_transporter2', '=', False)]}"/>
+                        <field name="transporter2_email" attrs="{'invisible': [('is_transporter2', '=', False)]}"/>
+                        <field name="transport2_contact" attrs="{'invisible': [('is_transporter2', '=', False)]}"/>
+                        <field name="second_carrier" attrs="{'invisible': [('is_transporter2', '=', False)]}"/>
+
+                    </group>
+                </group>
+                <group>
+                    <!--<separator string='Section4'/>-->
+
+                    <group>
+                        <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 5c Transporter 3</span>
+                        <field name="is_transporter3" string="Include Transporter3"/>
+                        <label for="transporter3_street" string="Pickup Address"  attrs="{'invisible': [('is_transporter3', '=', False)]}"/>
+                        <div class="o_address_format"  attrs="{'invisible': [('is_transporter3', '=', False)]}">
+                            <field name="transporter3_street" class="o_address_street"  attrs="{'invisible': [('is_transporter3', '=', False)]}"/>
+                            <field name="transporter3_zip" class="o_address_zip"  attrs="{'invisible': [('is_transporter3', '=', False)]}"/>
+                            <field name="transporter3_city" class="o_address_city" attrs="{'invisible': [('is_transporter3', '=', False)]}"/>
+                        </div>
+                        <field name="transporter3_phone" attrs="{'invisible': [('is_transporter3', '=', False)]}"/>
+                        <field name="transporter3_email" attrs="{'invisible': [('is_transporter3', '=', False)]}"/>
+                        <field name="transport3_contact" attrs="{'invisible': [('is_transporter3', '=', False)]}"/>
+                        <field name="third_carrier" attrs="{'invisible': [('is_transporter3', '=', False)]}"/>
+                    </group>
+                    <group>
+                        <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 6 Waste Generator</span>
+
+                        <field name="client"/>
+                        <label for="client_street" string="Pickup Address"/>
+                        <div class="o_address_format">
+                            <field name="client_street" class="o_address_street"/>
+                            <field name="client_zip" class="o_address_zip"/>
+                            <field name="client_city" class="o_address_city"/>
+                        </div>
+                        <field name="client_phone"/>
+                        <field name="client_email"/>
+                        <field name="client_contact"/>
+                    </group>
+                </group>
+                <group>
+                    <!--<separator string='Section5'/>-->
+                    <group>
+                        <field name="contractor"/>
+                        <label for="contractor_street" string="Pickup Address"/>
+                        <div class="o_address_format">
+                            <field name="contractor_street" class="o_address_street"/>
+                            <field name="contractor_zip" class="o_address_zip"/>
+                            <field name="contractor_city" class="o_address_city"/>
+                        </div>
+                        <field name="contractor_phone"/>
+                        <field name="contractor_email"/>
+                        <field name="contractor_contact"/>
+                    </group>
+                    <group>
+                        <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 8 Recovery Operation</span>
+                        <field name="buyer_treatment_code"/>
+                        <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 9 Usual Description of the waste</span>
+                        <field name="material_type"/>
+                        <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 10 Recovery Operation</span>
+                        <field name="waste_code"/>
+                    </group>
+                </group>
+                <group>
+                    <!--<separator string='Section6'/>-->
+                    <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 11 Countries Concerned</span>
+                    <field name="despatch_country"/>
+                    <field name="transit_country_1"/>
+                    <field name="transit_country_2"/>
+                    <field name="destination_country"/>
+                    <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 12 Declaration</span>
+                    <field name="declaration_date"/>
+                    <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 12 Date of reception</span>
+                    <field name="reception_date"/>
+                    <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 13 Confirmed Quantity</span>
+                    <field name="confirmed_quantity"/>
+                </group>
+                <footer>
+                    <button name="update_annexe" string="Update Annexe" type="object" class="btn btn-sm btn-primary"/>
+                    <button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="annexe_update_view_action" model="ir.actions.act_window">
+        <field name="name">Update Annexe7</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">update.annexe.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="annexe_update_view" />
+        <field name="target">new</field>
+    </record>
+</odoo>

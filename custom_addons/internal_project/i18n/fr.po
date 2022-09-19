@@ -1,0 +1,278 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* internal_project
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-12 08:33+0000\n"
+"PO-Revision-Date: 2020-08-12 08:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: internal_project
+#: code:addons/internal_project/models/internal_project.py:0
+#, python-format
+msgid "2nd Process Containers"
+msgstr "2ème conteneurs de processus"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__action_type
+msgid "Action Type"
+msgstr "Type d’action"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__partner_id
+msgid "Client Name"
+msgstr "Propriétaire"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__company_id
+msgid "Company"
+msgstr "Compagnie"
+
+#. module: internal_project
+#: model:ir.model,name:internal_project.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: internal_project
+#: model_terms:ir.ui.view,arch_db:internal_project.inernal_project_view_form
+msgid "Container"
+msgstr "Conteneurs"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__net_weight
+msgid "Container Net Weight"
+msgstr "Poids net"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__container_ids
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__project_containers
+#: model_terms:ir.ui.view,arch_db:internal_project.inernal_project_view_form
+msgid "Containers"
+msgstr "Conteneurs"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__content_type_id
+msgid "Content Type"
+msgstr "Matière"
+
+#. module: internal_project
+#: model_terms:ir.ui.view,arch_db:internal_project.inernal_project_view_form
+msgid "Cost"
+msgstr "Prix"
+
+#. module: internal_project
+#: model_terms:ir.ui.view,arch_db:internal_project.inernal_project_view_form
+msgid "Create Containers"
+msgstr "Créer des Contenants"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__currency_id
+msgid "Currency"
+msgstr "Devise"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__display_name
+msgid "Display Name"
+msgstr "Afficher un nom"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__id
+msgid "ID"
+msgstr ""
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_res_partner__internal_company
+#: model:ir.model.fields,field_description:internal_project.field_res_users__internal_company
+msgid "Internal Company"
+msgstr "Entreprise interne"
+
+#. module: internal_project
+#: model:ir.actions.act_window,name:internal_project.action_internal_project
+#: model:ir.ui.menu,name:internal_project.menu_internal_project
+#: model_terms:ir.ui.view,arch_db:internal_project.inernal_project_view_form
+#: model_terms:ir.ui.view,arch_db:internal_project.internal_project_tree_view
+msgid "Internal Project"
+msgstr "Projet interne"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_project_container__internal_project_id
+#: model:ir.model.fields,field_description:internal_project.field_project_fraction__internal_project_id
+msgid "Internal Project ID"
+msgstr "ID de projet interne"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__location_id
+msgid "Location"
+msgstr "Emplacement"
+
+#. module: internal_project
+#: model:ir.model.fields.selection,name:internal_project.selection__internal_project__action_type__loose
+msgid "Loose"
+msgstr "Vrac"
+
+#. module: internal_project
+#: model:ir.model.fields.selection,name:internal_project.selection__internal_project__state__new
+msgid "New"
+msgstr "Nouveau"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__container_count
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__rc_container_count
+msgid "Number of Containers"
+msgstr "Nombre de contenants"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_project_container__parent_rc_id
+#: model:ir.model.fields,field_description:internal_project.field_project_fraction__parent_rc_id
+msgid "Parent Recipient"
+msgstr "Destinataire parent"
+
+#. module: internal_project
+#: code:addons/internal_project/models/internal_project.py:0
+#, python-format
+msgid "Please add fraction weight!"
+msgstr "SVP saisir le poids de la fraction."
+
+#. module: internal_project
+#: code:addons/internal_project/models/internal_project.py:0
+#, python-format
+msgid "Please close Fraction '%s' to process further"
+msgstr "SVP fermer la fraction '%s' afin de continuer"
+
+#. module: internal_project
+#: code:addons/internal_project/models/internal_project.py:0
+#, python-format
+msgid "Please number of pieces in fraction!"
+msgstr "Veuillez nombre de pièces en fraction!"
+
+#. module: internal_project
+#: code:addons/internal_project/models/internal_project.py:0
+#, python-format
+msgid "Please select the Recipient Container!"
+msgstr "SVP sélectionnnez le contenant de réception"
+
+#. module: internal_project
+#: model:ir.model.fields.selection,name:internal_project.selection__internal_project__state__processing
+msgid "Processing"
+msgstr "Processing"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__production_cost
+msgid "Production Cost"
+msgstr "Prix de Revient"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__name
+msgid "Project"
+msgstr "Affaire"
+
+#. module: internal_project
+#: model:ir.model,name:internal_project.model_project_container
+msgid "Project Containers"
+msgstr "Conteneurs de projet"
+
+#. module: internal_project
+#: model:ir.model,name:internal_project.model_project_fraction
+msgid "Project Fractions"
+msgstr "Fractions du projet"
+
+#. module: internal_project
+#: code:addons/internal_project/models/internal_project.py:0
+#, python-format
+msgid ""
+"Recipient Container is almost full it can accept only %s kg, Please adjust "
+"accordingly!"
+msgstr ""
+"Contenant de réception est presque chargé, il reste que  %skg, donc svp "
+"ajuster le remplissage."
+
+#. module: internal_project
+#: code:addons/internal_project/models/internal_project.py:0
+#, python-format
+msgid ""
+"Recipient Container is full, Please select/create some other container!"
+msgstr ""
+"Le contenant de réception est plein, svp sélectionner ou créez un "
+"alternatif."
+
+#. module: internal_project
+#: model:ir.model.fields.selection,name:internal_project.selection__internal_project__action_type__refining
+msgid "Refining"
+msgstr "Affinage"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_project_container__second_process_cost
+msgid "Second Process Cost"
+msgstr "Coût du deuxième processus"
+
+#. module: internal_project
+#: model:ir.model.fields.selection,name:internal_project.selection__internal_project__state__done
+msgid "Sorted/Treated"
+msgstr "Trié/Traité"
+
+#. module: internal_project
+#: model:ir.model.fields.selection,name:internal_project.selection__internal_project__action_type__sorting
+msgid "Sorting"
+msgstr "Tri"
+
+#. module: internal_project
+#: model:ir.model.fields.selection,name:internal_project.selection__internal_project__action_type__testing
+msgid "Testing"
+msgstr "Test"
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__final_production_cost
+msgid "Total Production Cost"
+msgstr "Coût total de production"
+
+#. module: internal_project
+#: code:addons/internal_project/models/internal_project.py:0
+#, python-format
+msgid ""
+"Work hour for the container '%s' is 00:00. Please add work hour the "
+"container"
+msgstr ""
+"Minuteur pour le contenant '%s' est 00:00. SVP saisir du temps travaillé."
+
+#. module: internal_project
+#: model:ir.model,name:internal_project.model_internal_project
+msgid "internal.project"
+msgstr ""
+
+#. module: internal_project
+#: model:ir.model.fields,field_description:internal_project.field_internal_project__state
+msgid "state"
+msgstr ""

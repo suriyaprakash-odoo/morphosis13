@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="email_template_send_notification" model="mail.template">
+			<field name="name">Logistics Notification</field>
+			<field name="subject">Logistics Notification (Bon de Commande) ${ctx.get('project')} ${ctx.get('pickup_partner_id')}</field>
+			<field name="email_from">${object.company_id.partner_id.email}</field>
+			<field name="email_to">cyril.boutin@morphosis.fr,melanie.vincent@weeecycling.com</field>
+			<field name="model_id" ref="ppts_project_entries.model_project_entries"/>
+			<field name="report_template" ref="ppts_project_entries.report_logistic_request"/>
+			<field name="report_name">Logistic Request_${ctx.get('project')}</field>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Hello</p>     
+                    <p>We are receiving a shipment from <strong>${ctx.get('partner')}</strong>, Please find the details below.</p>
+                    <p>Project: <strong>${ctx.get('project')}</strong></p>
+					<p>Pickup Location: <strong>${ctx.get('pickup_partner_id')}</strong></p>
+					<p>Pickup Date Type: <strong>${ctx.get('pickup_type')}</strong></p>
+					<!--<p>Pickup Date: <strong>${ctx.get('pickup_date')}</strong></p>-->
+					<p>Gross Weight: <strong>${ctx.get('gross_weight')} Kg</strong></p>
+					<p>Waste Code: <strong>${ctx.get('waste_code')}</strong></p>
+					<p>Material: <strong>${ctx.get('material')}</strong></p>
+					<p>Container Count: <strong>${ctx.get('container_count')}</strong></p>
+					<p>Dimensions: <strong>${ctx.get('dimension')}</strong></p>
+					<p>Lorry Type: <strong>${ctx.get('type_lorry')}</strong></p>
+					<p>Notes: <strong>${ctx.get('note')}</strong></p>
+                    <br/>
+                    <p>Thanks,</p>
+                   <p>${company}</p>
+                ]]>
+			</field>
+		</record>
+
+		<record id="email_template_alert_logistics_team" model="mail.template">
+			<field name="name">Allocate Logistics</field>
+			<field name="subject">Demande Logistiques.</field>
+			<field name="email_from">${object.company_id.partner_id.email}</field>
+			<field name="email_to">cyril.boutin@morphosis.fr,melanie.vincent@weeecycling.com</field>
+			<field name="model_id" ref="ppts_project_entries.model_project_entries"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Bonjour,</p>
+                    Le projet <strong>${object.name}</strong> a besoin d’enlèvement depuis l’adresse suivante :<br/>
+                    <strong>${object.partner_id.name}</strong><br/>
+                    <strong>${object.partner_id.street}</strong><br/>
+                    <strong>${object.partner_id.street2}</strong><br/>
+                    <strong>${object.partner_id.city}</strong><br/>
+                    <strong>${object.partner_id.zip}</strong><br/>
+                    <strong>${object.partner_id.state_id.name}</strong><br/>
+                    <p>
+                    %if object.is_full_load:
+                        <strong>La charge est un camion complet.</strong>
+                    
+                    %elif object.no_of_container != 0:
+                        <strong>La charge est compris de ${object.no_of_container} contenants.</strong>
+                    %else:
+                        <strong>La charge doit être confirmé avec le fournisseur.<br/>
+                        Le type de camion demandé est ${object.lorry_type} 
+                        %if object.is_tail_lift:
+                        avec hayons
+                        %endif
+                        <br/>
+                        La date d’enlèvement est </strong>
+                    %endif
+                    La date d’enlèvement demandé est 
+                    %if object.collection_date_type == 'specific':
+                        ${object.estimated_collection_date}.
+                    %elif object.collection_date_type == 'between':
+                        entre le ${object.collection_date_from} et le ${object.collection_date_to}.
+                    else:
+                        dès que possible.
+                    %endif
+                    
+                    </p>
+                    <p>Merci</p>
+                    <p>${object.company_id.name}</p>
+                ]]>
+			</field>
+		</record>
+
+        <record id="email_template_mask_purchase_done" model="mail.template">
+            <field name="name">Purchase Order: Send PO</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="subject">${object.company_id.name} Order (Ref ${object.name or 'n/a' })</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear ${object.partner_id.name}
+                        % if object.partner_id.parent_id:
+                            (${object.partner_id.parent_id.name})
+                        % endif
+                        <br/><br/>
+                        Here is in attachment a purchase order <strong>${object.name}</strong>
+                        % if object.partner_ref:
+                            with reference: ${object.partner_ref}
+                        % endif
+                        amounting in <strong>${format_amount(object.mask_po_total, object.currency_id)}</strong>
+                        from ${object.company_id.name}.
+                        <br/><br/>
+                        If you have any questions, please do not hesitate to contact us.
+                        <br/><br/>
+                        Best regards,
+                    </p>
+                </div>
+            </field>            
+            <field name="report_template" ref="ppts_project_entries.report_mask_po"/>
+            <field name="report_name">PO_${(object.name or '').replace('/','_')}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="user_signature" eval="False"/>
+            <field name="auto_delete" eval="True"/>
+        </record>
+	</data>
+</odoo>

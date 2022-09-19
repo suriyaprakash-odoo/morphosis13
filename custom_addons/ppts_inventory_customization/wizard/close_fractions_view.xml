@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="close_fraction_wizard_form" model="ir.ui.view">
+		<field name="name">close.fraction.wizard.form</field>
+		<field name="model">close.fraction.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Invoice Verified">
+				<group>
+					<field name="container_id" readonly="1"/>
+				</group>
+				<div style="float:right;margin-right: 20px;">
+					<field name="select_all"/>
+					<span style="font-weight: bold; padding-left:4px;">Select All</span>
+				</div>
+				<field name="fraction_line" nolabel="1">
+					<tree editable="bottom" create="false">
+						<field name="fraction_id" options="{'no_create_edit': True}"/>
+						<field name="main_product_id" readonly="1"/>
+						<field name="sub_product_id" readonly="1"/>
+						<field name="fraction_weight" readonly="1"/>
+						<field name="number_of_pieces" readonly="1"/>
+						<field name="recipient_container_id" readonly="1"/>
+						<field name="close"/>
+					</tree>
+				</field>
+				<footer>
+					<button name="action_close_fractions_line" string="Close Fractions" type="object" class="btn btn-sm btn-primary"/>
+					<button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="close_fractions_action" model="ir.actions.act_window">
+		<field name="name">Close Fractions</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">close.fraction.wizard</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="close_fraction_wizard_form"/>
+		<field name="target">new</field>
+	</record>
+</odoo>

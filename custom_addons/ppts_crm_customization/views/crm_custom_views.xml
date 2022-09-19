@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- <menuitem id="crm_menu_leads" name="Leads" parent="crm.crm_menu_root" groups="crm.group_use_lead" sequence="01"/>
+
+    <menuitem id="crm_menu_sales" name="Sales" parent="crm.crm_menu_root" sequence="02"/> -->
+
+	<record id="sale_crm_case_form_view_oppor_inherited" model="ir.ui.view">
+		<field name="name">crm.lead.oppor.inherited.crm</field>
+		<field name="model">crm.lead</field>
+		<field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor"/>
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='action_view_sale_quotation']" position="replace">
+				<button class="oe_stat_button" type="object"
+						name="action_view_sale_quotation" icon="fa-pencil-square-o" 
+						attrs="{'invisible': ['|',('lead_type', 'in', ['purchase','refining_purchase']),'|',('type', '=', 'lead')]}">
+					<field name="quotation_count" widget="statinfo" string="Sales Quotations"/>
+				</button>
+			</xpath>
+			<xpath expr="//button[@name='action_view_sale_order']" position="replace">
+				<button class="oe_stat_button" type="object" 
+					attrs="{'invisible': ['|',('lead_type', 'in', ['purchase','refining_purchase']),'|',('type', '=', 'lead')]}"
+						name="action_view_sale_order" icon="fa-usd">
+					<div class="o_field_widget o_stat_info">
+						<span class="o_stat_value">
+							<field name="sale_amount_total" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+						</span>
+						<span class="o_stat_text">Sale Orders</span>
+						<field name="sale_order_count" invisible="1"/>
+					</div>
+				</button>
+			</xpath>
+
+			<xpath expr="//button[@name='action_sale_quotations_new']" position="replace">
+				<button string="New Sale Quotation" name="action_sale_quotations_new" type="object" class="oe_highlight"
+						attrs="{'invisible': ['|',('lead_type', 'in', ['purchase','refining_purchase']),'|',('type', '=', 'lead')]}"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="crm_custom_lead_form_inherited" model="ir.ui.view">
+		<field name="name">crm.lead.customization</field>
+		<field name="model">crm.lead</field>
+		<field name="inherit_id" ref="crm.crm_lead_view_form"/>
+		<field name="arch" type="xml">
+			<field name='user_id' position="before">
+				<field name="partner_ref" style="pointer-events: none;" />
+				<field name="lead_type" required="1"/>
+				<field name="margin_class" attrs="{'required': [('lead_type', 'in', ['purchase','refining_purchase'])]}"/>
+			</field>
+
+			<field name='user_id' position ="attributes">
+                <attribute name="string">Project Owner</attribute>
+            </field>
+
+			<field name='team_id' position ="attributes">
+                <attribute name="string">Team</attribute>
+			</field>
+
+			<field name='company_id' position="after">
+				<field name="estimated_transport_cost"/>
+				<field name="estimated_additional_purchase"/>
+				<!-- <field name="estimated_additional_sale"/> -->
+			</field>
+
+			<button name='action_set_won_rainbowman' position="before">
+				<button string="New Purchase Quotation" name="action_purchase_quotations_new" type="object" class="oe_highlight"
+						attrs="{'invisible': ['|',('lead_type', 'in', ['sales']),'|',('type', '=', 'lead'),'&amp;',('probability' , '=' , 0),'|',('active' , '=' , False)]}"/>
+			</button>
+
+			<button name="action_schedule_meeting" position="after">
+				<button class="oe_stat_button" type="object"
+						name="action_view_purchase_quotation" icon="fa-pencil-square-o" 
+						attrs="{'invisible': ['|',('lead_type', '=', 'sales'),'|',('type', '=', 'lead')]}">
+					<field name="po_quotation_count" widget="statinfo" string="Purchase Quotations"/>
+				</button>
+				<button class="oe_stat_button" type="object" 
+					attrs="{'invisible': ['|',('lead_type', 'in', ['sales']),'|',('type', '=', 'lead')]}"
+						name="action_view_purchase_order" icon="fa-usd">
+					<div class="o_field_widget o_stat_info">
+						<span class="o_stat_value">
+							<field name="po_amount_total" widget="monetary" options="{'currency_field': 'company_currency'}"/>
+						</span>
+						<span class="o_stat_text">Purchase Orders</span>
+						<field name="po_order_count" invisible="1"/>
+					</div>
+				</button>
+				<button class="oe_stat_button" type="object" name="action_view_project_entry" icon="fa-wpforms" attrs="{'invisible': [('project_count', '=', 0)]}">
+					<div class="o_field_widget o_stat_info">
+						<span class="o_stat_text">View Project</span>
+						<field name="project_count" invisible="1"/>
+					</div>
+				</button>
+			</button>
+
+			<xpath expr="//field[@name='estimated_additional_purchase']" position="after">
+				
+				<field name="is_ecologic_pricelist"/>
+				
+			</xpath>
+
+			<xpath expr="//page[1]" position="before">
+				<page string="Products">
+					<field name="product_lines"
+						   context="{'default_parent_lead_type':lead_type,'default_estimated_transport_cost':estimated_transport_cost,'default_margin_class':margin_class,'default_is_ecologic_pricelist':is_ecologic_pricelist}">
+						<tree create="1" delete="1">
+							<field name="product_id"/>
+							<field name="description" invisible="1"/>
+							<field name="container_ids"/>
+							<field name="quantity"/>
+							<field name="uom_id" string="UOM"/>
+							<field name="price_per_ton" style="pointer-events: none;" />
+							<field name="process_type" widget="many2many_tags" />
+							<field name="price" />
+							<field name="return_price" invisible="1"/>
+							<field name="offer_price" />
+							<field name="malus_demand" />
+							<field name="estimated_service_cost" string="Service Charge"/>
+							<field name="currency_id" invisible="1"/>
+							<field name="production_cost" />
+						</tree>
+						<form>
+							<group>
+								<group>
+									<field name="product_id"/>
+									<field name="description"/>
+									<field name="process_type" widget="many2many_tags" attrs="{'invisible': [('parent_lead_type', '=', 'sales')]}"/>
+									<field name="estimated_transport_cost" invisible="1"/>
+									<field name="parent_lead_type" invisible="1"/>
+									<field name="margin_class" invisible="1" />
+									<field name="process_cost" invisible="1"/>
+									<field name="is_malus" />
+									<field name="is_service" />
+									<field name="is_ecologic_pricelist" invisible="1"/>
+								</group>
+								<group>
+									<field name="quantity" />
+									<field name="uom_id" />
+									<field name="return_price" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', False)]}" />
+									<field name="charge_malus" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', False)]}" />
+									<field name="price_per_ton" style="pointer-events: none;" attrs="{'invisible': [('is_malus', '=', True)]}" />
+									<field name="price" style="pointer-events: none;" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', True)]}" />
+									<field name="expexted_margin_percentage" readonly="1" attrs="{'invisible': ['|','|',('is_service','=',True),('parent_lead_type', '=', 'sales'),('is_malus', '=', True)]}" />
+									<field name="malus_demand" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', False)]}" />
+									<field name="offer_price" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', True)]}" />
+									<field name="computed_margin_percentage" style="pointer-events: none;" attrs="{'invisible': ['|','|',('is_service','=',True),('parent_lead_type', '=', 'sales'),('is_malus', '=', True)]}" />
+									<field name="estimated_service_cost" attrs="{'invisible': ['|',('is_service','!=',True),('is_malus', '=', True)]}" string='Service Charge'/>
+								</group>
+							</group>
+							<group attrs="{'invisible': ['|',('is_service','=',True),('parent_lead_type', 'in', ['purchase','refining_purchase'])]}">
+								<field name="production_cost"/>
+								<field name="container_ids">
+									<tree editable="bottom">
+										<field name="name"/>
+										<field name="content_type_id"/>
+										<field name="net_weight"/>
+										<field name="tare_weight"/>
+										<field name="absolute_tare_weight"/>
+										<field name="gross_weight"/>
+										<field name="forecast_sale_price"/>
+									</tree>
+								</field>
+							</group>
+						</form>
+					</field>
+					<group class="oe_subtotal_footer oe_right" name="total_weight">
+						<field name="total_target_price" class="oe_subtotal_footer_separator"/>
+						<field name="total_target_price_transport" class="oe_subtotal_footer_separator"/>
+						<field name="total_offer_price" class="oe_subtotal_footer_separator"/>
+						<field name="total_offer_price_transport" class="oe_subtotal_footer_separator"/>
+						<field name="cash_margin" class="oe_subtotal_footer_separator" attrs="{'invisible': [('lead_type', '=', 'sales')]}" />
+						<field name="margin_percentage" class="oe_subtotal_footer_separator" attrs="{'invisible': [('lead_type', '=', 'sales')]}" />
+					</group>
+					<div class="oe_clear"/>
+				</page>
+				<page name='refining_sample' string='Refining Sample' attrs="{'invisible': [('lead_type', 'not in', ['refining_purchase'])]}"> 
+					<field name='sample_line_ids'>
+						<tree editable='bottom'>
+							<field name='product_id' required='1' />
+							<field name='name' required='1' />
+							<field name='quantity' />
+							<field name='expected_result' />
+							<field name='actual_result' />
+						</tree>
+					</field>
+				</page>
+			</xpath>
+
+		</field>
+	</record>
+	
+</odoo>

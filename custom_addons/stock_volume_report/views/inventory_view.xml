@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<menuitem name="Stock Status" id="menu_stock_status"
+			  parent="ppts_inventory_customization.menu_project_report"
+			  action="stock_volume_report_wizard_action"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager"/>
+</odoo>

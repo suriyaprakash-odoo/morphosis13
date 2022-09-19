@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+      <template id="report_annux_document">
+            <div class="header">
+                  <div class="row">
+                        <div class="col-10 text-center" >
+                            <p style="font-size:22px;"><strong>INFORMATIONS ACCOMPAGNANT LES TRANSFERTS DE DECHETS VISES A L'ARTICLE 3, PARAGRAPHES 2 ET 4</strong></p>
+                            <p style="font-size:16px;"><i>Règlement (CE) n°1013/2006 du Parlement européen et du Conseil du 14 juin 2006</i></p>
+                        </div>
+                        <div class="col-2 text-right" style="width:100%;">
+                            <img class="img img-responsive" src="/ppts_logistics/static/src/img/annux7_logo.png"/>
+                  	</div>
+                  </div>
+            </div>
+            <div class="page">
+                  <style>
+                        .tg  {
+                              border-collapse:collapse;
+                              border-spacing:0;
+                              padding:0px;
+                              margin:0px;
+                        }
+                        .tg td{
+                              font-family:Arial, sans-serif;
+                              font-size:14px;
+                              padding:10px 5px;
+                              border-style:solid;
+                              border-width:1px;
+                              overflow:hidden;
+                              word-break:normal;
+                              border-color:black;
+                              padding:0px;
+                              margin:0px;
+                        }
+                        .tg .tg-lboi{
+                              border-color:inherit;
+                              text-align:left;
+                              vertical-align:middle;
+                              padding:0px;
+                              margin:0px;
+                        }
+                        .tg .tg-x928{
+                              font-size:16px;
+                              font-family:"Times New Roman", Times, serif !important;
+                              border-color:inherit;
+                              text-align:left;
+                              vertical-align:top;
+                              padding:0px;
+                              margin:0px;
+                        }
+                        .tg .tg-0pky{
+                              border-color:inherit;
+                              text-align:left;
+                              vertical-align:top;
+                              padding:0px;
+                              margin:0px;
+                        }
+                        p
+                        {
+                              padding:0px;
+                              margin:0px;
+                        }
+                        .p_note{
+                            font-size:14px;
+                        }
+                  </style>
+                  <div>
+                        <p><div class="col-10 text-left" style="float:left"><strong>Informations relatives à l'expédition</strong>(1)</div><div class="col-2 text-right" style="float:left"><span t-field="o.current_annexe_sequence"/></div></p>
+                  </div>
+                  <div>
+                        <table class="tg" style="width:100%;">
+                              <tr>
+                                    <td class="tg-lboi" colspan="3">
+                                          <p><strong>1. Personne qui organise le transfert</strong></p>
+                                          <p>Nom:&#160;<span t-field="o.pickup_partner_id.name"/></p>
+                                          <p>
+                                                Personne à contacter:&#160;
+                                                <span t-field="o.pickup_partner_id.name"/>&#160;
+                                                <span t-field="o.pickup_street"/>&#160;
+                                                <span t-field="o.pickup_street2"/>&#160;
+                                                <span t-field="o.pickup_city"/>&#160;
+                                                <span t-field="o.pickup_state_id.name"/>&#160;
+                                                <span t-field="o.pickup_zip"/>&#160;
+                                                <span t-field="o.pickup_country_id.name"/>
+                                          </p>
+                                          <p>Tél.:&#160;<span t-field="o.pickup_partner_id.phone"/>&#160;&#160;&#160;&#160;Télécopie:&#160;<span t-field="o.pickup_partner_id.mobile"/></p>
+                                          <p>Courrier électronique:&#160;<span t-field="o.pickup_partner_id.email"/></p>
+                                    </td>
+                                    <td class="tg-lboi" colspan="4">
+                                          <p><strong>2. Importateur - destinataire</strong></p>
+                                          <p>Nom:&#160;<span t-field="o.delivery_partner_id.name"/></p>
+
+                                                <span t-field="o.delivery_street"/><br/>
+                                                <span t-field="o.delivery_city"/><br/>
+                                                <span t-field="o.delivery_state_id.name"/>&#160;
+                                                <span t-field="o.delivery_zip"/><br/>
+                                                <span t-field="o.delivery_countries_id.name"/>
+
+                                         <p>Personne à contacter:&#160;</p>
+                                          <p>Tél.:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Télécopie:</p>
+                                          <p>Courrier électronique:&#160;</p>
+                                    </td>
+                              </tr>
+                              <tr>
+                                    <td class="tg-lboi" colspan="3">
+                                          <p><strong>3. Quantité effective:</strong></p>
+                                          <p>
+                                                tonnes (Mg):
+                                                &#160; <span t-if="o.is_full_load">N/A</span><span t-if="o.is_full_load != True"><span t-field="o.linear_meter" /></span>
+                                          </p>
+                                    </td>
+                                    <td class="tg-lboi" colspan="4">
+                                          <p><strong>4. Date effective du transfert:</strong></p>
+                                    </td>
+                              </tr>
+                              <tr>
+                                    <td class="tg-lboi" colspan="2" style="width:33.33%;">
+                                          <p><strong>5. a) 1er transporteur</strong>(2)</p>
+                                          <p>Nom:&#160;<span t-field="o.partner_id.name"/></p>
+                                          <p>
+                                                Adresse:&#160;<br/>
+                                                <span t-field="o.partner_id.street"/>&#160;
+                                                <span t-field="o.partner_id.street2"/>&#160;
+                                                <span t-field="o.partner_id.city"/>&#160;
+                                                <span t-field="o.partner_id.state_id.name"/>&#160;
+                                                <span t-field="o.partner_id.zip"/>&#160;
+                                                <span t-field="o.partner_id.country_id.name"/>
+                                          </p>
+                                          <p>Personne à contacter:&#160;<span t-field="o.partner_id.name"/></p>
+                                          <p>Tél.:&#160;<span t-field="o.partner_id.phone"/></p>
+                                          <p>Télécopie:&#160;<span t-field="o.partner_id.phone"/></p>
+                                          <p>Courrier électronique:&#160;<span t-field="o.partner_id.email"/></p>
+                                          <p>Moyen de transport:&#160;<span t-field="o.tranport_mode"/></p>
+                                          <p>Date de la prise en charge:&#160;<span t-field="o.pickup_date"/></p>
+                                          <p>Signature:</p>
+                                    </td>
+                                    <td class="tg-lboi" colspan="3" style="width:33.33%;">
+                                          <p><strong>5. b) 2er transporteur</strong></p>
+                                          <p>Nom:</p>
+                                          <p>Adresse:</p><br/>
+                                          <p>Personne à contacter:</p>
+                                          <p>Tél.:</p>
+                                          <p>Télécopie:</p>
+                                          <p>Courrier électronique:</p>
+                                          <p>Moyen de transport:</p>
+                                          <p>Date de la prise en charge:</p>
+                                          <p>Signature:</p>
+                                    </td>
+                                    <td class="tg-lboi" colspan="2" style="width:33.33%;">
+                                          <p><strong>5. c) 3er transporteur</strong></p>
+                                          <p>Nom:</p>
+                                          <p>Adresse:</p><br/>
+                                          <p>Personne à contacter:</p>
+                                          <p>Tél.:</p>
+                                          <p>Télécopie:</p>
+                                          <p>Courrier électronique:</p>
+                                          <p>Moyen de transport:</p>
+                                          <p>Date de la prise en charge:</p>
+                                          <p>Signature:</p>
+                                    </td>
+                              </tr>
+                              <tr>
+                                    <td class="tg-0pky" colspan="3" rowspan="2">
+                                          <p><strong>6. Producteur des déchets</strong>(3)</p>
+                                          <p>Producteur(s) initial(aux), nouveau(x) producteur(s) ou collecteur:</p>
+                                          <p>Nom:&#160;<span t-field="o.company_id.name"/></p>
+                                          <p>
+                                                Adresse: &#160;<br/>
+                                                <span t-field="o.company_id.street"/>&#160;
+                                                <span t-field="o.company_id.street2"/>&#160;
+                                                <span t-field="o.company_id.city"/>&#160;
+                                                <span t-field="o.company_id.state_id.name"/>&#160;
+                                                <span t-field="o.company_id.zip"/>&#160;
+                                                <span t-field="o.company_id.country_id.name"/>
+                                          </p>
+                                          <p>Personne à contacter:&#160;G.Blais</p>
+                                          <p>Tél.:&#160;0232727414&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Télécopie:</p>
+                                          <p>Courrier électronique:&#160;melanie.vincent@weeecycling.com</p>
+                                    </td>
+                                    <td class="tg-0pky" colspan="4">
+                                          <p><strong>8. Opération de valorisation (ou, le cas échéant, d'élimination pour les déchets visés à l'article 3, paragraphe 4):</strong></p>
+                                          <p>Code R/D:&#160;R4</p>
+                                    </td>
+                              </tr>
+                              <tr>
+                                    <td class="tg-0pky" colspan="4">
+                                          <p><strong>9. Dénomination usuelle des déchets:</strong> <span t-field="o.material"/><br/>
+
+											  <br/><br/><br/><br/></p>
+                                    </td>
+                              </tr>
+                              <tr>
+                                    <td class="tg-0pky" colspan="3">
+                                          <p>
+                                                <strong>7. Installation de valorisation</strong>
+                                                <svg width="10" height="10">
+                                                      <rect width="10" height="10" style="fill:#000000;stroke:#000000;" />
+                                                </svg>
+                                                <strong>Laboratoire</strong>
+                                                <svg width="10" height="10">
+                                                      <rect width="10" height="10" style="fill:#ffffff;stroke:#000000;" />
+                                                </svg>
+                                          </p>
+                                           <p>Nom:&#160;<span t-field="o.delivery_partner_id.name"/></p>
+
+                                                <span t-field="o.delivery_street"/><br/>
+                                                <span t-field="o.delivery_city"/><br/>
+                                                <span t-field="o.delivery_state_id.name"/>&#160;
+                                                <span t-field="o.delivery_zip"/><br/>
+                                                <span t-field="o.delivery_countries_id.name"/>
+
+                                         <p>Personne à contacter:&#160;</p>
+                                          <p>Tél.:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Télécopie:</p>
+                                          <p>Courrier électronique:&#160;</p>
+                                    </td>
+                                    <td class="tg-0pky" colspan="4">
+                                          <p><strong>10. Identification des déchets </strong>(indiquer les codes correspondants):</p>
+                                          <p>i) Convention de Bâle – annexe IX:</p>
+                                          <p>ii) OCDE [si différent de i)]:</p>
+                                          <p>iii) Liste des déchets de la CE:&#160;<span t-field="o.waste_code"/></p>
+                                          <p>iv) Code national:</p>
+                                    </td>
+                              </tr>
+                              <tr>
+                                    <td class="tg-0pky" colspan="7">
+                                          <p><strong>11. Pays/États concernés:</strong></p>
+                                    </td>
+                              </tr>
+                              <tr>
+                                    <td class="tg-0pky" colspan="2">
+                                          <p>Exportation/expédition:&#160; France </p>
+                                    </td>
+                                    <td class="tg-0pky" colspan="3">
+                                          <p>Transit</p>
+                                    </td>
+                                    <td class="tg-0pky" colspan="2">
+                                          <p>Importation/destination: <span t-field="o.delivery_countries_id.name"/></p>
+                                    </td>
+                              </tr>
+                              <tr>
+                                    <td class="tg-0pky" colspan="2" style="width:33%;"></td>
+                                    <td class="tg-0pky" style="width:11%;"></td>
+                                    <td class="tg-0pky" style="width:11%;"></td>
+                                    <td class="tg-0pky" style="width:11%;"></td>
+                                    <td class="tg-0pky" colspan="2" style="width:33%;"></td>
+                              </tr>
+                              <tr>
+                                    <td class="tg-0pky" colspan="7">
+                                          <p><strong>12. Déclaration de la personne qui organise le transfert:</strong>Je soussigné certifie que les renseignements portés dans les cases ci-dessus sont exacts et établis de bonne foi. Je certifie également que les obligations contractuelles écrites prévues par la réglementation ont été remplies avec le destinataire (non nécessaire dans le cas des déchets visés à l'article 3, paragraphe 4):</p>
+                                          <p>
+                                                Nom:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                Date:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Signature:
+                                          </p>
+                                    </td>
+                              </tr>
+                              <tr>
+                                    <td class="tg-0pky" colspan="7">
+                                          <p><strong>13. Signature à la réception des déchets par le destinataire:</strong></p>
+                                          <p>
+                                                Nom:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                Date:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Signature:
+                                          </p>
+                                    </td>
+                              </tr>
+                              <tr>
+                                    <td class="tg-0pky" colspan="7">
+                                          <p><strong>À REMPLIR PAR L'INSTALLATION DE VALORISATION OF PAR LE LABORATOIRE</strong></p>
+                                    </td>
+                              </tr>
+                              <tr>
+                                    <td class="tg-x928" colspan="7">
+                                          <p>
+                                                <strong>14. Transfert reçu par l'installation de valorisation</strong>
+                                                <svg width="10" height="10">
+                                                      <rect width="10" height="10" style="fill:#ffffff;stroke:#000000;" />
+                                                </svg>
+                                                <strong>ou par le laboratoire</strong>
+                                                <svg width="10" height="10">
+                                                      <rect width="10" height="10" style="fill:#ffffff;stroke:#000000;" />
+                                                </svg>
+                                          </p>
+                                          <p>
+                                                Quantité reçue:
+                                                tonnes (Mg):
+                                                &#160;<span t-esc="o.gross_weight/1000"/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                m³:<span t-if="o.is_full_load">N/A</span><span t-if="o.is_full_load != True"><span t-field="o.linear_meter" /></span>
+                                          </p>
+                                          <p>
+                                                Nom:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                                                Date:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Signature:
+                                          </p>
+                                    </td>
+                              </tr>
+                        </table>
+                        <p class="p_note">
+                            (1)Informations accompagnant les transferts de déchets figurant sur la liste verte et destinés à la valorisation ou destinés à l'analyse en laboratoire conformément au règlement (CE) n° 1013/2006. Pour compléter ce document, voir également les instructions spécifiques correspondantes figurant à l'annexe IC du règlement (CE) n° 1013/2006.
+                        </p>
+                        <p class="p_note">
+                            (2)S'il y a plus de trois transporteurs, joindre les renseignements prévus aux cases 5 a, b, c).
+                        </p>
+                        <p class="p_note">
+                            (3)Lorsque la personne qui organise le transfert n'est pas le producteur ou le collecteur, des informations concernant le producteur ou le collecteur sont fournies.
+                        </p>
+                        <p class="p_note">
+                            (4)Le ou les codes concernés doivent être utilisés tels qu’indiqués à l’annexe III A du règlement (CE) no 1013/2006, le cas échéant les uns à la suite des autres. Certaines rubriques de la convention de Bâle, telles que les rubriques B1100, B3010 et B3020, sont limitées à certains flux de déchets spécifiques, comme indiqué à l’annexe III A.
+                        </p>
+                        <p class="p_note">
+                            (5)Les codes BEU énumérés à l’annexe III B du règlement (CE) no 1013/2006 doivent être utilisés.
+                        </p>
+                  </div>
+            </div>
+      </template>
+
+      <template id="report_annux_file">
+          <t t-call="web.html_container">
+              <t t-foreach="docs" t-as="o">
+                  <t t-call="ppts_logistics.report_annux_document" t-lang="o.partner_id.lang"/>
+              </t>
+          </t>
+      </template>
+
+</odoo>

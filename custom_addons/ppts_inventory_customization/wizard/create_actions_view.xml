@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="create_action_wizard_form" model="ir.ui.view">
+		<field name="name">create.action.wizard.form</field>
+		<field name="model">create.action.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Invoice Verified">
+				<group class="oe_title" string="Containers">
+					<field name="container_line" nolabel="1">
+						<tree editable="bottom" create="0">
+							<field name="container_id" required="1"/>
+							<field name="external_action_type" required="1"/>
+						</tree>
+					</field>
+				</group>
+				<group>
+					<group>
+						<field name="action_date" required="1"/>
+
+					</group>
+					<group>
+						<field name="action_date_end" required="1"/>
+						<!--<field name="supervisor_id" required="1" options="{'no_create_edit': True}"/>-->
+						<!--<field name="worker_ids" widget="many2many_tags" required="1" options="{'no_create_edit': True}"/>-->
+					</group>
+				</group>
+				<footer>
+					<button name="action_create_plan" string="Create Action" type="object" class="btn btn-sm btn-primary"/>
+					<button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+					<!--<span class="alert alert-warning" role="alert" style="float:right">Container will be moved to Inprogress state, details will be sent to the supervisor</span>-->
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="set_action_plan_action" model="ir.actions.act_window">
+		<field name="name">Create Actions</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">create.action.wizard</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="create_action_wizard_form"/>
+		<field name="target">new</field>
+	</record>
+</odoo>

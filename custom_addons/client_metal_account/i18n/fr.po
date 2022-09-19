@@ -1,0 +1,355 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* client_metal_account
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e-20191017\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-07 11:55+0000\n"
+"PO-Revision-Date: 2020-12-07 11:55+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_client_metal_account__partner_id
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard__partner_id
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__partner_id
+msgid "Client"
+msgstr ""
+
+#. module: client_metal_account
+#: code:addons/client_metal_account/models/project_entree.py:0
+#: model:ir.actions.act_window,name:client_metal_account.action_client_metal_account
+#: model:ir.ui.menu,name:client_metal_account.menu_client_metal_account
+#: model_terms:ir.ui.view,arch_db:client_metal_account.project_entries_form_view_inherited_new
+#, python-format
+msgid "Client Metal Account"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.ui.menu,name:client_metal_account.menu_client_metal_account
+#, python-format
+msgid "Client Metal Account"
+msgstr "Comptes Poids"
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__to_client
+msgid "Client Metal Account(g)"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_client_metal_account__metal_line_ids
+msgid "Client Metal Line"
+msgstr ""
+
+#. module: client_metal_account
+#: model_terms:ir.ui.view,arch_db:client_metal_account.client_metal_acc_wizard
+msgid "Close"
+msgstr "Fermer"
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__commission
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line__commission
+msgid "Commission"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model,name:client_metal_account.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: client_metal_account
+#: model:ir.model,name:client_metal_account.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields.selection,name:client_metal_account.selection__product_template__precious_metal__copper
+msgid "Copper"
+msgstr ""
+
+#. module: client_metal_account
+#: model_terms:ir.actions.act_window,help:client_metal_account.action_client_metal_account
+msgid "Create a new record"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_client_metal_account__create_uid
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard__create_uid
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__create_uid
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_client_metal_account__create_date
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard__create_date
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__create_date
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: client_metal_account
+#: model_terms:ir.ui.view,arch_db:client_metal_account.client_metal_acc_wizard
+msgid "Credit to Client"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_client_metal_account__display_name
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard__display_name
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__display_name
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line__display_name
+msgid "Display Name"
+msgstr "Afficher Nom"
+
+#. module: client_metal_account
+#: model:ir.model.fields.selection,name:client_metal_account.selection__product_template__precious_metal__gold
+msgid "Gold"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_client_metal_account__id
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard__id
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__id
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line__id
+msgid "ID"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields.selection,name:client_metal_account.selection__product_template__precious_metal__iridium
+msgid "Iridium"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_product_category__is_metal
+msgid "Is Metal?"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__lot_id
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line__lot_id
+msgid "LOT/Serial"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_client_metal_account____last_update
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard____last_update
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line____last_update
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_client_metal_account__write_uid
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard__write_uid
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__write_uid
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_client_metal_account__write_date
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard__write_date
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__write_date
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__location_id
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line__location_id
+msgid "Location"
+msgstr "Lieu"
+
+#. module: client_metal_account
+#: model:res.groups,name:client_metal_account.group_client_metal_account_manager
+msgid "Manage Client Metal Account"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__metal
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line__metal
+#: model:ir.model.fields,field_description:client_metal_account.field_product_product__is_metal
+#: model:ir.model.fields,field_description:client_metal_account.field_product_template__is_metal
+msgid "Metal"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line__metal_acc_id
+msgid "Metal Acc"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_project_entries__metal_account_id
+#: model_terms:ir.ui.view,arch_db:client_metal_account.client_metal_acc_wizard
+msgid "Metal Account"
+msgstr ""
+
+#. module: client_metal_account
+#: model_terms:ir.ui.view,arch_db:client_metal_account.view_client_metal_account_form
+msgid "Metal Details"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard__metal_wizard_line
+msgid "Metal Line"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_product_category__precious_location_id
+msgid "Metal Location"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields.selection,name:client_metal_account.selection__product_template__precious_metal__palladium
+msgid "Palladium"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields.selection,name:client_metal_account.selection__product_template__precious_metal__platinum
+msgid "Platinum"
+msgstr ""
+
+#. module: client_metal_account
+#: code:addons/client_metal_account/models/project_entree.py:0
+#, python-format
+msgid "Please some metals to the line item"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_product_product__precious_metal
+#: model:ir.model.fields,field_description:client_metal_account.field_product_template__precious_metal
+#: model_terms:ir.ui.view,arch_db:client_metal_account.view_company_form_inherit
+msgid "Precious Metal"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_res_partner__metal_location_id
+#: model:ir.model.fields,field_description:client_metal_account.field_res_users__metal_location_id
+msgid "Precious Metal Location"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_res_company__precious_location_id
+msgid "Precious Metal Stock Location"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__product_id
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line__product_id
+msgid "Product"
+msgstr "Article"
+
+#. module: client_metal_account
+#: model:ir.model,name:client_metal_account.model_product_category
+msgid "Product Category"
+msgstr "Catégorie d'article"
+
+#. module: client_metal_account
+#: model:ir.model,name:client_metal_account.model_product_template
+msgid "Product Template"
+msgstr "Modèle d'article"
+
+#. module: client_metal_account
+#: model:ir.model,name:client_metal_account.model_mrp_production
+msgid "Production Order"
+msgstr "Ordre de fabrication"
+
+#. module: client_metal_account
+#: model:ir.model,name:client_metal_account.model_project_entries
+msgid "Project Entries"
+msgstr "Projet Entrée"
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard__project_id
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__project_id
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line__project_id
+msgid "Project ID"
+msgstr "ID du projet"
+
+#. module: client_metal_account
+#: model_terms:ir.ui.view,arch_db:client_metal_account.view_client_metal_account_form
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_account_line__quantity
+msgid "Quantity(g)"
+msgstr ""
+
+#. module: client_metal_account
+#: model_terms:ir.ui.view,arch_db:client_metal_account.client_metal_acc_wizard
+msgid "Refining"
+msgstr "Affinage"
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__actual_result
+msgid "Result(g)"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_product_category__reuse_container
+#: model:ir.model.fields,field_description:client_metal_account.field_product_product__reuse_container
+#: model:ir.model.fields,field_description:client_metal_account.field_product_template__reuse_container
+msgid "Reusable Container"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields.selection,name:client_metal_account.selection__product_template__precious_metal__rhodium
+msgid "Rhodium"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields.selection,name:client_metal_account.selection__product_template__precious_metal__ruthenium
+msgid "Ruthenium"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields.selection,name:client_metal_account.selection__product_template__precious_metal__silver
+msgid "Silver"
+msgstr ""
+
+#. module: client_metal_account
+#: model_terms:ir.ui.view,arch_db:client_metal_account.project_entries_form_view_inherited_new
+msgid "Validate Refining"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model.fields,field_description:client_metal_account.field_metal_acc_wizard_line__wiz_id
+msgid "Wiz"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model,name:client_metal_account.model_client_metal_account
+msgid "client.metal.account"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model,name:client_metal_account.model_metal_acc_wizard
+msgid "metal.acc.wizard"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model,name:client_metal_account.model_metal_acc_wizard_line
+msgid "metal.acc.wizard.line"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model,name:client_metal_account.model_metal_account_line
+msgid "metal.account.line"
+msgstr ""
+
+#. module: client_metal_account
+#: model:ir.model,name:client_metal_account.model_stock_container
+msgid "stock.container"
+msgstr ""

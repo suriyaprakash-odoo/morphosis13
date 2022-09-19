@@ -1,0 +1,211 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* container_subcontracting
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-12 11:19+0000\n"
+"PO-Revision-Date: 2020-08-12 11:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: container_subcontracting
+#: model_terms:ir.ui.view,arch_db:container_subcontracting.create_po_wizard_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: container_subcontracting
+#: model_terms:ir.ui.view,arch_db:container_subcontracting.create_po_wizard_form
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: container_subcontracting
+#: code:addons/container_subcontracting/models/sub_contracting.py:0
+#: model:ir.model.fields,field_description:container_subcontracting.field_stock_picking__container_id
+#, python-format
+msgid "Container"
+msgstr "Conteneurs"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po__container_id
+msgid "Container ID"
+msgstr "ID du conteneur"
+
+#. module: container_subcontracting
+#: model_terms:ir.ui.view,arch_db:container_subcontracting.stock_picking_form_inherited_inventory_inherit
+msgid "Create Fractions"
+msgstr "Créer des fractions"
+
+#. module: container_subcontracting
+#: model_terms:ir.ui.view,arch_db:container_subcontracting.create_po_wizard_form
+#: model_terms:ir.ui.view,arch_db:container_subcontracting.project_container_form_view_inherit_new
+msgid "Create Purchase Order"
+msgstr "Créer un bon de commande"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po__create_uid
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po__create_date
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po__display_name
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po_line__display_name
+msgid "Display Name"
+msgstr "Afficher un nom"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po__id
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po_line__id
+msgid "ID"
+msgstr ""
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_project_container__in_shipment_id
+msgid "Incoming Shipment"
+msgstr "Livraison"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po____last_update
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po__write_uid
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po__write_date
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_project_container__out_shipment_id
+msgid "Outgoing Shipment"
+msgstr "Expédition"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po_line__price
+msgid "Price"
+msgstr "Prix"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po_line__product_id
+msgid "Product"
+msgstr "Matière"
+
+#. module: container_subcontracting
+#: model:ir.model,name:container_subcontracting.model_project_container
+msgid "Project Containers"
+msgstr "Conteneurs de projet"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po__po_lines
+msgid "Purchase Order Line"
+msgstr ""
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po_line__qty
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_project_container__state
+msgid "Status"
+msgstr "État"
+
+#. module: container_subcontracting
+#: model:ir.model,name:container_subcontracting.model_stock_move
+msgid "Stock Move"
+msgstr "Stock déplacer"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_stock_picking__sub_contract
+msgid "Sub Contract Picking"
+msgstr "Sélection de sous-contrat"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_project_container__sub_contract
+msgid "Sub Contract?"
+msgstr "Prestation"
+
+#. module: container_subcontracting
+#: model:ir.model.fields.selection,name:container_subcontracting.selection__project_container__state__subcontract
+msgid "Sub contract"
+msgstr "Prestation"
+
+#. module: container_subcontracting
+#: model_terms:ir.ui.view,arch_db:container_subcontracting.project_container_filters
+msgid "Subcontract"
+msgstr "Prestation"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_stock_move__sub_container_ids
+msgid "Subcontract Containers"
+msgstr "Conteneurs de Prestation"
+
+#. module: container_subcontracting
+#: model_terms:ir.ui.view,arch_db:container_subcontracting.project_container_form_view_inherit_new
+msgid "Subcontract Details"
+msgstr "Détails du contrat de Prestation"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_project_container__sub_contract_po_id
+msgid "Subcontract Purchase Order"
+msgstr "Bon de commande de Prestation"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_project_container__subcontract_rcvd
+msgid "Subcontract Received"
+msgstr "Prestation reçu"
+
+#. module: container_subcontracting
+#: model:ir.actions.act_window,name:container_subcontracting.create_wizard_po_action
+msgid "Subcontracting Purchase Order"
+msgstr "Bon de commande de Prestation"
+
+#. module: container_subcontracting
+#: model:ir.model,name:container_subcontracting.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po_line__uom_id
+msgid "UOM"
+msgstr ""
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po__partner_id
+msgid "Vendor"
+msgstr "Vendeur"
+
+#. module: container_subcontracting
+#: model:ir.model.fields,field_description:container_subcontracting.field_create_po_line__wiz_id
+msgid "Wiz"
+msgstr ""
+
+#. module: container_subcontracting
+#: model:ir.model,name:container_subcontracting.model_create_po
+msgid "create.po"
+msgstr ""
+
+#. module: container_subcontracting
+#: model:ir.model,name:container_subcontracting.model_create_po_line
+msgid "create.po.line"
+msgstr ""

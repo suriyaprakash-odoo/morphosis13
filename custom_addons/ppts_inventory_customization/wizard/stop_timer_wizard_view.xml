@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="view_stop_timer" model="ir.ui.view">
+		<field name="name">stop.timer.view.form</field>
+		<field name="model">stop.timer</field>
+		<field name="arch" type="xml">
+			<form string="Validate Picking">
+				<sheet>
+					<group>
+						<group>
+							<field name="shipment_id" options="{'no_create_edit': True}" style="pointer-events: none;"/>
+							<field name="manual_time" widget="float_time" />
+							<field name="picking_container_ids" options="{'no_create_edit': True}" style="pointer-events: none;" widget="many2many_tags"/>
+						</group>
+						<group>
+							<field name="sale_order_id" options="{'no_create_edit': True}" style="pointer-events: none;"/>
+							<field name="loaded_container_ids" options="{'no_create_edit': True}" widget="many2many_tags"/>
+						</group>
+						<!-- <separator string = 'Containers in Picking List' />
+						<field name="picking_container_ids" required="0" no_lable='1'>	
+							<tree editable='bottom'>
+								<field name='name'/>
+								<field name='net_weight'/>
+							</tree>
+						</field>	
+						<separator string = 'Loaded container List' />
+						<field name="loaded_container_ids" required="0" no_lable='1'>
+							<tree editable='bottom'>
+								<field name='name'/>
+								<field name='net_weight'/>
+							</tree>
+						</field> -->
+					</group>
+				</sheet>
+				<footer>
+					<!-- <button name="stop_timer" string="Stop Timer" type="object" class="btn-primary"/> -->
+					<button name="validate_picking" string="Validate" type="object" class="btn-primary"/>
+					<button string="Cancel" class="btn-secondary" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="action_stop_timer" model="ir.actions.act_window">
+		<field name="name">Validate Picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">stop.timer</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_stop_timer"/>
+		<field name="target">new</field>
+	</record>
+
+	<record id="view_stop_timer_reuse" model="ir.ui.view">
+		<field name="name">stop.timer.view.form</field>
+		<field name="model">stop.timer</field>
+		<field name="arch" type="xml">
+			<form string="Validate Picking">
+				<sheet>
+					<group>
+						<group>
+							<field name="shipment_id" options="{'no_create_edit': True}" style="pointer-events: none;"/>
+						</group>
+						<field name="loaded_container_ids" readonly="1"
+							   context="{'tree_view_ref': 'ppts_inventory_customization.view_stock_move_line_detailed_operation_tree_new'}">
+						</field>
+					</group>
+				</sheet>
+				<footer>
+					<button name="validate_picking" string="Validate" type="object" class="btn-primary"/>
+					<button string="Cancel" class="btn-secondary" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="action_stop_timer_reuse" model="ir.actions.act_window">
+		<field name="name">Validate Picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">stop.timer.reuse</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_stop_timer_reuse"/>
+		<field name="target">new</field>
+	</record>
+
+
+</odoo>

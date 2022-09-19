@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="logistics_management_form_view_refining" model="ir.ui.view">
+		<field name="name">logistics.management.form</field>
+		<field name="model">logistics.management</field>
+		<field name="inherit_id" ref="ppts_logistics.logistics_management_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='is_3rd_party']" position="after">
+				<field name="is_refining" />
+			</xpath>
+			<xpath expr="//page[2]" position="after">
+				<page string="Refining Containers" attrs="{'invisible':[('is_refining', '=', False)]}">
+					<field name="refining_containers">
+						<tree editable="bottom">
+							<field name="product_id" required="1" options="{'no_create_edit': True}"/>
+							<field name="container_type_id" required="1" options="{'no_create_edit': True}"/>
+							<field name="gross_weight" required="1"/>
+							<field name="tare_weight" required="1"/>
+							<field name="net_weight" required="1"/>
+							<field name="adr_id" options="{'no_create_edit': True}"/>
+							<field name="un_id" options="{'no_create_edit': True}"/>
+							<field name="seal_number"/>
+							<field name="name" readonly="1"/>
+						</tree>
+					</field>
+				</page>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="email_daily_action_plan" model="mail.template">
+			<field name="name">Daily Action Plan</field>
+			<field name="email_from">${object.project_id.company_id.partner_id.email}</field>
+			<field name="subject">Planning du ${datetime.datetime.today().date()}</field>
+			<field name="email_to">philippe.orange@morphosis.fr,sebastien.varin@morphosis.fr</field>
+			<field name="model_id" ref="ppts_inventory_customization.model_project_container"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                <p>Bonjour ${ctx.get('name')},
+                </p>Vous trouverez ci-joint le bon de travail pour ${datetime.datetime.today().date()}. <br><br>
+                <table width="771" cellspacing="1" cellpadding="4" border="1" height="73">
+                <tbody>
+                    <tr>
+                        <th>Contenant</th>
+                        <th>Action</th>
+                        <th>Lieu</th>
+                        <th>Ouvriers</th>
+                    </tr>
+                    % if ctx.get('action_list'):
+                        % for values in ctx['action_list']
+                            <tr>
+                                <td>${values['container']} - ${values['client']}</td>
+                                <td>${values['action']}</td>
+                                <td>${values['location']}</td>
+                                <td>${values['workers']}</td>
+                            </tr>
+                        % endfor
+                    % endif
+                </tbody>
+                </table>
+                <br/><br/>
+				<p>Merci,</p>
+				<p>${object.project_id.company_id.name}</p>
+            ]]></field>
+		</record>
+
+		<record id="email_template_container_mismatched" model="mail.template">
+			<field name="name">Container Mismatch</field>
+			<field name="subject">Non-Conformité d’une livraison</field>
+			<field name="email_from">${object.company_id.partner_id.email}</field>
+			<field name="email_to">${object.project_entry_id.user_id.partner_id.email}</field>
+			<!-- ${object.transporter_partner_id.email}, -->
+			<field name="model_id" ref="ppts_inventory_customization.model_stock_picking"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Bonjour,</p><br/>
+					<p>Pour le projet  ${object.project_entry_id.origin.name},  il y a une incohérence entre le nombre de contenants cité dans le manifeste et le nombre reçu à notre réception.</p><br/>
+					<p>SVP confirmez si vous voudriez accepter l'anomalie ou faut-il garder le matériel en quarantine?</p><br/>
+					<p>Merci d'avance</p><br/><br/>
+					<p>${object.company_id.name}</p>
+					
+                ]]>
+			</field>
+		</record>
+
+		<record id="email_template_incoming_shipment" model="mail.template">
+			<field name="name">Incoming Shipment Notification</field>
+			<field name="subject">Alerte de Livraison</field>
+			<field name="email_from">${object.company_id.partner_id.email}</field>
+			<field name="email_to">philippe.orange@morphosis.fr,sebastien.varin@morphosis.fr</field>
+			<field name="model_id" ref="ppts_inventory_customization.model_stock_picking"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Bonjour,</p>
+                    <p>Une livraison : <b>${object.name}</b> liée à l’Affaire : <b>${object.project_entry_id.name}</b> est en route vers nous, donc svp préparer pour son arrivée et déchargement. La date prévisionnel de son arrivée est le <b>${object.scheduled_date}</b></p>
+                    
+                    <br/>
+                    <p>Merci,</p>
+                    <p>${object.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+			</field>
+		</record>
+
+		<record id="email_template_outgoing_shipment" model="mail.template">
+			<field name="name">Outgoing Shipment Notification</field>
+			<field name="subject">Outgoing Shipment Notification</field>
+			<field name="email_from">${object.company_id.partner_id.email}</field>
+			<field name="email_to">philippe.orange@morphosis.fr,sebastien.varin@morphosis.fr</field>
+			<field name="model_id" ref="ppts_inventory_customization.model_stock_picking"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Salut,</p>
+                    <p>Un camion <b>${object.truck_licence_plate or ''}</b> arrivera au quai pour chargement de l’expédition <b>${object.name}</b> </p>                    
+                    <br/>
+                    <p>Merci,</p>
+                    <p>${object.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+			</field>
+		</record>
+
+		<record id="email_template_truck_unloaded_notification" model="mail.template">
+			<field name="name">Truck Unloaded Notification</field>
+			<field name="subject">Notification de déchargement de camion</field>
+			<field name="email_from">${object.company_id.partner_id.email}</field>
+			<field name="email_to">melanie.vincent@weeecycling.com,cyril.bouton@morphosis.fr</field>
+			<field name="model_id" ref="ppts_inventory_customization.model_stock_picking"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Bonjour,</p>
+                    <p>Le camion <b>${object.license_plate_number or ''}</b>, pour la livraison <b>${object.name}</b> est maintenant déchargé et arrivera bientôt au pont bascule afin d'être libéré.</p>  
+                    <br/>
+                    <p>Merci,</p>
+                    <p>${object.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+			</field>
+		</record>
+
+		<record id="email_template_truck_loaded_notification" model="mail.template">
+			<field name="name">Truck Loaded Notification</field>
+			<field name="subject">Notification du chargement de camion</field>
+			<field name="email_from">${object.company_id.partner_id.email}</field>
+			<field name="email_to">melanie.vincent@weeecycling.com,cyril.bouton@morphosis.fr</field>
+			<field name="model_id" ref="ppts_inventory_customization.model_stock_picking"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Bonjour,</p>
+					Le camion <b>${object.truck_licence_plate or ''}</b>, pour expédition vers <b>${object.name}</b> est maintenant chargé et arrivera bientôt au pont bascule.</p><br/>
+                    <p>Merci,</p>
+                    <p>${object.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+			</field>
+		</record>
+
+		<record id="non_conformity_notification_email" model="mail.template">
+			<field name="name">Non Conformity Email Notification</field>
+			<field name="subject">Alerte de non-conformite - ${object.name}</field>
+			<field name="email_from">${object.project_id.company_id.partner_id.email}</field>
+			<field name="email_to">annabelle.legrand@morphosis.fr</field>
+			<field name="model_id" ref="ppts_inventory_customization.model_project_container"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Bonjour ${object.project_id.user_id.name},</p>
+                    <p>Nous avons constaté une non-conformité pour projet ${object.name} de type ${ctx['type']}.  Les contenants sont mises en quarantine en attendant votre réponse.</p>
+                    <br/><br/>
+                    <p>Merci</p>
+                    <p>${object.project_id.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+			</field>
+		</record>
+
+		<record id="non_conformity_reconfirm_email" model="mail.template">
+			<field name="name">Non Conformity Email Notification</field>
+			<field name="subject">Non-conformité enlevée - ${object.name}</field>
+			<field name="email_from">${object.project_id.company_id.partner_id.email}</field>
+			<field name="email_to">philippe.orange@morphosis.fr</field>
+			<field name="model_id" ref="ppts_inventory_customization.model_project_container"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Bonjour ${object.project_id.user_id.name},</p>
+
+					<p>Le projet <b>${object.name}</b> est sortie de l'état de non-conformité et va reprendre le chemin prévu.</p>
+
+                    <br/><br/>
+                    <p>Merci</p>
+                    <p>${object.project_id.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+			</field>
+		</record>
+
+		<record id="non_conformity_return_email" model="mail.template">
+			<field name="name">Non Conformity Email Notification</field>
+			<field name="subject">Non Conformity Container Return - ${object.name}</field>
+			<field name="email_from">${object.project_id.company_id.partner_id.email}</field>
+			<field name="email_to">melanie.vincent@weeecycling.com,cyril.bouton@morphosis.fr</field>
+			<field name="model_id" ref="ppts_inventory_customization.model_project_container"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Bonjour ${object.project_id.user_id.name},</p>
+                    <p>Le projet <b>${object.name}</b> est à retourner au client en raison d'une ou plusiers non-conformités insolubles.</p>
+
+                    <br/><br/>
+                    <p>Merci</p>
+                    <p>${object.project_id.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+			</field>
+		</record>
+
+		<!--<record id="work_plan_notification_email" model="mail.template">
+			<field name="name">Work Plan Notification</field>
+			<field name="subject">Work Plan for - ${object.name}</field>
+			<field name="email_from">${object.project_id.company_id.partner_id.email}</field>
+			<field name="email_to">${object.supervisor_id.work_email}</field>
+			<field name="model_id" ref="ppts_inventory_customization.model_project_container"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Hi ${object.supervisor_id.name},</p>
+                    <p>Action Item is created for the container <b>${object.name}</b>.</p>
+                    <P>Action Start Date: <b>${object.action_date}</b></p>
+                    <P>Action End Date: <b>${object.action_date_end}</b></p>
+                    <p>Action Type: <b> ${ctx['type']}</b></p>
+                    <p>Container Location: <b>${object.location_id.name}</b>
+
+                    <p>
+                    Assigned workers:
+                    % for value in object.worker_ids:
+                         <span><b>${value.name},</b></span>
+                    % endfor
+                    </p>
+                    <br/><br/>
+                    <p>Thanks,</p>
+                    <p>${object.project_id.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+			</field>
+		</record>-->
+
+
+	</data>
+</odoo>

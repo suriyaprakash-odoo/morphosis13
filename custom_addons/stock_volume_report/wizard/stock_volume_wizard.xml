@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="stock_volume_report_wizard_form" model="ir.ui.view">
+		<field name="name">stock.status.form</field>
+		<field name="model">stock.status</field>
+		<field name="arch" type="xml">
+			<form string="Stock Status">
+				<div style="text-align:center;">
+					<button name="show_stock_status" string="Show Stock Status" style="font-size:17px;" type="object" class="btn btn-primary"/>
+				</div>
+				<footer>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="stock_volume_report_wizard_action" model="ir.actions.act_window">
+		<field name="name">Stock Status</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">stock.status</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="stock_volume_report_wizard_form"/>
+		<field name="target">new</field>
+	</record>
+
+	<record id="stock_status_tree_view" model="ir.ui.view">
+		<field name="name">stock.status.line.tree</field>
+		<field name="model">stock.status.line</field>
+		<field name="arch" type="xml">
+			<tree string="Stock Status" create="0" delete="0" decoration-warning="type == 'Donor Containers'" decoration-success="type == 'Recipient Containers'">
+				<field name="name"/>
+				<field name="primary_id"/>
+				<field name="secondary_id"/>
+				<field name="gross_weight" sum="Gross Weight"/>
+				<field name="net_weight" sum="Net Weight"/>
+				<field name="remaining_weight"/>
+				<field name="currency_id" invisible="1"/>
+				<field name="stock_value"/>
+				<field name="volume" sum="Volume"/>
+				<field name="type" invisible="1"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="stock_status_line_search" model="ir.ui.view">
+		<field name="name">stock.status.line.search</field>
+		<field name="model">stock.status.line</field>
+		<field name="arch" type="xml">
+			<search string="Search">
+				<field name="name" string="Container Sequence" filter_domain="[('name', 'ilike', self)]"/>
+				<separator/>
+				<field name="type" string="Container Type"/>
+				<field name="primary_id"/>
+				<field name="secondary_id"/>
+				<group expand="0" string="Group By">
+					<filter name="group_container_type" string="Container Type" context="{'group_by': 'type'}" help="Container Type"/>
+					<filter name="group_primary_id" string="Primary Type" context="{'group_by': 'primary_id'}" help="Primary Type"/>
+					<filter name="group_secondary_id" string="Secondary Type" context="{'group_by': 'secondary_id'}" help="Secondary Type"/>
+				</group>
+			</search>
+		</field>
+	</record>
+
+
+	<record id="action_stock_status_line" model="ir.actions.act_window">
+		<field name="name">Stock Status</field>
+		<field name="res_model">stock.status.line</field>
+		<field name="view_mode">tree,form</field>
+		<field name="view_id" ref="stock_status_tree_view"/>
+		<field name="search_view_id" ref="stock_status_line_search"/>
+	</record>
+
+</odoo>

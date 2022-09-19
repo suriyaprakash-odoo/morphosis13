@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="bsd_update_view" model="ir.ui.view">
+        <field name="name">update.bsd.wizard</field>
+        <field name="model">update.bsd.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Update BSD">
+
+                <group>
+
+                    <group name="Emetteur">
+                        <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 1 Emetteur</span>
+                        <field name="number_bsd"/>
+                        <field name="pickup_partner_id"/>
+                        <field name="company_id"/>
+                        <label for="pickup_street" string="Pickup Address"/>
+                        <div class="o_address_format">
+                            <field name="pickup_street" class="o_address_street"/>
+                            <field name="pickup_zip" class="o_address_zip"/>
+                            <field name="pickup_city" class="o_address_city"/>
+                            <field name="pickup_state_id" class="o_address_state"/>
+                            <field name="pickup_countries_id" class="o_address_country"/>
+                        </div>
+                        <field name="phone"/>
+                        <field name="email"/>
+                        <field name="contact_person_in"/>
+                        <field name="contact_person_out"/>
+                    </group>
+                    <!--<separatoe string='Section 2 Destinataire/Destination Business'/>-->
+
+                    <group name="Destinataire/Destination Business">
+                        <span style="font-size:17px;font-weight:bold;color:red" class="o_stat_text">Section 2 Destination</span>
+
+                        <field name="delivery_partner_id"/>
+                        <label for="delivery_street" string="Pickup Address"/>
+                        <div class="o_address_format">
+                            <field name="delivery_street" class="o_address_street"/>
+                            <field name="delivery_zip" class="o_address_zip"/>
+                            <field name="delivery_city" class="o_address_city"/>
+                            <field name="delivery_state_id" class="o_address_state"/>
+                            <field name="delivery_countries_id" class="o_address_country"/>
+                        </div>
+                        <field name="delivery_phone"/>
+                        <field name="delivery_email"/>
+                    </group>
+                </group>
+                <span style="font-size:17px;font-weight:bold;color:red" class="o_stat_text">Section 3 Dénomination du déchet</span>
+                <group>
+                    <!--<separator string='Section2'/>-->
+                    <group>
+
+                        <field name="logistics_contact"/>
+                        <field name="pretreatment_code"/>
+                    </group>
+                    <group>
+                        <field name="waste_code"/>
+                        <field name="waste_form"/>
+                        <field name="product_id"/>
+                    </group>
+                </group>
+                <group>
+                    <!--<separator string='Section3'/>-->
+
+                    <group>
+                        <span style="font-size:17px;font-weight:bold;color:red" class="o_stat_text">Section 4 ADR</span>
+
+                        <field name="is_adr"/>
+                        <field name="adr_line" attrs="{'invisible': [('is_adr', '=', False)]}">
+                            <tree delete="0">
+                                <field name="un_code" required="1"/>
+                                <field name="adr_class_id" required="1"/>
+                                <field name="adr_pickup_type_id" required="1"/>
+                                <field name="hazard_type_id" required="1"/>
+                                <field name="tunnel_code_id" required="1"/>
+                                <field name="adrline_id" invisible="1"/>
+                            </tree>
+                        </field>
+
+                    </group>
+
+                    <group>
+                        <span style="font-size:17px;font-weight:bold;color:red" class="o_stat_text">Section 5 Conditionnement</span>
+                        <field name="sale_logistics_exit_date_time"/>
+                        <field name="packing_type"/>
+                        <field name="container_count"/>
+                        <span style="font-size:14px;font-weight:bold;color:red" class="o_stat_text">Section 6 Poids Reel</span>
+                        <field name="gross_weight_on_bridge"/>
+                    </group>
+                </group>
+                <span style="font-size:17px;font-weight:bold;color:red" class="o_stat_text">Section 8 Collecteur Transporter</span>
+                <group>
+                    <!--<separator string='Section4'/>-->
+                    <group>
+
+                        <field name="transporter"/>
+                        <label for="transporter_street" string="Pickup Address"/>
+                        <div class="o_address_format">
+                            <field name="transporter_street" class="o_address_street"/>
+                            <field name="transporter_zip" class="o_address_zip"/>
+                            <field name="transporter_city" class="o_address_city"/>
+                        </div>
+                        <field name="transporter_phone"/>
+                        <field name="transporter_email"/>
+                        <field name="transport_contact"/>
+                    </group>
+                    <group>
+                        <field name="reciption_date"/>
+                        <field name="expected_delivery"/>
+                        <field name="r_state_id"/>
+                    </group>
+                </group>
+
+                <group>
+                    <!--<separator string='Section5'/>-->
+                    <group>
+                        <span style="font-size:17px;font-weight:bold;color:red" class="o_stat_text">Section 10 Installation de Destination </span>
+                        <field name="subcontractor"/>
+                        <label for="subcontractor_street" string="Pickup Address"/>
+                        <div class="o_address_format">
+                            <field name="subcontractor_street"/>
+                            <field name="subcontractor_zip"/>
+                            <field name="subcontractor_city"/>
+                        </div>
+                        <field name="subcontractor_phone"/>
+                        <field name="subcontractor_email"/>
+                        <field name="subcontractor_contact"/>
+                    </group>
+                    <group name="Collecteur Transporter">
+                        <span style="font-size:17px;font-weight:bold;color:red" class="o_stat_text">Section 11 Collecteur Transporter </span>
+                        <field name="buy_weight_confirmed"/>
+                        <field name="buyer_reception_date"/>
+                        <field name="buyer_accept_lot"/>
+                        <field name="buyer_reject_reason"/>
+                        <field name="buyer_treatment_date"/>
+                        <field name="buyer_treatment_code"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="update_bsd" string="Update BSD" type="object" class="btn btn-sm btn-primary"/>
+                    <button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="bsd_update_view_action" model="ir.actions.act_window">
+        <field name="name">Update BSD</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">update.bsd.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bsd_update_view"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

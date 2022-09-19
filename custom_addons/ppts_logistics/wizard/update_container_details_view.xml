@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_update_container_details" model="ir.ui.view">
+        <field name="name">update.container.details.view.form</field>
+        <field name="model">update.container.details</field>
+        <field name="arch" type="xml">
+            <form string="Update Container Details">
+            	<sheet>
+					<group>
+						<group>
+							<field name="delivery_licence_plate" required="1"/>
+						</group>
+						<group>
+							<field name="customs_seal_number" required="1" />
+						</group>
+					</group>
+				</sheet>
+                <footer>
+                    <button name="update_container_details" string="Update" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="action_update_container_details" model="ir.actions.act_window">
+		<field name="name">Update Container Details</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">update.container.details</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_update_container_details" />
+		<field name="target">new</field>
+	</record>
+
+</odoo>

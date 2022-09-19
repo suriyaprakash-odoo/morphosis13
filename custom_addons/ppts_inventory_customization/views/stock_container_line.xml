@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="action_stock_container_line" model="ir.actions.server">
+			<field name="name">Stock Container Report</field>
+			<field name="model_id" ref="model_stock_fraction_line"/>
+			<field name="state">code</field>
+			<field name="code">
+				action = model.show_stock_container_lines()
+			</field>
+		</record>
+
+		<menuitem name="Stock Container Report" id="menu_stock_container_line"
+				  parent="ppts_inventory_customization.menu_project_report"
+				  action="action_stock_container_line"
+				  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager"/>
+
+		<record id="stock_containers_line_tree_view" model="ir.ui.view">
+			<field name="name">stock.fraction.line.tree</field>
+			<field name="model">stock.fraction.line</field>
+			<field name="arch" type="xml">
+				<tree string="Container" create="0">
+					<field name="project_id"/>
+					<field name="stock_container_id"/>
+					<field name="fraction_id"/>
+					<field name="is_vrac"/>
+					<field name="is_cross_dock"/>
+					<field name="location_id"/>
+					<field name="weight"/>
+					<field name="currency_id" invisible="1"/>
+					<field name="production_cost"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="stock_fraction_line_search" model="ir.ui.view">
+		<field name="name">stock.fraction.line.search</field>
+		<field name="model">stock.fraction.line</field>
+		<field name="arch" type="xml">
+			<search string="Search">
+				<field name="project_id" string="Project" filter_domain="[('name', 'ilike', self)]"/>
+				<field name="fraction_id" string="Fraction" filter_domain="[('name', 'ilike', self)]"/>
+				<field name="stock_container_id" string="Stock Container" filter_domain="[('name', 'ilike', self)]"/>
+				<separator/>
+				<field name="project_id"/>
+				<field name="stock_container_id"/>
+				<field name="state"/>
+				<group expand="0" string="Group By">
+					<filter name="group_project_id" string="Project" context="{'group_by': 'project_id'}" help="Group by Project"/>
+					<filter name="group_stock_container_id" string="Stock Container" context="{'group_by': 'stock_container_id'}" help="Group by Stock Container"/>
+					<filter name="group_state" string="Status" context="{'group_by': 'state'}" help="Group by state"/>
+				</group>
+			</search>
+		</field>
+	</record>
+
+	</data>
+</odoo>

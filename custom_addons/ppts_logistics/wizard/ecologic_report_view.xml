@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="view_ecologic_report" model="ir.ui.view">
+            <field name="name">ecologic.report.form</field>
+            <field name="model">ecologic.report</field>
+            <field name="arch" type="xml">
+                <form string="Ecologic Report">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="from_date" required="1" />
+                            </group>
+                            <group>
+                                <field name="to_date" required="1" />
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="view_ecologic_report" string="Generate Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_ecologic_report" model="ir.actions.act_window">
+            <field name="name">Ecologic Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ecologic.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_ecologic_report" />
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="Ecologic Report" id="menu_ecologic_report" parent="ppts_inventory_customization.menu_project_report" action="action_ecologic_report"/>
+
+        <record id="ecologic_report_tree_view" model="ir.ui.view">
+            <field name="name">ecologic.report.wizard.tree</field>
+            <field name="model">ecologic.report.wizard</field>
+            <field name="arch" type="xml">
+                <tree create="0">
+                    <field name = 'command'/>
+                    <field name = 'partner_name'/>
+                    <field name = 'container_name'/>
+                    <field name = 'num_demande'/>
+                    <field name = 'origin_zip'/>
+                    <field name = 'origin_city'/>
+                    <field name = 'operation'/>
+                    <field name = 'reception_date'/>
+                    <field name = 'date_operation'/>
+                    <field name = 'ecologic_code'/>
+                    <field name = 'weight'/>
+                    <field name = 'declared'/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

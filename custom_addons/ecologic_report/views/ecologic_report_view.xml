@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="project_entries_form_view_ecologic" model="ir.ui.view">
+		<field name="name">project.entries.form</field>
+		<field name="model">project.entries</field>
+		<field name="inherit_id" ref="ppts_project_entries.project_entries_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='close_project']" position="before">
+				<button name="print_ecologic_report" string="Ecologic Report" attrs="{'invisible': [('is_ecologic','=', False)]}" type="object" class="btn-warning"/>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_bsd_document">
+		<div class="header" style="font-family: TimesNewRoman; position: relative; padding-bottom:0px !important;">
+			<div class="col-12" style="padding-bottom:0px !important;margin-bottom:0px !important;">
+				<div class="col-6" style="float:left;">
+					<img class="img-responsive" src="ppts_logistics/static/src/img/bsd_logo.png"/>
+					<span>
+						<p style="font-size:10px;">Formulaire CERFA n° 12571*01</p>
+					</span>
+				</div>
+				<div class="col-5" style="float:right;text-align:right;">
+					<span>
+						<p style="font-size:10px;">D écret n°2005-635 du 30 mai 2005</p>
+					</span>
+					<span>
+						<p style="font-size:10px;">Arrêté du 29 juillet 2005</p>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="page" style="font-family: TimesNewRoman;line-height:10px; margin-bottom:0px !important;">
+			<style type="text/css">
+				.tg {
+				border-collapse:collapse;
+				border-spacing:0;
+				line-height:10px;
+				font-size:9px;
+				}
+				.tg td{
+				font-family:TimesNewRoman;
+				font-size:10px;
+				padding:5px;
+				border-style:solid;
+				border-width:1px;
+				overflow:hidden;
+				word-break:normal;
+				border-color:black;
+				}
+				.tg th{
+				font-family:TimesNewRoman;
+				font-size:11px;
+				font-weight:normal;
+				padding:5px;
+				border-style:solid;
+				border-width:1px;
+				overflow:hidden;
+				word-break:normal;
+				border-color:black;
+				}
+				.tg .tg-lboi{
+				border-color:inherit;
+				text-align:left;
+				vertical-align:middle
+				}
+				.tg .tg-baqh{
+				text-align:center;
+				vertical-align:top
+				}
+				.tg .tg-c3ow{
+				border-color:inherit;
+				text-align:center;
+				vertical-align:top
+				}
+				.tg .tg-0lax{
+				text-align:left;
+				vertical-align:top
+				}
+				.tg .tg-0pky{
+				border-color:inherit;
+				text-align:left;
+				vertical-align:top
+				}
+				.tg .tg-fymr{
+				font-weight:bold;
+				border-color:inherit;
+				text-align:left;
+				vertical-align:top
+				}
+				p
+				{
+					padding:1px;
+					margin:0px;
+				}
+			</style>
+			<div class="row" style="font-family: TimesNewRoman;">
+				<p style="text-align:center;font-size:16px;margin-bottom:2px !important;">
+					<strong>
+						<u>Bordereau de suivi des déchets</u>
+					</strong>
+				</p>
+				<p style="text-align:center;font-size:14px;margin-bottom:2px !important;">
+					- À REMPLIR PAR L’ÉMETTEUR DU BORDEREAU -
+				</p>
+			</div>
+			<table class="tg" style="width:100%;font-family: TimesNewRoman;">
+				<tr>
+					<th class="tg-0lax" colspan="2">
+						<span style="font-weight:bold">Bordereau n° : <span t-field="o.current_bsd_sequence"/></span>
+					</th>
+				</tr>
+				<tr>
+					<td class="tg-lboi" style="width:50%;">
+						<p>
+							<span style="font-weight:bold">1. Émetteur du bordereau</span>
+						</p>
+						<p>
+							<div style="float:left;width:50%;">
+								<svg width="10" height="10">
+									<rect width="10" height="10" style="fill:#000000;stroke:#000000;"/>
+								</svg>
+								Producteur du déchet &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+							</div>
+							<div style="float:left;width:50%;">
+								<svg width="10" height="10">
+									<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+								</svg>
+								Collecteur de petites quantités
+								<br/>
+								de déchets relevant d’une même
+								<br/>
+								rubrique
+								<span style="font-style:italic">(joindre annexe 1)</span>
+							</div>
+						</p>
+						<!-- <p>déchets relevant d’une même</p> -->
+						<!-- <p>rubrique<span style="font-style:italic"> (joindre annexe 1)</span></p> -->
+						<p>
+							<svg width="10" height="10">
+								<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+							</svg>
+							Personne ayant transformé ou
+							<br/>
+							réalisé un traitement dont la
+							<br/>
+							provenance des déchets reste<br/>identifiable<span style="font-style:italic">(joindre annexe 2)</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+							<span style="margin-left:12% !important;">
+								<svg width="10" height="10">
+									<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+								</svg>
+								Autre détenteur
+							</span>
+						</p>
+						<!-- <p>réalisé un traitement dont la</p> -->
+						<!-- <p>provenance des déchets reste</p> -->
+						<!-- <p>identifiable <span style="font-style:italic"> (joindre annexe 2)</span></p> -->
+						<br/>
+						<p>N° SIRET :</p>
+						<p>NOM :&#160;<span t-field="o.pickup_partner_id.name"/></p>
+						<p>Adresse : &#160;
+							<span t-field="o.pickup_street"/>&#160;
+							<span t-field="o.pickup_street2"/>&#160;
+							<span t-field="o.pickup_city"/>&#160;
+							<span t-field="o.pickup_state_id.name"/>&#160;
+							<span t-field="o.pickup_zip"/>&#160;
+							<span t-field="o.pickup_country_id.name"/>
+						</p>
+						<p>Tél. :&#160;<span t-field="o.pickup_partner_id.phone"/> &#160;&#160;&#160;&#160;Fax :
+						</p>
+						<p>Mél :&#160;<span t-field="o.pickup_partner_id.mobile"/>
+						</p>
+						<p>Personne à contacter :</p>
+					</td>
+					<td class="tg-lboi" style="width:50%;">
+						<p style="font-weight:bold;">
+							2. Installation de destination ou d’entreposage ou de
+							<br/>
+							reconditionnement prévue
+						</p>
+						<p>Entreposage provisoire ou reconditionnement</p>
+						<p>
+							<svg width="10" height="10">
+								<rect width="10" height="10" style="fill:#000000;stroke:#000000;"/>
+							</svg>
+							oui
+							<span style="font-style:italic">(cadres 13 à 19 à remplir)</span>
+						</p>
+						<p>
+							<svg width="10" height="10">
+								<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+							</svg>
+							non
+						</p>
+						<p>N° SIRET :</p>
+						<p>NOM :&#160;<span t-field="o.delivery_partner_id.name"/>
+						</p>
+						<p>Adresse : &#160;
+							<span t-field="o.delivery_street"/>&#160;
+							<span t-field="o.delivery_street2"/>&#160;
+							<span t-field="o.delivery_city"/>&#160;
+							<span t-field="o.delivery_state_id.name"/>&#160;
+							<span t-field="o.delivery_zip"/>&#160;
+							<span t-field="o.delivery_countries_id.name"/>
+						</p>
+						<p>Tél. :&#160;<span t-field="o.delivery_partner_id.phone"/> &#160;&#160;&#160;&#160;Fax :
+						</p>
+						<p>Mél :&#160;<span t-field="o.delivery_partner_id.mobile"/>
+						</p>
+						<p>Personne à contacter :</p>
+						<p>N° de CAP (le cas échéant) :</p>
+						<p>Opération d’élimination / valorisation prévue (code D/R) :</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tg-lboi" colspan="2">
+						<p>
+							<span style="font-weight:bold;">3. Dénomination du déchet</span>
+						</p>
+						<p>Rubrique déchet : &#160;<span t-field="o.waste_code"/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+							Consistance :
+							<svg width="10" height="10">
+								<rect width="10" height="10" style="fill:#000000;stroke:#000000;"/>
+							</svg>&#160;solide &#160;&#160;
+							<svg width="10" height="10">
+								<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+							</svg>&#160;liquide &#160;&#160;
+							<svg width="10" height="10">
+								<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+							</svg>&#160;gazeux&#160;&#160;
+						</p>
+						<p>Dénomination usuelle :</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tg-lboi" colspan="2">
+						<p><span style="font-weight:bold;">4. Mentions au titre des règlements ADR, RID, ADNR, IMDG</span>(le cas échéant)
+							<br/>
+							<br/>
+							<br/>
+							<br/>
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tg-lboi" colspan="2">
+						<span style="font-weight:bold;">5. Conditionnement:</span>
+						<svg width="10" height="10">
+							<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+						</svg>&#160;benne&#160;&#160;
+						<svg width="10" height="10">
+							<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+						</svg>&#160;citerne&#160;&#160;
+						<svg width="10" height="10">
+							<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+						</svg>&#160;GRV&#160;&#160;
+						<svg width="10" height="10">
+							<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+						</svg>&#160;fût&#160;&#160;
+						<svg width="10" height="10">
+							<rect width="10" height="10" style="fill:#000000;stroke:#000000;"/>
+						</svg>&#160;autre (préciser)
+						&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Nombre de colis :
+					</td>
+				</tr>
+				<tr>
+					<td class="tg-lboi">
+						<span style="font-weight:bold;">6. Quantité</span>
+						<svg width="10" height="10">
+							<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+						</svg>&#160;réelle&#160;&#160;&#160;&#160;
+						<svg width="10" height="10">
+							<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+						</svg>&#160;estimée
+						<span> / </span><span t-field="o.gross_weight"/><span> kg</span>
+					</td>
+					<td class="tg-lboi"></td>
+				</tr>
+				<tr>
+					<td class="tg-lboi">
+						<p><span style="font-weight:bold;">7. Négociant</span>(le cas échéant)
+						</p>
+						<p>N° SIREN :</p>
+						<p>NOM :</p>
+						<p>Adresse :</p>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+						<br/>
+					</td>
+					<td class="tg-lboi">
+						<p>Récépissé n° :&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Département :</p>
+						<p>Limite de validité :</p>
+						<p>Personne à contacter :</p>
+						<p>Tél. :&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Fax. :</p>
+						<p>Mél :</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tg-c3ow" colspan="2">
+						<span style="font-weight:bold;">- À REMPLIR PAR LE COLLECTEUR-TRANSPORTEUR -</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="tg-0pky">
+						<p>
+							<span style="font-weight:bold;">8. Collecteur-transporteur</span>
+						</p>
+						<p>N° SIREN :</p>
+						<p>NOM :&#160;<span t-field="o.partner_id.name"/>
+						</p>
+						<p>Adresse : &#160;
+							<span t-field="o.partner_id.street"/>&#160;
+							<span t-field="o.partner_id.street2"/>&#160;
+							<span t-field="o.partner_id.city"/>&#160;
+							<span t-field="o.partner_id.state_id.name"/>&#160;
+							<span t-field="o.partner_id.zip"/>&#160;
+							<span t-field="o.partner_id.country_id.name"/>
+						</p>
+						<p>Tél. :&#160;<span t-field="o.partner_id.phone"/>
+						</p>
+						<p>Fax. :</p>
+						<p>Personne à contacter :</p>
+					</td>
+					<td class="tg-0pky">
+						<p>Récépissé n° :&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Département :&#160;<span t-field="o.partner_id.state_id.code"/><span
+								t-field="o.delivery_state_id.name"/>
+						</p>
+						<p>Limite de validité :</p>
+						<p>Mode de transport :&#160;<span t-field="o.tranport_mode"/>
+						</p>
+						<p>
+							<span style="font-weight:bold">Date de prise en charge :&#160;<span t-field="o.pickup_date"/>
+							</span>
+						</p>
+						<p>Signature:</p>
+						<br/>
+						<p>
+							<svg width="10" height="10">
+								<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+							</svg>&#160;Transport multimodal (Cadres 20 et 21 à remplir)
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tg-c3ow" colspan="2">
+						<p style="font-weight:bold;">- DÉCLARATION GÉNÉRALE DE L’ÉMETTEUR DU BORDEREAU -</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tg-0pky">
+						<p style="font-weight:bold;">9. Déclaration générale de l’émetteur du bordereau :</p>
+						<p>Je soussigné certifie que les renseignements portés dans les cadres</p>
+						<p>ci-dessus sont exacts et établis de bonne foi.</p>
+						<p>NOM :&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Date :&#160;&#160;&#160;&#160;/&#160;&#160;&#160;&#160;/</p>
+					</td>
+					<td class="tg-0pky">
+						Signature et cachet :
+					</td>
+				</tr>
+				<tr>
+					<td class="tg-c3ow" colspan="2">
+						<span style="font-weight:bold;">- À REMPLIR PAR L’INSTALLATION DE DESTINATION -</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="tg-0pky">
+						<p style="font-weight:bold;">10. Expédition reçue à l’installation de destination</p>
+						<p>N° SIRET :</p>
+						<p>NOM :&#160;<span t-field="o.company_id.name"/></p>
+						<p>Adresse :&#160;
+							<span t-field="o.company_id.street"/>&#160;
+							<span t-field="o.company_id.street2"/>&#160;
+							<span t-field="o.company_id.city"/>&#160;
+							<span t-field="o.company_id.state_id.name"/>&#160;
+							<span t-field="o.company_id.zip"/>&#160;
+							<span t-field="o.company_id.country_id.name"/></p>
+						<p>Personne à contacter :</p>
+						<p>Quantité réelle présentée :</p>
+						<p>Date de présentation :&#160;&#160;&#160;&#160;&#160;&#160;/&#160;&#160;&#160;&#160;&#160;&#160;/</p>
+						<p>
+							Lot accepté :&#160;
+							<svg width="10" height="10">
+								<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+							</svg>&#160;oui&#160;&#160;
+							<svg width="10" height="10">
+								<rect width="10" height="10" style="fill:#ffffff;stroke:#000000;"/>
+							</svg>&#160;non
+						</p>
+						<p>Motif de refus :</p>
+						<p>Signataire :&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Signature et cachet
+							:
+						</p>
+						<p>Date :&#160;&#160;&#160;&#160;&#160;&#160;/&#160;&#160;&#160;&#160;&#160;&#160;/</p>
+					</td>
+					<td class="tg-0pky">
+						<p style="font-weight:bold">11. Réalisation de l’opération :</p>
+						<p>Code D/R :</p>
+						<p>Description :</p>
+						<p>Je soussigné certifie que l’opération ci-dessus a été effectuée</p>
+						<p>NOM :</p>
+						<p>Date :&#160;&#160;&#160;&#160;&#160;&#160;/&#160;&#160;&#160;&#160;&#160;&#160;/&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Signature
+							et cachet :
+						</p>
+					</td>
+				</tr>
+				<tr>
+					<td class="tg-0pky" colspan="2">
+						<p>
+							<span style="font-weight:bold">12. Destination ultérieure prévue</span>
+							<span style="font-style:italic">(dans le cas d'une transformation ou d'un traitement aboutissant à des déchets dont la provenance</span>
+						</p>
+						<p>
+							<span style="font-style:italic">reste identifiable le nouveau bordereau sera accompagné de l'annexe 2 du formulaire CERFA n°12571*01)</span>
+							:
+						</p>
+					</td>
+				</tr>
+				<!-- <tr>
+					<td class="tg-0pky" colspan="2">
+						<p>Traitement prévu (code D/R) :</p>
+					</td>
+				</tr> -->
+				<tr>
+					<td class="tg-0pky">
+						<p>Traitement prévu (code D/R) :</p>
+						<p>N° SIRET :</p>
+						<p>NOM :</p>
+						<p>Adresse :</p>
+					</td>
+					<td class="tg-0pky">
+						<p>Personne à contacter :</p>
+						<p>Tél. :&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Fax. :</p>
+						<p>Mél :</p>
+					</td>
+				</tr>
+				<!-- <tr>
+				  <td class="tg-fymr" colspan="2">
+					  N° du bordereau de rattachement :
+				  </td>
+				</tr>
+				<tr>
+				  <td class="tg-baqh" colspan="2">
+					  <span style="font-weight:700">- À REMPLIR EN CAS D’ENTREPOSAGE PROVISOIRE OU DE RECONDITONNEMENT -</span>
+				  </td>
+				</tr>
+				<tr>
+				  <td class="tg-0pky">
+					  <span style="font-weight:bold">13. Réception dans l’installation d’entreposage ou de reconditionnement</span><br/>
+					  N° SIRET :<br/>
+					  NOM :<br/>
+					  Adresse : <br/><br/><br/>
+					  Quantité présentée :         réelle                 estimée      tonne(s)<br/><br/><br/>
+					  Date de présentation :       /      /<br/>
+					  Lot accepté :                 oui                  non<br/>
+					  Motif de refus : <br/><br/><br/><br/><br/>  <br/>
+					  Date :               /      /                     Signature et cachet :
+				  </td>
+				  <td class="tg-0pky">
+					  <span style="font-weight:bold">14. Installation de destination prévue</span><br/>
+					  N° SIRET :<br/>
+					  NOM :<br/>
+					  Adresse :<br/><br/><br/>
+					  Tél. :                                                Fax :<br/>
+					  Mél : <br/>
+					  Personne à contacter :<br/><br/><br/>
+					  N° de CAP (le cas échéant) :<br/>
+					  Opération d’élimination / valorisation prévue (code D/R) :<br/><br/><br/><br/><br/><br/><br/>
+					  Cadre 14 rempli par :<br/>
+					  Émetteur du bordereau (cf cadre 1)<br/><br/>
+					  Installation d’entreposage ou de reconditionnement (cf cadre 13)
+				  </td>
+				</tr>
+				<tr>
+				  <td class="tg-0pky" colspan="2">
+					  <span style="font-weight:bold">15. Mentions au titre des règlements ADR, RID, ADNR, IMDG</span> (le cas échéant) :<br/>
+					  (à remplir en cas de reconditionnement uniquement)<br/><br/>
+				  </td>
+				</tr>
+				<tr>
+				  <td class="tg-0pky" colspan="2">
+					  <span style="font-weight:bold">16. Conditionnement: </span>      benne            citerne            GRV             fût             autre (préciser)                                Nombre de colis :<br/>
+					  (à remplir en cas de reconditionnement uniquement)
+				  </td>
+				</tr>
+				<tr>
+				  <td class="tg-0pky">
+					  <span style="font-weight:bold">17. Quantité               réelle                estimée                  tonne(s)</span><br/>
+					  (à remplir en cas de reconditionnement uniquement)
+				  </td>
+				  <td class="tg-0pky"></td>
+				</tr>
+				<tr>
+				  <td class="tg-0pky">
+					  <span style="font-weight:bold">18. Collecteur-transporteur après entreposage ou reconditionnement</span><br/>
+					  N° SIREN : <br/>
+					  NOM :<br/>
+					  Adresse :<br/><br/><br/>
+					  Tél. :<br/>Fax :<br/>
+					  Mél :<br/>
+					  Personne à contacter :
+				  </td>
+				  <td class="tg-0pky">
+					  Récépissé n°                               Département :<br/>
+					  Limite de validité :<br/><br/><br/>
+					  Mode de transport : <br/>
+					  <span style="font-weight:bold">Date de la prise en charge : </span>      /      /<br/><br/><br/>
+					  Signature  :<br/><br/><br/><br/><br/>
+					  Transport multimodal (Cadres 20 et 21 à remplir)
+				  </td>
+				</tr>
+				<tr>
+				  <td class="tg-0pky" colspan="2">
+					  <span style="font-weight:bold">19. Déclaration de l’exploitant du site d’entreposage ou de reconditionnement :</span><br/>
+					  Je soussigné certifie que les renseignements portés ci-dessus sont exacts et établis de bonne foi.<br/><br/><br/>
+					  NOM :  Date :        /      /   Signature et cachet :
+				  </td>
+				</tr>
+				<tr>
+				  <td class="tg-c3ow" colspan="2">
+					  - À REMPLIR EN CAS DE TRANSPORT MULTIMODAL -
+				  </td>
+				</tr>
+				<tr>
+				  <td class="tg-0pky">
+					  <span style="font-weight:bold">20. Collecteur-transporteur n°</span><br/>
+					  N° SIREN :<br/>
+					  NOM :<br/>
+					  Adresse :<br/><br/><br/>
+					  Tél. :                                  Fax. :<br/>
+					  Mél :<br/>
+					  Personne à contacter :
+				  </td>
+				  <td class="tg-0pky">
+					  Récépissé N° :                              Département :<br/>
+					  Limite de validité :<br/>
+					  Mode  de transport :<br/>
+					  <span style="font-weight:bold">Date de prise en charge :</span>       /      /<br/><br/><br/>
+					  Signature:
+				  </td>
+				</tr>
+				<tr>
+				  <td class="tg-0pky"><span style="font-weight:bold">21. Collecteur-transporteur n°</span><br/>N° SIREN :<br/>NOM :<br/>Adresse :<br/><br/><br/>Tél. :                                  Fax. :<br/>Mél :<br/>Personne à contacter :</td>
+				  <td class="tg-0pky">Récépissé N° :                               Département :<br/>Limite de validité :<br/>Mode  de transport :<br/><span style="font-weight:bold">Date de prise en charge : </span>      /      /<br/>Signature:</td>
+				</tr> -->
+			</table>
+		</div>
+	</template>
+
+
+	<template id="report_bsd_file">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="ppts_logistics.report_bsd_document" t-lang="o.partner_id.lang"/>
+			</t>
+		</t>
+	</template>
+</odoo>

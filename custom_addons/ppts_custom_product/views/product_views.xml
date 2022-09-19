@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="product_template_attribute_value_view_form_inherit_new" model="ir.ui.view">
+		<field name="name">product.template.attribute.value.form</field>
+		<field name="model">product.template.attribute.value</field>
+		<field name="inherit_id" ref="product.product_template_attribute_value_view_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='price_extra']" position="after">
+				<label for="piece_weight"/>
+				<div class="o_row" style="width: 400px !important;">
+					<field name="piece_weight"/>
+					<field name="uom_id" placeholder="UOM"/>
+				</div>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="product_template_attribute_value_view_tree_inherit_new" model="ir.ui.view">
+		<field name="name">product.template.attribute.value.tree</field>
+		<field name="model">product.template.attribute.value</field>
+		<field name="inherit_id" ref="product.product_template_attribute_value_view_tree"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='price_extra']" position="before">
+				<field name="piece_weight"/>
+				<field name="uom_id"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="product_template_attribute_value_filter_inherit_new" model="ir.ui.view">
+		<field name="name">product.template.attribute.value.filter</field>
+		<field name="model">product.template.attribute.value</field>
+		<field name="inherit_id" ref="product.product_template_attribute_value_view_search"/>
+		<field name="arch" type="xml">
+			<xpath expr="//filter[@name='active']" position="after">
+				<field string="Product Category" name="product_category"/>
+				<group expand="1" string="Group By">
+					<filter string="Product Category" name="group_by_product_category" domain="[]" context="{'group_by':'product_category'}"/>
+				</group>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="product_template_attribute_value_view_tree_new" model="ir.ui.view">
+		<field name="name">product.template.attribute.value.view.tree</field>
+		<field name="model">product.template.attribute.value</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Attributes">
+				<field name="product_tmpl_id" invisible="1"/>
+				<field name="product_tmpl_id_dup"/>
+				<field name="product_category"/>
+				<field name="product_attribute_value_id"/>
+				<field name="attribute_id"/>
+				<field name="name" invisible="1"/>
+				<field name="piece_weight"/>
+				<field name="uom_id"/>
+				<field name="price_extra"/>
+				<field name="ptav_active" optional="hide"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="product_template_attribute_value_view_form_new" model="ir.ui.view">
+		<field name="name">product.template.attribute.value.form</field>
+		<field name="model">product.template.attribute.value</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<group>
+							<field name="product_tmpl_id" readonly="0"/>
+							<field name="product_category"/>
+							<field name="product_attribute_value_id"/>
+							<field name="attribute_id" readonly="0"/>
+							<field name="name" invisible="1"/>
+							<field name="product_tmpl_id_dup" invisible="1"/>
+						</group>
+						<group>
+							<label for="piece_weight"/>
+							<div class="o_row">
+								<field name="piece_weight"/>
+								<field name="uom_id" placeholder="UOM"/>
+							</div>
+							<field name="price_extra"/>
+							<field name="ptav_active"/>
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_open_attribute_values" model="ir.actions.act_window">
+		<field name="name">Product Variant Values</field>
+		<field name="res_model">product.template.attribute.value</field>
+		<field name="view_id" ref="product_template_attribute_value_view_tree_new"/>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem name="Product Variant Values" id="menu_product_variant_values" action="action_open_attribute_values" parent="sale.product_menu_catalog" sequence="2"/>
+
+
+	<record id="product_template_form_view_inherited" model="ir.ui.view">
+		<field name="name">product.template.customization</field>
+		<field name="model">product.template</field>
+		<field name="inherit_id" ref="product.product_template_form_view"/>
+		<field name="arch" type="xml">
+
+			<xpath expr="//field[@name='name']" position="after">
+				<label class="oe_edit_only" for="english_name" string="English Name"/>
+				<h3>
+					<field name="english_name" placeholder="English Name" required="1"/>
+				</h3>
+				<!-- <label class="oe_edit_only" for="ecologic_name" string="Ecologic Name"/>
+				<h3><field name="ecologic_name" placeholder="Ecologic Name" /></h3> -->
+			</xpath>
+
+			<xpath expr="//field[@name='categ_id']" position="after">
+				<field name="product_waste_code"/>
+				<field name="product_ecologic_code"/>
+				<field name="ecologic_price" attrs="{'invisible':['|',('product_ecologic_code','=', False),('product_ecologic_code','=', '')]}"/>
+				<field name="fraction_by_count"/>
+				<!-- <field name="additional_sale"/> -->
+				<field name="non_trie"/>
+
+				<!-- <label for="weight_per_piece" attrs="{'invisible':[('fraction_by_count','=', False)]}"/>
+				<div class="o_row">
+					<field name="weight_per_piece" attrs="{'invisible':[('fraction_by_count','=', False)],'required':[('fraction_by_count','!=', False)]}"/>
+					<field name="piece_uom_id" placeholder="UOM" attrs="{'invisible':[('fraction_by_count','=', False)],'required':[('fraction_by_count','!=', False)]}"/>
+				</div> -->
+
+			</xpath>
+
+			<xpath expr="//field[@name='uom_po_id']" position="after">
+				<field name="max_stock"/>
+				<field name="density"/>
+			</xpath>
+
+			<xpath expr="//page[@name='inventory']" position="after">
+				<page string="Containers">
+					<field name="container_product_ids" readonly="1" style="pointer-events: none;">
+						<tree>
+							<field name="container_id" required='1'/>
+							<field name="net_weight"/>
+							<field name="net_weight_unit_id"/>
+							<field name="production_cost"/>
+							<field name="forecasted_sales_cost"/>
+							<field name="actual_sales_cost"/>
+						</tree>
+					</field>
+					<group class="oe_subtotal_footer oe_right" name="total_weight">
+						<field name="net_weight" class="oe_subtotal_footer_separator"/>
+					</group>
+					<div class="oe_clear"/>
+				</page>
+			</xpath>
+
+			<!-- <xpath expr="//field[@name='taxes_id']" position="before">
+				<field name="malus" />
+				<field name="charge_malus" />
+			</xpath> -->
+
+		</field>
+	</record>
+
+	<record id="product_normal_form_view_inherited" model="ir.ui.view">
+		<field name="name">product.product.customization</field>
+		<field name="model">product.product</field>
+		<field name="inherit_id" ref="product.product_normal_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='taxes_id']" position="before">
+				<field name="malus"/>
+				<field name="charge_malus"/>
+			</xpath>
+			<xpath expr="//field[@name='categ_id']" position="after">
+				<field name="product_waste_code"/>
+				<field name="product_ecologic_code"/>
+				<field name="ecologic_price" attrs="{'invisible':['|',('product_ecologic_code','=', False),('product_ecologic_code','=', '')]}"/>
+				<field name="fraction_by_count"/>
+				<field name="non_trie"/>
+			</xpath>
+		</field>
+	</record>
+
+	<!-- <record id="product_template_only_form_view_inherited" model="ir.ui.view">
+		<field name="name">product.template.customization</field>
+		<field name="model">product.template</field>
+		<field name="inherit_id" ref="product.product_template_only_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='barcode']" position="after">
+				<field name="existing_barcode" />
+			</xpath>
+		</field>
+	</record>
+
+	<record id="product_normal_form_view_inherited" model="ir.ui.view">
+		<field name="name">product.product.customization</field>
+		<field name="model">product.product</field>
+		<field name="inherit_id" ref="product.product_normal_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='barcode']" position="after">
+				<field name="existing_barcode" />
+			</xpath>
+		</field>
+	</record> -->
+
+</odoo>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="update_time_containers" model="ir.ui.view">
+        <field name="name">update.time.view.form</field>
+        <field name="model">update.time</field>
+        <field name="arch" type="xml">
+            <form string="Update Time">
+            	<sheet>
+					<group>
+						<group>
+							<field name="duration" required="1" widget="float_time"/>
+						</group>
+						<group>
+						</group>
+					</group>
+				</sheet>
+                <footer>
+                    <button name="update_work_time" string="Update" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="action_update_time" model="ir.actions.act_window">
+		<field name="name">Update Work Time</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">update.time</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="update_time_containers" />
+		<field name="target">new</field>
+	</record>
+
+</odoo>

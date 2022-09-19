@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_release_truck" model="ir.ui.view">
+        <field name="name">release.truck.view.form</field>
+        <field name="model">release.truck</field>
+        <field name="arch" type="xml">
+            <form string="Release Truck">
+            	<sheet>
+					<group>
+						<group>
+							<field name="sale_logistics_weight_at_entry" style="pointer-events: none;"/>
+							<field name="sale_logistics_weight_at_exit" required="1"/>	
+						</group>
+						<group>
+							<field name="sale_logistics_exit_date_time" required="1" />
+							<button name="print_bsd_report" string="Print BSD" type="object" attrs="{'invisible':[('bsd_annexe','in',('annexe7',''))]}" class="btn-primary"/>
+							<button name="print_bsd_report" string="Print Annexe7" type="object" attrs="{'invisible':[('bsd_annexe','in',('bsd',''))]}" class="btn-primary"/>
+							<field name="bsd_annexe" invisible="1"/>
+						</group>
+					</group>
+				</sheet>
+                <footer>
+                    <button name="release_truck" string="Release" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_release_truck" model="ir.actions.act_window">
+		<field name="name">Release Truck</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">release.truck</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_release_truck" />
+		<field name="target">new</field>
+	</record>
+
+
+    <record id="view_update_outgoing_weight" model="ir.ui.view">
+        <field name="name">update.outgoing.weight.view.form</field>
+        <field name="model">update.outgoing.weight</field>
+        <field name="arch" type="xml">
+            <form string="Update Outgoing Truck Weight">
+            	<sheet>
+					<group>
+						<group>
+							<field name="sale_logistics_weight_at_entry" style="pointer-events: none;"/>
+							<field name="sale_logistics_weight_at_exit" required="1"/>	
+						</group>
+						<group>
+							<field name="sale_logistics_exit_date_time" required="1" />
+						</group>
+					</group>
+				</sheet>
+                <footer>
+                    <button name="update_weight" string="Update" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_update_outgoing_weight" model="ir.actions.act_window">
+		<field name="name">Update Outgoing Truck Weight</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">update.outgoing.weight</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_update_outgoing_weight" />
+		<field name="target">new</field>
+	</record>
+
+</odoo>

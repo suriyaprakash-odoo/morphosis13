@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="stock_picking_form_inherited_inter_sales" model="ir.ui.view">
+		<field name="name">stock.picking.form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='state']" position="replace">
+				<field name="state" widget="statusbar" statusbar_visible="draft,confirmed,partially_available,assigned,done"/>
+			</xpath>
+			<xpath expr="//field[@name='scheduled_date']" position="before">
+				<field name="internal_sales"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="stock_picking_form_inherited_inventory_int_sale" model="ir.ui.view">
+		<field name="name">stock.picking.form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="ppts_inventory_customization.stock_picking_form_inherited_inventory"/>
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='%(ppts_inventory_customization.action_update_transport_details)d']" position="attributes">
+				<attribute name="attrs">
+					{'invisible':['|',('state' , 'not in' , ('assigned'))
+					,'|',('logistics_updated','!=',False)
+					,'|',('is_internal_purchase' , '!=' , False),
+					'|',('is_registered_package' , '!=' , False),
+					'|',('internal_sales','=',True)]}
+				</attribute>
+			</xpath>
+
+			<xpath expr="//button[@name='%(ppts_inventory_customization.action_load_container)d']" position="attributes">
+				<attribute name="attrs">
+					{'invisible':['|','|','|',('internal_sales','=',True),
+					('state' , 'in' , ('draft','confirmed','partially_available','done','cancel')),
+					('picking_type_code', '!=', 'outgoing')]}
+				</attribute>
+			</xpath>
+
+			<xpath expr="//button[@name='%(ppts_inventory_customization.action_update_initial_demand_warnig_form)d']" position="attributes">
+				<attribute name="attrs">
+					{'invisible':['|','|','|',('internal_sales','=',True),
+					('state' , 'in' , ('draft','confirmed','partially_available','done','cancel')),
+					('picking_type_code', '!=', 'outgoing')]}
+				</attribute>
+			</xpath>
+
+			<xpath expr="//page[5]" position="attributes">
+				<attribute name="attrs">
+					{'invisible':[('internal_sales','=',True)]}
+				</attribute>
+			</xpath>
+		</field>
+	</record>
+
+
+	<record id="stock_picking_form_inherited_inter_comp_sales" model="ir.ui.view">
+		<field name="name">stock.picking.form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="ppts_inventory_customization.stock_picking_form_inherited"/>
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='%(ppts_inventory_customization.create_container_action)d']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|','|',('internal_sales','=',True),('picking_type_code', '!=', 'incoming'), ('state', 'not in', ('reception','production'))]}
+				</attribute>
+			</xpath>
+			<xpath expr="//button[@name='action_create_containers']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|', '|',('internal_sales','=',True),('picking_type_code', '!=', 'incoming'), ('state', 'not in', ('reception','production','sorted_treated','done'))]}
+				</attribute>
+			</xpath>
+			<xpath expr="//button[@name='action_view_recipient_containers']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|', '|',('internal_sales','=',True),('picking_type_code', '!=', 'incoming'), ('state', 'not in', ('reception','production','sorted_treated','done')), '|', ('recipient_container_count' , '=', 0)]}
+				</attribute>
+			</xpath>
+
+			<xpath expr="//group[@style='border: 2px solid #1d8e10;; background: #fcfcfc; box-shadow: 1px 1px 5px 1px #acada9;']" position="attributes">
+				<attribute name="attrs">
+					{'invisible':[('internal_sales','=',True)]}
+				</attribute>
+			</xpath>
+
+			<xpath expr="//label[@for='total_time']" position="attributes">
+				<attribute name="attrs">
+					{'invisible':[('internal_sales','=',True)]}
+				</attribute>
+			</xpath>
+			<xpath expr="//field[@name='total_time']" position="attributes">
+				<attribute name="attrs">
+					{'invisible':[('internal_sales','=',True)]}
+				</attribute>
+			</xpath>
+			<xpath expr="//button[@name='update_picking_time']" position="attributes">
+				<attribute name="attrs">
+					{'invisible':[('internal_sales','=',True)]}
+				</attribute>
+			</xpath>
+
+			<xpath expr="//page[5]" position="attributes">
+				<attribute name="attrs">
+					{'invisible':[('internal_sales','=',True)]}
+				</attribute>
+			</xpath>
+
+		</field>
+	</record>
+
+
+</odoo>

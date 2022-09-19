@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="stock_picking_vpicktree_inherited" model="ir.ui.view">
+		<field name="name">stock.picking.form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.vpicktree"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='partner_id']" position="after">
+				<field name="vendor_ref"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="stock_picking_form_inherited" model="ir.ui.view">
+		<field name="name">stock.picking.form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//div[@name='button_box']" position="inside"> 
+
+				<button name="%(add_additional_product_action)d" type="action" string="Add Additional Product" class="oe_stat_button" icon="fa-plus-square"
+						attrs="{'invisible': ['|', ('picking_type_code', '!=', 'outgoing'), ('state', 'not in', ('load_unload'))]}" >
+				</button>
+
+				<button name="%(create_container_action)d" type="action" string="Create Containers" class="oe_stat_button" icon="fa-plus-square"
+						attrs="{'invisible': ['|', ('picking_type_code', '!=', 'incoming'), ('state', 'not in', ('reception'))]}" context="{'default_project_id': project_entry_id}">
+				</button>
+				<button class="oe_stat_button" type="object"
+						name="action_create_containers" icon="fa-cubes" attrs="{'invisible': ['|', ('picking_type_code', '!=', 'incoming'), ('state', 'not in', ('reception','production','sorted_treated','done')), '|', ('container_count' , '=', 0)]}">
+					<field name="container_count" widget="statinfo" string="View Containers"/>
+				</button>
+				<button class="oe_stat_button" type="object"
+						name="action_view_recipient_containers" icon="fa-cubes" attrs="{'invisible': ['|', ('picking_type_code', '!=', 'incoming'), ('state', 'not in', ('reception','production','sorted_treated','done')), '|', ('recipient_container_count' , '=', 0)]}">
+					<field name="recipient_container_count" widget="statinfo" string="View Recipient Containers"/>
+				</button>
+
+				<button class="oe_stat_button" type="object"
+						name="action_view_vrac_containers" icon="fa-cubes" attrs="{'invisible': ['|', ('picking_type_code', '!=', 'incoming'), ('state', 'not in', ('reception','production','sorted_treated','done')), '|', ('vrac_container_count' , '=', 0)]}">
+					<field name="vrac_container_count" widget="statinfo" string="View Vrac Containers"/>
+				</button>
+			</xpath>
+			<xpath expr="//field[@name='origin']" position="after">
+				<field name="project_entry_id" options="{'no_create_edit': True}"/>
+				<field name="project_type" invisible="1"/>
+				<field name="pickup_location_id" options="{'no_create_edit': True}"/>
+				<field name="is_registered_package"/>
+				<field name="logistics_updated" invisible="1"/>
+				<field name="is_containers_created" invisible="1"/>
+				<field name="load_validated" invisible="1"/>
+				<field name="include_logistics" invisible="1" />
+			</xpath>
+			<!--<xpath expr="//field[@name='location_dest_id']" position="after">
+				<div style="padding-top:20px;">
+					<span style="color: red; font-size: 20px; padding-right: 33px;">Duration</span>
+					<field style="color:red;font-size:20px;width:80px" name="real_duration" widget="float_time"/>
+				</div>
+			</xpath>-->
+
+			<xpath expr="//sheet/group[1]" position="after">
+				<separator string="Loading/Unloading Time"  attrs="{'invisible': [('state', 'not in', ('load_unload','release_lorry','reception','production','sorted_treated','done'))]}"/>
+				<group style="border: 2px solid #1d8e10;; background: #fcfcfc; box-shadow: 1px 1px 5px 1px #acada9;" attrs="{'invisible': [('state', 'not in', ('load_unload','release_lorry','reception','production','sorted_treated','done'))]}">
+					<div class="col-12">
+						<div class="col-6" style="float:left;padding:10px;text-align: center;margin-top: 4px;">
+							<label for="task_timer" style="width: 125px; font-weight: bold;"/>
+							<div class="o_row" style="display: inline-block;">
+								<field name="task_timer" widget="boolean_toggle" attrs="{'readonly':[('state','in',('done'))]}"/>
+							</div>
+						</div>
+						<div class="col-6" style="float:left;padding:10px;">
+							<field name="is_user_working" invisible="1"/>
+							<div>
+								<label for="duration" style="width: 110px; font-weight: bold;"/>
+								<button style="pointer-events: none;" class="oe_inline label label-default">
+									<field name="duration" id="real_duration" widget="timesheet_uoms1" style="color: red;"/>
+								</button>
+							</div>
+						</div>
+					</div>
+				</group>
+				<group>
+					<group>
+						<label for="total_time" string="Work Duration(Minutes)" style="width: 150px;"/>
+						<div>
+							<field name="total_time" widget="float_time" class="oe_inline"/>
+							<button name="update_picking_time" type="object" string="Update Time" class="oe_link" groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager"/>
+						</div>
+					</group>
+					<group>						
+					</group>
+				</group>
+				<separator string="Reception Time"  attrs="{'invisible': [('state', 'not in', ('reception','production','sorted_treated','done'))]}"/>
+				<group style="border: 2px solid #1d8e10;; background: #fcfcfc; box-shadow: 1px 1px 5px 1px #acada9;" attrs="{'invisible': [('state', 'not in', ('reception','production','sorted_treated','done'))]}">
+					<div class="col-12">
+						<div class="col-6" style="float:left;padding:10px;text-align: center;margin-top: 4px;">
+							<label for="reception_task_timer" style="width: 125px; font-weight: bold;"/>
+							<div class="o_row" style="display: inline-block;">
+								<field name="reception_task_timer" widget="boolean_toggle" attrs="{'readonly':[('state','in',('done'))]}"/>
+							</div>
+						</div>
+						<div class="col-6" style="float:left;padding:10px;">
+							<field name="is_user_working" invisible="1"/>
+							<div>
+								<label for="reception_duration" style="width: 110px; font-weight: bold;"/>
+								<button style="pointer-events: none;" class="oe_inline label label-default">
+									<field name="reception_duration" id="reception_real_duration" widget="timesheet_uoms2" style="color: red;"/>
+								</button>
+							</div>
+						</div>
+					</div>
+				</group>
+				<group attrs="{'invisible': [('state', 'not in', ('reception','production','sorted_treated','done'))]}">
+					<group>
+						<label for="reception_total_time" string="Work Duration(Minutes)" style="width: 150px;"/>
+						<div>
+							<field name="reception_total_time" widget="float_time" class="oe_inline"/>
+							<button name="%(ppts_inventory_customization.action_update_time_reception)d" type="action" string="Update Time" class="oe_link" groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager"/>
+						</div>
+					</group>
+					<group>						
+					</group>
+				</group>
+			</xpath>
+
+			<xpath expr="//notebook/page[4]" position="after">
+				<page string="Unloading Work Duration" attrs="{'invisible': [('state', 'not in', ('load_unload','release_lorry','production','sorted_treated','done'))]}">
+					<div style="margin-top:7px;">
+						<widget name="web_ribbon" text="Started" attrs="{'invisible': [('task_timer', '=', False)]}"/>
+					</div>
+
+					<group string="Timings">
+						<field name="timesheet_ids" nolabel="1" readonly="1">
+							<tree>
+								<field name="date_start" required="1"/>
+								<field name="date_end"/>
+								<field name="timer_duration" invisible="1"/>
+								<field name="unit_amount" invisible="1"/>
+								<field name="user_id" invisible="1"/>
+								<field name="picking_id" invisible="1"/>
+							</tree>
+						</field>
+					</group>
+				</page>
+				<page string="Reception Work Duration" attrs="{'invisible': [('state', 'not in', ('load_unload','release_lorry','production','sorted_treated','done'))]}">
+					<div style="margin-top:7px;">
+						<widget name="web_ribbon" text="Started" attrs="{'invisible': [('reception_task_timer', '=', False)]}"/>
+					</div>
+
+					<group string="Timings">
+						<field name="reception_timesheet_ids" nolabel="1" readonly="1">
+							<tree>
+								<field name="date_start" required="1"/>
+								<field name="date_end"/>
+								<field name="timer_duration" invisible="1"/>
+								<field name="unit_amount" invisible="1"/>
+								<field name="user_id" invisible="1"/>
+								<field name="picking_id" invisible="1"/>
+							</tree>
+						</field>
+					</group>
+				</page>
+			</xpath>
+		</field>
+	</record>
+
+
+	<record id="stock_picking_form_inherited_inventory" model="ir.ui.view">
+		<field name="name">stock.picking.form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form"/>
+		<field name="arch" type="xml">
+
+			<xpath expr="//field[@name='state']" position="replace">
+				<field name="state" widget="statusbar" statusbar_visible="draft,confirmed,partially_available,assigned,load_unload,release_lorry,reception,production,sorted_treated,done"/>
+			</xpath>
+
+			<xpath expr="//button[@name='do_print_picking']" position="before">
+
+				<button name='go_to_reception' string="Move to Reception" class="btn-primary" type="object" attrs="{'invisible': ['|',('state', 'not in', ['assigned']),('include_logistics', '=', False),('picking_type_code', '!=', 'incoming')]}" />
+
+				<button name='move_to_sorted' string="Move to Treated" class="btn-primary" type="object" attrs="{'invisible': ['|',('state', 'not in', ['assigned']),('include_logistics', '=', False),('picking_type_code', '!=', 'outgoing')]}" />
+
+				<button name="%(ppts_inventory_customization.action_update_transport_details)d" string="Update Transporter Details" type="action" class="oe_highlight" attrs="{'invisible':['|',('state' , 'not in' , ('assigned')),'|',('logistics_updated','!=',False),'|',('is_internal_purchase' , '!=' , False),'|',('is_registered_package' , '!=' , False)]}" groups="ppts_logistics.group_logistics_user"/>
+
+				<button name="%(ppts_inventory_customization.action_unload_containers)d" string="Register truck" type="action" class="oe_highlight" attrs="{'invisible':['|','|','|',('state' , 'not in' , ('assigned')),('picking_type_code', '!=', 'incoming'),('is_unloaded','!=',False),('logistics_updated','=',False)]}" groups="ppts_logistics.group_logistics_user"/>
+				<button name="%(ppts_inventory_customization.action_release_containers)d" string="Release Truck" type="action" class="oe_highlight" attrs="{'invisible':['|','|',('state' , 'not in' , ('release_lorry')),('picking_type_code', '!=', 'incoming'),('is_unloaded','=',False)]}" groups="ppts_logistics.group_logistics_user"/>
+
+				<!-- New button to update outgoing truck weight -->
+				<button name="%(ppts_inventory_customization.action_update_outgoing_weight)d" string="Update Outgoing Weight" type="action" class="oe_highlight" attrs="{'invisible':['|','|',('state' , 'not in' , ('load_unload')),('picking_type_code', '!=', 'outgoing')]}" groups="ppts_logistics.group_logistics_user"/>
+
+				<button name="%(ppts_inventory_customization.action_load_truck)d" string="Register truck" type="action" class="oe_highlight" attrs="{'invisible':['|','|','|',('state' , 'not in' , ('assigned')),('picking_type_code', '!=', 'outgoing'),('logistics_updated','=',False)]}" groups="ppts_logistics.group_logistics_user"/>
+
+
+				<button name="%(ppts_inventory_customization.action_release_truck)d" string="Release Truck" type="action" class="oe_highlight" attrs="{'invisible':['|','|',('state' , 'not in' , ('release_lorry')),('picking_type_code', '!=', 'outgoing'),('is_unloaded','=',False)]}" groups="ppts_logistics.group_logistics_user" invisible="1"/>
+
+				<field name="check_release_truck_outgoing_button" invisible="1"/>
+
+				<button name="%(ppts_inventory_customization.action_release_truck)d" string="Release Truck" type="action" class="oe_highlight" attrs="{'invisible':[('check_release_truck_outgoing_button', '=', False)]}" groups="ppts_logistics.group_logistics_user"/>
+				
+				<button name="%(ppts_inventory_customization.action_load_container)d" string="Update Container Details" type="action" class="oe_highlight" attrs="{'invisible':['|','|',('state' , 'in' , ('draft','confirmed','partially_available','done','cancel')),('picking_type_code', '!=', 'outgoing')]}" groups="ppts_inventory_customization.group_production_supervisor" invisible="1"/>
+
+				<field name="check_update_container_outgoing_button" invisible="1"/>
+
+				<button name="%(ppts_inventory_customization.action_load_container)d" string="Update Container Details" type="action" class="oe_highlight" attrs="{'invisible':[('check_update_container_outgoing_button', '=', False)]}" groups="ppts_inventory_customization.group_production_supervisor"/>
+
+				<button name="%(ppts_inventory_customization.action_unload_truck)d" string="Update Container Details" type="action" class="oe_highlight" attrs="{'invisible':['|','|',('state' , 'not in' , ('load_unload')),('picking_type_code', '!=', 'incoming'),('is_unloaded','!=',False)]}" groups="ppts_inventory_customization.group_production_supervisor"/>
+
+				<button name="%(ppts_inventory_customization.action_register_chronopost)d" string="Register Chronopost Package" type="action" class="oe_highlight" groups="ppts_inventory_customization.group_production_supervisor" attrs="{'invisible':['|',('state' , 'not in' , ('assigned')),'|',('is_registered_package' , '=' , False)]}"/>
+
+				<button name="%(ppts_inventory_customization.action_update_purchase_order)d" string="Update Purchase Order" type="action" class="oe_highlight" groups="ppts_inventory_customization.group_production_supervisor" attrs="{'invisible':['|',('state' , 'not in' , ('sorted_treated')),('picking_type_code', '!=', 'incoming')]}"/>
+
+				<button name="%(ppts_inventory_customization.action_update_initial_demand_warnig_form)d" string="Update Initial Demand" type="action" class="oe_highlight" attrs="{'invisible':['|','|',('state' , 'in' , ('draft','confirmed','partially_available','done','cancel')),('picking_type_code', '!=', 'outgoing')]}" groups="ppts_inventory_customization.group_production_supervisor" invisible="1"/>
+
+
+				<button name="%(ppts_inventory_customization.action_update_initial_demand_warnig_form)d" string="Update Initial Demand" type="action" class="oe_highlight" attrs="{'invisible':[('check_release_truck_outgoing_button', '=', False)]}" groups="ppts_inventory_customization.group_production_supervisor"/>
+
+				<button name="%(ppts_inventory_customization.action_stop_timer)d" string="Validate Shipment" type="action" class="oe_highlight" attrs="{'invisible':['|','|','|','|',('load_validated','!=',False),('transport_id','!=',False),('state' , 'not in' , ('load_unload')),('picking_type_code', '!=', 'outgoing')]}" groups="ppts_inventory_customization.group_production_supervisor"/>
+
+				<button name="%(ppts_inventory_customization.action_stop_timer_reuse)d" string="Validate Shipment" type="action" class="oe_highlight" attrs="{'invisible':['|','|','|','|',('load_validated','!=',False),('transport_id','=',False),('state' , 'not in' , ('load_unload')),('picking_type_code', '!=', 'outgoing')]}" groups="ppts_inventory_customization.group_production_supervisor"/>
+
+				<button name="action_truck_loaded" string="Truck Loaded" type="object" class="oe_highlight" attrs="{'invisible':['|','|',('state' , '!=' , 'load_unload'),('picking_type_code', '!=', 'outgoing')]}" groups="ppts_inventory_customization.group_production_supervisor"/>
+
+			</xpath>
+
+			<xpath expr="//button[@name='button_validate'][1]" position="replace">
+				<field name="check_validate_button" invisible="1"/>
+				<button name="button_validate" attrs="{'invisible': [('check_validate_button', '=', False)]}" string="Validate" type="object" class="oe_highlight" groups="stock.group_stock_user"/>
+			</xpath>
+
+			<xpath expr="//button[@name='button_validate']" position="before">
+				<button name="move_to_production" attrs="{'invisible': [('state', 'not in', ('reception'),('is_internal_purchase' , '=' , False))]}" string="Move To Production" type="object" class="oe_highlight" groups="stock.group_stock_user,ppts_inventory_customization.group_production_supervisor"/>
+				<button name="button_finish" attrs="{'invisible': [('state', 'not in', ('production'),('is_internal_purchase' , '=' , False))]}" string="Finish Process" type="object" class="oe_highlight" groups="stock.group_stock_user,ppts_inventory_customization.group_production_manager"/>
+				<field name="check_move_to_reception_button" invisible="1"/>
+				<button name="move_to_reception" attrs="{'invisible': [('check_move_to_reception_button', '=', False)]}" string="Move To Reception" type="object" class="oe_highlight" invisible="1"/>
+			</xpath>
+
+			<xpath expr="//page[@name='extra']" position="after">
+				<page string="Transporter Details">
+					<group>
+						<group>
+							<field name="container_price" invisible="1"/>
+							<field name="transporter_partner_id"/>
+							<field name="transport_po_id"/>
+							<field name="worker_ids" widget="many2many_tags" options="{'no_create_edit': True}"/>
+						</group>
+						<group>
+							<field name="gross_weight" string="Gross weight(kg)" invisible="0"/>
+							<field name="overwrite_gross"/>
+							<field name="new_gross_weight" attrs="{'invisible':[('overwrite_gross', '=', False)],'required':[('overwrite_gross', '!=', False)]}"/>
+							<field name="unloading_charges"/>
+							<field name="reception_charges"/>
+						</group>
+					</group>
+					<group string="Loading" attrs="{'invisible':[('picking_type_code', '!=', 'outgoing')]}">
+						<group>
+							<field name="sale_logistics_pickup_date"/>
+							<field name="sale_logistics_weight_at_entry"/>
+							<field name="sale_logistics_entry_date_time"/>
+							<field name="is_sea_transport"/>
+							<field name="truck_licence_plate"/>
+							<field name="sale_logistics_no_of_container"/>
+						</group>
+						<group>
+							<field name="sale_logistics_expected_delivery"/>
+							<field name="sale_logistics_weight_at_exit"/>
+							<field name="sale_logistics_exit_date_time"/>
+							<!-- <field name="sale_logistics_actual_pickup" /> -->
+							<field name="truck_container_number"/>
+							<field name="container_seal_number"/>
+						</group>
+					</group>
+					<group string="Unloading" attrs="{'invisible':[('picking_type_code', '!=', 'incoming')]}">
+						<group>
+							<field name="pickup_date_type" />
+							<field name='pickup_date' attrs="{
+								'invisible': [('pickup_date_type', 'not in', ['specific'])]
+								}" />
+							<field name='pickup_earliest_date' attrs="{
+								'invisible': [('pickup_date_type', 'not in', ['between'])]
+								}" />
+							<field name='pickup_latest_date' attrs="{
+								'invisible': [('pickup_date_type', 'not in', ['between'])]
+								}" />
+							<field name="net_weight_of_shipment" string="Weight(Kg)"/>
+							<field name="weight_at_entry" string="Truck weight at Entry(Kg)"/>
+							<field name="weight_at_exit" string="Truck weight at Exit(Kg)"/>
+							<field name="no_of_container"/>
+							<label for="is_container_match" string="Is containers Mismatched?"/>
+							<div>
+								<field name="is_container_match" style="width: 48.5%"/>
+								<button name="action_send_container_mismatch" id="action_send_container_mismatch"
+										string="Notify Vendor" class="btn-primary" type="object" attrs="{'invisible': [('is_container_match', '!=', True)]}"/>
+							</div>
+							<field name="purchase_container_seal_number"/>
+						</group>
+						<group>
+							<field name="expected_delivery" string="Expected Delivery Date"/>
+							<field name="license_plate_number"/>
+							<field name="entry_date_time"/>
+							<field name="exit_date_time"/>
+							<field name="received_containers"/>
+							<field name="purchase_truck_container_number"/>
+							<field name="is_unloaded" invisible="1"/>
+							<field name="is_internal_purchase" invisible="1"/>
+						</group>
+					</group>
+				</page>
+				<page string="Container Images">
+					<field name = "conteriner_image_line_ids">
+						<tree editable="bottom">
+							<field name="conteriner_image" />
+						</tree>
+						<form>
+							<group>
+								<group>
+									<field name="conteriner_image" widget='image' />
+								</group>
+							</group>
+						</form>
+					</field>
+				</page>
+			</xpath>
+
+			<xpath expr="//notebook/page[3]/field[@name='move_ids_without_package']/tree/field[@name='product_uom']" position="after">
+				<field name="bsd_annexe"/>
+				<button name="update_bsd" id="update_bsd" string="Update BSD" class="btn-primary" type="object" attrs="{'invisible': [('bsd_annexe', 'not in', ['bsd'])]}"/>
+				<button name="update_annexe_7" id="update_annexe" string="Update Annexe 7" class="btn-primary" type="object" attrs="{'invisible': [('bsd_annexe', 'not in', ['annexe7'])]}"/>
+				<!--<button name="print_bsd_report" id="print_bsd_report" string="Print BSD" class="btn-primary" type="object" attrs="{'invisible': [('bsd_annexe', 'not in', ['bsd'])]}"/>-->
+				<!--<button name="print_annux_report" id="print_annux_report" string="Print Annexe 7" class="btn-primary" type="object" attrs="{'invisible': [('bsd_annexe', 'not in', ['annexe7'])]}"/>-->
+			</xpath>
+
+			<xpath expr="//notebook/page[3]/field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="after">
+				<field name="container_ids" widget="many2many_tags"/>
+			</xpath>
+
+			<xpath expr="//notebook/page[3]/field[@name='move_ids_without_package']/tree/field[@name='product_uom_qty']" position="after">
+				<field name="actual_weight" invisible="1"/>
+			</xpath>
+
+			<xpath expr="//field[@name='location_dest_id']" position="after">
+				<field name="from_owner_id" options="{'no_create_edit': True}"/>
+				<field name="to_owner_id" options="{'no_create_edit': True}"/>
+				<field name="vendor_ref" attrs="{'invisible':[('picking_type_code', '!=', 'incoming')]}"/>
+				<field name="buyer_ref" attrs="{'invisible':[('picking_type_code', '!=', 'outgoing')]}"/>
+			</xpath>
+
+		</field>
+	</record>
+</odoo>

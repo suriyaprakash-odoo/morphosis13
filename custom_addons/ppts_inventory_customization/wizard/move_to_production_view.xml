@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_container_to_inprogress" model="ir.ui.view">
+        <field name="name">move.to.production.view.form</field>
+        <field name="model">move.to.production</field>
+        <field name="arch" type="xml">
+            <form string="Move To Production">
+            	<sheet>
+					<group>
+						<group>
+							<field name="operator_ids" widget="many2many_tags" required="1"/>	
+						</group>
+					</group>
+				</sheet>
+                <footer>
+                    <button name="set_inprogress" string="Move to Production" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="action_container_to_inprogress" model="ir.actions.act_window">
+		<field name="name">Move To Production</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">move.to.production</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_container_to_inprogress" />
+		<field name="target">new</field>
+	</record>
+
+</odoo>

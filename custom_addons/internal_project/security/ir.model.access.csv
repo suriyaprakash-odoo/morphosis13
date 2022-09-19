@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_internal_project_user,internal.project,internal_project.model_internal_project,ppts_inventory_customization.group_production_supervisor,1,1,1,0
+access_internal_project_manager,internal.project,internal_project.model_internal_project,ppts_inventory_customization.group_production_manager,1,1,1,1

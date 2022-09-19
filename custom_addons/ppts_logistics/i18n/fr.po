@@ -1,0 +1,2667 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ppts_logistics
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e-20191017\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-02 06:29+0000\n"
+"PO-Revision-Date: 2020-12-02 06:29+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ppts_logistics
+#: model:mail.template,body_html:ppts_logistics.email_template_send_transport_request
+msgid ""
+"\n"
+"                \n"
+"                    <p>Hi ${object.partner_id.name},</p>\n"
+"                    <p>Greetings of the Day!</p>\n"
+"                    <p>We would like to transfer goods from ${object.pickup_country_id.name or ''} to ${object.delivery_country_id.name or ''} with weight of ${object.gross_weight or ''} on ${object.pickup_date or ''}.</p>\n"
+"                    <p>So kindly provide the estimated cost and availablity on the above</p>\n"
+"                    <br/>\n"
+"                    <p>Thanks,</p>\n"
+"                    <p>${object.company_id.name}</p>\n"
+"                    <p><i>Morphosis Group</i></p>\n"
+"                \n"
+"            "
+msgstr ""
+"       <p>Hi ${object.partner_id.name},</p>\n"
+"                    <p>Bonjour</p>\n"
+"                    <p>Nous avons un projet de transport avec enlèvement en ${object.pickup_country_id.name or ''} vers ${object.delivery_country_id.name or ''} avec un poids total de  ${object.gross_weight or ''} on ${object.pickup_date or ''}.</p>\n"
+"                    <p>Merci de nous donner votre devis pour ce projet </p>\n"
+"                    <br/>\n"
+"                    <p>Cordialement,</p>\n"
+"                    <p>${object.company_id.name}</p>\n"
+"                    <p><i>Morphosis Group</i></p>\n"
+"                \n"
+"            "
+
+#. module: ppts_logistics
+#: model:mail.template,body_html:ppts_logistics.email_template_send_approved_notification_to_production
+msgid ""
+"\n"
+"                \n"
+"                    <p>Hi Team,</p>\n"
+"                    <p>Greetings of the Day!</p>\n"
+"                    <p>The transport request for the Sale Order/Quotation: <strong>${object.sales_origin.name}</strong> has been approved and will be shipped by <strong>${object.partner_id.name}</strong> and expected pickup is on <strong>${object.pickup_date} </strong> </p>\n"
+"                    <p>Kindly check Sale Order/Quotation: <strong>${object.sales_origin.name}</strong> and Transport request: <strong>${object.name}</strong> for additional informations.</p>\n"
+"                    <br/>\n"
+"                    <p>Thanks,</p>\n"
+"                    <p>${object.company_id.name}</p>\n"
+"                    <p><i>Morphosis Group</i></p>\n"
+"                \n"
+"            "
+msgstr ""
+
+#. module: ppts_logistics
+#: model:mail.template,body_html:ppts_logistics.email_template_send_approved_notification
+msgid ""
+"\n"
+"                \n"
+"                    <p>Hi Team,</p>\n"
+"                    <p>Greetings of the Day!</p>\n"
+"                    <p>The transport request for the project: <strong>${object.origin.name}</strong> has been approved and will be shipped by <strong>${object.partner_id.name}</strong> and expected to be received on <strong>${object.expected_delivery} </strong> </p>\n"
+"                    <p>Kindly check Project: <strong>${object.origin.name}</strong> and Transport request: <strong>${object.name}</strong> for additional informations.</p>\n"
+"                    <br/>\n"
+"                    <p>Thanks,</p>\n"
+"                    <p>${object.company_id.name}</p>\n"
+"                    <p><i>Morphosis Group</i></p>\n"
+"                \n"
+"            "
+msgstr ""
+
+#. module: ppts_logistics
+#: model:mail.template,subject:ppts_logistics.email_template_transport_purchase_order
+msgid "${object.company_id.name} Order (Ref ${object.name or 'n/a' })"
+msgstr "${object.company_id.name} Commande (Ref ${object.name or 'n/d' })"
+
+#. module: ppts_logistics
+#: model:ir.actions.report,print_report_name:ppts_logistics.report_annux
+msgid "'Annux7 Report'"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.actions.report,print_report_name:ppts_logistics.report_bsd
+msgid "'BSD Report'"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.actions.report,print_report_name:ppts_logistics.report_transport_purchase_order
+msgid "'Order Details'"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.actions.report,print_report_name:ppts_logistics.report_trasport_order
+msgid "'Transport RFQ Report'"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid ""
+"***ATTENTION TRANSPORT SOUS ATTESTATION DE TRANSPORTS DE DECHETS DGX ET NON "
+"DGX***"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "***LE CHAUFFEUR DOIT L’AVOIR IMPERATIVEMENT DANS SON CAMION***"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "***REAFFRETEMENT INTERDIT***"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "- DÉCLARATION GÉNÉRALE DE L’ÉMETTEUR DU BORDEREAU -"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "- À REMPLIR PAR L’ÉMETTEUR DU BORDEREAU -"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__linear_meter__10
+msgid "10"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "10. Expédition reçue à l’installation de destination"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__linear_meter__11
+msgid "11"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "11. Réalisation de l’opération :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__linear_meter__12
+msgid "12"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__linear_meter__13
+msgid "13"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid ""
+"2. Installation de destination ou d’entreposage ou de\n"
+"\t\t\t\t\t\t\t<br/>\n"
+"\t\t\t\t\t\t\treconditionnement prévue"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__container_type__20
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__volume_to_ship__20
+msgid "20ft"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_number__li_metal_battery
+msgid "3090 - Lithium Metal Batteries"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_number__li_battery_equiped
+msgid "3091 - Lithium Batteries in Equipment"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_number__fuel_cells
+msgid "3166 - Fuel Cells"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_number__li_cells
+msgid "3480 - Lithium Cells"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_number__ni_metal_hydride
+msgid "3496 - Nickel Metal Hydride"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__container_type__40
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__volume_to_ship__40
+msgid "40ft"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__container_type__hc
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__volume_to_ship__hc
+msgid "40ft HC"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "9. Déclaration générale de l’émetteur du bordereau :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:mail.template,body_html:ppts_logistics.email_template_transport_purchase_order
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Dear ${object.partner_id.name}\n"
+"                        % if object.partner_id.parent_id:\n"
+"                            (${object.partner_id.parent_id.name})\n"
+"                        % endif\n"
+"                        <br/><br/>\n"
+"                        Here is in attachment a purchase order <strong>${object.name}</strong>\n"
+"                        % if object.partner_ref:\n"
+"                            with reference: ${object.partner_ref}\n"
+"                        % endif\n"
+"                        amounting in <strong>${format_amount(object.amount_total, object.currency_id)}</strong>\n"
+"                        from ${object.company_id.name}.\n"
+"                        <br/><br/>\n"
+"                        If you have any questions, please do not hesitate to contact us.\n"
+"                        <br/><br/>\n"
+"                        Best regards,\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        Dear ${object.partner_id.name}\n"
+"                        % if object.partner_id.parent_id:\n"
+"                            (${object.partner_id.parent_id.name})\n"
+"                        % endif\n"
+"                        <br/><br/>\n"
+"                Vous trouverez ci-joint notre bon de commande  <strong>${object.name}</strong>\n"
+"                        % if object.partner_ref:\n"
+"                            avec la référence: ${object.partner_ref}\n"
+"                        % endif\n"
+"                      pour une valeur de <strong>${format_amount(object.amount_total, object.currency_id)}</strong>\n"
+"                     de  ${object.company_id.name}.\n"
+"                        <br/><br/>\n"
+"                        Si vous avez des questions, n'hésitez pas de nous contacter.\n"
+"                        <br/><br/>\n"
+"                     Cordialement Votre,\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid ""
+"<i>Règlement (CE) n°1013/2006 du Parlement européen et du Conseil du 14 juin"
+" 2006</i>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "<span class=\"o_form_label\">Logistics</span>"
+msgstr "<span class=\"o_form_label\">Logistique</span>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid ""
+"<span style=\"font-style:italic\">reste identifiable le nouveau bordereau sera accompagné de l'annexe 2 du formulaire CERFA n°12571*01)</span>\n"
+"\t\t\t\t\t\t\t:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "<span style=\"font-weight:bold\">1. Émetteur du bordereau</span>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid ""
+"<span style=\"font-weight:bold\">12. Destination ultérieure prévue</span>\n"
+"\t\t\t\t\t\t\t<span style=\"font-style:italic\">(dans le cas d'une transformation ou d'un traitement aboutissant à des déchets dont la provenance</span>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid ""
+"<span style=\"font-weight:bold;\">- À REMPLIR PAR LE COLLECTEUR-TRANSPORTEUR"
+" -</span>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid ""
+"<span style=\"font-weight:bold;\">- À REMPLIR PAR L’INSTALLATION DE "
+"DESTINATION -</span>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "<span style=\"font-weight:bold;\">3. Dénomination du déchet</span>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid ""
+"<span style=\"font-weight:bold;\">4. Mentions au titre des règlements ADR, RID, ADNR, IMDG</span>(le cas échéant)\n"
+"\t\t\t\t\t\t\t<br/>\n"
+"\t\t\t\t\t\t\t<br/>\n"
+"\t\t\t\t\t\t\t<br/>\n"
+"\t\t\t\t\t\t\t<br/>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "<span style=\"font-weight:bold;\">5. Conditionnement:</span>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "<span style=\"font-weight:bold;\">6. Quantité</span>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "<span style=\"font-weight:bold;\">7. Négociant</span>(le cas échéant)"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "<span style=\"font-weight:bold;\">8. Collecteur-transporteur</span>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid ""
+"<strong>\n"
+"\t\t\t\t\t\t<u>Bordereau de suivi des déchets</u>\n"
+"\t\t\t\t\t</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "<strong>1. Personne qui organise le transfert</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid ""
+"<strong>10. Identification des déchets </strong>(indiquer les codes "
+"correspondants):"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "<strong>11. Pays/États concernés:</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid ""
+"<strong>12. Déclaration de la personne qui organise le transfert:</strong>Je"
+" soussigné certifie que les renseignements portés dans les cases ci-dessus "
+"sont exacts et établis de bonne foi. Je certifie également que les "
+"obligations contractuelles écrites prévues par la réglementation ont été "
+"remplies avec le destinataire (non nécessaire dans le cas des déchets visés "
+"à l'article 3, paragraphe 4):"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid ""
+"<strong>13. Signature à la réception des déchets par le "
+"destinataire:</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "<strong>14. Transfert reçu par l'installation de valorisation</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "<strong>2. Importateur - destinataire</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "<strong>3. Quantité effective:</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "<strong>4. Date effective du transfert:</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "<strong>5. a) 1er transporteur (2)</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "<strong>5. b) 2er transporteur (2)</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "<strong>5. b) 3er transporteur (2)</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid ""
+"<strong>6. Producteur des déchets (3) Producteur(s) initial(aux), nouveau(x)"
+" producteur(s) ou collecteur:</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "<strong>7. Installation de valorisation</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid ""
+"<strong>8. Opération de valorisation (ou, le cas échéant, d'élimination pour"
+" les déchets visés à l'article 3, paragraphe 4):</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid ""
+"<strong>9. Dénomination usuelle des "
+"déchets:</strong><br/><br/><br/><br/><br/><br/><br/><br/>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Additional Informations</strong>"
+msgstr "<strong>Information Complémentaire</strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Agreed Price : </strong>"
+msgstr "<strong>Prix Convenu : </strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Contact : </strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Contact : </strong>G.Blais 0232727414, C.Boutin 0232727418"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Destination Address: </strong>"
+msgstr "<strong>Adresse de livraison : </strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+msgid "<strong>Evening Opening Hours : </strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Expected delivery date: </strong>"
+msgstr "<strong>Date de livraison prévue: </strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Full Load : </strong>"
+msgstr "<strong>Camion Complet : </strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid ""
+"<strong>INFORMATIONS ACCOMPAGNANT LES TRANSFERTS DE DECHETS VISES A "
+"L'ARTICLE 3, PARAGRAPHES 2 ET 4</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "<strong>Informations relatives à l'expédition (1)</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "<strong>Laboratoire</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Linear Meter : </strong>"
+msgstr "<strong>Métrage Linéaire : </strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Load Details</strong>"
+msgstr "<strong>Détails du lot</strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Lorry Details</strong>"
+msgstr "<strong>Dérails du camion</strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Material : </strong>DEEE"
+msgstr "<strong>Matériel : </strong>DEEE"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+msgid "<strong>Morning Opening Hours : </strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Number of containers : </strong>"
+msgstr "<strong>Nombre de contenants : </strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Opening Hours : </strong>"
+msgstr "<strong>Horaires : </strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Opening Hours : </strong>8h-16h30(8h-15h30 le vendredi)"
+msgstr "<strong>Horaires : </strong>8h-16h30(8h-15h30 le vendredi)"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Pickup Address: </strong>"
+msgstr "<strong>Adresse d’enlèvement: </strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Pickup date: </strong>"
+msgstr "<strong>Date d’enlèvement: </strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Price Details</strong>"
+msgstr "<strong>Détails des prix</strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Tail Lift : </strong>"
+msgstr "<strong>Hayon : </strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Transport Details</strong>"
+msgstr "<strong>Détails du trajet</strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Type of Lorry : </strong>"
+msgstr "<strong>Type de camion : </strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "<strong>Weight of Load(Kg) : </strong>"
+msgstr "<strong>Poids brut du lot(Kg) : </strong>"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "<strong>ou par le laboratoire</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid ""
+"<strong>À REMPLIR PAR L'INSTALLATION DE VALORISATION OF PAR LE "
+"LABORATOIRE</strong>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_line__adr_class_id
+#: model:ir.ui.menu,name:ppts_logistics.menu_adr_class
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.adr_classes_form_view
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.adr_classes_tree_view
+msgid "ADR Class"
+msgstr "Classe ADR"
+
+#. module: ppts_logistics
+#: model:ir.actions.act_window,name:ppts_logistics.action_adr_class_view
+msgid "ADR Classes"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "ADR Details"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__adr_line
+msgid "ADR Line"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__adr_num
+msgid "ADR Number"
+msgstr "Numéro ADR"
+
+#. module: ppts_logistics
+#: model:ir.actions.act_window,name:ppts_logistics.action_adr_pickup_type_view
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_line__adr_pickup_type_id
+#: model:ir.ui.menu,name:ppts_logistics.menu_adr_pickup_type
+msgid "ADR Package Type"
+msgstr "Emballage ADR"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.adr_pickup_type_form_view
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.adr_pickup_type_tree_view
+msgid "ADR Pickup Type"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.ui.menu,name:ppts_logistics.menu_adr_settings_main
+msgid "ADR Settings"
+msgstr "Paramètres ADR"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__access_warning
+msgid "Access warning"
+msgstr "Avertissement d'accès"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__message_needaction
+msgid "Action Needed"
+msgstr "Nécessite une action"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_calendar_view
+msgid "Actions"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__active
+msgid "Active"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__activity_ids
+msgid "Activities"
+msgstr "Activités"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Activité d'exception de décoration"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__activity_state
+msgid "Activity State"
+msgstr "Status de l'activité"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__actual_container
+msgid "Actual numer of containers"
+msgstr "Nombre actuel de contenants"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Additional Informations"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Adresse :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Adresse:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__tranport_mode__air
+msgid "Air Flight"
+msgstr "Aérien"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__analytic_account_id
+msgid "Analytic Account"
+msgstr "Compte analytique"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__bsdannex__annux7
+msgid "Annexe7"
+msgstr "Annexe 7"
+
+#. module: ppts_logistics
+#: model:ir.actions.report,name:ppts_logistics.report_annux
+msgid "Annux7 Report"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.view_create_transport_rfq
+msgid "Approve and Create PO"
+msgstr "PASSER COMMANDE"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__status__approved
+msgid "Approved"
+msgstr "Approuvé"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Arrêté du 29 juillet 2005"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__pickup_date_type__as_soon_as_possible
+msgid "As soon as possible"
+msgstr "Dès que possible"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__message_attachment_count
+msgid "Attachment Count"
+msgstr "Compte des pièces jointes"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Autre détenteur"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__bsdannex__bsd
+msgid "BSD"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.actions.report,name:ppts_logistics.report_bsd
+msgid "BSD Report"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__bsdannex
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "BSD/Annexe7"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Bordereau n° :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.view_create_transport_rfq
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.view_search_chronopost_project
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.view_update_container_details
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_carton_logistics_line__name
+msgid "Carton Number"
+msgstr "Numéro du Carton"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__carton_ids
+msgid "Carton lines"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_search_chronopost_project__chronopost_number
+msgid "Chronopost Number"
+msgstr "Numéro de chronopost"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "City"
+msgstr "Ville"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_pickup_type__code
+msgid "Class Code"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_class__lable
+msgid "Class Name"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_pickup_type__class_type
+msgid "Class Type"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__adr_class
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__adr_class_id
+msgid "Classes"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__client_feedback_score
+msgid "Client Feedback Score"
+msgstr "Score de rétroaction des clients"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_class__code
+#: model:ir.model.fields,field_description:ppts_logistics.field_res_sea_ports__code
+msgid "Code"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Code D/R :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Code R/D: R4"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid ""
+"Collecteur de petites quantités\n"
+"\t\t\t\t\t\t\t\t<br/>\n"
+"\t\t\t\t\t\t\t\tde déchets relevant d’une même\n"
+"\t\t\t\t\t\t\t\t<br/>\n"
+"\t\t\t\t\t\t\t\trubrique\n"
+"\t\t\t\t\t\t\t\t<span style=\"font-style:italic\">(joindre annexe 1)</span>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__transport_type__collect
+msgid "Collection"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__company_id
+msgid "Company"
+msgstr "Société"
+
+#. module: ppts_logistics
+#: code:addons/ppts_logistics/models/logistics.py:0
+#: code:addons/ppts_logistics/models/purchase.py:0
+#, python-format
+msgid "Compose Email"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__is_conforms_with_deliver_note
+msgid "Conforms with delivery note"
+msgstr "Est conforme avec le BL"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Consistance :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__lorry_type__container
+msgid "Container"
+msgstr "Porte conteneur"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__container_count
+msgid "Container Count"
+msgstr "Nombre de contenants"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__container_type
+msgid "Container Load"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_filters
+msgid "Container Type"
+msgstr "Type de contenant"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__containers_to_ship
+msgid "Containers to Ship"
+msgstr "Nombre de contenants à transporter"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_class__corrosive
+msgid "Corrosives"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_carton_logistics_line__cost
+msgid "Cost"
+msgstr "Coût"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__delivery_countries_id
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__pickup_countries_id
+#: model:ir.model.fields,field_description:ppts_logistics.field_res_sea_ports__country_id
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Country"
+msgstr "Pays"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Courrier électronique:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Courrier électronique: gaetan.blais@morphosis.fr"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.view_create_transport_rfq
+msgid "Create Transport PO"
+msgstr "Créer un bon de commande de transport"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_class__create_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_line__create_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_pickup_type__create_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_carton_logistics_line__create_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_hazard_number__create_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__create_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_res_sea_ports__create_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_search_chronopost_project__create_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_document__create_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_rfq__create_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_tunnel_code__create_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_un_code__create_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_update_container_details__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_class__create_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_line__create_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_pickup_type__create_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_carton_logistics_line__create_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_hazard_number__create_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__create_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_res_sea_ports__create_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_search_chronopost_project__create_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_document__create_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_rfq__create_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_tunnel_code__create_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_un_code__create_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_update_container_details__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__transport_type__crosstrade
+msgid "Cross-Trade"
+msgstr "Négoce"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__currency_id
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_rfq__currency_id
+msgid "Currency"
+msgstr "Devise"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__current_annexe_sequence
+msgid "Current Annexe7 Sequence"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__current_bsd_sequence
+msgid "Current BSD Sequence"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__lorry_type__curtainside
+msgid "Curtain-side"
+msgstr "Tautliner"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_rfq__partner_id
+msgid "Customer"
+msgstr "Client"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,help:ppts_logistics.field_logistics_management__access_url
+msgid "Customer Portal URL"
+msgstr "URL du portail client"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__customs_classification_code
+msgid "Customs Classification Code"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__customs_seal_number
+#: model:ir.model.fields,field_description:ppts_logistics.field_update_container_details__customs_seal_number
+msgid "Customs Seal Number"
+msgstr "Code Douanier"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "D écret n°2005-635 du 30 mai 2005"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Date :      /      /"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid ""
+"Date :      /      /                                Signature\n"
+"\t\t\t\t\t\t\tet cachet :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Date de la prise en charge:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Date de prise en charge :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Date de présentation :      /      /"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__pickup_date
+msgid "Date of Pickup"
+msgstr "Date de collection"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__reciption_date
+msgid "Date of Reciption"
+msgstr "Date de réception"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__date_deadline
+msgid "Deadline for filing customs papers"
+msgstr "Date Limite pour dépôt des papiers des douanes"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__status__delivered
+msgid "Delivered"
+msgstr "Livré"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__transport_type__delivery
+msgid "Delivery"
+msgstr "Livraison"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Delivery Address"
+msgstr "Adresse de livraison"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__delivery_city
+msgid "Delivery City"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__delivery_partner_location_id
+msgid "Delivery Location"
+msgstr "Point de livraison"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__delivery_partner_id
+msgid "Delivery Point"
+msgstr "Destinataire"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__delivery_street
+msgid "Delivery Street"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__delivery_street2
+msgid "Delivery Street2"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__delivery_zip
+msgid "Delivery Zip"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__delivery_note
+msgid "Delivery note of Supplier"
+msgstr "Bon de Livraison du fournisseur"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__delivery_country_id
+msgid "Department of Destination"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__pickup_country_id
+msgid "Department of Origin"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Description :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_filters
+msgid "Destination"
+msgstr "Déstinataire"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__tranport_mode__direct
+msgid "Direct"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_class__display_name
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_line__display_name
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_pickup_type__display_name
+#: model:ir.model.fields,field_description:ppts_logistics.field_carton_logistics_line__display_name
+#: model:ir.model.fields,field_description:ppts_logistics.field_hazard_number__display_name
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__display_name
+#: model:ir.model.fields,field_description:ppts_logistics.field_res_sea_ports__display_name
+#: model:ir.model.fields,field_description:ppts_logistics.field_search_chronopost_project__display_name
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_document__display_name
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_rfq__display_name
+#: model:ir.model.fields,field_description:ppts_logistics.field_tunnel_code__display_name
+#: model:ir.model.fields,field_description:ppts_logistics.field_un_code__display_name
+#: model:ir.model.fields,field_description:ppts_logistics.field_update_container_details__display_name
+msgid "Display Name"
+msgstr "Afficher Nom"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__delivery_documents
+msgid "Documents"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Dénomination usuelle :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__pickup_earliest_date
+msgid "Earliest Date"
+msgstr "Date la plus ancienne"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Entreposage provisoire ou reconditionnement"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Evening Opening Hours"
+msgstr "Horaires de l'après-midi"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__evening_opening_hours_end
+msgid "Evening Opening Hours End"
+msgstr "Horaires d’ouverture de l’après midi"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__evening_opening_hours_start
+msgid "Evening Opening Hours Start"
+msgstr "Horaires d’ouverture de l’après midi"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__expected_delivery
+msgid "Expected date of delivery"
+msgstr "Date de livraison prévisionnelle"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_class__explosives
+msgid "Explosives"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Exportation/expédition"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Fax :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Fax. :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_class__flammable_liquid
+msgid "Flammable Liquids"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_class__flammable_solid
+msgid "Flammable Solids"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__message_follower_ids
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Abonnés (Canaux)"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (Partenaires)"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Formulaire CERFA n° 12571*01"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__is_full_load
+msgid "Full Load?"
+msgstr "Charge Complète"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "GRV"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_class__glasses
+msgid "Gases"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__entry_gross_weight
+msgid "Gross weight at entry"
+msgstr "Poids brut à l'entrée"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__gross_weight_on_bridge
+msgid "Gross weight on Bridge"
+msgstr "Poids Brut sur pont bascule"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__gross_weight
+msgid "Gross weight(Kg)"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_filters
+msgid "Group By"
+msgstr "Regrouper par"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_hazard_number__code
+msgid "Hazard Code"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_hazard_number__hazard_name
+msgid "Hazard Name"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.actions.act_window,name:ppts_logistics.action_hazard_number_view
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_line__hazard_type_id
+#: model:ir.ui.menu,name:ppts_logistics.menu_hazard_number
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.hazard_number_form_view
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.hazard_number_type_tree_view
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.un_code_form_view
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.un_code_tree_view
+msgid "Hazard Number"
+msgstr "Référence Danger"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__hazard_type_id
+msgid "Hazard Type"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_packing_group__high_danger
+msgid "I - High Danger"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_class__id
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_line__id
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_pickup_type__id
+#: model:ir.model.fields,field_description:ppts_logistics.field_carton_logistics_line__id
+#: model:ir.model.fields,field_description:ppts_logistics.field_hazard_number__id
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__id
+#: model:ir.model.fields,field_description:ppts_logistics.field_res_sea_ports__id
+#: model:ir.model.fields,field_description:ppts_logistics.field_search_chronopost_project__id
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_document__id
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_rfq__id
+#: model:ir.model.fields,field_description:ppts_logistics.field_tunnel_code__id
+#: model:ir.model.fields,field_description:ppts_logistics.field_un_code__id
+#: model:ir.model.fields,field_description:ppts_logistics.field_update_container_details__id
+msgid "ID"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__transporter_id
+msgid "ID of transporter"
+msgstr "Référence du transporteur"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_packing_group__medium_danger
+msgid "II - Medium Danger"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_packing_group__low_danger
+msgid "III - Low Danger"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__activity_exception_icon
+msgid "Icon"
+msgstr "Icône"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,help:ppts_logistics.field_logistics_management__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icône pour indiquer une activité d'exception."
+
+#. module: ppts_logistics
+#: model:ir.model.fields,help:ppts_logistics.field_logistics_management__message_needaction
+#: model:ir.model.fields,help:ppts_logistics.field_logistics_management__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: ppts_logistics
+#: model:ir.model.fields,help:ppts_logistics.field_logistics_management__message_has_error
+#: model:ir.model.fields,help:ppts_logistics.field_logistics_management__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si actif, certains messages ont une erreur de livraison."
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Importation/destination"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__pickup_date_type__between
+msgid "In between"
+msgstr "Enter deux dates"
+
+#. module: ppts_logistics
+#: model:ir.actions.act_window,name:ppts_logistics.action_logistics_management_incoming_shipment_view
+#: model:ir.ui.menu,name:ppts_logistics.menu_logistics_incoming_sub
+msgid "Incoming Shipment"
+msgstr "Livraison"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__incoterms_id
+msgid "Incoterms"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__is_3rd_party
+msgid "Is 3rd Party"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__is_adr
+msgid "Is ADR Required"
+msgstr "Besoin ADR?"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__message_is_follower
+msgid "Is Follower"
+msgstr "Est un abonné"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_purchase_order__is_transport_rfq
+msgid "Is Transport RFQ?"
+msgstr "Transport RFQ?"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Je soussigné certifie que les renseignements portés dans les cadres"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Je soussigné certifie que l’opération ci-dessus a été effectuée"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_class____last_update
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_line____last_update
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_pickup_type____last_update
+#: model:ir.model.fields,field_description:ppts_logistics.field_carton_logistics_line____last_update
+#: model:ir.model.fields,field_description:ppts_logistics.field_hazard_number____last_update
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management____last_update
+#: model:ir.model.fields,field_description:ppts_logistics.field_res_sea_ports____last_update
+#: model:ir.model.fields,field_description:ppts_logistics.field_search_chronopost_project____last_update
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_document____last_update
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_rfq____last_update
+#: model:ir.model.fields,field_description:ppts_logistics.field_tunnel_code____last_update
+#: model:ir.model.fields,field_description:ppts_logistics.field_un_code____last_update
+#: model:ir.model.fields,field_description:ppts_logistics.field_update_container_details____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_class__write_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_line__write_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_pickup_type__write_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_carton_logistics_line__write_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_hazard_number__write_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__write_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_res_sea_ports__write_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_search_chronopost_project__write_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_document__write_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_rfq__write_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_tunnel_code__write_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_un_code__write_uid
+#: model:ir.model.fields,field_description:ppts_logistics.field_update_container_details__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_class__write_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_line__write_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_pickup_type__write_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_carton_logistics_line__write_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_hazard_number__write_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__write_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_res_sea_ports__write_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_search_chronopost_project__write_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_document__write_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_rfq__write_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_tunnel_code__write_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_un_code__write_date
+#: model:ir.model.fields,field_description:ppts_logistics.field_update_container_details__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__pickup_latest_date
+msgid "Latest Date"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Limite de validité :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__linear_meter
+msgid "Linear Meter"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_class__iithium_ion
+msgid "Lithium Ion Batteries"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__partner_id
+#: model:ir.module.category,name:ppts_logistics.module_category_operations_logistics
+#: model:ir.ui.menu,name:ppts_logistics.menu_logistics_custom
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_filters
+msgid "Logistics"
+msgstr "Transporteur"
+
+#. module: ppts_logistics
+#: model:mail.template,subject:ppts_logistics.email_template_send_approved_notification
+msgid "Logistics Approval Notification"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:mail.template,subject:ppts_logistics.email_template_send_approved_notification_to_production
+msgid "Logistics Approval Outgoing Shipment Notification"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.actions.act_window,name:ppts_logistics.action_logistics_management_for_production_view
+#: model:ir.actions.act_window,name:ppts_logistics.action_logistics_management_view
+#: model:ir.model,name:ppts_logistics.model_logistics_management
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_tree_view
+msgid "Logistics Management"
+msgstr "Gestion de la logistique"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_document__transport_documents_line_id
+msgid "Logistics Management Ref"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_line__logistics_id
+#: model:ir.model.fields,field_description:ppts_logistics.field_carton_logistics_line__carton_id
+msgid "Logistics Management Reference"
+msgstr "Référence de gestion de la logistique"
+
+#. module: ppts_logistics
+#: model:mail.template,subject:ppts_logistics.email_template_send_transport_request
+msgid "Logistics Request"
+msgstr "Demande de logistique"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__logistics_for
+msgid "Logistics for?"
+msgstr "Logistique pour?"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Lot accepté :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Pièce jointe principale"
+
+#. module: ppts_logistics
+#: model:res.groups,name:ppts_logistics.group_logistics_manager
+#: model:res.groups,name:ppts_logistics.group_res_ports_manager
+msgid "Manager"
+msgstr "Gestionnaire"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__tranport_mode__fcl
+msgid "Maritime Groupage(FCL)"
+msgstr "Maritime (FCL)"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__tranport_mode__lcl
+msgid "Maritime Groupage(LCL)"
+msgstr "Maritime (LCL)"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__message_has_error
+msgid "Message Delivery error"
+msgstr "Erreur d'envoi du message"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__success_msg
+msgid "Messgae"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_class__miscellaneous_dangerous,
+msgid "Miscellaneous Dangerous Goods"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "Mobile :"
+msgstr "Mobile : "
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Mode de transport :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Morning Opening Hours"
+msgstr "Horaires du matin"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__morning_opening_hours_end
+msgid "Morning Opening Hours End"
+msgstr "Horaires d’ouverture du matin"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__morning_opening_hours_start
+msgid "Morning Opening Hours Start"
+msgstr "Horaires d’ouverture du matin"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Motif de refus :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__lorry_type__moving_floor
+msgid "Moving Floor"
+msgstr "Camion a fond mouvant"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Moyen de transport:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Mél :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "N/A"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "NOM :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "NOM :                                Date :    /    /"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__name
+#: model:ir.model.fields,field_description:ppts_logistics.field_res_sea_ports__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__load_net_weight
+msgid "Net weight of load"
+msgstr "Poids Net du Lot"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__loaded_lorry_weight
+msgid "Net weight of load with container"
+msgstr "Poids brut"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__status__new
+msgid "New"
+msgstr "Nouveau"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Date limite de l'activité à venir"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__activity_summary
+msgid "Next Activity Summary"
+msgstr "Résumé d'activité suivant"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__activity_type_id
+msgid "Next Activity Type"
+msgstr "Type d'activités à venir"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__annexe_next_seq
+msgid "Next Annexe7 Sequence"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__bsd_next_seq
+msgid "Next BSD Sequence"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "No"
+msgstr "Non"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Nom:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid ""
+"Nom:                                \n"
+"                                                Date:                                Signature:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__is_non_conformity
+msgid "Non-Conformity Notice"
+msgstr "Déclaration de non-conformité"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__container_count__not_specified
+msgid "Not Specified"
+msgstr "Non-défini"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__notes
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Notes"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__message_has_error_counter
+msgid "Number of errors"
+msgstr "Nombre d'erreurs"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,help:ppts_logistics.field_logistics_management__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Nombre de messages exigeant une action"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,help:ppts_logistics.field_logistics_management__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages avec des erreurs d'envoi"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,help:ppts_logistics.field_logistics_management__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Nombre de messages non lus"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "N° SIREN :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "N° SIRET :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "N° de CAP (le cas échéant) :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__opening_hours_end
+msgid "Opening Hours End"
+msgstr "Horaires d’ouverture"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__opening_hours_start
+msgid "Opening Hours Start"
+msgstr "Horaires d’ouverture"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Opération d’élimination / valorisation prévue (code D/R) :"
+msgstr ""
+
+#. module: ppts_logistics
+#: code:addons/ppts_logistics/models/purchase.py:0
+#: model:mail.template,report_name:ppts_logistics.email_template_send_transport_request
+#: model:mail.template,report_name:ppts_logistics.email_template_transport_purchase_order
+#, python-format
+msgid "Order Details"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.actions.report,name:ppts_logistics.report_trasport_order
+msgid "Order details Report"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.actions.act_window,name:ppts_logistics.action_logistics_management_outgoing_shipment_view
+#: model:ir.ui.menu,name:ppts_logistics.menu_logistics_outgoing_sub
+msgid "Outgoing Shipment"
+msgstr "Expédition"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_class__oxidizer
+msgid "Oxidizers"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__adr_packing_group
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__adr_pickup_type_id
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.adr_pickup_type_form_view
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.adr_pickup_type_tree_view
+msgid "Package Type"
+msgstr "Type de colis"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_filters
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid ""
+"Personne ayant transformé ou\n"
+"\t\t\t\t\t\t\t<br/>\n"
+"\t\t\t\t\t\t\tréalisé un traitement dont la\n"
+"\t\t\t\t\t\t\t<br/>\n"
+"\t\t\t\t\t\t\tprovenance des déchets reste<br/>identifiable<span style=\"font-style:italic\">(joindre annexe 2)</span>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Personne à contacter :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Personne à contacter:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Personne à contacter: G.Blais"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "Phone :"
+msgstr "Téléphone : "
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Pickup Address"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__pickup_city
+msgid "Pickup City"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Pickup Date"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__pickup_partner_location_id
+msgid "Pickup Location"
+msgstr "Point de collecte"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__pickup_partner_id
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_filters
+msgid "Pickup Point"
+msgstr "Envoyeur"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__pickup_street
+msgid "Pickup Street"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__pickup_street2
+msgid "Pickup Street2"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__pickup_zip
+msgid "Pickup Zip"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__pickup_date_type
+msgid "Pickup date type"
+msgstr "Type de date de collecte"
+
+#. module: ppts_logistics
+#: code:addons/ppts_logistics/models/logistics.py:0
+#, python-format
+msgid "Please Email ID for logistics in partner"
+msgstr "Veuillez envoyer un e-mail pour la logistique du partenaire"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__loading_port_id
+msgid "Port of Loading"
+msgstr "Port de chargement"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__unloading_port_id
+msgid "Port of Unloading"
+msgstr "Port de déchargement"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__access_url
+msgid "Portal Access URL"
+msgstr "URL d'accès au portail"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__transport_cost
+msgid "Price for Transport"
+msgstr "Coût du transport"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Print Annexe7"
+msgstr "Imprimer Annexe 7"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Print BSD"
+msgstr "Imprimer BSD"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_rfq__product_id
+msgid "Product"
+msgstr "Article"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Producteur du déchet"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "Project :"
+msgstr "Projet : "
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_filters
+msgid "Project Entries"
+msgstr "Projet Entrée"
+
+#. module: ppts_logistics
+#: code:addons/ppts_logistics/models/logistics.py:0
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__origin
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_filters
+#, python-format
+msgid "Project Entry"
+msgstr "Projet Entrée"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__logistics_for__purchase
+msgid "Purchase"
+msgstr "Achats"
+
+#. module: ppts_logistics
+#: code:addons/ppts_logistics/models/logistics.py:0
+#: code:addons/ppts_logistics/models/purchase.py:0
+#: model:ir.model,name:ppts_logistics.model_purchase_order
+#, python-format
+msgid "Purchase Order"
+msgstr "Commande fournisseur"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__user_id
+msgid "Purchase Representative"
+msgstr "Responsable achats"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__purchase_order_id
+msgid "Purchase order ref"
+msgstr "Bon de commande ref"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__no_of_container
+msgid "Quantity of Container"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid ""
+"Quantité reçue:\n"
+"                                                tonnes (Mg):"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Quantité réelle présentée :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_rfq__quoted_price
+msgid "Quoted Price"
+msgstr "Prix Offert"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_purchase_order__transport_rfq_count
+msgid "RFQ Count"
+msgstr "Nombre de RFQ"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__status__request
+msgid "RFQ Sent"
+msgstr "Demande de prix envoyée"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_class__radioactive
+msgid "Radioactive"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.actions.act_window,name:ppts_logistics.action_logistics_management_register_truck
+#: model:ir.ui.menu,name:ppts_logistics.menu_logistics_register_truck
+msgid "Register Truck"
+msgstr "Enregistrer un camion"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__delivery_licence_plate
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__licence_plate
+#: model:ir.model.fields,field_description:ppts_logistics.field_update_container_details__delivery_licence_plate
+msgid "Registraion of container"
+msgstr "Immatriculation du contenant"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__lorry_registration
+msgid "Registration of Lorry"
+msgstr "Immatriculation du camion"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Reject"
+msgstr "Rejeter"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__status__rejected
+msgid "Rejected"
+msgstr "Rejeté"
+
+#. module: ppts_logistics
+#: model:ir.actions.act_window,name:ppts_logistics.action_logistics_management_release_truck
+#: model:ir.ui.menu,name:ppts_logistics.menu_logistics_release_truck
+msgid "Release Truck"
+msgstr "Libérer un camion"
+
+#. module: ppts_logistics
+#: code:addons/ppts_logistics/models/purchase.py:0
+#, python-format
+msgid "Request for Quotation"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__activity_user_id
+msgid "Responsible User"
+msgstr "Responsable"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__lorry_type__rigid_body_truck
+msgid "Rigid Body Truck"
+msgstr "Camionnette"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__tranport_mode__route
+msgid "Route Groupage"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Rubrique déchet :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Récépissé n° :                                Département :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Erreur d'envoi SMS"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__sales_origin
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_filters
+msgid "Sale Order"
+msgstr "Bon de commande"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "Sale Order :"
+msgstr "Bon de commande : "
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__logistics_for__sale
+msgid "Sales"
+msgstr "Ventes"
+
+#. module: ppts_logistics
+#: model:ir.actions.act_window,name:ppts_logistics.action_res_ports_view
+#: model:ir.module.category,name:ppts_logistics.module_category_operations_res_ports
+#: model:ir.ui.menu,name:ppts_logistics.menu_sea_ports_custom
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.res_ports_form_view
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.res_ports_tree_view
+msgid "Sea Ports"
+msgstr "Ports maritimes"
+
+#. module: ppts_logistics
+#: model:ir.actions.act_window,name:ppts_logistics.action_search_chronopost_project
+#: model:ir.ui.menu,name:ppts_logistics.menu_search_project
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.view_search_chronopost_project
+msgid "Search Project"
+msgstr "Chercher un projet"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.view_search_chronopost_project
+msgid "Search and Open Project"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__access_token
+msgid "Security Token"
+msgstr "Jeton de sécurité"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__lorry_type__semi_trailer
+msgid "Semi-Trailer"
+msgstr "Demi-Remorque"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Send RFQ"
+msgstr "Envoyer Demande de Devis"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_filters
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: ppts_logistics
+#: code:addons/ppts_logistics/models/logistics.py:0
+#, python-format
+msgid "Shipment"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__shipping_date
+msgid "Shipping Date"
+msgstr "Date d'envoi"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid ""
+"Signataire :                                Signature et cachet\n"
+"\t\t\t\t\t\t\t:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Signature et cachet :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Signature:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__pickup_date_type__specific
+msgid "Specific Date"
+msgstr "Date Spécifique"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__container_count__specified
+msgid "Specified"
+msgstr "Défini"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__waste_in_container
+msgid "Standard waste codes of each container"
+msgstr "Codes déchets pour chaque contenant"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__delivery_state_id
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__pickup_state_id
+#: model:ir.model.fields,field_description:ppts_logistics.field_res_sea_ports__state_id
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "State"
+msgstr "État"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__status
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_filters
+msgid "Status"
+msgstr "État"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,help:ppts_logistics.field_logistics_management__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Statut basé sur les activités\n"
+"En retard : la date d'échéance est déjà dépassée\n"
+"Aujourd'hui : la date d'activité est aujourd'hui\n"
+"Planifiée : activités futures"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Street 2..."
+msgstr "Rue 2..."
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Street..."
+msgstr "Rue..."
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__is_tail_lift
+msgid "Tail-Lift"
+msgstr "Hayon"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__delivery_tare_of_lorry
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__tare_of_lorry
+msgid "Tare of lorry"
+msgstr "Tare du camion"
+
+#. module: ppts_logistics
+#: model:ir.model.fields.selection,name:ppts_logistics.selection__logistics_management__adr_class__toxic_infactious
+msgid "Toxic & Infectious"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Traitement prévu (code D/R) :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_filters
+msgid "Tranport Mode"
+msgstr "Mode de transport"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Transit"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_transport_document__transport_documents
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Transport Documents"
+msgstr "Documents du transport"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__transport_documents_line_ids
+msgid "Transport Documents Ref"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__tranport_mode
+msgid "Transport Mode"
+msgstr "Mode de transport"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "Transport PO"
+msgstr "Bon de commande de transport"
+
+#. module: ppts_logistics
+#: model:ir.actions.report,name:ppts_logistics.report_transport_purchase_order
+msgid "Transport Purchase Order Details"
+msgstr ""
+
+#. module: ppts_logistics
+#: code:addons/ppts_logistics/models/purchase.py:0
+#: model:ir.actions.act_window,name:ppts_logistics.action_logistics_management_rfq_view
+#: model:ir.ui.menu,name:ppts_logistics.menu_logistics_rfq_sub
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.purchase_order_form_logistics_inherited
+#, python-format
+msgid "Transport RFQ"
+msgstr "Demandes de devis Transport"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_purchase_order__logistics_id
+msgid "Transport Request ref"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.ui.menu,name:ppts_logistics.menu_logistics_custom_sub
+msgid "Transport Requests"
+msgstr "Demandes de transport"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_filters
+msgid "Transport Type"
+msgstr "Type de transport"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Transport multimodal (Cadres 20 et 21 à remplir)"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.actions.act_window,name:ppts_logistics.action_tunnel_code_view
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_line__tunnel_code_id
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__tunnel_code_id
+#: model:ir.model.fields,field_description:ppts_logistics.field_tunnel_code__name
+#: model:ir.ui.menu,name:ppts_logistics.menu_tunnel_code
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.tunnel_code_form_view
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.tunnel_code_tree_view
+msgid "Tunnel Code"
+msgstr "Code Tunnel"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__transport_type
+msgid "Type of Journey"
+msgstr "Type de trajet"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__lorry_type
+msgid "Type of Lorry"
+msgstr "Type de camion"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,help:ppts_logistics.field_logistics_management__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Type d'activité d'exception enregistrée"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Tél. :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Tél. :         Fax. :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "Tél. :                    Fax. :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Tél.:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Tél.: 0232727414        Télécopie:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "Télécopie:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.actions.act_window,name:ppts_logistics.action_un_code_view
+#: model:ir.model.fields,field_description:ppts_logistics.field_adr_line__un_code
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__un_code
+#: model:ir.model.fields,field_description:ppts_logistics.field_un_code__code
+#: model:ir.ui.menu,name:ppts_logistics.menu_un_code
+msgid "UN Code"
+msgstr "Code UN"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__adr_number
+msgid "UN List Number"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__message_unread
+msgid "Unread Messages"
+msgstr "Messages non lus"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Compteur de messages non lus"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.view_update_container_details
+msgid "Update"
+msgstr "Mettre à jour"
+
+#. module: ppts_logistics
+#: model:ir.actions.act_window,name:ppts_logistics.action_update_container_details
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.view_update_container_details
+msgid "Update Container Details"
+msgstr "Mettre à jour des détailles des contenants"
+
+#. module: ppts_logistics
+#: model:res.groups,name:ppts_logistics.group_logistics_user
+#: model:res.groups,name:ppts_logistics.group_res_ports_user
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__vendor_ref
+msgid "Vendor Reference"
+msgstr "Référence fournisseur"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "View Project"
+msgstr "Voir l'Affaire"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "View Shipment"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.ui.menu,name:ppts_logistics.menu_transport_calander_sub
+#: model:ir.ui.menu,name:ppts_logistics.menu_transport_calendar_logistics
+msgid "View Transport Calendar"
+msgstr "Voir la calendrier du transport"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__volume_to_ship
+msgid "Volume to Ship"
+msgstr "Volume à transporter"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__waste_code
+msgid "Waste Code"
+msgstr "Code Déchet"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__website_message_ids
+msgid "Website Messages"
+msgstr "Messages du site web"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,help:ppts_logistics.field_logistics_management__website_message_ids
+msgid "Website communication history"
+msgstr "Historique de communication du site web"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__gross_weight_on_bridge_uom_id
+msgid "Weight Unit at Bridge"
+msgstr "Unité de poids au pont"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__entry_weight_uom_id
+msgid "Weight Unit at entry"
+msgstr "Unité de poids à l'entrée"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__weight_to_ship
+msgid "Weight to Ship"
+msgstr "Poids à transporter"
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__weight_to_ship_uom_id
+msgid "Weight to ship UOM"
+msgstr "Poids à expédier UdM"
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_transport_po_document
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_trasport_rfq_document
+msgid "Yes"
+msgstr "Oui"
+
+#. module: ppts_logistics
+#: code:addons/ppts_logistics/models/purchase.py:0
+#, python-format
+msgid "You must set a Vendor Location for this partner %s"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.logistics_management_form_view
+msgid "ZIP"
+msgstr "Code postal"
+
+#. module: ppts_logistics
+#: model:ir.model,name:ppts_logistics.model_adr_class
+msgid "adr.class"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model,name:ppts_logistics.model_adr_line
+msgid "adr.line"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model,name:ppts_logistics.model_adr_pickup_type
+msgid "adr.pickup.type"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid ""
+"autre (préciser)\n"
+"\t\t\t\t\t\t                Nombre de colis :"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "benne"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model,name:ppts_logistics.model_carton_logistics_line
+msgid "carton.logistics.line"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "ci-dessus sont exacts et établis de bonne foi."
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "citerne"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "estimée"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "fût"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "gazeux"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model,name:ppts_logistics.model_hazard_number
+msgid "hazard.number"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "i) Convention de Bâle – annexe IX:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "ii) OCDE [si différent de i)]:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "iii) Liste des déchets de la CE:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "iv) Code national:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "liquide"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "m³:"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "non"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "oui"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid ""
+"oui\n"
+"\t\t\t\t\t\t\t<span style=\"font-style:italic\">(cadres 13 à 19 à remplir)</span>"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model,name:ppts_logistics.model_res_sea_ports
+msgid "res.sea.ports"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "réelle"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model,name:ppts_logistics.model_search_chronopost_project
+msgid "search.chronopost.project"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_bsd_document
+msgid "solide"
+msgstr ""
+
+#. module: ppts_logistics
+#: model_terms:ir.ui.view,arch_db:ppts_logistics.report_annux_document
+msgid "tonnes (Mg):"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model,name:ppts_logistics.model_transport_document
+msgid "transport.document"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model,name:ppts_logistics.model_transport_rfq
+msgid "transport.rfq"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model,name:ppts_logistics.model_tunnel_code
+msgid "tunnel.code"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model,name:ppts_logistics.model_un_code
+msgid "un.code"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model,name:ppts_logistics.model_update_container_details
+msgid "update.container.details"
+msgstr ""
+
+#. module: ppts_logistics
+#: model:ir.model.fields,field_description:ppts_logistics.field_logistics_management__buyer_ref
+msgid "Buyer Reference"
+msgstr "Référence Client"

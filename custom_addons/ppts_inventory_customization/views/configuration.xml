@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<menuitem name="Configuration" id="menu_project_configuration_main" parent="ppts_project_entries.menu_project_custom"
+			  groups='ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager'/>
+</odoo>

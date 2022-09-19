@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_refining_containers_user,refining.containers,refining_process.model_refining_containers,ppts_inventory_customization.group_production_supervisor,1,1,1,0
+access_refining_containers_manager,refining.containers,refining_process.model_refining_containers,ppts_inventory_customization.group_production_manager,1,1,1,1
+access_mrp_cost_operations,mrp.mrp_cost_operations user,model_mrp_cost_operations,mrp.group_mrp_user,1,1,0,0
+access_mrp_cost_operations_manager,mrp.mrp_cost_operations.manager,model_mrp_cost_operations,mrp.group_mrp_manager,1,1,1,1
+access_mrp_cost_structure,mrp.mrp.cost.structure user,model_mrp_cost_structure,mrp.group_mrp_user,1,1,0,0
+access_mrp_cost_structure_manager,mrp.mrp.cost.structure.manager,model_mrp_cost_structure,mrp.group_mrp_manager,1,1,1,1

@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<!-- Sequences for logistics.management -->
+		<record id="seq_logistics_management" model="ir.sequence">
+			<field name="name">Logistics Management</field>
+			<field name="code">logistics.management</field>
+			<field name="prefix">T</field>
+			<field name="padding">5</field>
+			<field name="company_id" eval="False"/>
+		</record>
+		<record id="logistics_management_form_view" model="ir.ui.view">
+			<field name="name">logistics.management.form</field>
+			<field name="model">logistics.management</field>
+			<field name="arch" type="xml">
+				<form string="Logistics Management">
+					<header>
+						<field name="status" widget="statusbar" statusbar_visible='new,request,approved,delivered'/>
+						<button name="action_send_transport_rfq" id="action_send_transport_rfq"
+								string="Send RFQ" class="btn-primary" type="object" attrs="{'invisible': [('status', 'not in', ['new'])]}" groups="ppts_logistics.group_logistics_manager"/>
+						<button name="action_approve_request" id="action_approve_request"
+								string="Approve and Create PO" class="btn-primary" type="object" attrs="{'invisible': [('status', 'not in', ['new','request'])]}"
+								groups="ppts_logistics.group_logistics_manager"/>
+						<button name="action_reject_request" id="action_reject_request"
+								string="Reject" class="btn-danger" type="object" attrs="{'invisible': [('status', 'not in', ['request'])]}" groups="ppts_logistics.group_logistics_manager"/>
+						<button name="%(ppts_logistics.action_update_container_details)d" string="Update Container Details" type="action" class="oe_highlight"
+								attrs="{'invisible':['|',('status' , 'not in' , ('approved')),('tranport_mode', 'not in', ['lcl','fcl'])]}" groups="ppts_logistics.group_logistics_manager"/>
+					</header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="action_view_project_entry"
+									type="object"
+									class="oe_stat_button"
+									icon="fa-newspaper-o" string="View Project">
+							</button>
+							<button name="action_view_transport_po"
+									type="object"
+									class="oe_stat_button"
+									icon="fa-money" string="Transport PO" attrs="{'invisible': ['|',('is_3rd_party','!=',False),('status', 'not in', ['approved','delivered'])]}">
+							</button>
+							<button name="action_view_shipment"
+									type="object"
+									class="oe_stat_button"
+									icon="fa-truck" string="View Shipment" attrs="{'invisible': ['|',('is_3rd_party','!=',False),('status', 'not in', ['approved','delivered'])]}">
+							</button>
+						</div>
+						<div style="height: 150px;width: 185px;position: absolute;overflow: hidden;right: 0;margin-top: -23px;">
+							<field name="success_msg" attrs="{'invisible': [('status', 'not in', ['approved','delivered'])]}"
+								   style="background: #006d3c;color: #fff;display: block;padding: 15px 40px;box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);font: 700 13px/1 'Lato', sans-serif;text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);text-transform: uppercase;text-align: center;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;transform: rotate(45deg);margin-top: 32px;margin-right: -52px;"
+								   readonly="1"/>
+						</div>
+						<div class="oe_title">
+							<span class="o_form_label">Logistics</span>
+							<h1>
+								<field name="name" readonly="1"/>
+							</h1>
+						</div>
+						<group>
+							<group>
+								<field name='number_bsd'/>
+								<field name='partner_id' attrs="{'readonly': [('status', 'not in', ['new'])],'required':[('is_3rd_party','=',False)]}" options="{'no_create_edit': True}"/>
+								<field name='company_id' attrs="{'readonly': [('status', 'not in', ['new'])]}" options="{'no_create_edit': True}"/>
+								<field name='pickup_partner_id' attrs="{'readonly': [('status', 'not in', ['new'])]}" options="{'no_create_edit': True}"/>
+								<field name='pickup_partner_location_id' options="{'no_create_edit': True}"/>
+								<field name="vendor_ref" attrs="{
+									'invisible': [('logistics_for', '=', 'sale')]
+									}"/>
+
+								<field name="buyer_ref" attrs="{
+									'invisible': [('logistics_for', '=', 'purchase')]
+									}"/>
+								<label for="street" string="Pickup Address"/>
+								<div class="o_address_format">
+									<field name="pickup_street" placeholder="Street..." class="o_address_street" attrs="{'readonly': [('status', 'not in', ['new'])]}" required="1"/>
+									<field name="pickup_street2" placeholder="Street 2..." class="o_address_street" attrs="{'readonly': [('status', 'not in', ['new'])]}"/>
+									<field name="pickup_city" placeholder="City" class="o_address_city" attrs="{'readonly': [('status', 'not in', ['new'])]}" required="1"/>
+									<field name="pickup_state_id" class="o_address_state" placeholder="State" options='{"no_open": True, "no_create": True}' attrs="{'readonly': [('status', 'not in', ['new'])]}" required="0"/>
+									<field name="pickup_zip" placeholder="ZIP" class="o_address_zip" attrs="{'readonly': [('status', 'not in', ['new'])]}" required="1"/>
+									<field name="pickup_countries_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}' attrs="{'readonly': [('status', 'not in', ['new'])]}" required="1"/>
+								</div>
+								<!-- <field name='pickup_country_id' attrs="{'readonly': [('status', 'not in', ['new'])]}" options="{'no_create_edit': True}" /> -->
+								<separator string="Pickup Date"/>
+								<field name="pickup_date_type" required="1"/>
+								<field name='pickup_date' attrs="{
+									'required': [('pickup_date_type', 'in', ['specific'])],
+									'invisible': [('pickup_date_type', 'not in', ['specific'])]
+									}"/>
+								<field name='pickup_earliest_date' attrs="{
+									'readonly': [('status', 'not in', ['new'])],
+									'required': [('pickup_date_type', 'in', ['between'])],
+									'invisible': [('pickup_date_type', 'not in', ['between'])]
+									}"/>
+								<field name='pickup_latest_date' attrs="{
+									'readonly': [('status', 'not in', ['new'])],
+									'required': [('pickup_date_type', 'in', ['between'])],
+									'invisible': [('pickup_date_type', 'not in', ['between'])]
+									}"/>
+								<!-- <field name='company_id' attrs="{'readonly': [('status', 'not in', ['new'])]}" options="{'no_create_edit': True}" /> -->
+								<!-- <field name='logistics_for' attrs="{'readonly': [('status', 'not in', ['new'])]}" /> -->
+								<field name="gross_weight" attrs="{'readonly': [('status', 'not in', ['new'])]}"/>
+								<field name='transporter_id' attrs="{'readonly': [('status', 'not in', ['new'])]}"/>
+								<field name='client_feedback_score' widget="priority" attrs="{'readonly': [('status', 'not in', ['new'])]}"/>
+								<field name="waste_code" required="1" attrs="{'readonly': [('status', 'not in', ['new'])]}"/>
+								<field name="material"/>
+								<label for='morning_opening_hours_start' string="Morning Opening Hours"/>
+								<div>
+									<field name='morning_opening_hours_start' style="width:15%" attrs="{'readonly' : [('status', 'not in' , 'new')]}"/>
+									-
+									<field name='morning_opening_hours_end' style="width:15%" attrs="{'readonly' : [('status', 'not in' , 'new')]}"/>
+								</div>
+								<label for='evening_opening_hours_start' string="Evening Opening Hours"/>
+								<div>
+									<field name='evening_opening_hours_start' style="width:15%" attrs="{'readonly' : [('status', 'not in' , 'new')]}"/>
+									-
+									<field name='evening_opening_hours_end' style="width:15%" attrs="{'readonly' : [('status', 'not in' , 'new')]}"/>
+								</div>
+								<field name="is_adr" attrs="{'readonly': [('status', 'not in', ['new'])]}"/>
+								<!--<field name="un_code" attrs="{
+									'required': [('is_adr', '=', True)],
+									'invisible': [('is_adr', '!=', True)],
+									'readonly': [('status', 'not in', ['new'])]
+									}" />
+								<field name="adr_class_id" attrs="{
+									'required': [('is_adr', '=', True)],
+									'invisible': [('is_adr', '!=', True)],
+									'readonly': [('status', 'not in', ['new'])]
+									}" />
+								<field name="adr_pickup_type_id" attrs="{
+									'required': [('is_adr', '=', True)],
+									'invisible': [('is_adr', '!=', True)],
+									'readonly': [('status', 'not in', ['new'])]
+									}" />
+								<field name="hazard_type_id" attrs="{
+									'required': [('is_adr', '=', True)],
+									'invisible': [('is_adr', '!=', True)],
+									'readonly': [('status', 'not in', ['new'])]
+									}" />
+								<field name="adr_num" attrs="{
+									'required': [('is_adr', '=', True)],
+									'invisible': [('is_adr', '!=', True)],
+									'readonly': [('status', 'not in', ['new'])]
+									}" />			-->
+								<label for='bsdannex' string="BSD/Annexe7"/>
+								<div>
+									<field name='bsdannex' style="width:50%"/>
+									<button name="print_bsd_report" id="print_bsd_report" string="Print BSD" class="btn-primary" type="object" attrs="{'invisible': [('bsdannex', 'not in', ['bsd'])]}" style="width:48%"/>
+									<button name="print_annux_report" id="print_annux_report" string="Print Annexe7" class="btn-primary" type="object" attrs="{'invisible': [('bsdannex', 'not in', ['annux7'])]}" style="width:48%"/>
+								</div>
+							</group>
+							<group>
+								<field name="is_3rd_party" invisible="1"/>
+								<field name='transport_type' attrs="{'readonly': [('status', 'not in', ['new'])]}"/>
+								<field name='logistics_for' attrs="{'readonly': [('status', 'not in', ['new'])]}"/>
+								<field name='origin' attrs="{
+									'required': [('logistics_for', 'in', ['purchase'])],
+									'invisible': [('logistics_for', 'not in', ['purchase'])],
+									'readonly': [('status', 'not in', ['new'])]
+									}" options="{'no_create_edit': True}"/>
+								<field name='sales_origin' attrs="{
+									'required': [('logistics_for', 'in', ['sale'])],
+									'invisible': [('logistics_for', 'not in', ['sale'])],
+									'readonly': [('status', 'not in', ['new'])]
+									}" options="{'no_create_edit': True}"/>
+								<field name='delivery_partner_id' attrs="{'readonly': [('status', 'not in', ['new'])]}" options="{'no_create_edit': True}"/>
+								<field name='delivery_partner_location_id' options="{'no_create_edit': True}"/>
+								<label for="street" string="Delivery Address"/>
+								<div class="o_address_format">
+									<field name="delivery_street" placeholder="Street..." class="o_address_street" attrs="{'readonly': [('status', 'not in', ['new'])]}" required="1"/>
+									<field name="delivery_street2" placeholder="Street 2..." class="o_address_street" attrs="{'readonly': [('status', 'not in', ['new'])]}"/>
+									<field name="delivery_city" placeholder="City" class="o_address_city" attrs="{'readonly': [('status', 'not in', ['new'])]}" required="1"/>
+									<field name="delivery_state_id" class="o_address_state" placeholder="State" options='{"no_open": True, "no_create": True}' attrs="{'readonly': [('status', 'not in', ['new'])]}" required="0"/>
+									<field name="delivery_zip" placeholder="ZIP" class="o_address_zip" attrs="{'readonly': [('status', 'not in', ['new'])]}" required="1"/>
+									<field name="delivery_countries_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}' attrs="{'readonly': [('status', 'not in', ['new'])]}" required="1"/>
+								</div>
+								<!-- <field name='delivery_country_id' attrs="{'readonly': [('status', 'not in', ['new'])]}" options="{'no_create_edit': True}" /> -->
+								<field name='expected_delivery' attrs="{
+									'readonly': [('status', 'not in', ['new'])]
+									}" required="1"/>
+
+								<label for='expected_delivery_start_time' string="Time Duration"/>
+								<div>
+									<field name='expected_delivery_start_time' style="width:15%" widget="float_time"/>
+									-
+									<field name='expected_delivery_end_time' style="width:15%" widget="float_time"/>
+								</div>
+
+								<field name="stock_picking_id"/>
+								<field name="stock_picking_weight" invisible="1"/>
+								<field name='container_count' required="1" attrs="{'readonly': [('status', 'not in', ['new'])]}"/>
+								<field name='no_of_container' attrs="{
+									'invisible': [('container_count', 'not in', ['specified'])],
+									'required': [('container_count', 'in', ['specified'])],
+									'readonly': [('status', 'not in', ['new'])]
+									}"/>
+								<field name="linear_meter" attrs="{
+									'invisible': [('container_count', 'not in', ['specified'])],
+									'required': [('container_count', 'in', ['specified']),('is_full_load' , '=' , False)]
+									}"/>
+								<field name="dimension"/>
+								<field name='lorry_registration' attrs="{'readonly': [('status', 'not in', ['new'])]}" invisible="1"/>
+								<field name='transport_cost' readonly="1"/>
+								<field name='incoterms_id' attrs="{
+									'invisible': [('tranport_mode', 'in', ['direct','route'])],
+									'required': [('tranport_mode', 'not in', ['direct','route'])],
+									'readonly': [('status', 'not in', ['new'])]
+									}" options="{'no_create_edit': True}"/>
+								<field name='customs_seal_number' attrs="{
+									'invisible': [('tranport_mode', 'in', ['direct','route'])],
+									'required': [('tranport_mode', 'not in', ['direct','route'])],
+									'readonly': [('status', 'not in', ['new'])]
+									}"/>
+								<field name='delivery_licence_plate' attrs="{
+									'invisible': [('tranport_mode', 'in', ['direct','route'])],
+									'required': [('tranport_mode', 'not in', ['direct','route'])],
+									'readonly': [('status', 'not in', ['new'])]
+									}"/>
+								<!-- <field name='customs_classification_code' />
+								<field name='delivery_documents' />	 -->
+								<field name='purchase_order_id' invisible="1"/>
+								<field name='active' invisible="1"/>
+								<field name='currency_id' invisible="1"/>
+								<field name='bsd_next_seq' invisible="1"/>
+								<field name='annexe_next_seq' invisible="1"/>
+							</group>
+							<group>
+								<field name='lorry_type' attrs="{'readonly': [('status', 'not in', ['new'])]}"/>
+								<field name='tranport_mode' attrs="{'readonly': [('status', 'not in', ['new'])]}"/>
+								<label for='loading_port_id' string="Port of Loading"/>
+								<div>
+									<field name='loading_port_id' attrs="{
+									'invisible': [('tranport_mode', 'in', ['direct','route'])],
+									'required': [('tranport_mode', 'not in', ['direct','route'])],
+									'readonly': [('status', 'not in', ['new'])]
+									}" style="width:45%"/>
+									<field name="loading_port_code" attrs="{
+									'invisible': [('tranport_mode', 'in', ['direct','route'])],
+									'required': [('tranport_mode', 'not in', ['direct','route'])],
+									'readonly': [('status', 'not in', ['new'])]
+									}" style="width:45%;margin-left:10px;"/>
+								</div>
+							</group>
+							<group>
+								<field name='container_type' attrs="{
+									'invisible': [('lorry_type', 'not in', ['container'])],
+									'required': [('lorry_type', 'in', ['container']),('tranport_mode' , 'in' , ['sea'])],
+									'readonly': [('status', 'not in', ['new'])]
+									}"/>
+								<field name='is_full_load' attrs="{'readonly': [('status', 'not in', ['new'])]}"/>
+								<label for='is_tail_lift' string="Tail-Lift"/>
+								<div>
+									<field name='is_tail_lift' attrs="{'readonly': [('status', 'not in', ['new'])]}" class="oe_inline"/>
+									<field name='hayons' attrs="{
+									'invisible': [('is_tail_lift', '=', False)],
+									'required': [('is_tail_lift', '!=', False)],
+									'readonly': [('status', 'not in', ['new'])]
+									}" class="oe_inline"/>
+								</div>
+
+								<field name='grid_rotation' attrs="{'readonly': [('status', 'not in', ['new'])]}"/>
+
+								<label for='unloading_port_id' string="Port of Unloading"/>
+								<div>
+									<field name='unloading_port_id' attrs="{
+									'invisible': [('tranport_mode', 'in', ['direct','route'])],
+									'required': [('tranport_mode', 'not in', ['direct','route'])],
+									'readonly': [('status', 'not in', ['new'])]
+									}" style="width:45%"/>
+									<field name="unloading_port_code" attrs="{
+									'invisible': [('tranport_mode', 'in', ['direct','route'])],
+									'required': [('tranport_mode', 'not in', ['direct','route'])],
+									'readonly': [('status', 'not in', ['new'])]
+									}" style="width:45%;margin-left:10px;"/>
+								</div>
+
+							</group>
+							<group>
+								<field name="is_transporter2" attrs="{'invisible': [('bsdannex', '=','bsd')]}"/>
+								<field name="transporter2" attrs="{'invisible': [('is_transporter2', '=',False)]}"/>
+								<field name="transporter2_street" attrs="{'invisible': [('is_transporter2', '=',False)]}"/>
+								<field name="transporter2_zip" attrs="{'invisible': [('is_transporter2', '=',False)]}"/>
+								<field name="transporter2_city" attrs="{'invisible': [('is_transporter2', '=',False)]}"/>
+								<field name="transporter2_phone" attrs="{'invisible': [('is_transporter2', '=',False)]}"/>
+								<field name="transporter2_email" attrs="{'invisible': [('is_transporter2', '=',False)]}"/>
+								<field name="transporter2_contact" attrs="{'invisible': [('is_transporter2', '=',False)]}"/>
+							</group>
+							<group>
+								<field name="is_transporter3" attrs="{'invisible': [('bsdannex', '=','bsd')]}"/>
+								<field name="transporter3" attrs="{'invisible': [('is_transporter3', '=',False)]}"/>
+								<field name="transporter3_street" attrs="{'invisible': [('is_transporter3', '=',False)]}"/>
+								<field name="transporter3_zip" attrs="{'invisible': [('is_transporter3', '=',False)]}"/>
+								<field name="transporter3_city" attrs="{'invisible': [('is_transporter3', '=',False)]}"/>
+								<field name="transporter3_phone" attrs="{'invisible': [('is_transporter3', '=',False)]}"/>
+								<field name="transporter3_email" attrs="{'invisible': [('is_transporter3', '=',False)]}"/>
+								<field name="transporter3_contact" attrs="{'invisible': [('is_transporter3', '=',False)]}"/>
+							</group>
+
+						</group>
+						<notebook>
+							<page string="ADR Details" attrs="{'invisible': [('is_adr', '=', False)]}">
+								<field name="adr_line">
+									<tree editable="bottom">
+										<field name="un_code" required="1"/>
+										<field name="adr_class_id" required="1"/>
+										<field name="adr_pickup_type_id" required="1"/>
+										<field name="hazard_type_id" required="1"/>
+										<field name="tunnel_code_id" required="1"/>
+									</tree>
+								</field>
+							</page>
+							<page string="Product Lines">
+								<field name='bsd_annexe_line_ids'>
+									<tree>
+										<field name="product_id" required="1" options="{'no_create_edit': True}"/>
+										<field name="name"/>
+										<field name="product_qty" required="1"/>
+										<field name="product_uom"/>
+										<!-- <field name="price_unit"/>
+										<field name="malus"/>
+										<field name="malus_demand"/>
+										<field name="estimated_service_cost" string="Service Charge"/>
+										<field name="offer_price"/> -->
+									</tree>
+									<form>
+										<group>
+											<group>
+												<field name="product_id" required="1" options="{'no_create_edit': True}"/>
+												<field name="name"/>
+												<!-- <field name="is_malus"/>
+												<field name="is_service"/>
+												<field name="margin_class" invisible="1"/> -->
+											</group>
+											<group>
+												<field name="product_qty" required="1"/>
+												<field name="product_uom"/>
+												<!-- <field name="malus" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', False)]}"/>
+												<field name="charge_malus" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', False)]}"/>
+												<field name="price_unit" attrs="{'invisible': [('is_malus', '=', True)]}"/>
+												<field name="price" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', True)]}"/>
+												<field name="expexted_margin_percentage" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', True)]}"/>
+												<field name="malus_demand" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', False)]}"/>
+												<field name="offer_price" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', True)]}"/>
+												<field name="estimated_service_cost" attrs="{'invisible': ['|',('is_service','!=',True),('is_malus', '=', True)]}" string='Service Charge'/>
+												<field name="computed_margin_percentage" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', True)]}"/> -->
+											</group>
+											<group name="Emetteur">
+						                        <span style="font-size:15px;font-weight:bold;color:red" class="o_stat_text">Section 1 Emetteur</span>
+						                        <field name="number_bsd"/>
+						                        <field name="pickup_partner_id"/>
+						                        <field name="company_id"/>
+						                        <label for="pickup_street" string="Pickup Address"/>
+						                        <div class="o_address_format">
+						                            <field name="pickup_street" class="o_address_street"/>
+						                            <field name="pickup_zip" class="o_address_zip"/>
+						                            <field name="pickup_city" class="o_address_city"/>
+						                            <field name="pickup_state_id" class="o_address_state"/>
+						                            <field name="pickup_countries_id" class="o_address_country"/>
+						                        </div>
+						                        <field name="phone"/>
+						                        <field name="email"/>
+						                        <field name="contact_person_in"/>
+						                        <field name="contact_person_out"/>
+						                    </group>
+						                    <group name="Destinataire/Destination Business">
+						                        <span style="font-size:17px;font-weight:bold;color:red" class="o_stat_text">Section 2 Destination</span>
+
+						                        <field name="delivery_partner_id"/>
+						                        <label for="delivery_street" string="Pickup Address"/>
+						                        <div class="o_address_format">
+						                            <field name="delivery_street" class="o_address_street"/>
+						                            <field name="delivery_zip" class="o_address_zip"/>
+						                            <field name="delivery_city" class="o_address_city"/>
+						                            <field name="delivery_state_id" class="o_address_state"/>
+						                            <field name="delivery_countries_id" class="o_address_country"/>
+						                        </div>
+						                        <field name="delivery_phone"/>
+						                        <field name="delivery_email"/>
+						                    </group>
+						                </group>
+						                <span style="font-size:17px;font-weight:bold;color:red" class="o_stat_text">Section 3 Dénomination du déchet</span>
+						                <group>
+						                    <group>
+
+						                        <field name="logistics_contact"/>
+						                        <field name="pretreatment_code"/>
+						                    </group>
+						                    <group>
+						                        <field name="waste_code"/>
+						                        <field name="waste_form"/>
+						                        <field name="product_id"/>
+						                    </group>
+						                </group>
+						                <group>
+						                    <group>
+						                        <span style="font-size:17px;font-weight:bold;color:red" class="o_stat_text">Section 4 ADR</span>
+
+						                        <field name="is_adr"/>
+						                        <field name="adr_line" attrs="{'invisible': [('is_adr', '=', False)]}">
+						                            <tree delete="0">
+						                                <field name="un_code" required="1"/>
+						                                <field name="adr_class_id" required="1"/>
+						                                <field name="adr_pickup_type_id" required="1"/>
+						                                <field name="hazard_type_id" required="1"/>
+						                                <field name="tunnel_code_id" required="1"/>
+						                                <field name="adrline_id" invisible="1"/>
+						                            </tree>
+						                        </field>
+
+						                    </group>
+
+						                    <group>
+						                        <span style="font-size:17px;font-weight:bold;color:red" class="o_stat_text">Section 5 Conditionnement</span>
+						                        <field name="sale_logistics_exit_date_time"/>
+						                        <field name="packing_type"/>
+						                        <field name="container_count"/>
+						                        <span style="font-size:14px;font-weight:bold;color:red" class="o_stat_text">Section 6 Poids Reel</span>
+						                        <field name="gross_weight_on_bridge"/>
+						                    </group>
+						                </group>
+						                <span style="font-size:17px;font-weight:bold;color:red" class="o_stat_text">Section 8 Collecteur Transporter</span>
+						                <group>
+						                    <group>
+
+						                        <field name="transporter"/>
+						                        <label for="transporter_street" string="Pickup Address"/>
+						                        <div class="o_address_format">
+						                            <field name="transporter_street" class="o_address_street"/>
+						                            <field name="transporter_zip" class="o_address_zip"/>
+						                            <field name="transporter_city" class="o_address_city"/>
+						                        </div>
+						                        <field name="transporter_phone"/>
+						                        <field name="transporter_email"/>
+						                        <field name="transport_contact"/>
+						                    </group>
+						                    <group>
+						                        <field name="reciption_date"/>
+						                        <field name="expected_delivery"/>
+						                        <field name="r_state_id"/>
+						                    </group>
+						                </group>
+
+						                <group>
+						                    <group>
+						                        <span style="font-size:17px;font-weight:bold;color:red" class="o_stat_text">Section 10 Installation de Destination </span>
+						                        <field name="subcontractor"/>
+						                        <label for="subcontractor_street" string="Pickup Address"/>
+						                        <div class="o_address_format">
+						                            <field name="subcontractor_street"/>
+						                            <field name="subcontractor_zip"/>
+						                            <field name="subcontractor_city"/>
+						                        </div>
+						                        <field name="subcontractor_phone"/>
+						                        <field name="subcontractor_email"/>
+						                        <field name="subcontractor_contact"/>
+						                    </group>
+						                    <group name="Collecteur Transporter">
+						                        <span style="font-size:17px;font-weight:bold;color:red" class="o_stat_text">Section 11 Collecteur Transporter </span>
+						                        <field name="buy_weight_confirmed"/>
+						                        <field name="buyer_reception_date"/>
+						                        <field name="buyer_accept_lot"/>
+						                        <field name="buyer_reject_reason"/>
+						                        <field name="buyer_treatment_date"/>
+						                        <field name="buyer_treatment_code"/>
+						                    </group>
+										</group>
+									</form>
+								</field>
+							</page>
+							<page string="Terms and Conditions">
+								<field name="term"/>
+							</page>
+							<page string="Additional Informations">
+								<separator string="Notes"/>
+								<field name="notes"/>
+							</page>
+							<page string="Transport Documents">
+								<field name="transport_documents_line_ids">
+									<tree editable="bottom">
+										<field name="transport_documents"/>
+									</tree>
+									<form>
+										<group>
+											<group>
+												<field name="transport_documents" widget='image'/>
+											</group>
+										</group>
+									</form>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+				</form>
+			</field>
+		</record>
+
+		<record id="logistics_management_tree_view" model="ir.ui.view">
+			<field name="name">logistics.management.tree</field>
+			<field name="model">logistics.management</field>
+			<field name="arch" type="xml">
+				<tree string="Logistics Management">
+					<field name='partner_id'/>
+					<field name='origin'/>
+					<field name='sales_origin'/>
+					<field name='pickup_partner_id'/>
+					<field name='delivery_partner_id'/>
+					<field name='pickup_state_id'/>
+					<field name='delivery_state_id'/>
+					<field name='pickup_date'/>
+					<field name='transport_type'/>
+					<field name='tranport_mode'/>
+					<field name='container_type'/>
+					<field name='is_full_load'/>
+					<field name='loading_port_id'/>
+					<field name='unloading_port_id'/>
+					<field name='status'/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="logistics_management_calendar_view" model="ir.ui.view">
+			<field name="name">logistics.management.calendar</field>
+			<field name="model">logistics.management</field>
+			<field name="arch" type="xml">
+				<calendar date_start="expected_delivery" string="Actions" color="logistics_for" mode="month">
+					<field name="name"/>
+					<field name="pickup_partner_location_id"/>
+					<field name="vendor_ref"/>
+					<field name="is_full_load"/>
+					<field name="no_of_container"/>
+					<field name="partner_id"/>
+					<field name="pickup_partner_id"/>
+					<field name="pickup_city"/>
+					<field name="pickup_state_id"/>
+					<field name="delivery_partner_id"/>
+					<!-- <field name="delivery_city"/> -->
+					<field name="delivery_state_id"/>
+					<field name='pickup_date'/>
+					<field name="expected_delivery"/>
+					<field name="gross_weight"/>
+				</calendar>
+			</field>
+		</record>
+
+		<record id="logistics_management_filters" model="ir.ui.view">
+			<field name="name">logistics.management.search</field>
+			<field name="model">logistics.management</field>
+			<field name="arch" type="xml">
+				<search string="Project Entries">
+					<field name="name" string="Sequence"/>
+					<field name="partner_id" string="Logistics"/>
+					<field name="origin" string="Project Entry"/>
+					<field name="sales_origin" string="Sale Order"/>
+					<field name='pickup_partner_id' string="Pickup Point"/>
+					<field name='delivery_partner_id' string="Destination"/>
+					<field name='transport_type' string="Transport Type"/>
+					<field name='tranport_mode' string="Tranport Mode"/>
+					<field name='container_type' string="Container Type"/>
+					<separator/>
+					<group expand="1" string="Group By">
+						<filter string="Sequence" name="group_by_name" domain="[]" context="{'group_by':'name'}"/>
+						<filter string="Partner" name="partner_id" domain="[]" context="{'group_by':'partner_id'}"/>
+						<filter string="Project Entry" name="group_project_entry" domain="[]" context="{'group_by':'origin'}"/>
+						<filter string="Sale Order" name="group_sale_order" domain="[]" context="{'group_by':'sales_origin'}"/>
+						<filter string="Pickup Point" name="pickup_partner_id" domain="[]" context="{'group_by':'pickup_partner_id'}"/>
+						<filter string="Destination" name="delivery_partner_id" domain="[]" context="{'group_by':'delivery_partner_id'}"/>
+						<filter string="Transport Type" name="transport_type" domain="[]" context="{'group_by':'transport_type'}"/>
+						<filter string="Tranport Mode" name="tranport_mode" domain="[]" context="{'group_by':'tranport_mode'}"/>
+						<filter string="Container Type" name="container_type" domain="[]" context="{'group_by':'container_type'}"/>
+						<filter string="Status" name="group_status" domain="[]" context="{'group_by':'status'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="action_logistics_management_view" model="ir.actions.act_window">
+			<field name="name">Logistics Management</field>
+			<field name="res_model">logistics.management</field>
+			<field name="search_view_id" ref="logistics_management_filters"/>
+			<field name="context">{"search_default_group_status": True}</field>
+			<field name="view_mode">tree,form,calendar</field>
+		</record>
+
+		<menuitem name="Logistics" id="menu_logistics_custom" parent="ppts_project_entries.menu_project_custom" action="action_logistics_management_view" groups='group_logistics_user' sequence="2"/>
+
+		<menuitem name="Transport Requests" id="menu_logistics_custom_sub" parent="ppts_logistics.menu_logistics_custom" action="action_logistics_management_view" groups='group_logistics_user' sequence="1"/>
+
+		<!-- View Transport Calander -->
+
+		<record id="action_logistics_management_for_production_view" model="ir.actions.act_window">
+			<field name="name">Logistics Management</field>
+			<field name="res_model">logistics.management</field>
+			<field name="search_view_id" ref="logistics_management_filters"/>
+			<field name="context">{"search_default_group_status": True}</field>
+			<field name="view_mode">calendar</field>
+		</record>
+
+		<menuitem name="View Transport Calendar" id="menu_transport_calander_sub" parent="ppts_inventory_customization.menu_project_production"
+				  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager" action="action_logistics_management_for_production_view" sequence="01"/>
+
+		<menuitem name="View Transport Calendar" id="menu_transport_calendar_logistics" parent="ppts_logistics.menu_logistics_custom"
+				  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager"
+				  action="action_logistics_management_for_production_view" sequence="02"/>
+
+		<!-- Transport RFQ Menu action -->
+
+		<record id="action_logistics_management_rfq_view" model="ir.actions.act_window">
+			<field name="name">Transport RFQ</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">purchase.order</field>
+			<field name="view_mode">tree,kanban,form,pivot,graph,calendar,activity</field>
+			<field name="domain">[('is_transport_rfq', '=', True)]</field>
+			<field name="context">{}</field>
+		</record>
+
+		<menuitem name="Transport RFQ" id="menu_logistics_rfq_sub" parent="ppts_logistics.menu_logistics_custom" action="action_logistics_management_rfq_view" groups='group_logistics_user' sequence="2"/>
+
+		<!-- Incoming Shipment Menu action -->
+
+		<record id="action_logistics_management_register_truck" model="ir.actions.act_window">
+			<field name="name">Register Truck</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">stock.picking</field>
+			<field name="view_mode">tree,kanban,form,calendar</field>
+			<field name="domain">[('state', 'in', ('waiting', 'assigned'))]</field>
+			<field name="context">{"search_default_picking_type": True}</field>
+		</record>
+
+		<menuitem name="Register Truck" id="menu_logistics_register_truck" parent="ppts_logistics.menu_logistics_custom" action="action_logistics_management_register_truck" groups='group_logistics_user' sequence="3"/>
+
+
+		<record id="action_logistics_management_release_truck" model="ir.actions.act_window">
+			<field name="name">Release Truck</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">stock.picking</field>
+			<field name="view_mode">tree,kanban,form,calendar</field>
+			<field name="domain">[('state', '=', 'release_lorry'), ('is_unloaded', '!=', False)]</field>
+			<field name="context">{"search_default_picking_type": True}</field>
+		</record>
+
+		<menuitem name="Release Truck" id="menu_logistics_release_truck" parent="ppts_logistics.menu_logistics_custom" action="action_logistics_management_release_truck" groups='group_logistics_user' sequence="5"/>
+
+		<record id="stock.view_picking_internal_search" model="ir.ui.view">
+			<field name="name">stock.picking.internal.search</field>
+			<field name="model">stock.picking</field>
+			<field name="arch" type="xml">
+				<search string="Picking Lists">
+					<field name="name" string="Transfer" filter_domain="['|', ('name', 'ilike', self), ('origin', 'ilike', self)]"/>
+					<field name="partner_id" filter_domain="[('partner_id', 'child_of', self)]"/>
+					<field name="origin"/>
+					<field name="product_id"/>
+					<field name="picking_type_id"/>
+					<filter name="my_transfers" string="My Transfers" domain="[('user_id', '=', uid)]"/>
+					<separator/>
+					<filter name="status_without_done_cancel" string="Status:(Except Done, Cancel)" domain="[('state', 'not in', ['done','cancel'])]" help="Status Except Done and Cancel"/>
+
+					<filter name="draft" string="Draft" domain="[('state', '=', 'draft')]" help="Draft Moves"/>
+					<filter name="waiting" string="Waiting" domain="[('state', 'in', ('confirmed', 'waiting'))]" help="Waiting Moves"/>
+					<filter name="available" string="Ready" domain="[('state', 'in', ('assigned', 'partially_available'))]" help="Assigned Moves"/>
+					<filter name="done" string="Done" domain="[('state', '=', 'done')]" help="Pickings already processed"/>
+					<filter name="cancel" string="Cancelled" domain="[('state', '=', 'cancel')]" help="Cancelled Moves"/>
+					<separator/>
+					<filter name="late" string="Late" domain="[('scheduled_date','&lt;', time.strftime('%%Y-%%m-%%d %%H:%%M:%%S')), ('state', 'in', ('assigned', 'waiting', 'confirmed'))]" help="Transfers that are late on scheduled time"/>
+					<separator/>
+					<filter name="backorder" string="Backorders" domain="[('backorder_id', '!=', False), ('state', 'in', ('assigned', 'waiting', 'confirmed'))]" help="Remaining parts of picking partially processed"/>
+					<separator/>
+					<filter invisible="1" string="Late Activities" name="activities_overdue"
+							domain="[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"
+							help="Show all records which has next action date is before today"/>
+					<filter invisible="1" string="Today Activities" name="activities_today"
+							domain="[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
+					<filter invisible="1" string="Future Activities" name="activities_upcoming_all"
+							domain="[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))]"/>
+					<separator/>
+					<filter string="Warnings" name="activities_exception"
+							domain="[('activity_exception_decoration', '!=', False)]"/>
+					<group expand="0" string="Group By">
+						<filter string="Status" name="status" domain="[]" context="{'group_by': 'state'}"/>
+						<filter string="Scheduled Date" name="expected_date" domain="[]" context="{'group_by': 'scheduled_date'}"/>
+						<filter string="Source Document" name="origin" domain="[]" context="{'group_by': 'origin'}"/>
+						<filter string="Operation Type" name="picking_type" domain="[]" context="{'group_by': 'picking_type_id'}"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
+
+		<record id="action_logistics_management_incoming_shipment_view" model="ir.actions.act_window">
+			<field name="name">Incoming Shipment</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">stock.picking</field>
+			<field name="view_mode">tree,kanban,form,calendar</field>
+			<field name="domain">[('picking_type_code', '=', 'incoming')]</field>
+			<field name="context">{"search_default_status_without_done_cancel": True, "search_default_status": True}</field>
+		</record>
+
+		<menuitem name="Incoming Shipment" id="menu_logistics_incoming_sub" parent="ppts_logistics.menu_logistics_custom" action="action_logistics_management_incoming_shipment_view" groups='group_logistics_user' sequence="6"/>
+
+		<!-- Outgoing Shipment Menu action -->
+
+		<record id="action_logistics_management_outgoing_shipment_view" model="ir.actions.act_window">
+			<field name="name">Outgoing Shipment</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">stock.picking</field>
+			<field name="view_mode">tree,kanban,form,calendar</field>
+			<field name="domain">[('picking_type_code', '=', 'outgoing')]</field>
+			<field name="context">{"search_default_status_without_done_cancel": True, "search_default_status": True}</field>
+		</record>
+
+		<menuitem name="Outgoing Shipment" id="menu_logistics_outgoing_sub" parent="ppts_logistics.menu_logistics_custom" action="action_logistics_management_outgoing_shipment_view" groups='group_logistics_user' sequence="7"/>
+
+		<record id="res_ports_form_view" model="ir.ui.view">
+			<field name="name">res.sea.ports.form</field>
+			<field name="model">res.sea.ports</field>
+			<field name="arch" type="xml">
+				<form string="Sea Ports">
+					<sheet>
+						<group>
+							<group>
+								<field name='name'/>
+								<field name='code'/>
+							</group>
+							<group>
+								<field name='state_id'/>
+								<field name='country_id'/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="res_ports_tree_view" model="ir.ui.view">
+			<field name="name">res.sea.ports.tree</field>
+			<field name="model">res.sea.ports</field>
+			<field name="arch" type="xml">
+				<tree string="Sea Ports">
+					<field name='name'/>
+					<field name='code'/>
+					<field name='state_id'/>
+					<field name='country_id'/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_res_ports_view" model="ir.actions.act_window">
+			<field name="name">Sea Ports</field>
+			<field name="res_model">res.sea.ports</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem name="Sea Ports" id="menu_sea_ports_custom" parent="contacts.menu_localisation" action="action_res_ports_view" groups='group_res_ports_user'/>
+
+
+		<record id="tunnel_code_form_view" model="ir.ui.view">
+			<field name="name">tunnel.code.form</field>
+			<field name="model">tunnel.code</field>
+			<field name="arch" type="xml">
+				<form string="Tunnel Code">
+					<sheet>
+						<group>
+							<group>
+								<field name='name' required="1"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="tunnel_code_tree_view" model="ir.ui.view">
+			<field name="name">tunnel.code.tree</field>
+			<field name="model">tunnel.code</field>
+			<field name="arch" type="xml">
+				<tree string="Tunnel Code">
+					<field name='name'/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_tunnel_code_view" model="ir.actions.act_window">
+			<field name="name">Tunnel Code</field>
+			<field name="res_model">tunnel.code</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record id="adr_classes_form_view" model="ir.ui.view">
+			<field name="name">adr.class.form</field>
+			<field name="model">adr.class</field>
+			<field name="arch" type="xml">
+				<form string="ADR Class">
+					<sheet>
+						<group>
+							<group>
+								<field name='code' required="1"/>
+							</group>
+							<group>
+								<field name='lable'/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="adr_classes_tree_view" model="ir.ui.view">
+			<field name="name">adr.class.tree</field>
+			<field name="model">adr.class</field>
+			<field name="arch" type="xml">
+				<tree string="ADR Class">
+					<field name='code'/>
+					<field name='lable'/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_adr_class_view" model="ir.actions.act_window">
+			<field name="name">ADR Classes</field>
+			<field name="res_model">adr.class</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record id="adr_pickup_type_form_view" model="ir.ui.view">
+			<field name="name">adr.pickup.type.form</field>
+			<field name="model">adr.pickup.type</field>
+			<field name="arch" type="xml">
+				<form string="ADR Pickup Type">
+					<sheet>
+						<group>
+							<group>
+								<field name='code' required="1"/>
+							</group>
+							<group>
+								<field name='class_type' string="Package Type"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="adr_pickup_type_tree_view" model="ir.ui.view">
+			<field name="name">adr.pickup.type.tree</field>
+			<field name="model">adr.pickup.type</field>
+			<field name="arch" type="xml">
+				<tree string="ADR Pickup Type">
+					<field name='code'/>
+					<field name='class_type' string="Package Type"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_adr_pickup_type_view" model="ir.actions.act_window">
+			<field name="name">ADR Package Type</field>
+			<field name="res_model">adr.pickup.type</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record id="hazard_number_form_view" model="ir.ui.view">
+			<field name="name">hazard.number.form</field>
+			<field name="model">hazard.number</field>
+			<field name="arch" type="xml">
+				<form string="Hazard Number">
+					<sheet>
+						<group>
+							<group>
+								<field name='code' required="1"/>
+							</group>
+							<group>
+								<field name='hazard_name'/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="hazard_number_type_tree_view" model="ir.ui.view">
+			<field name="name">hazard.number.tree</field>
+			<field name="model">hazard.number</field>
+			<field name="arch" type="xml">
+				<tree string="Hazard Number">
+					<field name='code'/>
+					<field name='hazard_name'/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_hazard_number_view" model="ir.actions.act_window">
+			<field name="name">Hazard Number</field>
+			<field name="res_model">hazard.number</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<record id="un_code_form_view" model="ir.ui.view">
+			<field name="name">un.code.form</field>
+			<field name="model">un.code</field>
+			<field name="arch" type="xml">
+				<form string="Hazard Number">
+					<sheet>
+						<group>
+							<group>
+								<field name='code' required="1"/>
+							</group>
+							<group>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="un_code_tree_view" model="ir.ui.view">
+			<field name="name">un.code.tree</field>
+			<field name="model">un.code</field>
+			<field name="arch" type="xml">
+				<tree string="Hazard Number">
+					<field name='code'/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_un_code_view" model="ir.actions.act_window">
+			<field name="name">UN Code</field>
+			<field name="res_model">un.code</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+
+		<menuitem name="ADR Settings" id="menu_adr_settings_main" parent="ppts_inventory_customization.menu_project_configuration_main" sequence="02" groups='group_logistics_user'/>
+
+		<menuitem name="Tunnel Code" id="menu_tunnel_code" parent="ppts_logistics.menu_adr_settings_main" action="action_tunnel_code_view" sequence="05" groups='group_logistics_user'/>
+
+		<menuitem name="ADR Class" id="menu_adr_class" parent="ppts_logistics.menu_adr_settings_main" action="action_adr_class_view" sequence="02" groups='group_logistics_user'/>
+
+		<menuitem name="ADR Package Type" id="menu_adr_pickup_type" parent="ppts_logistics.menu_adr_settings_main" action="action_adr_pickup_type_view" sequence="03" groups='group_logistics_user'/>
+
+		<menuitem name="Hazard Number" id="menu_hazard_number" parent="ppts_logistics.menu_adr_settings_main" action="action_hazard_number_view" sequence="04" groups='group_logistics_user'/>
+
+		<menuitem name="UN Code" id="menu_un_code" parent="ppts_logistics.menu_adr_settings_main" action="action_un_code_view" sequence="01" groups='group_logistics_user'/>
+	</data>
+</odoo>

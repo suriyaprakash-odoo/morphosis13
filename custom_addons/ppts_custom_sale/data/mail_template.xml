@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="email_template_send_notification" model="mail.template">
+            <field name="name">Logistics Notification</field>
+            <field name="subject">Logistics Notification (Commande Client)</field>
+            <field name="email_from">${object.company_id.partner_id.email}</field>
+            <field name="email_to">cyril.boutin@morphosis.fr,melanie.vincent@weeecycling.com</field>
+            <field name="model_id" ref="ppts_custom_sale.model_sale_order" />
+            <field name="auto_delete" eval="False" />
+            <field name="body_html">
+                <![CDATA[
+                    <p>Hi Team,</p>
+                    <p>We are sending a shipment for <strong>${object.partner_id.name}</strong>, based in ${object.partner_shipping_id.state_id}.</p>
+                    <p>Kindly check Sale Order/Quotation: <strong>${object.name}</strong> for additional informations.</p>
+                    <br/>
+                    <p>Thanks,</p>
+                ]]>
+            </field>
+        </record>
+        
+        <record id="email_template_send_notification_to_production" model="mail.template">
+            <field name="name">Outgoing Shipment Notification</field>
+            <field name="subject">Préparation d’une expédition</field>
+            <field name="email_from">${object.company_id.partner_id.email}</field>
+            <field name="email_to">philippe.orange@morphosis.fr,sebastien.varin@morphosis.fr</field>
+            <field name="model_id" ref="ppts_custom_sale.model_sale_order" />
+            <field name="auto_delete" eval="False" />
+            <field name="body_html">
+                <![CDATA[
+                    <p>Bonjour,</p>
+                    <p>Nous expédierons un lot vers notre client <strong>${object.partner_id.name}</strong>.donc svp faire le nécessaire pour le chargement du camion. Le camion est prévu le ${ctx.get('scheduled_date')}.</p>
+                    <p>Vous trouverez les détails dans le bon de commande: <strong>${object.name}</strong> et n’hésitez pas si vous avez des questions.</p>
+                    <br/>
+                    <p>Merci,</p>
+                    <p>${object.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+            </field>
+        </record>
+
+        <record id="email_template_demand_for_logistics" model="mail.template">
+            <field name="name">Allocate Logistics</field>
+            <field name="subject">Allocate Logistics ${object.name}</field>
+            <field name="email_from">${object.company_id.partner_id.email}</field>
+            <field name="email_to">cyril.boutin@morphosis.fr,melanie.vincent@weeecycling.com</field>
+            <field name="model_id" ref="ppts_custom_sale.model_sale_order" />
+            <field name="auto_delete" eval="False" />
+            <field name="body_html">
+                <![CDATA[
+                    
+
+                        Hello,<br/>
+
+                        We are selling a shipment to <strong>${object.partner_shipping_id.name}</strong>, Please find the details below.<br/>
+
+                        Project: <strong>${object.name}</strong><br/>
+
+                        Pickup Location: <strong>${object.pickup_location_id.name}</strong><br/>
+
+                        Pickup Date Type: <strong>${object.collection_date_type}</strong><br/>
+
+                        Gross Weight: <strong>${object.total_quantity} Kg</strong><br/>
+
+                        Waste Code: <strong>${object.waste_code}</strong><br/>
+
+                        Material: <strong>${object.material}</strong><br/>
+
+                        Dimensions: <strong>${object.dimension}</strong><br/>
+
+                        Lorry Type: <strong>${object.lorry_type}</strong><br/>
+
+                        Notes: <strong>${object.note or ''}</strong><br/><br/>
+
+
+                        Thanks,
+
+
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

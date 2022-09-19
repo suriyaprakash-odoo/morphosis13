@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+
+		<record id="process_type_form_view" model="ir.ui.view">
+			<field name="name">process.type.form</field>
+			<field name="model">process.type</field>
+			<field name="arch" type="xml">
+				<form string="Process Type">
+					<sheet>
+						<group>
+							<group>
+								<field name='name'/>
+							</group>
+							<group>
+								<field name="estimated_production_cost"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="process_type_tree_view" model="ir.ui.view">
+			<field name="name">process.type.tree</field>
+			<field name="model">process.type</field>
+			<field name="arch" type="xml">
+				<tree string="Process Type">
+					<field name='name'/>
+					<field name='estimated_production_cost'/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_process_type_view" model="ir.actions.act_window">
+			<field name="name">Process Type</field>
+			<field name="res_model">process.type</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem name="Process Type" id="menu_process_type_master" parent="sale.menu_sale_config" action="action_process_type_view" groups="sales_team.group_sale_manager" />
+	
+	</data>
+</odoo>

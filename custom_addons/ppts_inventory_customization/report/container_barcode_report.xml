@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report 
+            string="Generate Barcode(PDF)" 
+            id="report_stock_container_barcode" 
+            model="stock.container" 
+            report_type="qweb-pdf"
+            name="ppts_inventory_customization.stock_container_barcode_report" 
+            file="ppts_inventory_customization.stock_container_barcode_report"
+            print_report_name="'Stock Continer Barcode'"
+            paperformat="ppts_inventory_customization.paperformat_container_label"
+        />
+
+        <report 
+            string="Generate Barcode(PDF)" 
+            id="report_project_container_barcode" 
+            model="project.container" 
+            report_type="qweb-pdf"
+            name="ppts_inventory_customization.project_container_barcode_report" 
+            file="ppts_inventory_customization.project_container_barcode_report"
+            print_report_name="'Donor Continer Barcode'"
+            paperformat="ppts_inventory_customization.paperformat_container_label"
+        />
+
+    </data>
+</odoo>

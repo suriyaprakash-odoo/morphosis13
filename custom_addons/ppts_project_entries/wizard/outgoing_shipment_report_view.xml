@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="view_outgoing_shipment_report" model="ir.ui.view">
+            <field name="name">outgoing.shipment.report.form</field>
+            <field name="model">outgoing.shipment.report</field>
+            <field name="arch" type="xml">
+                <form string="Outgoing Shipment Report">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="from_date" required="1" />
+                            </group>
+                            <group>
+                                <field name="to_date" required="1" />
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="view_outgoing_shipment_report" string="Generate Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_outgoing_shipment_report" model="ir.actions.act_window">
+            <field name="name">Outgoing Shipment Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">outgoing.shipment.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_outgoing_shipment_report" />
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="Outgoing Shipment Report" id="menu_outgoing_shipment_report" parent="ppts_inventory_customization.menu_project_report" action="action_outgoing_shipment_report"/>
+
+        <record id="outgoing_shipment_report_tree_view" model="ir.ui.view">
+            <field name="name">outgoing.shipment.wizard.report.tree</field>
+            <field name="model">outgoing.shipment.wizard.report</field>
+            <field name="arch" type="xml">
+                <tree create="0">
+                    <field name = 'sale_order_name'/>
+                    <field name = 'shipment_name'/>
+                    <field name = 'recipent_container_name'/>
+                    <field name = 'content_type_name'/>
+                    <field name = 'gross_weight'/>
+                    <field name = 'net_weight'/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

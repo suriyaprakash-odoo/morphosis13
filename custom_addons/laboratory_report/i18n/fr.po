@@ -1,0 +1,162 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* laboratory_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e-20191017\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-07 10:58+0000\n"
+"PO-Revision-Date: 2020-12-07 10:58+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__partner_id
+msgid "Client"
+msgstr ""
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_lab_documents__create_uid
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_lab_documents__create_date
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_lab_documents__name
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__description
+msgid "Description"
+msgstr ""
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_lab_documents__display_name
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__display_name
+msgid "Display Name"
+msgstr "Afficher Nom"
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_lab_documents__project_doc
+msgid "Document"
+msgstr ""
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__document_ids
+#: model_terms:ir.ui.view,arch_db:laboratory_report.laboratory_report_form_view
+msgid "Documents"
+msgstr ""
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_lab_documents__file_char
+msgid "File Name"
+msgstr "Nom de Fichier"
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_lab_documents__id
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__id
+msgid "ID"
+msgstr ""
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_project_entries__lab_report_id
+msgid "Lab report Id"
+msgstr ""
+
+#. module: laboratory_report
+#: model:ir.ui.menu,name:laboratory_report.menu_laboratory_report
+msgid "Laboratory Report"
+msgstr "Rapport d'analyse"
+
+#. module: laboratory_report
+#: model:ir.actions.act_window,name:laboratory_report.action_laboratory_report
+#: model_terms:ir.ui.view,arch_db:laboratory_report.laboratory_report_tree_view
+#: model_terms:ir.ui.view,arch_db:laboratory_report.project_entries_form_view_inherited_new
+msgid "Laboratory Report"
+msgstr "Analyses"
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_lab_documents____last_update
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_lab_documents__write_uid
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_lab_documents__write_date
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__received_date
+msgid "Material received date"
+msgstr ""
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__sent_date
+msgid "Material sent date"
+msgstr ""
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: laboratory_report
+#: model_terms:ir.ui.view,arch_db:laboratory_report.laboratory_report_form_view
+msgid "Notes"
+msgstr ""
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__project_id
+msgid "Project"
+msgstr "Projet"
+
+#. module: laboratory_report
+#: model:ir.model,name:laboratory_report.model_project_entries
+msgid "Project Entries"
+msgstr "Projet Entrée"
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__report_date
+msgid "Report Date"
+msgstr ""
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_lab_documents__lab_id
+msgid "Report ID"
+msgstr ""
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_project_entries__lab_test
+msgid "Request Laboratory Test"
+msgstr "Demande d'analyse"
+
+#. module: laboratory_report
+#: model:ir.model.fields,field_description:laboratory_report.field_laboratory_report__user_id
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: laboratory_report
+#: model:ir.model,name:laboratory_report.model_lab_documents
+msgid "lab.documents"
+msgstr ""
+
+#. module: laboratory_report
+#: model:ir.model,name:laboratory_report.model_laboratory_report
+msgid "laboratory.report"
+msgstr ""

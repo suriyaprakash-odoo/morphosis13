@@ -1,0 +1,1177 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+
+		<!-- Sequences for project.entries -->
+		<record id="seq_project_entry_pe" model="ir.sequence">
+			<field name="name">Project Entries PE</field>
+			<field name="code">project.entries.pe</field>
+			<field name="prefix">PE/%(y)s/%(woy)s/</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+
+		<record id="seq_project_entry_pr" model="ir.sequence">
+			<field name="name">Project Entries PR</field>
+			<field name="code">project.entries.pr</field>
+			<field name="prefix">PR/%(y)s/%(woy)s/</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+
+		<record id="seq_project_entry_pa" model="ir.sequence">
+			<field name="name">Project Entries PA</field>
+			<field name="code">project.entries.pa</field>
+			<field name="prefix">PA/%(y)s/%(woy)s/</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+
+		<record id="seq_project_entry_pf" model="ir.sequence">
+			<field name="name">Project Entries PF</field>
+			<field name="code">project.entries.pf</field>
+			<field name="prefix">PF/%(y)s/%(woy)s/</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+
+		<record id="seq_project_entry_pv" model="ir.sequence">
+			<field name="name">Project Entries PV</field>
+			<field name="code">project.entries.pv</field>
+			<field name="prefix">PV/%(y)s/%(woy)s/</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+
+		<!-- <record id="seq_project_entry_pn" model="ir.sequence">
+			<field name="name">Project Entries PN</field>
+			<field name="code">project.entries.pn</field>
+			<field name="prefix">PN/%(y)s/%(woy)s/</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+
+		<record id="seq_project_entry_cd" model="ir.sequence">
+			<field name="name">Project Entries CD</field>
+			<field name="code">project.entries.cd</field>
+			<field name="prefix">CD/%(y)s/%(woy)s/</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record>
+
+		<record id="seq_project_entry_ds" model="ir.sequence">
+			<field name="name">Project Entries DT</field>
+			<field name="code">project.entries.ds</field>
+			<field name="prefix">DT/%(y)s/%(woy)s/</field>
+			<field name="padding">4</field>
+			<field name="company_id" eval="False"/>
+		</record> -->
+
+		<record id="project_entries_form_view" model="ir.ui.view">
+			<field name="name">project.entries.form</field>
+			<field name="model">project.entries</field>
+			<field name="arch" type="xml">
+				<form string="Project Entries">
+					<header>
+						<field name="status" widget="statusbar" statusbar_visible='quote,in_transit,reception,wip,srt,finished'/>
+						<button name="action_alert_logistics" id="action_alert_logistics"
+								string="Demand for Logistics" class="btn-primary" type="object"
+								attrs="{'invisible': ['|',('status', 'not in', ['quote']),'|',('is_transport', '=', False),'|',('is_demand_sent', '!=', False),'|',('is_registered_package' ,'!=' , False)]}"
+								groups='ppts_project_entries.group_project_entries_officer'/>
+						<button name="action_create_transport_request" id="action_create_transport_request"
+								string="Create Transport Request" class="btn-primary" type="object" attrs="{'invisible': ['|', ('status', 'not in', ['quote']),('is_transport', '=', False),'|',('is_registered_package' ,'=' , False)]}"
+								groups='ppts_logistics.group_logistics_user'/>
+						<button name="send_notification" string="Alert Logistics" class="btn-primary" type="object"
+								attrs="{'invisible': ['|', '|',('status', 'not in', ['quote']),('is_transport', '!=', False),('is_registered_package','!=',False)]}"
+								groups='ppts_project_entries.group_project_entries_officer'/>
+						<button name="send_notification" string="Confirm Chronopost"
+								class="btn-primary" type="object"
+								attrs="{'invisible': ['|', '|',('status', 'not in', ['quote']),('is_transport', '!=', False),('is_registered_package','=',False)]}"
+								groups='ppts_project_entries.group_project_entries_officer'/>
+						<button name="%(ppts_project_entries.action_reject_project_entry)d" string="Reject" class="btn-danger" type="action" attrs="{'invisible': [('status', 'not in', ['quote'])]}"/>
+						<button name="generate_sorting_report" string="Generate Fraction Report" class="btn-primary" type="object" attrs="{'invisible': [('status', 'not in', ['wip','srt'])]}"/>
+						<button name="fixed_purchase_report" string="Fixed Purchase Report" class="btn-primary" type="object" attrs="{'invisible': [('status', 'not in', ['reception','wip'])]}"/>
+						<button name="plan_third_party_arrival" class="oe_highlight" type="object" string="Plan Arrival" groups="ppts_logistics.group_logistics_manager"
+								attrs="{'invisible': ['|',('is_transport','!=',False),('status', '!=', 'in_transit')]}"/>
+						<button name="close_project" string="Close" type="object" attrs="{'invisible': [('status', 'not in', ['srt'])]}" class="btn-danger"/>
+						<button name='confirm_project' string="confirm Project" class="btn-primary" type="object" attrs="{'invisible': ['|',('status', 'not in', ['quote']),('include_logistics', '=', False)]}" />
+					</header>
+					<sheet>
+						<div class="oe_button_box" name="button_box">
+							<button name="additional_purchase_order" string="Additional Purchase"
+									class="oe_stat_button"
+									icon="fa-money"
+									type="object"/>
+
+							<button name="action_view_purchase_order"
+									type="object"
+									class="oe_stat_button"
+									icon="fa-newspaper-o" string="View PO">
+							</button>
+							<button name="action_view_transport_request"
+									type="object"
+									class="oe_stat_button"
+									icon="fa-truck"
+									attrs="{'invisible': [('transport_request_count', '=', 0)]}" groups='ppts_project_entries.group_project_entries_officer,ppts_logistics.group_logistics_user'>
+								<field name="transport_request_count" widget="statinfo" string="Transports"/>
+							</button>
+							<!-- changed button type to object for python validations 21/12/2020 start-->
+							<button name="action_view_transport_po"
+									type="object"
+									class="oe_stat_button"
+									icon="fa-bus" attrs="{'invisible': ['|',('is_transport', '=', False),'|',('transport_rfq_count' , '=' , 0)]}">
+								<field name="transport_rfq_count" widget="statinfo" string="Transport PO"/>
+							</button>
+							<button name="action_create_credit_note" type="object" string="Create Credit Note"
+									class="oe_stat_button" icon="fa-credit-card" context="{'default_project_id': id}" attrs="{'invisible': [('status', 'in', ['quote'])]}">
+							</button>
+							<!-- changed button type to object for python validations 21/12/2020 end-->
+
+							<!-- <button name="%(ppts_inventory_customization.create_container_action)d" type="action" string="Create Containers"
+									class="oe_stat_button" icon="fa-plus-square" attrs="{'invisible': ['|',('is_registered_package', '=', False),('status', 'not in', ['in_transit','reception','wip'])]}" context="{'default_project_id': id}">
+							</button> -->
+							<button name="create_container_action" type="object" string="Create Containers"
+									class="oe_stat_button" icon="fa-plus-square" attrs="{'invisible': ['|',('is_registered_package', '=', False),('status', 'not in', ['in_transit','reception','wip'])]}" context="{'default_project_id': id}">
+							</button>
+							<button name="%(ppts_inventory_customization.action_update_chronopost)d" string="Update Chronopost" type="action"
+									class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': ['|',('is_registered_package', '=', False),('status', 'not in', ['in_transit','reception','wip'])]}" context="{'default_project_id': id}">
+							</button>
+
+							<!--<button class="oe_stat_button" type="object"
+									name="action_create_fractions" icon="fa-th">
+								<field name="fraction_count" widget="statinfo" string="Fractions"/>
+							</button>-->
+
+						</div>
+						<widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+
+						<div class="oe_title">
+							<span class="o_form_label">Project Entries</span>
+							<h1>
+								<field name="name" readonly="1"/>
+							</h1>
+						</div>
+						<group>
+							<group>
+								<field name="active" invisible="1"/>
+								<field name='project_type' required="1" attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name='partner_id' attrs="{'readonly' : [('status', 'not in' , 'quote')]}" options="{'no_create_edit': True}"/>
+								<field name='company_id' attrs="{'readonly' : [('status', 'not in' , 'quote')]}" options="{'no_create_edit': True}"/>
+								<field name='user_id' required="1" attrs="{'readonly' : [('status', 'not in' , 'quote')]}" options="{'no_create_edit': True}"/>
+								<!-- <field name='no_of_container' attrs="{'readonly' : [('status', 'not in' , 'quote')]}" /> -->
+								<field name='standard_tc' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name='margin_class' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name='pricing_type' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name='is_internal_project' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name='is_registered_package' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<!-- <field name='no_of_boxes' attrs="{
+									'invisible' : ['|',('is_registered_package', '!=', True),('collection_type', 'in', ['labels'])],
+									'required' : [('collection_type', 'in' , ['labels_boxes'])],
+									'readonly' : [('status', 'not in' , 'quote')]
+									}"/> -->
+								<field name="is_demand_sent" invisible="1"/>
+								<!-- <field name='is_fifteen_days' attrs="{'readonly' : [('status', 'not in' , 'quote')]}" /> -->
+								<field name='fifteen_days_date' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+							</group>
+							<group>
+								<field name='origin' attrs="{'readonly' : [('status', 'not in' , 'quote')]}" options="{'no_create_edit': True}"/>
+								<field name="pickup_location_id" context="{'show_address': 1}"
+									   options='{"always_reload": True, "highlight_first_line": True,"no_create_edit": True}' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<!--<label for="street" string="Collection point for project"/>
+	                            <div class="o_address_format">
+	                                <field name="street" placeholder="Street..." class="o_address_street" attrs="{'readonly': [('status', 'not in', ['quote'])]}" required="1"/>
+	                                <field name="street2" placeholder="Street 2..." class="o_address_street" attrs="{'readonly': [('status', 'not in', ['quote'])]}"/>
+	                                <field name="city" placeholder="City" class="o_address_city" attrs="{'readonly': [('status', 'not in', ['quote'])]}" required="1"/>
+	                                <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True, "no_create": True}' attrs="{'readonly': [('status', 'not in', ['quote'])]}" required="1"/>
+	                                <field name="zip" placeholder="ZIP" class="o_address_zip" attrs="{'readonly': [('status', 'not in', ['quote'])]}" required="0"/>
+	                                <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}' attrs="{'readonly': [('status', 'not in', ['quote'])]}" required="1"/>
+	                            </div>-->
+								<!-- <field name='project_origin' attrs="{'readonly' : [('status', 'not in' , 'quote')]}" options="{'no_create_edit': True}" />
+								<field name='transporter_id' attrs="{'readonly' : [('status', 'not in' , 'quote')]}" /> -->
+								<field name='partner_ref' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<!-- <field name='container_waste_type' attrs="{'readonly' : [('status', 'not in' , 'quote')]}" /> -->
+								<!-- <field name='waste_code' attrs="{'readonly' : [('status', 'not in' , 'quote')]}" /> -->
+								<field name="currency_id" invisible="1"/>
+								<field name='export_license' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<!-- <field name="collection_type" attrs="{
+									'invisible' : [('is_registered_package', '!=', True)],
+									'required' : [('is_registered_package', '=' , True)],
+									'readonly' : [('status', 'not in' , 'quote')]
+									}"/> -->
+								<field name="is_ecologic"/>
+								<field name="add_cost_existing_po" attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name="add_additional_sale_po" attrs="{'readonly' : [('status', 'not in' , 'quote')],'invisible' : [('project_type', '!=' , 'refine')]}"/>
+								<field name="send_containers"/>
+								<field name='is_client_request_sorted' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name='offer_expiry_date' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+							</group>
+						</group>
+						<group string="Logistics Informations">
+							<group>
+								<field name='include_logistics' />
+								<field name='is_transport' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name='no_of_container' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<!-- <field name="no_of_container_duplicate" /> -->
+								<field name='lorry_type' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<separator string='Collection'/>
+								<field name='collection_date_type' attrs="{'readonly' : [('status', 'not in' , 'quote')]}" required="1"/>
+								<field name='estimated_collection_date' attrs="{
+										'readonly' : [('status', 'not in' , 'quote')],
+										'required' : [('is_registered_package' , '=' , False),('collection_date_type' , '=' , 'specific')],
+										'invisible' : [('collection_date_type' , '!=' , 'specific')]
+									}"/>
+								<field name='collection_date_from' attrs="{
+										'readonly' : [('status', 'not in' , 'quote')],
+										'required' : [('is_registered_package' , '=' , False),('collection_date_type' , '=' , 'between')],
+										'invisible' : [('collection_date_type' , '!=' , 'between')]
+									}"/>
+								<field name='collection_date_to' attrs="{
+										'readonly' : [('status', 'not in' , 'quote')],
+										'required' : [('is_registered_package' , '=' , False),('collection_date_type' , '=' , 'between')],
+										'invisible' : [('collection_date_type' , '!=' , 'between')]
+									}"/>
+								<field name="actual_date" attrs="{'readonly' : [('status', 'in' , 'finished')]}"/>
+							</group>
+							<group>
+								<field name="is_full_load" attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name='is_tail_lift' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<!-- <label for='opening_hours_start' string="Opening Hours" />
+								<div>
+									<field name='opening_hours_start' style="width:15%" attrs="{'readonly' : [('status', 'not in' , 'quote')]}" /> -  
+									<field name='opening_hours_end' style="width:15%" attrs="{'readonly' : [('status', 'not in' , 'quote')]}" />
+								</div> -->
+								<!-- <field name="grid_rotation" attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/> -->
+							</group>
+							<group string="Opening Hours">
+								<label for='morning_opening_hours_start' string="Morning Opening Hours"/>
+								<div>
+									<field name='morning_opening_hours_start' style="width:15%" attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+									-
+									<field name='morning_opening_hours_end' style="width:15%" attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								</div>
+								<label for='evening_opening_hours_start' string="Evening Opening Hours"/>
+								<div>
+									<field name='evening_opening_hours_start' style="width:15%" attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+									-
+									<field name='evening_opening_hours_end' style="width:15%" attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								</div>
+							</group>
+							<group string="Ecologic" attrs="{
+								'readonly' : [('status', 'not in' , 'quote')], 
+								'invisible' : [('is_ecologic' , '=' , False)]
+								}">
+								<field name="command" attrs="{'required' : [('is_ecologic' , '!=' , False)]}"/>
+								<field name="order" attrs="{'required' : [('is_ecologic' , '!=' , False)]}"/>
+								<field name="num_demande" attrs="{'required' : [('is_ecologic' , '!=' , False)]}"/>
+								<field name="ordre_de_traitement" attrs="{'required' : [('is_ecologic' , '!=' , False)]}"/>
+								<field name="date_demand" attrs="{'required' : [('is_ecologic' , '!=' , False)]}"/>
+								<field name="date_reception" attrs="{'required' : [('is_ecologic' , '!=' , False)]}"/>
+							</group>
+						</group>
+						<group string="Costs">
+							<group string="Forecast Values">
+								<field name='initial_offer_price'/>
+								<field name='forcased_transport_cost' attrs="{
+									'required' : [('is_transport', '!=' , False)],
+									'readonly' : [('status', 'not in' , 'quote')]
+									}"/>
+								<field name='estimated_extra_purchase_cost' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name="process_type_cost"/>
+								<field name='forecast_profit'/>
+								<field name='value_of_lot'/>
+								<!-- <field name="forecast_production_cost"/>
+								<field name='forcased_transport_cost' attrs="{
+									'required' : [('is_transport', '!=' , False)],
+									'readonly' : [('status', 'not in' , 'quote')]
+									}"/>
+								<field name="process_type_cost"/>
+								<field name='estimated_extra_purchase_cost' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name='target_price' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name='initial_offer_price'/>
+								<field name="potential_sales_price"/> -->
+							</group>
+							<group string='Actual Values'>
+								<field name='quoted_price' readonly="1"/>
+								<field name='confirmed_transport_cost' style="pointer-events: none;"/>
+								<field name='labour_cost' string='Process Cost'/>
+								<field name="extra_purchase_cost"/>
+								<field name="total_production_cost"/>
+								<field name='production_cost_with_offer'/>
+								<field name="potential_sales_price"/>
+								<field name='calculated_profit'/>
+								<field name='calculated_profit_percentage'/>
+								<field name="actual_sale_cost"/>
+								<field name='actual_profit'/>
+								<!-- <field name="total_production_cost"/>
+								<field name='confirmed_transport_cost' style="pointer-events: none;"/>
+								<field name='labour_cost'/>
+								<field name="extra_purchase_cost"/>
+								<field name='calculated_bying_price'/>
+								<field name='quoted_price' readonly="1"/> -->
+							</group>
+						</group>
+						<!-- <group>
+							<group>
+								<field name='is_fifteen_days' attrs="{'readonly' : [('status', 'not in' , 'quote')]}" />
+								<field name='fifteen_days_date' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name='is_client_request_sorted' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name='offer_expiry_date' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+							</group>
+							<group>
+								<field name='is_offer_subject_to_analysis' attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+								<field name='is_offer_reject' readonly="1"/>
+								<field name='reject_reason' attrs="{
+									'invisible' : [('is_offer_reject', '=', False)],
+									'required' : [('is_offer_reject', '!=' , False)],
+									'readonly' : [('status', 'not in' , 'quote')]
+									}"/>
+							</group>
+						</group> -->
+						<group>
+							<field name="total_quantity" />
+							<field name="total_offer_price" />
+						</group>
+
+						<notebook>
+							<page string='Products'>
+								<field name="project_entry_ids" attrs="{'readonly' : [('status', 'not in' , ['quote','in_transit','reception'])]}" context="{'default_margin_class':margin_class}">
+									<tree>
+										<field name="product_id" required="1" options="{'no_create_edit': True}"/>
+										<field name="name"/>
+										<field name="account_analytic_id" required="1" optional="show"/>
+										<field name="product_qty" required="1"/>
+										<field name="product_uom"/>
+										<field name="price_unit"/>
+										<field name="malus"/>
+										<field name="malus_demand"/>
+										<field name="estimated_service_cost" string="Service Charge"/>
+										<field name="offer_price"/>
+										<!-- <field name="taxes_id" widget="many2many_tags" options="{'no_create': True}" optional="show"/> -->
+										<!-- <field name="price_subtotal"/> -->
+									</tree>
+									<form>
+										<group>
+											<group>
+												<field name="product_id" required="1" options="{'no_create_edit': True}"/>
+												<field name="name"/>
+												<field name="account_analytic_id" required="1" context="{'default_partner_id': parent.partner_id}" groups="analytic.group_analytic_accounting" domain="['|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"/>
+												<field name="is_malus"/>
+												<field name="is_service"/>
+												<field name="margin_class" invisible="1"/>
+											</group>
+											<group>
+												<field name="product_qty" required="1"/>
+												<field name="product_uom"/>
+												<field name="malus" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', False)]}"/>
+												<field name="charge_malus" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', False)]}"/>
+												<field name="price_unit" attrs="{'invisible': [('is_malus', '=', True)]}"/>
+												<field name="price" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', True)]}"/>
+												<field name="expexted_margin_percentage" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', True)]}"/>
+												<field name="malus_demand" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', False)]}"/>
+												<field name="offer_price" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', True)]}"/>
+												<field name="estimated_service_cost" attrs="{'invisible': ['|',('is_service','!=',True),('is_malus', '=', True)]}" string='Service Charge'/>
+												<field name="computed_margin_percentage" attrs="{'invisible': ['|',('is_service','=',True),('is_malus', '=', True)]}"/>
+												<!-- <field name="taxes_id" widget="many2many_tags" options="{'no_create': True}"/> -->
+												<!-- <field name="price_subtotal"/> -->
+											</group>
+										</group>
+									</form>
+								</field>
+
+								<!-- <group class="oe_subtotal_footer oe_right" name="total_weight">
+									<field name="total_quantity" class="oe_subtotal_footer_separator"/>
+									<field name="total_offer_price" class="oe_subtotal_footer_separator"/>
+									
+								</group>
+								<div class="oe_clear"/> -->
+							</page>
+							<page name='refining_sample' string='Refining Sample' attrs="{'invisible': [('project_type', 'not in', ['refine'])]}"> 
+								<field name='sample_line_ids'>
+									<tree editable='bottom'>
+										<field name='product_id' required='1' />
+										<field name='name' required='1' context="{'default_product_id': product_id,'default_company_id':parent.company_id}" />
+										<!-- <field name='quantity' />
+										<field name='expected_result' />
+										<field name='actual_result' /> -->
+									</tree>
+								</field>
+							</page>
+							<page string="Carton Details" attrs="{'invisible' : [('is_registered_package', '!=', True)]}">
+								<field name="carton_ids">
+									<tree editable="bottom">
+										<field name="name" string="Chronopost Number" required="1"/>
+										<field name="cost" />
+										<field name="sur_charges" />
+									</tree>
+								</field>
+							</page>
+							<page string="Refining" name="refining" attrs="{'invisible' : [('project_type', 'not in' , 'refine')]}">
+								<separator string="Treatment Costs"/>
+								<span style="font-weight: bold;">Silver
+									<field name="silver" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<span style="font-weight: bold;">Gold
+									<field name="gold" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<span style="font-weight: bold;">Palladium
+									<field name="palladium" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<span style="font-weight: bold;">Platinum
+									<field name="platinum" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<span style="font-weight: bold;">Copper
+									<field name="copper" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<span style="font-weight: bold;">Rhodium
+									<field name="rhodium" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<span style="font-weight: bold;">Ruthenium
+									<field name="ruthenium" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<span style="font-weight: bold;">Iridium
+									<field name="iridium" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<separator/>
+								<separator string="Silver Treatment Costs" attrs="{'invisible' : [('silver', '=', False)]}"/>
+								<field name="silver_cost_ids" attrs="{'invisible' : [('silver', '=', False)]}">
+									<tree>
+										<field name="analysis_for_certification"/>
+										<field name="reference_sample_analysis"/>
+										<field name="actual_result"/>
+										<field name="dedection_percentage" invisible="1"/>
+										<field name="buy_price_discount"/>
+										<field name="remaining_metal"/>
+										<field name="currency_id" invisible="1"/>
+										<field name="lbma_price" required="1"/>
+										<field name="offer_buying_price"/>
+										<field name="treatment_cost" />
+										<field name="final_purchase_price"/>
+										<field name="price_per_gram"/>
+										<field name="waste_nature"/>
+									</tree>
+									<form>
+										<group>
+											<field name="sample_ct_id" placeholder="Recipient Container" options="{'no_create_edit': True}"/>
+											<group>
+												<label for="analysis_for_certification"/>
+												<div class="o_row">
+													<field name="analysis_for_certification"/>
+													<field name="is_analysis_for_certification" invisible="1"/>
+													<field name="refining_sample_id" attrs="{'required' : [('is_analysis_for_certification', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="reference_sample_analysis"/>
+												<div class="o_row">
+													<field name="reference_sample_analysis"/>
+													<field name="is_reference_sample_analysis" invisible="1"/>
+													<field name="refining_sample_id_2" attrs="{'required' : [('is_reference_sample_analysis', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="actual_result"/>
+												<div class="o_row">
+													<field name="actual_result"/>
+													<field name="is_actual_result" invisible="1"/>
+													<field name="refining_sample_id_3" attrs="{'required' : [('is_actual_result', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<field name="minimum_levy"/>
+												<field name="return_percentage"/>
+												<field name="dedection_percentage" invisible="1"/>
+												<field name="lme_price_discount"/>
+												<field name="buy_price_discount" invisible="1"/>
+												<field name="currency_id" invisible="1"/>
+												<field name="waste_nature"/>
+												<field name="project_id" invisible="1"/>
+											</group>
+											<group>
+												<field name="remaining_metal"/>
+												<field name="lbma_price" required="1"/>
+												<field name="price_date" required="1"/>
+												<field name="price_source" required="1"/>
+												<field name="price_per_gram"/>
+												<field name="offer_buying_price"/>
+												<field name="treatment_cost" attrs="{'required' : [('is_actual_result', '=', True)]}"/>
+												<field name="final_purchase_price"/>
+											</group>
+										</group>
+									</form>
+								</field>
+								<separator string="Gold Treatment Costs" attrs="{'invisible' : [('gold', '=', False)]}"/>
+								<field name="gold_cost_ids" attrs="{'invisible' : [('gold', '=', False)]}">
+									<tree>
+										<field name="analysis_for_certification"/>
+										<field name="reference_sample_analysis"/>
+										<field name="actual_result" />
+										<field name="buy_price_discount"/>
+										<field name="remaining_metal"/>
+										<field name="currency_id" invisible="1"/>
+										<field name="lbma_price" required="1"/>
+										<field name="offer_buying_price"/>
+										<field name="treatment_cost" />
+										<field name="final_purchase_price"/>
+										<field name="price_per_gram"/>
+										<field name="waste_nature"/>
+									</tree>
+									<form>
+										<group>
+											<field name="sample_ct_id" placeholder="Recipient Container" options="{'no_create_edit': True}"/>
+											<group>
+												<label for="analysis_for_certification"/>
+												<div class="o_row">
+													<field name="analysis_for_certification"/>
+													<field name="is_analysis_for_certification" invisible="1"/>
+													<field name="refining_sample_id" attrs="{'required' : [('is_analysis_for_certification', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="reference_sample_analysis"/>
+												<div class="o_row">
+													<field name="reference_sample_analysis"/>
+													<field name="is_reference_sample_analysis" invisible="1"/>
+													<field name="refining_sample_id_2" attrs="{'required' : [('is_reference_sample_analysis', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="actual_result"/>
+												<div class="o_row">
+													<field name="actual_result" />
+													<field name="is_actual_result" invisible="1"/>
+													<field name="refining_sample_id_3" attrs="{'required' : [('is_actual_result', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<field name="minimum_levy"/>
+												<field name="return_percentage"/>
+												<field name="dedection_percentage" invisible="1"/>
+												<field name="lme_price_discount"/>
+												<field name="buy_price_discount" invisible="1"/>
+												<field name="currency_id" invisible="1"/>
+												<field name="waste_nature"/>
+												<field name="project_id" invisible="1"/>
+											</group>
+											<group>
+												<field name="remaining_metal"/>
+												<field name="lbma_price" required="1"/>
+												<field name="price_date" required="1"/>
+												<field name="price_source" required="1"/>
+												<field name="price_per_gram"/>
+												<field name="price_per_gram"/>
+												<field name="offer_buying_price"/>
+												<field name="treatment_cost" attrs="{'required' : [('is_actual_result', '=', True)]}"/>
+												<field name="final_purchase_price"/>
+											</group>
+										</group>
+									</form>
+								</field>
+								<separator string="Palladium Treatment Costs" attrs="{'invisible' : [('palladium', '=', False)]}"/>
+								<field name="palladium_cost_ids" attrs="{'invisible' : [('palladium', '=', False)]}">
+									<tree>
+										<field name="analysis_for_certification"/>
+										<field name="reference_sample_analysis"/>
+										<field name="actual_result" />
+										<field name="buy_price_discount"/>
+										<field name="remaining_metal"/>
+										<field name="currency_id" invisible="1"/>
+										<field name="lbma_price" required="1"/>
+										<field name="offer_buying_price"/>
+										<field name="treatment_cost" />
+										<field name="final_purchase_price"/>
+										<field name="price_per_gram"/>
+										<field name="waste_nature"/>
+									</tree>
+									<form>
+										<group>
+											<field name="sample_ct_id" placeholder="Recipient Container" options="{'no_create_edit': True}"/>
+											<group>
+												<label for="analysis_for_certification"/>
+												<div class="o_row">
+													<field name="analysis_for_certification"/>
+													<field name="is_analysis_for_certification" invisible="1"/>
+													<field name="refining_sample_id" attrs="{'required' : [('is_analysis_for_certification', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="reference_sample_analysis"/>
+												<div class="o_row">
+													<field name="reference_sample_analysis"/>
+													<field name="is_reference_sample_analysis" invisible="1"/>
+													<field name="refining_sample_id_2" attrs="{'required' : [('is_reference_sample_analysis', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="actual_result"/>
+												<div class="o_row">
+													<field name="actual_result" />
+													<field name="is_actual_result" invisible="1"/>
+													<field name="refining_sample_id_3" attrs="{'required' : [('is_actual_result', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<field name="minimum_levy"/>
+												<field name="return_percentage"/>
+												<field name="dedection_percentage" invisible="1"/>
+												<field name="lme_price_discount"/>
+												<field name="buy_price_discount" invisible="1"/>
+												<field name="currency_id" invisible="1"/>
+												<field name="waste_nature"/>
+												<field name="project_id" invisible="1"/>
+											</group>
+											<group>
+												<field name="remaining_metal"/>
+												<field name="lbma_price" required="1"/>
+												<field name="price_date" required="1"/>
+												<field name="price_source" required="1"/>
+												<field name="price_per_gram"/>
+												<field name="price_per_gram"/>
+												<field name="offer_buying_price"/>
+												<field name="treatment_cost" attrs="{'required' : [('is_actual_result', '=', True)]}"/>
+												<field name="final_purchase_price"/>
+											</group>
+										</group>
+									</form>
+								</field>
+								<separator string="Platinum Treatment Costs" attrs="{'invisible' : [('platinum', '=', False)]}"/>
+								<field name="platinum_cost_ids" attrs="{'invisible' : [('platinum', '=', False)]}">
+									<tree>
+										<field name="analysis_for_certification"/>
+										<field name="reference_sample_analysis"/>
+										<field name="actual_result" />
+										<field name="buy_price_discount"/>
+										<field name="remaining_metal"/>
+										<field name="currency_id" invisible="1"/>
+										<field name="lbma_price" required="1"/>
+										<field name="offer_buying_price"/>
+										<field name="treatment_cost" />
+										<field name="final_purchase_price"/>
+										<field name="price_per_gram"/>
+										<field name="waste_nature"/>
+									</tree>
+									<form>
+										<group>
+											<field name="sample_ct_id" placeholder="Recipient Container" options="{'no_create_edit': True}"/>
+											<group>
+												<label for="analysis_for_certification"/>
+												<div class="o_row">
+													<field name="analysis_for_certification"/>
+													<field name="is_analysis_for_certification" invisible="1"/>
+													<field name="refining_sample_id" attrs="{'required' : [('is_analysis_for_certification', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="reference_sample_analysis"/>
+												<div class="o_row">
+													<field name="reference_sample_analysis"/>
+													<field name="is_reference_sample_analysis" invisible="1"/>
+													<field name="refining_sample_id_2" attrs="{'required' : [('is_reference_sample_analysis', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="actual_result"/>
+												<div class="o_row">
+													<field name="actual_result" />
+													<field name="is_actual_result" invisible="1"/>
+													<field name="refining_sample_id_3" attrs="{'required' : [('is_actual_result', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<field name="minimum_levy"/>
+												<field name="return_percentage"/>
+												<field name="dedection_percentage" invisible="1"/>
+												<field name="lme_price_discount"/>
+												<field name="buy_price_discount" invisible="1"/>
+												<field name="currency_id" invisible="1"/>
+												<field name="waste_nature"/>
+												<field name="project_id" invisible="1"/>
+											</group>
+											<group>
+												<field name="remaining_metal"/>
+												<field name="lbma_price" required="1"/>
+												<field name="price_date" required="1"/>
+												<field name="price_source" required="1"/>
+												<field name="price_per_gram"/>
+												<field name="price_per_gram"/>
+												<field name="offer_buying_price"/>
+												<field name="treatment_cost" attrs="{'required' : [('is_actual_result', '=', True)]}"/>
+												<field name="final_purchase_price"/>
+											</group>
+										</group>
+									</form>
+								</field>
+								<separator string="Copper Treatment Costs" attrs="{'invisible' : [('copper', '=', False)]}"/>
+								<field name="copper_cost_ids" attrs="{'invisible' : [('copper', '=', False)]}">
+									<tree>
+										<field name="analysis_for_certification"/>
+										<field name="reference_sample_analysis"/>
+										<field name="actual_result" />
+										<field name="buy_price_discount"/>
+										<field name="remaining_metal"/>
+										<field name="currency_id" invisible="1"/>
+										<field name="lbma_price" required="1"/>
+										<field name="offer_buying_price"/>
+										<field name="treatment_cost" />
+										<field name="final_purchase_price"/>
+										<field name="price_per_gram"/>
+										<field name="waste_nature"/>
+									</tree>
+									<form>
+										<group>
+											<field name="sample_ct_id" placeholder="Recipient Container" options="{'no_create_edit': True}"/>
+											<group>
+												<label for="analysis_for_certification"/>
+												<div class="o_row">
+													<field name="analysis_for_certification"/>
+													<field name="is_analysis_for_certification" invisible="1"/>
+													<field name="refining_sample_id" attrs="{'required' : [('is_analysis_for_certification', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="reference_sample_analysis"/>
+												<div class="o_row">
+													<field name="reference_sample_analysis"/>
+													<field name="is_reference_sample_analysis" invisible="1"/>
+													<field name="refining_sample_id_2" attrs="{'required' : [('is_reference_sample_analysis', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="actual_result"/>
+												<div class="o_row">
+													<field name="actual_result"/>
+													<field name="is_actual_result" invisible="1"/>
+													<field name="refining_sample_id_3" attrs="{'required' : [('is_actual_result', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<field name="minimum_levy"/>
+												<field name="return_percentage"/>
+												<field name="dedection_percentage" invisible="1"/>
+												<field name="lme_price_discount"/>
+												<field name="buy_price_discount" invisible="1"/>
+												<field name="currency_id" invisible="1"/>
+												<field name="waste_nature"/>
+												<field name="project_id" invisible="1"/>
+											</group>
+											<group>
+												<field name="remaining_metal"/>
+												<field name="lbma_price" required="1"/>
+												<field name="price_date" required="1"/>
+												<field name="price_source" required="1"/>
+												<field name="price_per_gram"/>
+												<field name="price_per_gram"/>
+												<field name="offer_buying_price"/>
+												<field name="treatment_cost" attrs="{'required' : [('is_actual_result', '=', True)]}"/>
+												<field name="final_purchase_price"/>
+											</group>
+										</group>
+									</form>
+								</field>
+
+								<separator string="Rhodium Treatment Costs" attrs="{'invisible' : [('rhodium', '=', False)]}"/>
+								<field name="rhodium_cost_ids" attrs="{'invisible' : [('rhodium', '=', False)]}">
+									<tree>
+										<field name="analysis_for_certification"/>
+										<field name="reference_sample_analysis"/>
+										<field name="actual_result" />
+										<field name="minimum_levy"/>
+										<field name="buy_price_discount"/>
+										<field name="remaining_metal"/>
+										<field name="currency_id" invisible="1"/>
+										<field name="lbma_price" required="1"/>
+										<field name="offer_buying_price"/>
+										<field name="treatment_cost" />
+										<field name="final_purchase_price"/>
+										<field name="price_per_gram"/>
+										<field name="waste_nature"/>
+									</tree>
+									<form>
+										<group>
+											<field name="sample_ct_id" placeholder="Recipient Container" options="{'no_create_edit': True}"/>
+											<group>
+												<label for="analysis_for_certification"/>
+												<div class="o_row">
+													<field name="analysis_for_certification"/>
+													<field name="is_analysis_for_certification" invisible="1"/>
+													<field name="refining_sample_id" attrs="{'required' : [('is_analysis_for_certification', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="reference_sample_analysis"/>
+												<div class="o_row">
+													<field name="reference_sample_analysis"/>
+													<field name="is_reference_sample_analysis" invisible="1"/>
+													<field name="refining_sample_id_2" attrs="{'required' : [('is_reference_sample_analysis', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="actual_result"/>
+												<div class="o_row">
+													<field name="actual_result" />
+													<field name="is_actual_result" invisible="1"/>
+													<field name="refining_sample_id_3" attrs="{'required' : [('is_actual_result', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<field name="return_percentage"/>
+												<field name="dedection_percentage" invisible="1"/>
+												<field name="lme_price_discount"/>
+												<field name="buy_price_discount" invisible="1"/>
+												<field name="currency_id" invisible="1"/>
+												<field name="waste_nature"/>
+												<field name="project_id" invisible="1"/>
+											</group>
+											<group>
+												<field name="remaining_metal"/>
+												<field name="lbma_price" required="1"/>
+												<field name="price_date" required="1"/>
+												<field name="price_source" required="1"/>
+												<field name="price_per_gram"/>
+												<field name="price_per_gram"/>
+												<field name="offer_buying_price"/>
+												<field name="treatment_cost" attrs="{'required' : [('is_actual_result', '=', True)]}"/>
+												<field name="final_purchase_price"/>
+											</group>
+										</group>
+									</form>
+								</field>
+
+								<separator string="Ruthenium Treatment Costs" attrs="{'invisible' : [('ruthenium', '=', False)]}"/>
+								<field name="ruthenium_cost_ids" attrs="{'invisible' : [('ruthenium', '=', False)]}">
+									<tree>
+										<field name="analysis_for_certification"/>
+										<field name="reference_sample_analysis"/>
+										<field name="actual_result" />
+										<field name="buy_price_discount"/>
+										<field name="remaining_metal"/>
+										<field name="currency_id" invisible="1"/>
+										<field name="lbma_price" required="1"/>
+										<field name="offer_buying_price"/>
+										<field name="treatment_cost" />
+										<field name="final_purchase_price"/>
+										<field name="price_per_gram"/>
+										<field name="waste_nature"/>
+									</tree>
+									<form>
+										<group>
+											<field name="sample_ct_id" placeholder="Recipient Container" options="{'no_create_edit': True}"/>
+											<group>
+												<label for="analysis_for_certification"/>
+												<div class="o_row">
+													<field name="analysis_for_certification"/>
+													<field name="is_analysis_for_certification" invisible="1"/>
+													<field name="refining_sample_id" attrs="{'required' : [('is_analysis_for_certification', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="reference_sample_analysis"/>
+												<div class="o_row">
+													<field name="reference_sample_analysis"/>
+													<field name="is_reference_sample_analysis" invisible="1"/>
+													<field name="refining_sample_id_2" attrs="{'required' : [('is_reference_sample_analysis', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="actual_result"/>
+												<div class="o_row">
+													<field name="actual_result" />
+													<field name="is_actual_result" invisible="1"/>
+													<field name="refining_sample_id_3" attrs="{'required' : [('is_actual_result', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<field name="minimum_levy"/>
+												<field name="return_percentage"/>
+												<field name="dedection_percentage" invisible="1"/>
+												<field name="lme_price_discount"/>
+												<field name="buy_price_discount" invisible="1"/>
+												<field name="currency_id" invisible="1"/>
+												<field name="waste_nature"/>
+												<field name="project_id" invisible="1"/>
+											</group>
+											<group>
+												<field name="remaining_metal"/>
+												<field name="lbma_price" required="1"/>
+												<field name="price_date" required="1"/>
+												<field name="price_source" required="1"/>
+												<field name="price_per_gram"/>
+												<field name="price_per_gram"/>
+												<field name="offer_buying_price"/>
+												<field name="treatment_cost" attrs="{'required' : [('is_actual_result', '=', True)]}"/>
+												<field name="final_purchase_price"/>
+											</group>
+										</group>
+									</form>
+								</field>
+
+								<separator string="Iridium Treatment Costs" attrs="{'invisible' : [('iridium', '=', False)]}"/>
+								<field name="iridium_cost_ids" attrs="{'invisible' : [('iridium', '=', False)]}">
+									<tree>
+										<field name="analysis_for_certification"/>
+										<field name="reference_sample_analysis"/>
+										<field name="actual_result"/>
+										<field name="buy_price_discount"/>
+										<field name="remaining_metal"/>
+										<field name="currency_id" invisible="1"/>
+										<field name="lbma_price" required="1"/>
+										<field name="offer_buying_price"/>
+										<field name="treatment_cost"/>
+										<field name="final_purchase_price"/>
+										<field name="price_per_gram"/>
+										<field name="waste_nature"/>
+									</tree>
+									<form>
+										<group>
+											<field name="sample_ct_id" placeholder="Recipient Container" options="{'no_create_edit': True}"/>
+											<group>
+												<label for="analysis_for_certification"/>
+												<div class="o_row">
+													<field name="analysis_for_certification"/>
+													<field name="is_analysis_for_certification" invisible="1"/>
+													<field name="refining_sample_id" attrs="{'required' : [('is_analysis_for_certification', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="reference_sample_analysis"/>
+												<div class="o_row">
+													<field name="reference_sample_analysis"/>
+													<field name="is_reference_sample_analysis" invisible="1"/>
+													<field name="refining_sample_id_2" attrs="{'required' : [('is_reference_sample_analysis', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<label for="actual_result"/>
+												<div class="o_row">
+													<field name="actual_result" />
+													<field name="is_actual_result" invisible="1"/>
+													<field name="refining_sample_id_3" attrs="{'required' : [('is_actual_result', '=', True)]}" placeholder='Refining Sample'/>
+												</div>
+												<field name="minimum_levy"/>
+												<field name="return_percentage"/>
+												<field name="dedection_percentage" invisible="1"/>
+												<field name="lme_price_discount"/>
+												<field name="buy_price_discount" invisible="1"/>
+												<field name="currency_id" invisible="1"/>
+												<field name="waste_nature"/>
+												<field name="project_id" invisible="1"/>
+											</group>
+											<group>
+												<field name="remaining_metal"/>
+												<field name="lbma_price" required="1"/>
+												<field name="price_date" required="1"/>
+												<field name="price_source" required="1"/>
+												<field name="price_per_gram"/>
+												<field name="price_per_gram"/>
+												<field name="offer_buying_price"/>
+												<field name="treatment_cost" attrs="{'required' : [('is_actual_result', '=', True)]}"/>
+												<field name="final_purchase_price"/>
+											</group>
+										</group>
+									</form>
+								</field>
+
+							</page>
+							<page string="Additional Purchases">
+								<field name="purchase_ids" context="{'default_project_entry_id_int': id,'default_client_id_int':partner_id}">
+									<tree editable="bottom">
+										<field name="purchase_id" context="{'default_is_internal_purchase': True,'default_project_entry_id':project_entry_id_int,'default_partner_id':client_id_int}"/>
+										<field name="untaxed_amount" sum="Untaxed Amount"/>
+										<field name="amount" sum="Total"/>
+										<field name="description"/>
+										<field name="project_entry_id_int" invisible="1"/>
+										<field name="client_id_int" invisible="1"/>
+									</tree>
+									<form>
+										<group>
+											<field name="purchase_id"/>
+											<field name="untaxed_amount" />
+											<field name="amount"/>
+											<field name="description"/>
+										</group>
+									</form>
+								</field>
+							</page>
+							<page string="Credit Note">
+								<field name="account_ids" context="{'default_project_entry_id_int': id,'default_client_id_int':partner_id}">
+									<tree editable="bottom">
+										<field name="account_id" context="{'default_is_internal_purchase': True,'default_project_entry_id':project_entry_id_int,'default_partner_id':client_id_int}"/>
+										<field name="untaxed_amount" sum="Untaxed Amount"/>
+										<field name="amount" sum="Total"/>
+										<field name="amount_residual"/>
+										<field name="description"/>
+										<field name="project_entry_id_int" invisible="1"/>
+										<field name="client_id_int" invisible="1"/>
+									</tree>
+									<form>
+										<group>
+											<field name="account_id"/>
+											<field name="untaxed_amount" />
+											<field name="amount"/>
+											<field name="amount_residual"/>
+											<field name="description"/>
+										</group>
+									</form>
+								</field>
+							</page>
+							<page string="Advance Payments">
+								<field name="account_payment_ids" nolabel="1" colspan="4"
+									   context="{'form_view_ref': 'account.view_account_payment_form','tree_view_ref': 'account.view_account_supplier_payment_tree'}"/>
+							</page>
+							<page string="Additional Information">
+								<separator string="Notes"/>
+								<field name="notes"/>
+							</page>
+							<page string="Documents">
+								<field name="document_ids">
+									<tree editable="bottom">
+										<field name="name" required="1"/>
+										<field name="file_char" invisible="1"/>
+										<field name="project_doc" widget="binary" filename="file_char" required="1"/>
+									</tree>
+									<form>
+										<group>
+											<field name="name"/>
+											<field name="file_char" invisible="1"/>
+											<field name="project_doc" widget="binary" filename="file_char"/>
+										</group>
+									</form>
+								</field>
+							</page>
+							<page string="Container Details" attrs="{'invisible' : [('send_containers', '=', False)]}">
+								<field name="project_container_ids">
+									<tree editable="bottom">
+										<field name="product_id" required="1"/>
+										<field name="quantity" required="1"/>
+									</tree>
+								</field>
+							</page>
+						</notebook>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="view_excel_report" model="ir.ui.view">
+			<field name="name">Fraction Sort Report</field>
+			<field name="model">fraction.sort.report</field>
+			<field name="arch" type="xml">
+				<form string="Fraction Sort Report">
+					<group>
+						<field name="fraction_xml" readonly="1" filename="fraction_char"/>
+						<field name="fraction_char" invisible="1"/>
+					</group>
+					<footer>
+						<button name="cancel" string="Close" special="cancel"
+								class="oe_link"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="view_fixed_pruchase_excel_report" model="ir.ui.view">
+			<field name="name">Fixed Purchase Report</field>
+			<field name="model">fixed.purchase.report</field>
+			<field name="arch" type="xml">
+				<form string="Fixed Purchase Report">
+					<group>
+						<field name="fixed_purchase_report_xml" readonly="1" filename="fixed_purchase_report_char"/>
+						<field name="fixed_purchase_report_char" invisible="1"/>
+					</group>
+					<footer>
+						<button name="cancel" string="Close" special="cancel"
+								class="oe_link"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="view_mask_po_excel_report" model="ir.ui.view">
+			<field name="name">Mask PO Report</field>
+			<field name="model">mask.po.report</field>
+			<field name="arch" type="xml">
+				<form string="Mask PO Report">
+					<group>
+						<field name="file_data" readonly="1" filename="file_name"/>
+						<field name="file_name" invisible="1"/>
+					</group>
+					<footer>
+						<button name="cancel" string="Close" special="cancel"
+								class="oe_link"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+
+
+		<record id="project_entries_tree_view" model="ir.ui.view">
+			<field name="name">project.entries.tree</field>
+			<field name="model">project.entries</field>
+			<field name="arch" type="xml">
+				<tree string="Project Entries">
+					<field name='name'/>
+					<field name='origin'/>
+					<field name='partner_id'/>
+					<field name='partner_ref'/>
+					<field name='user_id'/>
+					<field name="analytic_account_id"/>
+					<field name='project_origin'/>
+					<field name='target_price' sum="Target Buying Price"/>
+					<field name='conditional_offer'/>
+					<field name='status'/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="project_entries_filters" model="ir.ui.view">
+			<field name="name">project.entries.search</field>
+			<field name="model">project.entries</field>
+			<field name="arch" type="xml">
+				<search string="Project Entries">
+					<field name="name" string="Sequence"/>
+					<field name="origin" string="Purchase Order"/>
+					<field name="partner_id" string="Partner"/>
+					<field name='user_id' string="Project Sales Manager"/>
+					<field name='project_type' string="Project Type"/>
+					<separator/>
+					<group expand="1" string="Group By">
+						<filter string="Sequence" name="group_by_name" domain="[]" context="{'group_by':'name'}"/>
+						<filter string="Purchase Order" name="group_purchase_order" domain="[]" context="{'group_by':'origin'}"/>
+						<filter string="Partner" name="partner_id" domain="[]" context="{'group_by':'partner_id'}"/>
+						<filter string="Project Sales Manager" name="user_id" domain="[]" context="{'group_by':'user_id'}"/>
+						<filter string="Project Type" name="project_type" domain="[]" context="{'group_by':'project_type'}"/>
+						<filter string="Status" name="status" domain="[]" context="{'group_by':'status'}"/>
+					</group>
+					<separator/>
+					<filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+				</search>
+			</field>
+		</record>
+
+		<record id="project_entries_kanban_view" model="ir.ui.view">
+			<field name="name">project.entries.kanban</field>
+			<field name="model">project.entries</field>
+			<field name="arch" type="xml">
+				<kanban default_group_by="status" class="o_kanban_mobile" disable_drag_drop_record='true' quick_create="false">
+					<field name="name"/>
+					<field name="origin"/>
+					<field name="partner_id"/>
+					<field name="user_id"/>
+					<field name="project_origin"/>
+					<field name="quoted_price"/>
+					<field name="target_price"/>
+					<templates>
+						<t t-name="kanban-box">
+							<div t-attf-class="oe_kanban_card oe_kanban_global_click">
+								<div class="o_kanban_record_top mb16">
+									<div class="o_kanban_record_headings mt4">
+										<strong class="o_kanban_record_title">
+											<span>
+												<field name="name"/>
+											</span>
+										</strong>
+									</div>
+								</div>
+								<div>
+									<div>
+										<span class="o_kanban_record_subtitle">
+											<b>Customer:</b>
+											<field name="partner_id"/>
+										</span>
+										<span class="o_kanban_record_subtitle">
+											<b>Purchase Order:</b>
+											<field name="origin"/>
+										</span>
+										<span class="o_kanban_record_subtitle">
+											<b>Origin:</b>
+											<field name="project_origin"/>
+										</span>
+									</div>
+								</div>
+								<div class="o_kanban_record_bottom">
+									<div class="oe_kanban_bottom_left">
+									</div>
+									<div class="oe_kanban_bottom_right">
+										<field name="status" widget="label_selection"/>
+									</div>
+								</div>
+							</div>
+						</t>
+					</templates>
+				</kanban>
+			</field>
+		</record>
+
+		<record id="action_project_entries_view" model="ir.actions.act_window">
+			<field name="name">Project Entries</field>
+			<field name="res_model">project.entries</field>
+			<field name="search_view_id" ref="project_entries_filters"/>
+			<field name="view_mode">kanban,tree,form</field>
+		</record>
+
+		<menuitem name="Affaire" id="menu_project_custom" groups='group_project_entries_user,group_project_entries_production_user' sequence="10" web_icon="ppts_project_entries,static/description/icon.png"/>
+
+		<menuitem name="Project Entry" id="menu_project_entry_custom" parent="menu_project_custom" action="action_project_entries_view" groups='group_project_entries_user' sequence="1"/>
+
+	</data>
+</odoo>		

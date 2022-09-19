@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="group_container_wizard_form" model="ir.ui.view">
+		<field name="name">group.container.wizard.form</field>
+		<field name="model">group.container.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Invoice Verified">
+				<group>
+					<group>
+						<field name="lorry_entry_weight" readonly="1"/>
+						<field name="lorry_exit_weight" readonly="1"/>
+						<field name="project" readonly="1"/>
+					</group>
+					<group>
+						<field name="container_weight"/>
+						<field name="grouped_containers_weight"/>
+						<field name="tare_weight" invisible="1"/>
+						<field name="picking_id" invisible="1"/>
+					</group>
+				</group>
+				<group>
+					<field name="container_ids" nolabel="1">
+						<tree editable="bottom" create="false">
+							<field name="name" options="{'no_create_edit': True}" string="Container ID"/>
+							<field name="main_product_id"/>
+						</tree>
+					</field>
+				</group>
+				<footer>
+					<button name="action_group_containers" string="Group Container" type="object" class="btn btn-sm btn-primary"/>
+					<button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="group_container_action" model="ir.actions.act_window">
+		<field name="name">Group Container</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">group.container.wizard</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="group_container_wizard_form"/>
+		<field name="target">new</field>
+	</record>
+</odoo>

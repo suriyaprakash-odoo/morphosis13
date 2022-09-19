@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="purchase_order_form_inherited_int_sales" model="ir.ui.view">
+		<field name="name">purchase.order.form</field>
+		<field name="model">purchase.order</field>
+		<field name="inherit_id" ref="ppts_project_entries.purchase_order_form_inherited"/>
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='update_po_price']" position="attributes">
+				<attribute name="attrs">{'invisible':['|',('is_internal_purchase','!=',False),('state' , 'not in' , 'purchase')]}</attribute>
+			</xpath>
+
+		</field>
+	</record>
+</odoo>

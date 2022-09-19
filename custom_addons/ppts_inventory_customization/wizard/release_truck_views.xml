@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_release_containers" model="ir.ui.view">
+        <field name="name">release.container.view.form</field>
+        <field name="model">release.container</field>
+        <field name="arch" type="xml">
+            <form string="Release Truck">
+            	<sheet>
+					<group>
+						<group>
+							<field name="weight_at_entry" style="pointer-events: none;"/>
+							<field name="weight_at_exit" required="1" />
+						</group>
+						<group>
+							<field name="exit_date_time" required="1" />
+							<button name="print_bsd_report" string="Print BSD" type="object" attrs="{'invisible':[('bsd_annexe','in',('annexe7',''))]}" class="btn-primary"/>
+							<button name="print_bsd_report" string="Print Annexe7" type="object" attrs="{'invisible':[('bsd_annexe','in',('bsd',''))]}" class="btn-primary"/>
+							<field name="bsd_annexe" invisible="1"/>
+						</group>
+					</group>
+				</sheet>
+                <footer>
+                    <button name="release_container" string="Release Truck" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_release_containers" model="ir.actions.act_window">
+		<field name="name">Release Truck</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">release.container</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_release_containers" />
+		<field name="target">new</field>
+	</record>
+
+</odoo>

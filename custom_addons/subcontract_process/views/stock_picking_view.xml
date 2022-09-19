@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="stock_pick_form_inherit" model="ir.ui.view">
+		<field name="name">stock_pick.form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form"/>
+		<field name="priority" eval="4"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='scheduled_date']" position="before">
+				<field name="sub_contract_order"/>
+				<field name="sub_type" invisible="1"/>
+			</xpath>
+		</field>
+	</record>
+
+
+	<!--<record id="stock_picking_form_inherited_inventory_subcontract_sale" model="ir.ui.view">
+		<field name="name">stock.picking.form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="inter_company_sales.stock_picking_form_inherited_inventory_int_sale"/>
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='%(ppts_inventory_customization.action_update_transport_details)d']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|', ('state', 'not in', ('assigned'))
+						, '|', ('logistics_updated', '!=', False)
+						, '|', ('is_internal_purchase', '!=', False),
+								   '|', ('is_registered_package', '!=', False),
+								   '|', ('internal_sales', '=', True),
+								   '|', ('sub_contract', '=', True)]}
+				</attribute>
+			</xpath>
+
+			<xpath expr="//button[@name='%(ppts_inventory_customization.action_load_container)d']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|', '|', '|', '|', ('internal_sales', '=', True),
+								   ('state', 'in', ('draft', 'confirmed', 'partially_available', 'done', 'cancel')),
+								   ('picking_type_code', '!=', 'outgoing'),
+								   ('sub_contract', '=', True)]}
+				</attribute>
+			</xpath>
+
+			<xpath expr="//button[@name='%(ppts_inventory_customization.action_update_initial_demand_warnig_form)d']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|', '|', '|', '|', ('internal_sales', '=', True),
+								   ('state', 'in', ('draft', 'confirmed', 'partially_available', 'done', 'cancel')),
+								   ('picking_type_code', '!=', 'outgoing'),
+								   ('sub_contract', '=', True)]}
+				</attribute>
+			</xpath>
+
+			<xpath expr="//page[5]" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|', ('internal_sales', '=', True),
+								   ('sub_contract', '=', True)]}
+				</attribute>
+			</xpath>
+
+			<xpath expr="//group[@style='border: 2px solid #1d8e10;; background: #fcfcfc; box-shadow: 1px 1px 5px 1px #acada9;']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|', ('internal_sales', '=', True), ('sub_contract', '=', True)]}
+				</attribute>
+			</xpath>
+
+
+			<xpath expr="//group[@style='border: 2px solid #1d8e10;; background: #fcfcfc; box-shadow: 1px 1px 5px 1px #acada9;'][2]" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|', ('internal_sales', '=', True), ('sub_contract', '=', True)]}
+				</attribute>
+			</xpath>
+
+			<xpath expr="//label[@for='total_time']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|', ('internal_sales', '=', True), ('sub_contract', '=', True)]}
+				</attribute>
+			</xpath>
+			<xpath expr="//field[@name='total_time']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|',('internal_sales', '=', True), ('sub_contract', '=', True)]}
+				</attribute>
+			</xpath>
+			<xpath expr="//button[@name='update_picking_time']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|', ('internal_sales', '=', True), ('sub_contract', '=', True)]}
+				</attribute>
+			</xpath>
+
+		</field>
+	</record>-->
+
+	<!--<record id="stock_picking_form_inherited_inventory_subcontract" model="ir.ui.view">
+		<field name="name">stock.picking.form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="ppts_inventory_customization.stock_picking_form_inherited_inventory"/>
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='%(ppts_inventory_customization.action_load_container)d']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|', ('check_update_container_outgoing_button', '=', False), ('sub_contract', '=', True)]}
+				</attribute>
+			</xpath>
+
+		</field>
+	</record>
+-->
+
+</odoo>

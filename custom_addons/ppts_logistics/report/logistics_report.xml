@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report 
+            string="BSD Report" 
+            id="report_bsd" 
+            model="logistics.management" 
+            report_type="qweb-pdf"
+            name="ppts_logistics.report_bsd_file" 
+            file="ppts_logistics.report_bsd_file"
+            print_report_name="'BSD Report'"
+        />
+
+        <report 
+            string="Annux7 Report" 
+            id="report_annux" 
+            model="logistics.management" 
+            report_type="qweb-pdf"
+            name="ppts_logistics.report_annux_file" 
+            file="ppts_logistics.report_annux_file"
+            print_report_name="'Annux7 Report'"
+        />
+
+        <report 
+            string="Order details Report" 
+            id="report_trasport_order" 
+            model="logistics.management" 
+            report_type="qweb-pdf"
+            name="ppts_logistics.report_trasport_rfq_new" 
+            file="ppts_logistics.report_trasport_rfq_new"
+            print_report_name="'Transport RFQ Report'"
+        />
+
+        <report 
+            string="Transport Purchase Order Details" 
+            id="report_transport_purchase_order" 
+            model="purchase.order" 
+            report_type="qweb-pdf"
+            name="ppts_logistics.report_transport_po" 
+            file="ppts_logistics.report_transport_po"
+            print_report_name="'Order Details'"
+        />
+
+    </data>
+</odoo>

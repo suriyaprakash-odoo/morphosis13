@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_company_form_inherit" model="ir.ui.view">
+		<field name="name">res.company.form</field>
+		<field name="model">res.company</field>
+		<field name="inherit_id" ref="base.view_company_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//group[@name='social_media']" position="after">
+				<group string="Hourly Rates" name="hourly_rates">
+					<field name="contract_rate"/>
+					<field name="ea_rate"/>
+					<field name="standard_rate"/>
+					<field name="standard_unloading_rate"/>
+					<field name="standard_reception_rate"/>
+					<field name="cross_dock_cost"/> 
+					<field name="vrac_cost"/>
+				</group>
+
+				<group string="Containers" name="container">
+					<field name="tolerance_percentage"/>
+				</group>
+	
+				<group name="sale_configurations" string="Sales">
+					<!-- <field name="margin_percentage"/> -->
+					<field name="sale_margin_a"/>
+					<field name="sale_margin_b"/>
+					<field name="sale_margin_c"/>
+				</group>
+				<group name="purchase_configuration" string="Purchase">
+					<field name="purchase_threshold_percentage"/>
+					<field name="purchase_limit"/>
+				</group>
+				<!-- <group name="refining_configuration" string="Refining">
+					<field name="dedection_percentage"/>
+					<field name="buy_price_discount"/>
+				</group> -->
+			</xpath>
+		</field>
+	</record>
+</odoo>

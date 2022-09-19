@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_client_metal_account,client_metal_account,client_metal_account.model_client_metal_account,client_metal_account.group_client_metal_account_manager,1,1,1,1
+access_metal_account_line,metal.account.line,client_metal_account.model_metal_account_line,client_metal_account.group_client_metal_account_manager,1,1,1,1
+access_mrp_production_metal,mrp.production,mrp.model_mrp_production,client_metal_account.group_client_metal_account_manager,1,1,1,0

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+      
+      <template id="report_trasport_rfq_document">
+            <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+                  <div>
+                        <h2 style="text-align:center">Commande de transport</h2>
+                        <div class="col-12" style="float:left">
+                              <p t-if="o.logistics_for == 'purchase'"><strong>Reference : <span t-field="o.origin.name"/></strong></p>
+                              <p t-if="o.logistics_for == 'sale'"><strong>Sale Order : <span t-field="o.sales_origin.name"/></strong></p>
+                        </div>
+                        <div class="col-12" style="float:left">
+                              <p><strong>Transport Details</strong></p>
+                              <div class="col-6" style="float:left;">
+                                    <p><strong>Pickup Address: </strong></p>
+                                    <p>
+                                          <span t-if="o.pickup_partner_id.company_type == 'company'">
+                                                <span t-field="o.pickup_partner_id.name"/>
+                                          </span>
+                                          <span t-if="o.pickup_partner_id.company_type == 'person'">
+                                                <span t-if="o.pickup_partner_id.parent_id">
+                                                      <span t-field="o.pickup_partner_id.parent_id.name"/>
+                                                </span>
+                                                <span t-else="">
+                                                      <span t-field="o.pickup_partner_id.name"/>
+                                                </span>
+                                          </span>
+                                    </p>
+                                    <p><span t-field="o.pickup_street"/> <span t-if="o.pickup_street2"><span t-field="o.pickup_street2"/></span> <span t-field="o.pickup_city"/></p>
+                                    <p><span t-field="o.pickup_state_id.name"/> - <span t-field="o.pickup_zip"/> <span t-field="o.pickup_countries_id.name"/></p>
+                                    <p t-if="o.pickup_partner_id.phone">Phone : <span t-field="o.pickup_partner_id.phone"/></p>
+                                    <p t-if="o.pickup_partner_id.mobile">Mobile : <span t-field="o.pickup_partner_id.mobile"/></p>
+                                    <p><strong>Contact : </strong><span t-field="o.pickup_partner_id.name"/></p>
+                                    <p t-if="o.opening_hours_start"><strong>Opening Hours : </strong><span t-field="o.opening_hours_start" /> - <span t-field="o.opening_hours_end" /></p>
+                              </div>
+                              <div class="col-6" style="float:left;">
+                                    <p><strong>Destination Address: </strong></p>
+                                    <p><span t-field="o.delivery_partner_id.name"/></p>
+                                    <p><span t-field="o.delivery_street"/> <span t-if="o.delivery_street2"><span t-field="o.delivery_street2"/></span> <span t-field="o.delivery_city"/></p>
+                                    <p><span t-field="o.delivery_state_id.name"/> - <span t-field="o.delivery_zip"/> <span t-field="o.delivery_countries_id.name"/></p>
+                                    <p t-if="o.delivery_partner_id.phone">Phone : <span t-field="o.delivery_partner_id.phone"/></p>
+                                    <p t-if="o.delivery_partner_id.mobile">Mobile : <span t-field="o.delivery_partner_id.mobile"/></p>
+                                    <p><strong>Contact : </strong>M.Vincent 0232727414, C.Boutin 0232727418</p>
+                                    <p><strong>Opening Hours : </strong>8h-16h30(8h-15h30 le vendredi)</p>
+                              </div>
+                        </div>
+                        <div class="col-12" style="float:left">
+                              <div class="col-6" style="float:left">
+                                    <!-- <p><strong>Pickup date: </strong></p>
+                                    <p><span t-field="o.pickup_date"/></p>                         -->
+                                    <t t-if="o.pickup_date_type=='specific'">
+                                          <p><strong>Date d’enlèvement souhaitée : </strong></p>
+                                          <p><span t-field="o.pickup_date"/></p>  
+                                    </t>
+                                    <t t-if="o.pickup_date_type=='between'">
+                                          <p><strong>Date d’enlèvement souhaitée : </strong></p>
+                                          <p><span t-field="o.pickup_earliest_date"/> - <span t-field="o.pickup_latest_date"/></p>  
+                                    </t>
+                              </div>
+                              <div class="col-6" style="float:left">
+                                    <!-- <p><strong>Expected delivery date: </strong></p>
+                                    <p><span t-field="o.expected_delivery"/></p> -->
+                                    
+                              </div>
+                        </div>
+                        <div class="col-12" style="float:left">
+                              <p><strong>Load Details</strong></p>
+                              <div class="col-6" style="float:left">
+                                    <p><strong>Material : </strong><t t-esc="o.material"/></p><!--DEEE-->
+                                    <t t-if="o.no_of_container and o.container_count=='specified'">
+                                          <p><strong>Number of containers : </strong><span t-field="o.no_of_container"/></p>
+                                    </t>
+                                    <p><strong>Linear Meter : </strong><span t-if="o.is_full_load != True"><span t-field="o.linear_meter"/></span><span t-if="o.is_full_load">N/A</span></p>
+
+                                    <p><strong>Désignation de la marchanidse : </strong><span t-field="o.waste_code"/></p>
+                              </div>
+                              <div class="col-6" style="float:left">
+                                    <p><strong>Weight of Load(Kg) : </strong><span t-field="o.gross_weight"/></p>
+                                    <p><strong>Full Load : </strong><span t-if="o.is_full_load">Yes</span><span t-if="o.is_full_load != True">No</span></p>
+                                    
+                              </div>
+                        </div>
+                        <div class="col-12" style="float:left">
+                              <p><strong>Lorry Details</strong></p>
+                              <div class="col-6" style="float:left">
+                                    <p><strong>Type of Lorry : </strong><span t-field="o.lorry_type"/></p>
+                              </div>
+                              <div class="col-6" style="float:left">
+                                    <p><strong>Tail Lift : </strong><span t-if="o.is_tail_lift">Yes</span><span t-if="o.is_tail_lift != True">No</span></p>
+                              </div>
+                        </div>
+                        <div class="col-12" style="float:left" t-if="o.transport_cost != 0">
+                              <p><strong>Price Details</strong></p>
+                              <div class="col-6" style="float:left">
+                                    <p><strong>Agreed Price : </strong><span t-field="o.transport_cost" /></p>
+                                     <p><strong>Prix convenu :</strong><t t-esc="o.transport_cost"/></p>                  
+                              
+                              </div>
+                        </div>
+                        <div class="col-12" style="float:left" t-if="o.notes">
+                             
+                              <p><strong>Additional Informations</strong></p>
+                              <p><span t-field="o.notes" /></p>
+                        </div>
+                        <br/>
+
+                        <!-- adr details added 19/12/2020 start-->
+
+                        <div class="col-12" style="float:left" t-if="o.is_adr">
+                              <p><strong>ADR Details</strong></p>
+                              <p>
+                                    <table class="table table-stripped" style="width:100% !important;">
+                                          <tr>
+                                                <td style="font-weight:bold !important;font-size:13px !important;border-bottom:solid black 1px !important;">
+                                                UN CODE
+                                                </td>
+                                                <td style="font-weight:bold !important;font-size:13px !important;border-bottom:solid black 1px !important;">
+                                                ADR CLASS
+                                                </td>
+                                                <td style="font-weight:bold !important;font-size:13px !important;border-bottom:solid black 1px !important;">
+                                                PACKAGE TYPE
+                                                </td>
+                                                <td style="font-weight:bold !important;font-size:13px !important;border-bottom:solid black 1px !important;">
+                                                HAZARD NUMBER
+                                                </td>
+                                                <td style="font-weight:bold !important;font-size:13px !important;border-bottom:solid black 1px !important;">
+                                                TUNNEL CODE
+                                                </td>
+                                          </tr>
+
+                                          <t t-foreach="o.adr_line" t-as="adr_obj">
+                                                <tr>
+                                                      <td style="width:37% !important;">
+                                                            <span t-field="adr_obj.un_code" />
+                                                      </td>
+                                                      <td style="width:15% !important;">
+                                                            <span t-field="adr_obj.adr_class_id.code" />
+                                                      </td>
+                                                      <td style="width:15% !important;">
+                                                            <span t-field="adr_obj.adr_pickup_type_id.code" />
+                                                      </td>
+                                                      <td style="width:18% !important;">
+                                                            <span t-field="adr_obj.hazard_type_id.code" />
+                                                      </td>
+                                                      <td style="width:15% !important;">
+                                                            <span t-field="adr_obj.tunnel_code_id.name" />
+                                                      </td>
+                                                </tr>
+                                          </t>
+                                    </table>
+                              </p>
+                        </div>
+                        <br/>
+                        <!-- adr details added 19/12/2020 end-->
+
+                        <!-- <p>***ATTENTION TRANSPORT SOUS ATTESTATION DE TRANSPORTS DE DECHETS DGX ET NON DGX***</p>
+                              <p>***LE CHAUFFEUR DOIT L’AVOIR IMPERATIVEMENT DANS SON CAMION***</p>
+                              <p>***REAFFRETEMENT INTERDIT***</p> -->
+
+                        <!-- <div t-if="o.term" class="col-12 text-center" style="float:left;color:red;">
+                              
+
+                              <p >
+                                    <span t-field="o.term"/>
+                              </p>
+                        </div> -->
+                  </div>
+            </t>            
+      </template>
+
+
+      <template id="report_trasport_rfq">
+          <t t-call="web.html_container">
+              <t t-foreach="docs" t-as="o">
+                  <t t-call="ppts_logistics.report_trasport_rfq_document" t-lang="o.partner_id.lang"/>
+              </t>
+          </t>
+      </template>
+
+</odoo>

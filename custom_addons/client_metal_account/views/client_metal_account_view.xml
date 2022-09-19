@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_client_metal_account_form" model="ir.ui.view">
+		<field name="name">client.metal.account.form</field>
+		<field name="model">client.metal.account</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<group>
+							<field name="partner_id" required="1"/>
+						</group>
+						<group></group>
+					</group>
+					<notebook>
+						<page string="Metal Details">
+							<field name="metal_line_ids">
+								<tree editable="bottom">
+									<field name="project_id"/>
+									<field name="product_id"/>
+									<field name="metal"/>
+									<field name="location_id"/>
+									<field name="lot_id"/>
+									<field name="quantity" sum="Quantity"/>
+									<field name="commission" invisible="1"/>
+								</tree>
+
+								<form>
+									<group>
+										<group>
+											<field name="project_id"/>
+											<field name="product_id"/>
+											<field name="metal"/>
+										</group>
+										<group>
+											<field name="quantity"/>
+											<field name="lot_id"/>
+											<field name="location_id"/>
+										</group>
+									</group>
+								</form>
+							</field>
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_client_metal_account_tree" model="ir.ui.view">
+		<field name="name">client.metal.account.tree</field>
+		<field name="model">client.metal.account</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="partner_id"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_client_metal_account" model="ir.actions.act_window">
+		<field name="name">Client Metal Account</field>
+		<field name="res_model">client.metal.account</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="o_view_nocontent_smiling_face">
+				Create a new record
+			</p>
+		</field>
+	</record>
+
+	<menuitem name="Client Metal Account" id="menu_client_metal_account" parent="ppts_project_entries.menu_project_custom" action="action_client_metal_account" groups="group_client_metal_account_manager" sequence="08"/>
+
+
+	<record id="client_metal_acc_wizard" model="ir.ui.view">
+		<field name="name">Client Metal Account</field>
+		<field name="model">metal.acc.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Metal Account">
+				<group>
+					<group>
+						<field name="project_id"/>
+					</group>
+					<group>
+						<field name="partner_id"/>
+					</group>
+				</group>
+				<notebook>
+					<page string="Refining">
+						<field name="metal_wizard_line">
+							<tree editable="bottom">
+								<field name="project_id" invisible="1"/>
+								<field name="partner_id" invisible="1"/>
+								<field name="product_id" required="1"/>
+								<field name="metal" required="1"/>
+								<field name="actual_result" required="1"/>
+								<field name="to_client" required="1"/>
+								<field name="location_id" required="1"/>
+								<field name="commission" invisible="1"/>
+								<field name="company_id" invisible="1"/>
+								<field name="lot_id" required="1" context="{'default_company_id': company_id, 'default_product_id': product_id}"/>
+							</tree>
+						</field>
+					</page>
+				</notebook>
+				<footer>
+					<button name="credit_to_client_account" string="Credit to Client" type="object" class="btn-primary"/>
+					<button name="cancel" string="Close" special="cancel" class="oe_link"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="view_stock_move_raw_tree_inherit" model="ir.ui.view">
+		<field name="name">stock.move.raw.tree</field>
+		<field name="model">stock.move</field>
+		<field name="inherit_id" ref="mrp.view_stock_move_raw_tree"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='location_id']" position="attributes">
+				<attribute name="invisible">0</attribute>
+			</xpath>
+			<!--<xpath expr="//field[@name='location_dest_id']" position="attributes">
+				<attribute name="invisible">0</attribute>
+			</xpath>-->
+		</field>
+	</record>
+
+	<record id="view_stock_move_lots_inherited" model="ir.ui.view">
+		<field name="name">stock.move.lots.form</field>
+		<field name="model">stock.move</field>
+		<field name="inherit_id" ref="mrp.view_stock_move_lots"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='location_id']" position="attributes">
+				<attribute name="invisible">0</attribute>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

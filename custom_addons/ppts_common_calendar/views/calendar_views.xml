@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<record id="view_calendar_event_form_inherited" model="ir.ui.view">
+		<field name="name">calendar.event.form</field>
+		<field name="model">calendar.event</field>
+		<field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+		<field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+			<xpath expr="//field[@name='name']" position="after">
+				<field name="updated_name" string="Name"/>
+				<field name="name_ref" string="ref" invisible="1"/>
+				<field name="logistics_calendar" invisible="1"/>
+				<field name="production_calendar" invisible="1"/>
+			</xpath>
+			<xpath expr="//notebook/page[@name='page_details']/group[2]/group[2]" position="after">
+				<group name="logistcs_details" string="Logistics Details" attrs="{'invisible': [('logistics_calendar', '=', False)]}">
+					<field name="logistics_id" readonly='1' />
+					<field name="logistics_partner_id" readonly='1' />
+					<field name="logistics_pickup_partner_id" readonly='1' />
+					<field name="logistics_delivery_partner_id" readonly='1' />
+					<field name="pickup_state_id" readonly='1' />
+					<field name="delivery_state_id" readonly='1' />
+					<field name='gross_weight' readonly='1' />
+					<field name="pickup_date_type" readonly='1' />
+					<field name='pickup_date' attrs="{
+						'invisible': [('pickup_date_type', 'not in', ['specific'])]
+						}" readonly='1' />
+					<field name='pickup_earliest_date' attrs="{
+						'invisible': [('pickup_date_type', 'not in', ['between'])]
+						}" readonly='1' />
+					<field name='pickup_latest_date' attrs="{
+						'invisible': [('pickup_date_type', 'not in', ['between'])]
+						}" readonly='1' />
+					<field name="expected_delivery" readonly='1' />
+				</group>
+				<group name="container_details" string="Container Details" attrs="{'invisible': [('production_calendar', '=', False)]}">
+					<field name="container_id" readonly='1' />
+					<field name="project_id" readonly='1' />
+					<field name="main_product_id" readonly='1' />
+					<field name="sub_product_id" readonly='1' />
+					<field name="action_type" readonly='1' />
+					<field name="external_action_type" readonly='1' />
+                    <field name="operator_ids" widget="many2many_tags" readonly='1' />
+					<!--<field name="supervisor_id" readonly='1' />-->
+					<!--<field name="worker_ids" widget="many2many_tags" readonly='1' />-->
+					<field name="status" readonly='1' />					
+				</group>
+			</xpath>
+		</field>
+	</record>
+    <record id="view_calendar_event_tree_inherited" model="ir.ui.view">
+        <field name="name">calendar.event.tree</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="updated_name" required="1" string="Subject"/>
+                <field name="name_ref" string="ref" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+	<record id="view_calendar_event_calendar_inherited" model="ir.ui.view">
+		<field name="name">calendar.event.calendar</field>
+		<field name="model">calendar.event</field>
+		<field name="inherit_id" ref="calendar.view_calendar_event_calendar"/>
+		<field name="arch" type="xml">
+			<xpath expr="//calendar" position="inside">
+				<field name="logistics_id" class="transport_request" />
+				<field name="logistics_partner_id" class="logistics_partner_id" />
+				<field name="logistics_pickup_partner_id" class="logistics_pickup_partner_id" />
+				<field name="pickup_state_id" class="pickup_state_id" />
+				<field name="pickup_date" class="pickup_date" />
+				<field name="logistics_delivery_partner_id" class="logistics_delivery_partner_id" />
+				<field name="delivery_state_id" class="delivery_state_id" />
+				<field name="expected_delivery" class="expected_delivery" />
+				<field name='gross_weight' class="gross_weight" />
+				<field name="container_id" class="container_id" />
+				<field name="project_id" class="project_id" />
+				<field name="main_product_id" class="main_product_id" />
+				<field name="sub_product_id" class="sub_product_id" />
+				<field name="action_type" class="action_type" />
+				<field name="external_action_type" class="external_action_type" />
+				<!--<field name="supervisor_id" class="supervisor_id" />-->
+				<!--<field name="worker_ids" widget="many2many_tags_avatar" class="worker_ids" />-->
+				<field name="status" class="status" />
+			</xpath>
+		</field>
+	</record>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="project_entries_form_view_inherited_new" model="ir.ui.view">
+		<field name="name">project.entries.form</field>
+		<field name="model">project.entries</field>
+		<field name="inherit_id" ref="ppts_project_entries.project_entries_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//page[@name='refining']/separator[2]" position="after">
+				<button name="validate_refining" type="object" string="Validate Refining" class="oe_highlight"/>
+				<separator/>
+				<field name="metal_account_id" invisible="1"/>
+			</xpath>
+
+			<xpath expr="//page[@name='refining']/separator[1]" position="before">
+				<div class="oe_button_box" name="button_box">
+					<button name="open_client_metal_acc" string="Client Metal Account" class="oe_stat_button" icon="fa-diamond" type="object"
+							attrs="{'invisible':[('metal_account_id', '=', False)]}" style="margin-top: -18px;"/>
+				</div>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

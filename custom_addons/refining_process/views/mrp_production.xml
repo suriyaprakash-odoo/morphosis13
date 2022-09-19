@@ -1,0 +1,488 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="mrp_production_form_view_inherit_refining" model="ir.ui.view">
+		<field name="name">mrp.production.form</field>
+		<field name="model">mrp.production</field>
+		<field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='company_id']" position="after">
+				<field name="project_id" attrs="{'invisible':[('project_id' , '=' , False)]}"/>
+				<field name="container_id" attrs="{'invisible':[('container_id' , '=' , False)]}"/>
+				<field name="currency_id" invisible="1"/>
+				<field name="is_refining" invisible="1"/>
+			</xpath>
+			<!--<xpath expr="//button[@name='button_scrap']" position="after">
+				<button name="get_report_values" type="object" string="Cost Analysis"/>
+			</xpath>-->
+
+			<xpath expr="//page[last()]" position="after">
+				<page string="Refining Results" name="refining" attrs="{'invisible':[('is_refining' , '=' , False)]}">
+					<separator string="Treatment Results"/>
+					<span style="font-weight: bold;">Silver
+						<field name="silver" style="margin-left: 6px;margin-right: 20px;"/>
+					</span>
+					<span style="font-weight: bold;">Gold
+						<field name="gold" style="margin-left: 6px;margin-right: 20px;"/>
+					</span>
+					<span style="font-weight: bold;">Palladium
+						<field name="palladium" style="margin-left: 6px;margin-right: 20px;"/>
+					</span>
+					<span style="font-weight: bold;">Platinum
+						<field name="platinum" style="margin-left: 6px;margin-right: 20px;"/>
+					</span>
+					<span style="font-weight: bold;">Copper
+						<field name="copper" style="margin-left: 6px;margin-right: 20px;"/>
+					</span>
+					<span style="font-weight: bold;">Rhodium
+						<field name="rhodium" style="margin-left: 6px;margin-right: 20px;"/>
+					</span>
+					<span style="font-weight: bold;">Ruthenium
+						<field name="ruthenium" style="margin-left: 6px;margin-right: 20px;"/>
+					</span>
+					<span style="font-weight: bold;">Iridium
+						<field name="iridium" style="margin-left: 6px;margin-right: 20px;"/>
+					</span>
+					<separator/>
+					<separator string="Silver Treatment" attrs="{'invisible' : [('silver', '=', False)]}"/>
+					<field name="silver_cost_ids" attrs="{'invisible' : [('silver', '=', False)]}" context="{'default_silver_cost_id': project_id,'default_sample_ct_id': container_id}">
+						<tree>
+							<field name="analysis_for_certification"/>
+							<field name="reference_sample_analysis"/>
+							<field name="actual_result" required="1"/>
+							<field name="dedection_percentage" invisible="1"/>
+							<field name="buy_price_discount"/>
+							<field name="remaining_metal"/>
+							<field name="currency_id" invisible="1"/>
+							<field name="lbma_price" required="1"/>
+							<field name="offer_buying_price"/>
+							<field name="treatment_cost" required="1"/>
+							<field name="final_purchase_price"/>
+							<field name="price_per_gram"/>
+							<field name="waste_nature"/>
+						</tree>
+						<form>
+							<group>
+								<group>
+									<field name="analysis_for_certification"/>
+									<label for="reference_sample_analysis"/>
+									<div class="o_row">
+										<field name="reference_sample_analysis" required="1"/>
+										<field name="sample_ct_id" placeholder="Container" required="1" domain="[('project_id','=', silver_cost_id)]" options="{'no_create_edit': True}"/>
+									</div>
+									<field name="actual_result" required="1"/>
+									<field name="minimum_levy"/>
+									<field name="return_percentage"/>
+									<field name="dedection_percentage" invisible="1"/>
+									<field name="lme_price_discount"/>
+									<field name="buy_price_discount" invisible="1"/>
+									<field name="currency_id" invisible="1"/>
+									<field name="waste_nature"/>
+									<field name="project_id" invisible="1"/>
+								</group>
+								<group>
+									<field name="remaining_metal"/>
+									<field name="lbma_price" required="1"/>
+									<field name="price_date" required="1"/>
+									<field name="price_source" required="1"/>
+									<field name="price_per_gram"/>
+									<field name="offer_buying_price"/>
+									<field name="treatment_cost" required="1"/>
+									<field name="final_purchase_price"/>
+									<field name="silver_cost_id" invisible="1"/>
+								</group>
+							</group>
+						</form>
+					</field>
+					<separator string="Gold Treatment" attrs="{'invisible' : [('gold', '=', False)]}"/>
+					<field name="gold_cost_ids" attrs="{'invisible' : [('gold', '=', False)]}" context="{'default_gold_cost_id': project_id,'default_sample_ct_id': container_id}">
+						<tree>
+							<field name="analysis_for_certification"/>
+							<field name="reference_sample_analysis"/>
+							<field name="actual_result" required="1"/>
+							<field name="buy_price_discount"/>
+							<field name="remaining_metal"/>
+							<field name="currency_id" invisible="1"/>
+							<field name="lbma_price" required="1"/>
+							<field name="offer_buying_price"/>
+							<field name="treatment_cost" required="1"/>
+							<field name="final_purchase_price"/>
+							<field name="price_per_gram"/>
+							<field name="waste_nature"/>
+						</tree>
+						<form>
+							<group>
+								<group>
+									<field name="analysis_for_certification"/>
+									<label for="reference_sample_analysis"/>
+									<div class="o_row">
+										<field name="reference_sample_analysis" required="1"/>
+										<field name="sample_ct_id" required="1" placeholder="Container" domain="[('project_id','=', gold_cost_id)]" options="{'no_create_edit': True}"/>
+									</div>
+									<field name="actual_result" required="1"/>
+									<field name="minimum_levy"/>
+									<field name="return_percentage"/>
+									<field name="dedection_percentage" invisible="1"/>
+									<field name="lme_price_discount"/>
+									<field name="buy_price_discount" invisible="1"/>
+									<field name="currency_id" invisible="1"/>
+									<field name="waste_nature"/>
+									<field name="project_id" invisible="1"/>
+								</group>
+								<group>
+									<field name="remaining_metal"/>
+									<field name="lbma_price" required="1"/>
+									<field name="price_date" required="1"/>
+									<field name="price_source" required="1"/>
+									<field name="price_per_gram"/>
+									<field name="price_per_gram"/>
+									<field name="offer_buying_price"/>
+									<field name="treatment_cost" required="1"/>
+									<field name="final_purchase_price"/>
+									<field name="gold_cost_id" invisible="1"/>
+								</group>
+							</group>
+						</form>
+					</field>
+					<separator string="Palladium Treatment" attrs="{'invisible' : [('palladium', '=', False)]}"/>
+					<field name="palladium_cost_ids" attrs="{'invisible' : [('palladium', '=', False)]}" context="{'default_palladium_cost_id': project_id,'default_sample_ct_id': container_id}">
+						<tree>
+							<field name="analysis_for_certification"/>
+							<field name="reference_sample_analysis"/>
+							<field name="actual_result" required="1"/>
+							<field name="buy_price_discount"/>
+							<field name="remaining_metal"/>
+							<field name="currency_id" invisible="1"/>
+							<field name="lbma_price" required="1"/>
+							<field name="offer_buying_price"/>
+							<field name="treatment_cost" required="1"/>
+							<field name="final_purchase_price"/>
+							<field name="price_per_gram"/>
+							<field name="waste_nature"/>
+						</tree>
+						<form>
+							<group>
+								<group>
+									<field name="analysis_for_certification"/>
+									<label for="reference_sample_analysis"/>
+									<div class="o_row">
+										<field name="reference_sample_analysis"/>
+										<field name="sample_ct_id" required="1" placeholder="Container" domain="[('project_id','=', palladium_cost_id)]" options="{'no_create_edit': True}"/>
+									</div>
+									<field name="actual_result" required="1"/>
+									<field name="minimum_levy"/>
+									<field name="return_percentage"/>
+									<field name="dedection_percentage" invisible="1"/>
+									<field name="lme_price_discount"/>
+									<field name="buy_price_discount" invisible="1"/>
+									<field name="currency_id" invisible="1"/>
+									<field name="waste_nature"/>
+									<field name="project_id" invisible="1"/>
+								</group>
+								<group>
+									<field name="remaining_metal"/>
+									<field name="lbma_price" required="1"/>
+									<field name="price_date" required="1"/>
+									<field name="price_source" required="1"/>
+									<field name="price_per_gram"/>
+									<field name="price_per_gram"/>
+									<field name="offer_buying_price"/>
+									<field name="treatment_cost" required="1"/>
+									<field name="final_purchase_price"/>
+									<field name="palladium_cost_id" invisible="1"/>
+								</group>
+							</group>
+						</form>
+					</field>
+					<separator string="Platinum Treatment" attrs="{'invisible' : [('platinum', '=', False)]}"/>
+					<field name="platinum_cost_ids" attrs="{'invisible' : [('platinum', '=', False)]}" context="{'default_platinum_cost_id': project_id,'default_sample_ct_id': container_id}">
+						<tree>
+							<field name="analysis_for_certification"/>
+							<field name="reference_sample_analysis"/>
+							<field name="actual_result" required="1"/>
+							<field name="buy_price_discount"/>
+							<field name="remaining_metal"/>
+							<field name="currency_id" invisible="1"/>
+							<field name="lbma_price" required="1"/>
+							<field name="offer_buying_price"/>
+							<field name="treatment_cost" required="1"/>
+							<field name="final_purchase_price"/>
+							<field name="price_per_gram"/>
+							<field name="waste_nature"/>
+						</tree>
+						<form>
+							<group>
+								<group>
+									<field name="analysis_for_certification"/>
+									<label for="reference_sample_analysis"/>
+									<div class="o_row">
+										<field name="reference_sample_analysis"/>
+										<field name="sample_ct_id" required="1" placeholder="Container" domain="[('project_id','=', platinum_cost_id)]" options="{'no_create_edit': True}"/>
+									</div>
+									<field name="actual_result" required="1"/>
+									<field name="minimum_levy"/>
+									<field name="return_percentage"/>
+									<field name="dedection_percentage" invisible="1"/>
+									<field name="lme_price_discount"/>
+									<field name="buy_price_discount" invisible="1"/>
+									<field name="currency_id" invisible="1"/>
+									<field name="waste_nature"/>
+									<field name="project_id" invisible="1"/>
+								</group>
+								<group>
+									<field name="remaining_metal"/>
+									<field name="lbma_price" required="1"/>
+									<field name="price_date" required="1"/>
+									<field name="price_source" required="1"/>
+									<field name="price_per_gram"/>
+									<field name="price_per_gram"/>
+									<field name="offer_buying_price"/>
+									<field name="treatment_cost" required="1"/>
+									<field name="final_purchase_price"/>
+									<field name="platinum_cost_id" invisible="1"/>
+								</group>
+							</group>
+						</form>
+					</field>
+					<separator string="Copper Treatment" attrs="{'invisible' : [('copper', '=', False)]}"/>
+					<field name="copper_cost_ids" attrs="{'invisible' : [('copper', '=', False)]}" context="{'default_copper_cost_id': project_id,'default_sample_ct_id': container_id}">
+						<tree>
+							<field name="analysis_for_certification"/>
+							<field name="reference_sample_analysis"/>
+							<field name="actual_result" required="1"/>
+							<field name="buy_price_discount"/>
+							<field name="remaining_metal"/>
+							<field name="currency_id" invisible="1"/>
+							<field name="lbma_price" required="1"/>
+							<field name="offer_buying_price"/>
+							<field name="treatment_cost" required="1"/>
+							<field name="final_purchase_price"/>
+							<field name="price_per_gram"/>
+							<field name="waste_nature"/>
+						</tree>
+						<form>
+							<group>
+								<group>
+									<field name="analysis_for_certification"/>
+									<label for="reference_sample_analysis"/>
+									<div class="o_row">
+										<field name="reference_sample_analysis"/>
+										<field name="sample_ct_id" required="1" placeholder="Container" domain="[('project_id','=', copper_cost_id)]" options="{'no_create_edit': True}"/>
+									</div>
+									<field name="actual_result" required="1"/>
+									<field name="minimum_levy"/>
+									<field name="return_percentage"/>
+									<field name="dedection_percentage" invisible="1"/>
+									<field name="lme_price_discount"/>
+									<field name="buy_price_discount" invisible="1"/>
+									<field name="currency_id" invisible="1"/>
+									<field name="waste_nature"/>
+									<field name="project_id" invisible="1"/>
+								</group>
+								<group>
+									<field name="remaining_metal"/>
+									<field name="lbma_price" required="1"/>
+									<field name="price_date" required="1"/>
+									<field name="price_source" required="1"/>
+									<field name="price_per_gram"/>
+									<field name="price_per_gram"/>
+									<field name="offer_buying_price"/>
+									<field name="treatment_cost" required="1"/>
+									<field name="final_purchase_price"/>
+									<field name="copper_cost_id" invisible="1"/>
+								</group>
+							</group>
+						</form>
+					</field>
+
+					<separator string="Rhodium Treatment" attrs="{'invisible' : [('rhodium', '=', False)]}"/>
+					<field name="rhodium_cost_ids" attrs="{'invisible' : [('rhodium', '=', False)]}" context="{'default_rhodium_cost_id': project_id,'default_sample_ct_id': container_id}">
+						<tree>
+							<field name="analysis_for_certification"/>
+							<field name="reference_sample_analysis"/>
+							<field name="actual_result" required="1"/>
+							<field name="minimum_levy"/>
+							<field name="buy_price_discount"/>
+							<field name="remaining_metal"/>
+							<field name="currency_id" invisible="1"/>
+							<field name="lbma_price" required="1"/>
+							<field name="offer_buying_price"/>
+							<field name="treatment_cost" required="1"/>
+							<field name="final_purchase_price"/>
+							<field name="price_per_gram"/>
+							<field name="waste_nature"/>
+						</tree>
+						<form>
+							<group>
+								<group>
+									<field name="analysis_for_certification"/>
+									<label for="reference_sample_analysis"/>
+									<div class="o_row">
+										<field name="reference_sample_analysis"/>
+										<field name="sample_ct_id" required="1" placeholder="Container" domain="[('project_id','=', rhodium_cost_id)]" options="{'no_create_edit': True}"/>
+									</div>
+									<field name="actual_result" required="1"/>
+									<field name="return_percentage"/>
+									<field name="dedection_percentage" invisible="1"/>
+									<field name="lme_price_discount"/>
+									<field name="buy_price_discount" invisible="1"/>
+									<field name="currency_id" invisible="1"/>
+									<field name="waste_nature"/>
+									<field name="project_id" invisible="1"/>
+								</group>
+								<group>
+									<field name="remaining_metal"/>
+									<field name="lbma_price" required="1"/>
+									<field name="price_date" required="1"/>
+									<field name="price_source" required="1"/>
+									<field name="price_per_gram"/>
+									<field name="price_per_gram"/>
+									<field name="offer_buying_price"/>
+									<field name="treatment_cost" required="1"/>
+									<field name="final_purchase_price"/>
+									<field name="rhodium_cost_id" invisible="1"/>
+								</group>
+							</group>
+						</form>
+					</field>
+
+					<separator string="Ruthenium Treatment" attrs="{'invisible' : [('ruthenium', '=', False)]}"/>
+					<field name="ruthenium_cost_ids" attrs="{'invisible' : [('ruthenium', '=', False)]}" context="{'default_ruthenium_cost_id': project_id,'default_sample_ct_id': container_id}">
+						<tree>
+							<field name="analysis_for_certification"/>
+							<field name="reference_sample_analysis"/>
+							<field name="actual_result" required="1"/>
+							<field name="buy_price_discount"/>
+							<field name="remaining_metal"/>
+							<field name="currency_id" invisible="1"/>
+							<field name="lbma_price" required="1"/>
+							<field name="offer_buying_price"/>
+							<field name="treatment_cost" required="1"/>
+							<field name="final_purchase_price"/>
+							<field name="price_per_gram"/>
+							<field name="waste_nature"/>
+						</tree>
+						<form>
+							<group>
+								<group>
+									<field name="analysis_for_certification"/>
+									<label for="reference_sample_analysis"/>
+									<div class="o_row">
+										<field name="reference_sample_analysis"/>
+										<field name="sample_ct_id" required="1" placeholder="Container" domain="[('project_id','=', ruthenium_cost_id)]" options="{'no_create_edit': True}"/>
+									</div>
+									<field name="actual_result" required="1"/>
+									<field name="minimum_levy"/>
+									<field name="return_percentage"/>
+									<field name="dedection_percentage" invisible="1"/>
+									<field name="lme_price_discount"/>
+									<field name="buy_price_discount" invisible="1"/>
+									<field name="currency_id" invisible="1"/>
+									<field name="waste_nature"/>
+									<field name="project_id" invisible="1"/>
+								</group>
+								<group>
+									<field name="remaining_metal"/>
+									<field name="lbma_price" required="1"/>
+									<field name="price_date" required="1"/>
+									<field name="price_source" required="1"/>
+									<field name="price_per_gram"/>
+									<field name="price_per_gram"/>
+									<field name="offer_buying_price"/>
+									<field name="treatment_cost" required="1"/>
+									<field name="final_purchase_price"/>
+									<field name="ruthenium_cost_id" invisible="1"/>
+								</group>
+							</group>
+						</form>
+					</field>
+
+					<separator string="Iridium Treatment" attrs="{'invisible' : [('iridium', '=', False)]}"/>
+					<field name="iridium_cost_ids" attrs="{'invisible' : [('iridium', '=', False)]}" context="{'default_iridium_cost_id': project_id,'default_sample_ct_id': container_id}">
+						<tree>
+							<field name="analysis_for_certification"/>
+							<field name="reference_sample_analysis"/>
+							<field name="actual_result" required="1"/>
+							<field name="buy_price_discount"/>
+							<field name="remaining_metal"/>
+							<field name="currency_id" invisible="1"/>
+							<field name="lbma_price" required="1"/>
+							<field name="offer_buying_price"/>
+							<field name="treatment_cost" required="1"/>
+							<field name="final_purchase_price"/>
+							<field name="price_per_gram"/>
+							<field name="waste_nature"/>
+						</tree>
+						<form>
+							<group>
+								<group>
+									<field name="analysis_for_certification"/>
+									<label for="reference_sample_analysis"/>
+									<div class="o_row">
+										<field name="reference_sample_analysis"/>
+										<field name="sample_ct_id" required="1" placeholder="Container" domain="[('project_id','=', iridium_cost_id)]" options="{'no_create_edit': True}"/>
+									</div>
+									<field name="actual_result" required="1"/>
+									<field name="minimum_levy"/>
+									<field name="return_percentage"/>
+									<field name="dedection_percentage" invisible="1"/>
+									<field name="lme_price_discount"/>
+									<field name="buy_price_discount" invisible="1"/>
+									<field name="currency_id" invisible="1"/>
+									<field name="waste_nature"/>
+									<field name="project_id" invisible="1"/>
+								</group>
+								<group>
+									<field name="remaining_metal"/>
+									<field name="lbma_price" required="1"/>
+									<field name="price_date" required="1"/>
+									<field name="price_source" required="1"/>
+									<field name="price_per_gram"/>
+									<field name="price_per_gram"/>
+									<field name="offer_buying_price"/>
+									<field name="treatment_cost" required="1"/>
+									<field name="final_purchase_price"/>
+									<field name="iridium_cost_id" invisible="1"/>
+								</group>
+							</group>
+						</form>
+					</field>
+				</page>
+			</xpath>
+
+			<xpath expr="//page[last()]" position="after">
+				<page string="Cost Analysis" states="done">
+					<separator string="Cost Structure"/>
+					<field name="cost_structure_ids">
+						<tree editable="bottom">
+							<field name="bom_line" required="1"/>
+							<field name="qty" required="1"/>
+							<field name="cost" required="1" sum="Cost"/>
+							<field name="total" sum="Total"/>
+							<field name="currency_id" invisible="1"/>
+						</tree>
+					</field>
+					<separator string="Cost of Operations"/>
+					<field name="operation_cost_ids">
+						<tree editable="bottom">
+							<field name="user_id" required="1"/>
+							<field name="operation_id" required="1"/>
+							<field name="work_time" required="1"/>
+							<field name="cost" required="1" sum="Cost"/>
+							<field name="total_cost" sum="Total Cost"/>
+							<field name="currency_id" invisible="1"/>
+						</tree>
+					</field>
+					<group class="oe_subtotal_footer oe_right" colspan="2">
+						<field name="total_structure_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+						<field name="total_operation_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+						<div class="oe_subtotal_footer_separator oe_inline o_td_label">
+							<label for="production_total"/>
+						</div>
+						<field name="production_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+					</group>
+					<div class="oe_clear"/>
+				</page>
+			</xpath>
+		</field>
+	</record>
+</odoo>

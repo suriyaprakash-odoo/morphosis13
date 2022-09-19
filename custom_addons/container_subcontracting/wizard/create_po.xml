@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="create_po_wizard_form" model="ir.ui.view">
+		<field name="name">create.po.wizard.form</field>
+		<field name="model">create.po</field>
+		<field name="arch" type="xml">
+			<form string="Create Purchase Order">
+				<group>
+					<group>
+						<field name="partner_id" required="1"/>
+						<field name="container_id" invisible="1"/>
+					</group>
+				</group>
+				<field name="po_lines">
+					<tree editable="bottom">
+						<field name="product_id"/>
+						<field name="uom_id"/>
+						<field name="qty" required="1"/>
+						<field name="price"/>
+					</tree>
+				</field>
+				<footer>
+					<button name="create_sbc_purchase_order" string="Confirm" type="object" class="btn btn-sm btn-primary"/>
+					<button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="create_wizard_po_action" model="ir.actions.act_window">
+		<field name="name">Subcontracting Purchase Order</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">create.po</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="create_po_wizard_form"/>
+		<field name="target">new</field>
+	</record>
+</odoo>

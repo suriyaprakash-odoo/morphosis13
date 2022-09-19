@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<record id="seq_fractions" model="ir.sequence">
+		<field name="name">Project Fraction Sequence</field>
+		<field name="code">project.fraction</field>
+		<field name="prefix">F</field>
+		<field name="padding">2</field>
+		<field name="company_id" eval="False"/>
+	</record>
+
+	<record id="project_fractions_form_view" model="ir.ui.view">
+		<field name="name">project.fraction.form</field>
+		<field name="model">project.fraction</field>
+		<field name="arch" type="xml">
+			<form string="Project Fraction">
+				<header>
+					<field name="state" widget="statusbar"/>
+					<button name="close_fraction" string="Close Fraction" type="object" class="oe_highlight" states="new"/>
+				</header>
+				<sheet>
+					<div class="oe_title">
+						<h1>
+							<field name="name" readonly="1"/>
+						</h1>
+					</div>
+					<group>
+						<group>
+							<field name='project_id' attrs="{'readonly':[('state','!=','new')],'required':[('second_process', '=', False)],'invisible':[('second_process', '!=', False)]}" options="{'no_create_edit': True}"/>
+							<field name='partner_ref'/>
+							<field name='source_container_id' attrs="{'readonly':[('state','!=','new')]}" options="{'no_create_edit': True}"/>
+							<field name="container_weight" />
+							<!-- required="1" attrs="{'readonly':[('state','!=','new')]}" -->
+							<field name='supplier_id' attrs="{'readonly':[('state','!=','new')]}" options="{'no_create_edit': True}"/>
+							<field name="cross_dock" invisible="1"/>
+							<field name='worker_id' attrs="{'readonly':[('state','!=','new')],'required':[('cross_dock','=',False)]}" options="{'no_create_edit': True}"/>
+							<field name="currency_id" invisible="1"/>
+							<field name="second_process" invisible="1"/>
+							<field name='fraction_production_cost' string='Estimated Production Cost' groups="stock.group_stock_manager"/>
+							<field name="production_cost" string='Actual Production Cost' groups="stock.group_stock_manager"/>
+						</group>
+						<group>
+
+							<label for="is_scrap" string="Is Scrap?"/>
+							<div>
+								<field name="is_scrap" style="width: 10%"/>
+								<field name="scrap_txt" style="width: 60%;height: 15px;" readonly="1" attrs="{'invisible':[('is_scrap','=', False)]}"/>
+							</div>
+							<field name='is_vrac'/>
+							<field name='main_product_id' required="1"  attrs="{'readonly':[('state','!=','new')]}" options="{'no_create_edit': True}"/>
+							<field name='sub_product_id' required="1" attrs="{'readonly':[('state','!=','new')]}" options="{'no_create_edit': True}"/>
+							<field name="fraction_by" attrs="{'readonly':[('state','!=','new')]}" required="1"/>
+							<field name="number_of_pieces" attrs="{
+								'required':[('fraction_by' , '=' , 'count')],
+								'readonly':[('state','!=','new')]
+								}"/>
+							<field name="fraction_weight" attrs="{
+								'required':[('fraction_by' , '=' , 'weight')],
+								'readonly':[('state','!=','new')]
+								}" string="Net Weight of the Fraction(Kg)"/>
+							<field name='labour_cost' groups="stock.group_stock_manager" />
+							<field name='labour_cost_dup' invisible="1" />
+							<field name="company_id" invisible="1" />
+							<field name='recipient_container_id' context="{'default_content_type_id': sub_product_id,'default_container_id': source_container_id,'default_cross_dock':cross_dock,'default_related_company_id':company_id}" attrs="{'readonly':[('state','!=','new')]}"/>
+							<field name="rc_name"/>
+							<field name="remaining_rc_weight" attrs="{'readonly':[('state','!=','new')]}"/>
+						</group>
+					</group>
+					<group>
+						<field name='waste_code' attrs="{'readonly':[('state','!=','new')]}"/>
+						<field name='client_waste_code' attrs="{'readonly':[('state','!=','new')]}"/>
+					</group>
+
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="project_fractions_tree_view" model="ir.ui.view">
+		<field name="name">project.fraction.tree</field>
+		<field name="model">project.fraction</field>
+		<field name="arch" type="xml">
+			<tree string="Project Fraction">
+				<field name='name'/>
+				<!--<field name='project_id'/>-->
+				<!--<field name='source_container_id'/>-->
+				<field name='recipient_container_id'/>
+				<field name='supplier_id'/>
+				<field name='sales_team_id'/>
+				<field name='main_product_id'/>
+				<field name='sub_product_id'/>
+				<field name="fraction_weight" sum="Fraction Weight" string="Net Weight of the Fraction"/>
+				<field name="number_of_pieces" sum="Fraction Weight"/>
+				<field name='labour_cost' sum="Labour Cost"/>
+				<field name='labour_cost_dup' invisible="1" />
+				<field name="production_cost" sum="Production Cost"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="view_project_fraction_pivot">
+        <field name="name">project.fraction.pivot</field>
+        <field name="model">project.fraction</field>
+        <field name="arch" type="xml">
+            <pivot string="Project Fractions">
+                <field name="project_id" type="row"/>
+                <field name="worker_id" type="row"/>
+                <field name="name" type="row"/>
+                <field name="unloading_cost_dup" type="measure"/>
+                <field name="reception_cost_dup" type="measure"/>
+                <field name="labour_cost_dup" type="measure"/>
+                <field name="additional_purchase_cost_dup" type="measure"/>
+                <field name="tranport_cost_dup" type="measure"/>
+                <field name="purchase_cost_dup" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+	<record id="project_fractions_filters" model="ir.ui.view">
+		<field name="name">project.fraction.search</field>
+		<field name="model">project.fraction</field>
+		<field name="arch" type="xml">
+			<search string="Project Container">
+				<field name="name" string="Sequence"/>
+				<field name="project_id" string="Project"/>
+				<field name="source_container_id" string="Source Container"/>
+				<field name='main_product_id' string="Primary Type"/>
+				<field name='sub_product_id' string="Secondary Type"/>
+				<separator/>
+				<group expand="1" string="Group By">
+					<filter string="Source Container" name="group_by_project" domain="[]" context="{'group_by':'source_container_id'}"/>
+					<filter string="Project" name="group_project_id" domain="[]" context="{'group_by':'project_id'}"/>
+					<filter string="Primary Type" name="main_product_id" domain="[]" context="{'group_by':'main_product_id'}"/>
+					<filter string="Secondary Type" name="sub_product_id" domain="[]" context="{'group_by':'sub_product_id'}"/>
+					<filter string="Recipient Container" name="recipient_container_id" domain="[]" context="{'group_by':'recipient_container_id'}"/>
+					<filter string="Operator" name="worker_id" domain="[]" context="{'group_by':'worker_id'}"/>
+				</group>
+			</search>
+		</field>
+	</record>
+
+	<record id="action_create_fractions_view" model="ir.actions.act_window">
+		<field name="name">Fractions</field>
+		<field name="res_model">project.fraction</field>
+		<field name="view_mode">tree,form,pivot</field>
+	</record>
+
+	<menuitem name="Fractions" id="menu_create_project_fractions" parent="ppts_inventory_customization.menu_project_report" action="action_create_fractions_view" groups="ppts_inventory_customization.group_production_manager" sequence="10"/>
+
+</odoo>

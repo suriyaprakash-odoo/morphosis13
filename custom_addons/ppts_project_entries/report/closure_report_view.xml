@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="project_entries_form_view_report" model="ir.ui.view">
+		<field name="name">project.entries.form</field>
+		<field name="model">project.entries</field>
+		<field name="inherit_id" ref="ppts_project_entries.project_entries_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//header" position="inside">
+				<button name="print_project_report" class="oe_highlight" type="object" string="Print Report"
+						attrs="{'invisible': [('status', '!=', 'finished')]}"/>
+			</xpath>
+		</field>
+	</record>
+</odoo>

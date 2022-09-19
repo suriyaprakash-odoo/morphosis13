@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_order_form_inter_company_sales" model="ir.ui.view">
+		<field name="name">sale.order.customization</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='validity_date']" position="before">
+				<field name="internal_sales"/>
+			</xpath>
+
+		</field>
+	</record>
+
+
+	<record id="action_inter_company_sales" model="ir.actions.act_window">
+		<field name="name">Inter-company Quotations</field>
+		<field name="res_model">sale.order</field>
+		<field name="view_mode">tree,form</field>
+		<field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+		<field name="view_id" ref="sale.action_quotations_with_onboarding"/>
+		<field name="context">{'default_internal_sales': True}</field>
+		<field name="domain">[('internal_sales','=',True),('state', 'in', ('draft', 'sent', 'cancel'))]</field>
+	</record>
+
+	<menuitem id="menu_inter_company_sales_main"
+			  name="Inter Company Sales"
+			  parent="sale.sale_menu_root"
+			  sequence="2" groups="sales_team.group_sale_salesman"/>
+
+	<menuitem id="menu_inter_company_sales"
+			  name="Quotations"
+			  parent="menu_inter_company_sales_main"
+			  action="action_inter_company_sales"
+			  sequence="1" groups="sales_team.group_sale_salesman"/>
+
+
+	<record id="action_inter_company_sales_orders" model="ir.actions.act_window">
+		<field name="name">Inter-company Order</field>
+		<field name="res_model">sale.order</field>
+		<field name="view_mode">tree,form</field>
+		<field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+		<field name="view_id" ref="sale.action_quotations_with_onboarding"/>
+		<field name="context">{'default_internal_sales': True}</field>
+		<field name="domain">[('internal_sales','=',True),('state', 'not in', ('draft', 'sent', 'cancel'))]</field>
+	</record>
+
+	<menuitem id="menu_inter_company_sales_orders"
+			  name="Orders"
+			  parent="menu_inter_company_sales_main"
+			  action="action_inter_company_sales_orders"
+			  sequence="2" groups="sales_team.group_sale_salesman"/>
+
+
+	<!-- Hide Inter company orders form default view -->
+	<record id="sale.action_quotations_with_onboarding" model="ir.actions.act_window">
+		<field name="name">Quotations</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.order</field>
+		<field name="view_id" ref="sale.view_quotation_tree_with_onboarding"/>
+		<field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+		<field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+		<field name="context">{'search_default_my_quotation': 1}</field>
+		<field name="domain">[('internal_sales','=',False)]</field>
+		<field name="help" type="html">
+			<p class="o_view_nocontent_smiling_face">
+				Create a new quotation, the first step of a new sale!
+			</p>
+			<p>
+				Once the quotation is confirmed by the customer, it becomes a sales order.
+				<br/>
+				You will be able to create an invoice and collect the payment.
+			</p>
+		</field>
+	</record>
+
+
+	<record id="sale.action_orders" model="ir.actions.act_window">
+		<field name="name">Sales Orders</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.order</field>
+		<field name="view_mode">tree,kanban,form,calendar,pivot,graph,activity</field>
+		<field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+		<field name="context">{}</field>
+		<field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel')),('internal_sales','=',False)]</field>
+		<field name="help" type="html">
+			<p class="o_view_nocontent_smiling_face">
+				Create a new quotation, the first step of a new sale!
+			</p>
+			<p>
+				Once the quotation is confirmed, it becomes a sales order.
+				<br/>
+				You will be able to create an invoice and collect the payment.
+			</p>
+		</field>
+	</record>
+
+
+
+	<record id="view_order_form_container_inherited_int_sale" model="ir.ui.view">
+		<field name="name">sale.order.customization</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="ppts_custom_sale.view_order_form_container_inherited"/>
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='send_notification']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|','|',('internal_sales','=',True),('state', 'not in', ['draft','sent']),('is_transport', '!=', False)]}
+				</attribute>
+			</xpath>
+
+			<xpath expr="//field[@name='is_transport']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': [('internal_sales','=',True)]}
+				</attribute>
+			</xpath>
+			<xpath expr="//field[@name='order_pickup_date']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|',('internal_sales','=',True),('is_transport', '!=', False)]}
+				</attribute>
+			</xpath>
+
+			<xpath expr="//button[@name='action_view_transport_rfq']/field[@name='transport_rfq_count']" position="replace">
+				<field name="transport_rfq_count" widget="statinfo" string="Transport RFQ" attrs="{'invisible': [('internal_sales','!=', False)]}"/>
+				<field name="transport_rfq_count" widget="statinfo" string="Purchase Order" attrs="{'invisible': [('internal_sales','=', False)]}"/>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

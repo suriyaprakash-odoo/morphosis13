@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="view_psm_report" model="ir.ui.view">
+            <field name="name">psm.report.form</field>
+            <field name="model">psm.report</field>
+            <field name="arch" type="xml">
+                <form string="BSD/Annexe7 Report">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="from_date" required="1" />
+                            </group>
+                            <group>
+                                <field name="to_date" required="1" />
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="view_psm_report" string="Generate Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_bsd_annexe_report" model="ir.actions.act_window">
+            <field name="name">PSM Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">psm.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_psm_report" />
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="PSM Report" id="menu_bsd_annexe_report" parent="ppts_inventory_customization.menu_project_report" action="action_bsd_annexe_report"/>
+
+        <record id="psm_report_tree_view" model="ir.ui.view">
+            <field name="name">psm.wizard.report.tree</field>
+            <field name="model">psm.wizard.report</field>
+            <field name="arch" type="xml">
+                <tree create="0">
+                    <field name = 'project_name'/>
+                    <field name = 'container_name'/>
+                    <field name = 'container_registration'/>
+                    <field name = 'state'/>
+                    <field name = 'po_updated'/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

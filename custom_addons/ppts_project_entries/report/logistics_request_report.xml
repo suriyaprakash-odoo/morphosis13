@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_logistics_request_template">
+		<t t-call="web.external_layout">
+			<t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+			<div class="page">
+				<div class="row mt32 mb32">
+					<div style="width:65%">
+						<style>
+							.borderless td, .borderless th {
+							border: none;
+							}
+						</style>
+						<table class="table-borderless">
+							<tbody>
+								<tr style="border: none;">
+									<td>
+										<span style="font-weight:bold">Project</span>
+									</td>
+									<td>
+										<span t-field="o.name"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span style="font-weight:bold">Vendor</span>
+									</td>
+									<td>
+										<span t-field="o.partner_id"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span style="font-weight:bold">Sales Manager</span>
+									</td>
+									<td>
+										<span t-field="o.user_id"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span style="font-weight:bold">Collection Date</span>
+									</td>
+									<td>
+										<span t-field="o.actual_date"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<b>reference</b>
+									</td>
+									<td>
+										<span t-field="o.partner_ref"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<b>date de livraison</b>
+									</td>
+									<td>
+										<span t-field="o.expected_delivery"/>
+									</td>
+								</tr>
+
+								<tr t-if="o.is_registered_package">
+									<td>
+										<b>Registered Package</b>
+									</td>
+									<td>
+										<span style="padding-left:5px;" class="fa fa-check-square-o"/>
+									</td>
+								</tr>
+								<tr t-if="o.is_ecologic">
+									<td>
+										<b>Ecologic</b>
+									</td>
+									<td>
+										<span style="padding-left:5px;" class="fa fa-check-square-o"/>
+									</td>
+								</tr>
+								<tr t-if="o.is_full_load" style="border: none;">
+									<td>
+										<b>Full Load</b>
+									</td>
+									<td>
+										<span style="padding-left:5px;" class="fa fa-check-square-o"/>
+									</td>
+								</tr>
+								<tr t-if="o.is_tail_lift">
+									<td>
+										<b>Tail Lift</b>
+									</td>
+									<td>
+										<span style="padding-left:5px;" class="fa fa-check-square-o"/>
+									</td>
+								</tr>
+								
+							</tbody>
+						</table>
+
+						<!--<p>
+							<b>Project :</b>
+							<span t-field="o.name"/>
+						</p>
+						<p>
+							<b>Vendor :</b>
+							<span t-field="o.partner_id"/>
+						</p>
+						<p>
+							<b>Sales Manager :</b>
+							<span t-field="o.user_id"/>
+						</p>
+						<p>
+							<b>Collection Date :</b>
+							<span t-field="o.estimated_collection_date"/>
+						</p>
+
+						<p t-if="o.is_registered_package">
+							<b>Registered Package:</b>
+							<span style="padding-left:5px;" class="fa fa-check-square-o"/>
+						</p>
+						<p t-if="o.is_ecologic">
+							<b>Ecologic:</b>
+							<span style="padding-left:5px;" class="fa fa-check-square-o"/>
+						</p>
+						<p t-if="o.is_full_load">
+							<b>Full Load:</b>
+							<span style="padding-left:5px;" class="fa fa-check-square-o"/>
+						</p>
+						<p t-if="o.is_tail_lift">
+							<b>Tail Lift:</b>
+							<span style="padding-left:5px;" class="fa fa-check-square-o"/>
+						</p>
+-->
+					</div>
+					<div style="width:35%">
+						<span>
+							<b>Collection Point:</b>
+						</span>
+						<address t-field="o.pickup_location_id" t-options='{"widget": "contact", "fields": ["address", "phone"], "no_marker": True, "phone_icons": True}' />
+						<!--<p style="line-height:11px;">
+							<span t-field="o.street"/>
+						</p>
+						<p style="line-height:11px;">
+							<span t-field="o.street2"/>
+						</p>
+						<p style="line-height:11px;">
+							<span t-field="o.city"/>
+						</p>
+						<p style="line-height:11px;">
+							<span t-field="o.state_id"/>
+						</p>
+						<p style="line-height:11px;">
+							<span t-field="o.zip"/>
+						</p>
+						<p style="line-height:11px;">
+							<span t-field="o.country_id"/>
+						</p>-->
+					</div>
+				</div>
+
+				<table class="table table-sm">
+					<thead>
+						<tr>
+							<th>
+								<strong>Product</strong>
+							</th>
+							<th>
+								<strong>Quantity</strong>
+							</th>
+							<th style="text-align:center;">
+								Container Details
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<t t-foreach="o.project_entry_ids" t-as="line">
+							<tr>
+								<td>
+									<span t-field="line.product_id"/>
+								</td>
+								<td>
+									<span t-field="line.product_qty"/>
+									<span t-field="line.product_uom"/>
+								</td>
+								<td>
+									<table class="" style="width:500px;">
+										<tr>
+											<th>
+												Type
+											</th>
+											<th>
+												Containers
+											</th>
+											<th>
+												Length
+											</th>
+											<th>Width</th>
+											<th>Height</th>
+										</tr>
+										<tbody>
+											<t t-foreach="line.container_type_line_ids" t-as="inline">
+												<tr>
+													<td>
+														<span t-field="inline.container_type_id"/>
+													</td>
+													<td>
+														<span t-field="inline.container_count"/>
+													</td>
+													<td>
+														<span t-field="inline.container_length"/>
+													</td>
+													<td>
+														<span t-field="inline.container_width"/>
+													</td>
+													<td>
+														<span t-field="inline.container_height"/>
+													</td>
+												</tr>
+											</t>
+										</tbody>
+									</table>
+
+									<!--<span t-esc="map(lambda x: (x.container_type_id), line.container_type_line_ids)"/>-->
+								</td>
+							</tr>
+						</t>
+					</tbody>
+				</table>
+
+
+			</div>
+		</t>
+	</template>
+
+
+	<template id="report_logistics_request_action">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="ppts_project_entries.report_logistics_request_template" t-lang="o.partner_id.lang"/>
+			</t>
+		</t>
+	</template>
+</odoo>

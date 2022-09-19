@@ -1,0 +1,150 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ppts_custom_product
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e-20191017\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-19 12:55+0000\n"
+"PO-Revision-Date: 2019-12-19 12:55+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_stock_container_line__actual_sales_cost
+msgid "Actual Sales Cost"
+msgstr "Prix de vente actuel"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_product__container_product_ids
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_template__container_product_ids
+msgid "Container line"
+msgstr "Ligne de conteneurs"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_stock_container_line__container_product_id
+msgid "Container line Reference"
+msgstr "Référence de ligne de conteneur"
+
+#. module: ppts_custom_product
+#: model_terms:ir.ui.view,arch_db:ppts_custom_product.product_template_form_view_inherited
+msgid "Containers"
+msgstr "Conteneurs"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_stock_container_line__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_stock_container_line__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_stock_container_line__display_name
+msgid "Display Name"
+msgstr "Afficher Nom"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_product__product_ecologic_code
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_template__product_ecologic_code
+msgid "Ecologic Code"
+msgstr "Code Ecologic"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_product__ecologic_name
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_template__ecologic_name
+msgid "Ecologic Name"
+msgstr "Nom Ecologic"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_product__english_name
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_template__english_name
+#: model_terms:ir.ui.view,arch_db:ppts_custom_product.product_template_form_view_inherited
+msgid "English Name"
+msgstr "Nom en Anglais"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_product__existing_barcode
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_template__existing_barcode
+msgid "Existing Barcode"
+msgstr "Code Barre Existante"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_stock_container_line__forecasted_sales_cost
+msgid "Forecasted Sales Cost"
+msgstr "Prix de vente prévu"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_stock_container_line__id
+msgid "ID"
+msgstr ""
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_stock_container_line____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_stock_container_line__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_stock_container_line__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_product__max_stock
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_template__max_stock
+msgid "Maximum Stock"
+msgstr "Stock Maximum"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_stock_container_line__container_id
+msgid "Name"
+msgstr "Référence du contenant"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_product__net_weight
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_template__net_weight
+msgid "Net Load"
+msgstr "Charge nette"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_stock_container_line__net_weight
+msgid "Net Weight"
+msgstr "Poids Net"
+
+#. module: ppts_custom_product
+#: model:ir.model,name:ppts_custom_product.model_product_template
+msgid "Product Template"
+msgstr "Modèle d'article"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_stock_container_line__production_cost
+msgid "Production Cost of Container"
+msgstr "Prix de Revient"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_stock_container_line__net_weight_unit_id
+msgid "Unit"
+msgstr "Unité"
+
+#. module: ppts_custom_product
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_product__product_waste_code
+#: model:ir.model.fields,field_description:ppts_custom_product.field_product_template__product_waste_code
+msgid "Waste Code"
+msgstr "Code de Déchets"
+
+#. module: ppts_custom_product
+#: model:ir.model,name:ppts_custom_product.model_stock_container_line
+msgid "stock.container.line"
+msgstr ""

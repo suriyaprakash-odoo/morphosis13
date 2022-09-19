@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="report_trasport_rfq_document_new">
+		<!-- <t t-call="web.external_layout"> -->
+
+		<t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+
+		<div class="header" style="margin:0px !important;padding:0px !important;height: 5% !important;max-height: 5% !important;">
+			<div class="row" style="margin:0px !important;padding:0px !important;">
+				<div class="col-sm-12" style="margin:0px !important;padding:0px !important;">
+					<table style="width:100%;margin:0px;padding:0px;">
+						<tr>
+							<td>
+								<!-- <img class="img img-responsive" style="width:250px;" src="ppts_logistics/static/src/img/rfq_image.png"/> -->
+								<img t-if="o.company_id.logo" t-att-src="b'data:image/png;base64,%s' % o.company_id.logo" style="width:250px;"/>
+							</td>
+
+							<td style="text-align:right;">
+								<span style="text-decoration:underline;font-weight:bold;">Date:</span><span></span><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m/%d/%Y')"/>
+
+							</td>
+						</tr>
+
+					</table>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="page row" style="margin-top:0px !important;margin-left:20px !important;margin-right:20px !important;margin-bottom:0px !important;padding-top:0px !important;padding-bottom:0px !important;">
+
+			<div class="col-sm-12" style="margin:0px !important;padding:0px !important;">
+
+				<table style="width:100%;">
+					<tr>
+
+						<td>
+							<span t-field="o.company_id.name" style="font-weight:bold;"/><br/>
+							<span t-if="o.company_id.street"/><br/>
+							<span t-field="o.company_id.zip"/><br/>
+							<span t-field="o.company_id.city"/><br/>
+							Siret: <span t-field="o.company_id.siret"/><br/>
+							Téléphone: <span t-field="o.company_id.phone"/><br/>
+							Email: <span t-field="o.company_id.email"/>
+
+
+						</td>
+
+						<td style="padding-left:20px;text-align:left;">
+							<span style="font-weight:bold;text-decoration:underline;">ATTN: </span><span t-field="o.partner_id.name"/>
+						</td>
+
+					</tr>
+				</table>
+			</div>
+
+			<div class="col-sm-12">
+				<h2 style="text-align:center">COMMANDE DE TRANSPORT</h2>
+				<table style="width:100%;border:1px solid black;">
+					<tr>
+						<td style="width:30%;border-bottom:1px solid black;border-right:1px solid black;">
+							<span style="text-align:center;font-weight:bold;">Références à rappeler sur votre facture sous peine de retour</span>
+						</td>
+						<td style="width:20%;border-bottom:1px solid black;border-right:1px solid black;">
+
+							<t t-if="o.logistics_for == 'purchase'"><span t-field="o.origin.name"/></t>
+							<t t-if="o.logistics_for == 'sale'"><span t-field="o.sales_origin.name"/></t>
+
+						</td>
+						<td style="width:30%;border-bottom:1px solid black;border-right:1px solid black;">
+							<span style="text-align:center;font-weight:bold;">Références client</span>
+						</td>
+						<td style="width:20%;border-bottom:1px solid black;">
+							<t t-if="o.logistics_for == 'purchase'">
+								<span t-field="o.origin.partner_ref"/>
+							</t>
+							<t t-if="o.logistics_for == 'sale'">
+								<span t-field="o.sales_origin.buyer_ref"/>
+							</t>
+							
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="width:50%;border-right:1px solid black;padding-top:5px;padding-bottom:10px;">
+							<span style="text-align:center;padding-left;30px;text-decoration:underline;font-weight:bold;">Adresse de chargement:</span><br/><br/>
+
+
+							<span t-if="o.pickup_partner_id.company_type == 'company'">
+								<span t-field="o.pickup_partner_id.name"/>
+							</span><br/>
+							<span t-if="o.pickup_partner_id.company_type == 'person'">
+								<span t-if="o.pickup_partner_id.parent_id">
+									<span t-field="o.pickup_partner_id.parent_id.name"/>
+								</span>
+								<span t-else="">
+									<span t-field="o.pickup_partner_id.name"/>
+								</span>
+							</span><br/>
+
+							<span t-field="o.pickup_street"/> <span t-if="o.pickup_street2"/><span t-field="o.pickup_street2"></span> <span t-field="o.pickup_city"/><br/>
+							<span t-field="o.pickup_state_id.name"/> - <span t-field="o.pickup_zip"/> <span t-field="o.pickup_countries_id.name"/><br/><br/>
+
+							<t t-if="o.pickup_partner_location_id">
+								<span style="text-decoration:underline;font-weight:bold;">Contact :</span>   <span t-field="o.pickup_partner_location_id.name"/>   : <span t-field="o.pickup_partner_location_id.phone"/><br/>
+							</t>
+
+							<t t-else="">
+								<span style="text-decoration:underline;font-weight:bold;">Contact :</span>   <span t-field="o.pickup_partner_id.name"/>   : <span t-field="o.pickup_partner_id.phone"/><br/>
+							</t>
+
+					
+
+							<span style="text-decoration:underline;font-weight:bold;">Horaires d'ouverture :</span>&#160;&#160;&#160;
+								<span t-field="o.morning_opening_hours_start"/> - <span t-field="o.morning_opening_hours_end"/><br/>
+								<span style="padding-left:185px;" t-field="o.evening_opening_hours_start"/> - <span t-field="o.evening_opening_hours_end"/>
+						</td>
+
+						<td colspan="2" style="width:50%;padding-bottom:10px;padding-top:0px;">
+							<span style="text-align:center;padding-left;30px;text-decoration:underline;font-weight:bold;">Adresse de livraison:</span><br/><br/>
+
+
+							<span t-field="o.delivery_partner_id.name"/><br/>
+							<span t-field="o.delivery_street"/> <span t-if="o.delivery_street2"><span t-field="o.delivery_street2"/></span> <span t-field="o.delivery_city"/><br/>
+							<span t-field="o.delivery_state_id.name"/> - <span t-field="o.delivery_zip"/> <span t-field="o.delivery_countries_id.name"/><br/><br/>
+
+							<!-- <span style="text-decoration:underline;font-weight:bold;">Contact :</span>&#160;&#160;&#160;<span t-field="o.delivery_partner_id.name"/>&#160;&#160;&#160;<span t-field="o.delivery_partner_id.phone"/><br/><br/> -->
+
+							<span style="text-decoration:underline;font-weight:bold;">Contact :</span>&#160;&#160;&#160;M.Vincent : 0232727414<br/>
+							&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;C.Boutin : 0232727418<br/><br/>
+
+							<span style="text-decoration:underline;font-weight:bold;">Horaires d'ouverture :</span>&#160;&#160;&#160;<span> 8h00-16h30<br/>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;(8h-15h30
+							le vendredi)</span>
+
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="col-sm-12">
+				<table style="margin-top:10px;">
+					<tr>
+						<td colspan="2" style="padding-bottom:10px;width:10%;">
+							<span style="text-decoration:underline;font-weight:bold;">code déchet :</span>&#160;&#160;&#160;
+							<span t-field="o.waste_code"/>
+						</td>
+					</tr>
+					<tr>
+						<td style="padding-bottom:10px;">
+							<span style="text-decoration:underline;font-weight:bold;width:5%;">Type de camions :</span>&#160;&#160;&#160;
+							<span t-field="o.lorry_type"/>
+						</td>
+
+						<td style="padding-bottom:10px;">
+							<span style="text-decoration:underline;font-weight:bold;width:5%;">Hayons :</span>&#160;&#160;&#160;
+							<span t-if="o.is_tail_lift">Yes - <span t-field="o.hayons"/></span><span t-if="o.is_tail_lift != True">No</span>
+						</td>
+					</tr>
+
+					<tr t-if="o.grid_rotation">
+						<td colspan="2" style="padding-bottom:10px;width:10%;">
+							<span style="text-decoration:underline;font-weight:bold;">rotation de grille :</span>&#160;&#160;&#160;
+							<span t-field="o.grid_rotation"/>
+						</td>
+					</tr>
+
+					<tr t-if="o.material">
+						<td colspan="2" style="padding-bottom:10px;width:10%;">
+							<span style="text-decoration:underline;font-weight:bold;">désignation de marchandise :</span>&#160;&#160;&#160;
+							<span t-field="o.material"/>
+						</td>
+					</tr>
+					<tr t-if="o.no_of_container and o.container_count=='specified'">
+						<td colspan="2" style="padding-bottom:10px;width:10%;">
+							<span style="text-decoration:underline;font-weight:bold;">Nombre de conteneurs :</span>&#160;&#160;&#160;
+							<span t-field="o.no_of_container"/>
+						</td>
+					</tr>
+
+					<tr>
+						<td colspan="2" style="padding-bottom:10px;width:10%;">
+							<span style="text-decoration:underline;font-weight:bold;">Colisage :</span>&#160;&#160;&#160;
+							<t t-if="o.dimension">
+								<span t-field="o.dimension"/>
+							</t>
+							<t t-else="">
+								<span t-field="o.linear_meter"/>
+							</t>
+						</td>
+					</tr>
+
+					<tr>
+						<td colspan="2" style="padding-bottom:10px;width:10%;">
+							<span style="text-decoration:underline;font-weight:bold;">Poids brut estimé :</span>&#160;&#160;&#160;
+							<span t-field="o.gross_weight"/>(KG)
+						</td>
+					</tr>
+
+					<tr>
+						<td colspan="2" style="padding-bottom:10px;width:10%;">
+							<span style="text-decoration:underline;font-weight:bold;">Date d'enlèvement possible :</span>&#160;&#160;&#160;
+							<t t-if="o.pickup_date_type=='specific'">
+								<span t-field="o.pickup_date"/>
+							</t>
+							<t t-if="o.pickup_date_type=='between'">
+								entre le <span t-field="o.pickup_earliest_date"/> et le <span t-field="o.pickup_latest_date"/>
+							</t>
+							<t t-if="o.pickup_date_type=='as_soon_as_possible'">
+								<span>dès que possible</span>
+							</t>
+						</td>
+					</tr>
+
+					<!--<t t-if="o.pickup_date_type=='specific'">-->
+					<!--<tr>-->
+					<!--<td colspan="2" style="padding-bottom:10px;width:10%;">-->
+					<!--<span style="text-decoration:underline;font-weight:bold;">Date d'enlèvement souhaitée :</span>&#160;&#160;&#160;-->
+					<!--<span t-field="o.pickup_date"/>-->
+					<!--</td> -->
+					<!--</tr> -->
+					<!--</t>-->
+					<!--<t t-if="o.pickup_date_type=='between'">-->
+					<!--<tr>-->
+					<!--<td colspan="2" style="padding-bottom:10px;width:10%;">-->
+					<!--<span style="text-decoration:underline;font-weight:bold;">Date d'enlèvement souhaitée :</span>&#160;&#160;&#160;-->
+					<!--<span t-field="o.pickup_earliest_date"/> - <span t-field="o.pickup_latest_date"/>-->
+					<!--</td>-->
+					<!--</tr>  -->
+					<!--</t>-->
+
+				</table>
+			</div>
+
+			<div class="col-sm-12">
+				<table style="border:1px solid black;width:30%;">
+					<tr>
+						<td style="border-right:1px solid black;width:15%;">
+							<span style="font-weight:bold;">PRIX CONVENU</span>
+						</td>
+						<td style="width:10%;">
+							<span t-field="o.transport_cost"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="col-sm-12" t-if="o.term">
+				<table style="border:1px solid black;width:100%;margin-top:4%;">
+					<tr>
+						<td style="text-align:center;">
+							<span style="font-weight:bold;">Instructions complémentaires</span>
+						</td>
+
+					</tr>
+				</table>
+			</div>
+
+			<div class="col-sm-12" t-if="o.term">
+				<table style="text-align:center;width:100%;">
+					<tr>
+						<td style="text-align:center;">
+							<span t-field="o.term" style="text-align:center;"/>
+						</td>
+
+					</tr>
+				</table>
+			</div>
+
+			<div class="col-sm-12">
+				<table style="border:1px solid black;width:60%;margin-left:20%;margin-right:20%;margin-top:3%; margin-bottom:0px !important;">
+					<tr>
+						<td style="text-align:center;font-weight:bold;">
+							<span t-field="o.company_id.name"/> au capital de 50 000 euros - SIRET <span t-field="o.company_id.siret"/>
+						</td>
+
+					</tr>
+					<tr>
+						<td style="text-align:center;font-weight:bold;">
+							Identifiant TVA : <span t-field="o.company_id.vat"/>
+						</td>
+
+					</tr>
+					<tr>
+						<td style="text-align:center;font-weight:bold;">
+							Siège social : <span t-field="o.company_id.street"/> - <span t-field="o.company_id.zip"/> <span t-field="o.company_id.city"/> - <span t-field="o.company_id.country_id.name"/>
+						</td>
+
+					</tr>
+				</table>
+			</div>
+
+		</div>
+		<!-- </t>             -->
+	</template>
+
+
+	<template id="report_trasport_rfq_new">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="ppts_logistics.report_trasport_rfq_document_new" t-lang="o.partner_id.lang"/>
+			</t>
+		</t>
+	</template>
+
+</odoo>

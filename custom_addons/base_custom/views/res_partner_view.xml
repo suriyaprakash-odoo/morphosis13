@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_partner_form_inherited" model="ir.ui.view">
+			<field name="name">res.partner.form</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//group[1]" position="inside">
+					<group>
+						<field name="client_d3e"/>
+						<field name="client_ecologic"/>
+						<field name="client_affinage"/>
+					</group>
+				</xpath>
+				<xpath expr="//field[@name='category_id']" position="after">
+					<field name="is_transporter"/>
+					<field name="is_chronopost" attrs="{'invisible':[('is_transporter', '!=', True)]}"/>
+					<field name="is_prospect"/>
+					<field name="unknown_location"/>
+					<field name="recipit"  attrs="{'invisible':[('is_transporter', '!=', True)]}"/>
+					<field name="recipit_expiration"  attrs="{'invisible':[('is_transporter', '!=', True)]}"/>
+				</xpath>
+				<xpath expr="//field[@name='vat']" position="after">
+					<field name="short_code" attrs="{'invisible':[('is_transporter', '=', True)]}"/>
+					<field name="lot_sequence_number" attrs="{'invisible':[('is_transporter', '=', True)]}"/>
+				</xpath>
+
+				<xpath expr="//page[@name='sales_purchases']" position="after">
+					<page name="opening_hours" string="Opening Hours">
+						<group string="Opening Hours">
+							<label for='morning_opening_hours_start' string="Morning Opening Hours"/>
+							<div>
+								<field name='morning_opening_hours_start' style="width:15%" />
+								-
+								<field name='morning_opening_hours_end' style="width:15%" />
+							</div>
+							<label for='evening_opening_hours_start' string="Evening Opening Hours" />
+							<div>
+								<field name='evening_opening_hours_start' style="width:15%" />
+								-
+								<field name='evening_opening_hours_end' style="width:15%" />
+								
+								<!-- attrs="{'required':[('client_d3e', '=', True)]}" -->
+							</div>
+						</group>
+						<group>
+							<label for='is_tail_lift' string="Tail-Lift" />
+							<div>
+								<field name='is_tail_lift' class="oe_inline"/>
+								<field name='hayons' attrs="{
+									'invisible': [('is_tail_lift', '=', False)],
+									'required': [('is_tail_lift', '!=', False)]
+									}" class="oe_inline"/>
+							</div>
+							<field name="grid_rotation" />
+						</group>
+					</page>
+				</xpath>
+			</field>
+		</record>
+
+
+		<record id="view_partner_filter_inherited" model="ir.ui.view">
+			<field name="name">res.partner.filter</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_res_partner_filter"/>
+			<field name="arch" type="xml">
+				<xpath expr="//filter[@name='inactive']" position="before">
+					<filter string="Transporter" name="is_transporter" domain="[('is_transporter','!=', False)]"/>
+					<filter string="Prospect" name="is_prospect" domain="[('is_prospect','!=', False)]"/>
+					<separator/>
+				</xpath>
+			</field>
+		</record>
+
+
+		<record id="res_partner_view_form" model="ir.ui.view">
+			<field name="name">res.partner.form</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="account_accountant.res_partner_view_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//group[@name='accounting_entries']" position="attributes">
+					<attribute name="groups">account.group_account_user</attribute>
+				</xpath>
+			</field>
+		</record>
+
+
+		<record id="view_partner_property_form_inherited" model="ir.ui.view">
+			<field name="name">res.partner</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="account.view_partner_property_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//group[@name='accounting_entries']" position="replace">
+					<group string="Accounting Entries" name="accounting_entries">
+						<field name="currency_id" invisible="1"/>
+						<field name="property_account_receivable_id"/>
+						<field name="property_account_payable_id"/>
+					</group>
+				</xpath>
+			</field>
+		</record>
+
+
+	</data>
+</odoo>

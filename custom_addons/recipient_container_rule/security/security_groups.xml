@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="recipient_container_record_rule" model="ir.rule">
+            <field name="name">Recipient Container</field>
+            <field name="model_id" ref="ppts_inventory_customization.model_stock_container" />
+            <!-- <field eval="True" name="active" /> -->
+            <field name="groups" eval="[(4, ref('ppts_inventory_customization.group_production_supervisor')),(4, ref('ppts_project_entries.group_project_entries_production_user'))]"/>
+            <field name="domain_force">['|',('location_id','=',False),('location_id', 'in', user.stock_location_ids.ids)]</field>
+            <field eval="True" name="active" />
+            <field name="perm_create" eval="1"/>
+	        <field name="perm_write" eval="1"/>
+	        <field name="perm_unlink" eval="1"/>
+	        <field name="perm_read" eval="1"/>
+        </record>
+
+	</data>
+</odoo>

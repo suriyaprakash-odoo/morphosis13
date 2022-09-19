@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="create_mo_wizard_form" model="ir.ui.view">
+		<field name="name">create.mo.wizard.form</field>
+		<field name="model">create.mo.wizard</field>
+		<field name="arch" type="xml">
+			<form>
+				<group>
+					<group>
+						<field name="product_id" required="1"  options="{'no_create_edit': True}"/>
+						<field name="quantity" required="1"/>
+						<field name="uom_id" required="1"  options="{'no_create_edit': True}"/>
+						<field name="bom_id" required="1"  options="{'no_create_edit': True}"/>
+					</group>
+				</group>
+				<footer>
+					<button name="create_refining_mo" string="Create Manufacturing Order" type="object" class="btn btn-sm btn-primary"/>
+					<button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="create_mo_action" model="ir.actions.act_window">
+		<field name="name">Create Subcontract</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">create.mo.wizard</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="create_mo_wizard_form"/>
+		<field name="target">new</field>
+	</record>
+</odoo>

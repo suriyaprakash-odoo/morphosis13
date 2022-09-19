@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- <record id="email_template_send_transport_request" model="mail.template">
+            <field name="name">Transport RFQ</field>
+            <field name="subject">Demande de logistique</field>
+            <field name="email_from">${object.company_id.partner_id.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="model_id" ref="ppts_logistics.model_logistics_management" />
+            <field name="auto_delete" eval="False" />
+            <field name="body_html">
+                <![CDATA[
+                    <p>Hi ${object.partner_id.name},</p>
+                    <p>Bonjour,</p>
+                    <p>Le projet ${object.origin.name or ''} a besoin d’un enlèvement de l’adresse :</p>
+                    <p>${object.pickup_street or ''}<br/>
+                    ${object.pickup_street2 or ''}<br/>
+                    ${object.pickup_city or ''}<br/>
+                    ${object.pickup_state_id.name or ''}<br/>
+                    ${object.pickup_zip or ''}<br/>
+                    ${object.pickup_countries_id.name or ''}
+                    </p>
+
+                    <p>
+                    Pour une livraison vers :<br/>
+                    ${object.delivery_street or ''}<br/>
+                    ${object.delivery_street2 or ''}<br/>
+                    ${object.delivery_city or ''}<br/>
+                    ${object.delivery_state_id.name or ''}<br/>
+                    ${object.delivery_zip or ''}<br/>
+                    ${object.delivery_countries_id.name or ''}
+                    </p>
+
+                    <p>
+                    La charge est ${object.no_of_container} contenants sur ${object.linear_meter} mètres linéaires, avec un poids de ${object.gross_weight}  kg
+                    </p>
+
+                    <p>La date d’enlèvement demandé est 
+                    %if object.pickup_date_type == 'specific':
+                          ${object.pickup_date}.
+
+                    %elif object.pickup_date_type == 'between':
+                        entre ${object.pickup_earliest_date} et ${object.pickup_latest_date}.
+                    else:
+                        dès que possible.
+                    %endif
+                    </p>
+                    <br/>
+
+                    <p>Merci,</p>
+                    <p>${object.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+            </field>
+            <field name="report_template" ref="report_trasport_order"/>
+            <field name="report_name">Order Details</field>
+        </record> -->
+
+        <record id="email_template_send_transport_request" model="mail.template">
+            <field name="name">Transport RFQ</field>
+            <field name="subject">Demande de logistique</field>
+            <field name="email_from">${object.company_id.partner_id.email}</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="model_id" ref="ppts_logistics.model_logistics_management" />
+            <field name="auto_delete" eval="False" />
+            <field name="body_html">
+                <![CDATA[
+                    <p>Bonjour ${object.partner_id.name},</p>
+                    <p>Nous avons un projet de transport avec enlèvement depuis ${object.pickup_city or ''}, ${object.pickup_state_id.name or ''} en vers ${object.delivery_city or ''} avec un poids total de ${object.gross_weight or ''} 
+                    %if object.pickup_date_type == 'specific':
+                        le ${object.pickup_date},
+
+                    %elif object.pickup_date_type == 'between':
+                        entre le ${object.pickup_earliest_date} et le ${object.pickup_latest_date},
+                    else:
+                        dès que possible.
+                    %endif
+                    <br/>Merci de nous donner votre devis pour ce projet</p>
+                    <br/>
+                    <p>Cordialement,</p>
+                    <p>${object.company_id.name}</p>
+                ]]>
+            </field>
+            <field name="report_template" ref="report_trasport_order"/>
+            <field name="report_name">Order Details</field>
+        </record>
+
+
+        <record id="email_template_send_approved_notification" model="mail.template">
+            <field name="name">Logistics Approval Notification</field>
+            <field name="subject">Logistics Approval Notification</field>
+            <field name="email_from">${object.company_id.partner_id.email}</field>
+            <field name="email_to">melanie.vincent@weeecycling.com,cyril.boutin@morphosis.fr</field>
+            <field name="model_id" ref="ppts_logistics.model_logistics_management" />
+            <field name="auto_delete" eval="False" />
+            <field name="body_html">
+                <![CDATA[
+                    <p>Hi Team,</p>
+                    <p>Greetings of the Day!</p>
+                    <p>The transport request for the project: <strong>${object.origin.name}</strong> has been approved and will be shipped by <strong>${object.partner_id.name}</strong> and expected to be received on <strong>${object.expected_delivery} </strong> </p>
+                    <p>Kindly check Project: <strong>${object.origin.name}</strong> and Transport request: <strong>${object.name}</strong> for additional informations.</p>
+                    <br/>
+                    <p>Thanks,</p>
+                    <p>${object.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+            </field>
+        </record>
+
+        <record id="email_template_send_approved_notification_to_production" model="mail.template">
+            <field name="name">Logistics Approval Outgoing Shipment Notification</field>
+            <field name="subject">Confirmation d’une expédition approuvé</field>
+            <field name="email_from">${object.company_id.partner_id.email}</field>
+            <field name="email_to">melanie.vincent@weeecycling.com,cyril.boutin@morphosis.fr</field>
+            <field name="model_id" ref="ppts_logistics.model_logistics_management" />
+            <field name="auto_delete" eval="False" />
+            <field name="body_html">
+                <![CDATA[
+                    <p>Bonjour,</p>
+                    <p>La demande de transport pour le bon de commande: <strong>${object.sales_origin.name}</strong> est approuvé est sera traité par <strong>${object.partner_id.name}</strong> La date de prélèvement prevue est le <strong>${object.pickup_date} </strong></p>
+                   
+                    <p>La demande de transport est le <strong>${object.name}</strong>, si besoin.</p>
+                    <br/>
+                    <p>Merci,</p>
+                    <p>${object.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+            </field>
+        </record>
+
+        <record id="email_template_transport_purchase_order" model="mail.template">
+            <field name="name">Transport Purchase Order Details</field>
+            <field name="model_id" ref="ppts_logistics.model_purchase_order"/>
+            <field name="subject">${object.company_id.name} Commande (Ref ${object.name or 'n/a' })</field>
+            <field name="partner_to">${object.partner_id.id}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Cher(e) ${object.partner_id.name}
+                        % if object.partner_id.parent_id:
+                            (${object.partner_id.parent_id.name})
+                        % endif
+                        <br/><br/>
+                        Vous trouverez ci-joint notre bon de commande de transport <strong>${object.name}</strong>
+                        % if object.partner_ref:
+                            avec la référence: ${object.partner_ref}
+                        % endif
+                        pour une valeur de <strong>${format_amount(object.amount_total, object.currency_id)}</strong>
+                        from ${object.company_id.name}.
+                        <br/><br/>
+                        Si vous avez des questions, n'hésitez pas de nous contacter.
+                        <br/><br/>
+                        Cordialement Votre,
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="ppts_logistics.report_transport_purchase_order"/>
+            <field name="report_name">Order Details</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="user_signature" eval="False"/>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

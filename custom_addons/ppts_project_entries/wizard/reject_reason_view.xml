@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_reject_project_entry" model="ir.ui.view">
+        <field name="name">reject.project.entry.form</field>
+        <field name="model">reject.project.entry</field>
+        <field name="arch" type="xml">
+            <form string="Reject Project Entry">
+            	<sheet>
+					<group>
+						<field name="name" required="1"/>
+					</group>
+				</sheet>
+                <footer>
+                    <button name="reject_project_entry" string="Reject" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="action_reject_project_entry" model="ir.actions.act_window">
+		<field name="name">Reject Project Entry</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">reject.project.entry</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_reject_project_entry" />
+		<field name="target">new</field>
+	</record>
+
+</odoo>

@@ -1,0 +1,133 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bills_approval
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e-20191017\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-07 10:19+0000\n"
+"PO-Revision-Date: 2020-12-07 10:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bills_approval
+#: model:mail.template,body_html:bills_approval.template_send_for_approval
+msgid ""
+"\n"
+"\t\t\t\t\n"
+"                    <p>Hi,</p>\n"
+"\n"
+"                    <p>There is a bill waiting for your approval to process the payment. Find the details below.\n"
+"                    <br/>\n"
+"                    <br/>\n"
+"                    % if object.invoice_origin\n"
+"                    \t<p>Purchase Order: <strong>${object.invoice_origin}</strong> </p>\n"
+"                    % endif\n"
+"                    <br/>\n"
+"                    <p>Vendor: <strong>${object.partner_id.name}</strong></p>\n"
+"                    <br/>\n"
+"                    <p>Total Amount: <strong>${format_amount(object.amount_total, object.currency_id)}</p>\n"
+"                    <br/>\n"
+"\t\t\t\t\t<br/>\n"
+"\n"
+"\t\t\t\t\t<a href=\"${ctx.get('url')}\"\n"
+"\t\t\t\t\t\tstyle=\"background-color: #875A7B; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 15px;text-transform:uppercase;\">Click to Open</a>\n"
+"\t\t\t\t\t<br/>\n"
+"\t\t\t\t\t<br/>\n"
+"\t\t\t\t\t<br/>\n"
+"\t\t\t\t\t<br/>\n"
+"\n"
+"                    <p>Thanks,</p>\n"
+"                    <p>${object.company_id.name}</p>\n"
+"                    <p><i>Morphosis Group</i></p>\n"
+"                \n"
+"\t\t\t"
+msgstr ""
+
+#. module: bills_approval
+#: model:ir.model.fields,field_description:bills_approval.field_account_move__approval_required
+msgid "Approval Required?"
+msgstr ""
+
+#. module: bills_approval
+#: model_terms:ir.ui.view,arch_db:bills_approval.view_move_form_inherit
+msgid "Approve"
+msgstr "Approuver"
+
+#. module: bills_approval
+#: model:res.groups,name:bills_approval.group_approve_bills
+msgid "Approve Bills"
+msgstr ""
+
+#. module: bills_approval
+#: model:ir.actions.act_window,name:bills_approval.action_invoice_approve
+#: model:ir.ui.menu,name:bills_approval.menu_invoice_approve
+msgid "Bill Approval"
+msgstr "Approbation des factures"
+
+#. module: bills_approval
+#: model:mail.template,subject:bills_approval.template_send_for_approval
+msgid "Bill Approval Notification"
+msgstr ""
+
+#. module: bills_approval
+#: model:ir.model.fields,field_description:bills_approval.field_res_company__invoice_threshold
+msgid "Billing Threshold"
+msgstr ""
+
+#. module: bills_approval
+#: model:ir.model,name:bills_approval.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: bills_approval
+#: model:ir.model,name:bills_approval.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: bills_approval
+#: model_terms:ir.ui.view,arch_db:bills_approval.view_company_form_inherit
+#: model_terms:ir.ui.view,arch_db:bills_approval.view_users_form_inherit
+msgid "Invoice & Billing"
+msgstr ""
+
+#. module: bills_approval
+#: model:ir.model.fields,field_description:bills_approval.field_res_partner__approver_id
+#: model:ir.model.fields,field_description:bills_approval.field_res_users__approver_id
+msgid "Invoice/Bills Approver"
+msgstr ""
+
+#. module: bills_approval
+#: model:ir.model,name:bills_approval.model_account_move
+msgid "Journal Entries"
+msgstr "Pièces comptables"
+
+#. module: bills_approval
+#: model:ir.model.fields,field_description:bills_approval.field_account_move__approver_id
+msgid "Person to Approve"
+msgstr ""
+
+#. module: bills_approval
+#: model_terms:ir.ui.view,arch_db:bills_approval.view_move_form_inherit
+msgid "Send for Approval"
+msgstr "Envoyer pour approuval"
+
+#. module: bills_approval
+#: model_terms:ir.ui.view,arch_db:bills_approval.view_move_form_inherit
+msgid "Source Document"
+msgstr "Document d'origine"
+
+#. module: bills_approval
+#: model:ir.model.fields,field_description:bills_approval.field_account_move__state
+msgid "Status"
+msgstr "État"
+
+#. module: bills_approval
+#: model:ir.model.fields.selection,name:bills_approval.selection__account_move__state__approval
+msgid "Waiting for Approval"
+msgstr ""

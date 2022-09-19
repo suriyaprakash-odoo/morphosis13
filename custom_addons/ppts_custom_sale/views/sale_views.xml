@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Sequences for sale.order -->
+    <record id="seq_sale_order_new" model="ir.sequence">
+        <field name="name">Sale Order Sequence</field>
+        <field name="code">sale.order.new</field>
+        <field name="prefix">CC/%(y)s/%(woy)s/</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+
+    <record id="view_order_form_container_inherited" model="ir.ui.view">
+        <field name="name">sale.order.customization</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <field name="payment_term_id" position="after">
+                <field name="no_of_container" attrs="{'required': [('sale_by', 'in', ['container'])]}"/>
+                <field name="sale_by" required='1'/>
+            </field>
+
+            <xpath expr="//button[@id='action_confirm']" position="replace">
+                <button name="action_confirm" id="action_confirm" string="Confirm" class="btn-primary" type="object"
+                        attrs="{'invisible': [('state', 'not in', ['logistics'])]}"/>
+            </xpath>
+
+            <xpath expr="//button[@id='action_confirm']" position="after">
+                <button name="action_confirm_so" string="Confirm SO" class="btn-primary" type="object"
+                        attrs="{'invisible': [('include_logistics', '=', False)]}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='sale_order_template_id']" position="after">
+                <field name="is_contrack_work"/>
+                <field name="is_transport"/>
+                <field name="hide_price"/>
+                <field name="buyer_ref"/>
+                <field name="include_logistics"/>
+                <field name="shipment_validated" invisible='1' />
+            </xpath>
+
+            <xpath expr="//sheet/div[1]" position="after">
+                <div style="margin-top:0px;">
+                    <widget name="web_ribbon" text="Validated" attrs="{'invisible': [('shipment_validated', '=', False)]}"/>
+                </div>
+            </xpath>
+
+            <xpath expr="//form//sheet//notebook//page//field[@name='order_line']//tree//field[@name='name']" position="after">
+                <field name="account_analytic_id" groups="analytic.group_analytic_accounting" attrs="{'required': [('display_type', '=', False)]}"/>                         
+            </xpath>
+
+            <xpath expr="//field[@name='date_order']" position="after">
+                <field name="order_pickup_date" attrs="{'invisible': [('is_transport', '!=', False)]}"/>
+            </xpath>
+
+            <xpath expr="//button[@name='action_quotation_send']" position="before">
+                <button name="action_alert_logistics_sale" id="action_alert_logistics_sale" string="Demand for Logistics"
+                        class="btn-primary" type="object"
+                        attrs="{'invisible': ['|',('state', 'not in', ['draft','sent']),'|',('is_transport' , '=' , False)]}"
+                        groups="sales_team.group_sale_salesman"/>
+
+                <button name="send_notification" string="Alert Logistics" class="btn-primary" type="object"
+                        attrs="{'invisible': ['|', ('state', 'not in', ['draft','sent']),('is_transport', '!=', False)]}"
+                        groups="sales_team.group_sale_salesman"/>
+
+                <field name="create_transport_request" invisible="1"/>
+                <field name="trigger_action_confirm" invisible="1"/>
+
+                <button name="action_create_transport_request" string="Create Transport Request" class="btn-primary"
+                        type="object" attrs="{'invisible': [('create_transport_request','=',False)]}"
+                        groups='ppts_logistics.group_logistics_user'/>
+            </xpath>
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_transport_request"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-bus"
+                        attrs="{'invisible': [('transport_request_count', '=', 0)]}"
+                        groups="ppts_logistics.group_logistics_user">
+                    <field name="transport_request_count" widget="statinfo" string="View Transpors"/>
+                </button>
+                <button type="object" name="action_view_transport_rfq"
+                        class="oe_stat_button"
+                        icon="fa-money" attrs="{'invisible': [('transport_rfq_count', '=', 0)]}"
+                        groups="ppts_logistics.group_logistics_user">
+                    <field name="transport_rfq_count" widget="statinfo" string="Transport RFQ"/>
+                </button>
+            </xpath>
+
+            <xpath expr="//page[@name='order_lines']/field/tree/field[@name='name']" position="before">
+                <field name="container_id" widget="many2many_tags" options="{'no_create_edit': True}"/>
+                <field name="potential_sale_price"/>
+                <field name="cost_price"/>
+            </xpath>
+
+            <xpath expr="//page[@name='order_lines']/field/form/field[@name='state']" position="before">
+                <field name="container_id" options="{'no_create_edit': True}"/>
+                <field name="potential_sale_price"/>
+                <field name="cost_price"/>
+            </xpath>
+            <xpath expr="//page[@name='order_lines']" position="after">
+                <page string="Transport Details">
+                    <group>
+                        <group string="Logistics Informations">
+                            <field name='lorry_type'/>
+                            <field name='tranport_mode'/>
+                            <label for='loading_port_id' string="Port of Loading"/>
+                            <div>
+                                <field name='loading_port_id' attrs="{
+									'invisible': [('tranport_mode', 'in', ['direct','route'])],
+									'required': [('tranport_mode', 'not in', ['direct','route'])]
+									}" style="width:45%"/>
+                                <field name="loading_port_code" attrs="{
+									'invisible': [('tranport_mode', 'in', ['direct','route'])],
+									'required': [('tranport_mode', 'not in', ['direct','route'])]
+									}" style="width:45%;margin-left:10px;"/>
+                            </div>
+                            <label for='unloading_port_id' string="Port of Unloading"/>
+                            <div>
+                                <field name='unloading_port_id' attrs="{
+									'invisible': [('tranport_mode', 'in', ['direct','route'])],
+									'required': [('tranport_mode', 'not in', ['direct','route'])]
+									}" style="width:45%"/>
+                                <field name="unloading_port_code" attrs="{
+									'invisible': [('tranport_mode', 'in', ['direct','route'])],
+									'required': [('tranport_mode', 'not in', ['direct','route'])]
+									}" style="width:45%;margin-left:10px;"/>
+                            </div>
+
+                            <separator string='Collection'/>
+                            <field name='collection_date_type' required="0"/>
+                            <field name='estimated_collection_date' attrs="{
+										'required' : [('collection_date_type' , '=' , 'specific')],
+										'invisible' : [('collection_date_type' , '!=' , 'specific')]
+									}"/>
+                            <field name='collection_date_from' attrs="{
+										'required' : [('collection_date_type' , '=' , 'between')],
+										'invisible' : [('collection_date_type' , '!=' , 'between')]
+									}"/>
+                            <field name='collection_date_to' attrs="{
+										'required' : [('collection_date_type' , '=' , 'between')],
+										'invisible' : [('collection_date_type' , '!=' , 'between')]
+									}"/>
+                            <field name="actual_date"/>
+                            <field name="waste_code" required="1"/>
+                            <field name="material"/>
+                            <field name="dimension"/>
+                        </group>
+                        <group>
+                            <field name="pickup_location_id" context="{'show_address': 1}"
+                                   options='{"always_reload": True, "highlight_first_line": True,"no_create_edit": True}'/>
+                            <field name="is_full_load"/>
+                            <label for='is_tail_lift' string="Tail-Lift"/>
+                            <div>
+                                <field name='is_tail_lift' class="oe_inline"/>
+                                <field name='hayons' attrs="{
+									'invisible': [('is_tail_lift', '=', False)],
+									'required': [('is_tail_lift', '!=', False)]
+									}" class="oe_inline"/>
+                            </div>
+                        </group>
+                        <group string="Opening Hours">
+                            <label for='morning_opening_hours_start' string="Morning Opening Hours"/>
+                            <div>
+                                <field name='morning_opening_hours_start' style="width:15%"/>
+                                -
+                                <field name='morning_opening_hours_end' style="width:15%"/>
+                            </div>
+                            <label for='evening_opening_hours_start' string="Evening Opening Hours"/>
+                            <div>
+                                <field name='evening_opening_hours_start' style="width:15%"/>
+                                -
+                                <field name='evening_opening_hours_end' style="width:15%"/>
+                            </div>
+                        </group>
+                        <group string="Shipment">
+                            <field name="container_count"/>
+                            <field name='qty_of_container' attrs="{
+									'invisible': [('container_count', 'not in', ['specified'])],
+									'required': [('container_count', 'in', ['specified'])]
+									}"/>
+								<field name="linear_meter" attrs="{
+									'invisible': [('container_count', 'not in', ['specified'])]}"/>
+                                    <!-- 'required': [('container_count', 'in', ['specified']),('is_full_load' , '=' , False)] -->
+                            <field name="total_quantity"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+            <!-- <xpath expr="//page[@name='order_lines']/field/tree/field[@name='product_uom_qty']" position="after">
+                <field name="weight" />
+            </xpath>
+
+            <xpath expr="//page[@name='order_lines']/field/tree/field[@name='price_subtotal']" position="after">
+                <button name="%(ppts_custom_sale.action_sale_picking_list)d" context="{'default_product_id': product_id,'default_weight':weight}" string="Picking List" class="btn-primary" type="action" />
+            </xpath> -->
+
+        </field>
+    </record>
+    <record id="view_order_tree_container_inherited" model="ir.ui.view">
+        <field name="name">sale.order.tree.customization</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="/tree/field[@name='partner_id']" position="after">
+                <field name="buyer_ref"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

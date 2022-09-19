@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_additional_sale_order,project.additonal_sales.user,additonal_sales.model_additional_sale_orders,ppts_project_entries.group_project_entries_officer,1,1,1,0
+access_additional_sale_order_manager,project.additonal_sales.manager,additonal_sales.model_additional_sale_orders,ppts_project_entries.group_project_entries_manager,1,1,1,0

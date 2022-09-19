@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="action_so_po_billing_report" model="ir.actions.server">
+			<field name="name">Billing Report</field>
+			<field name="model_id" ref="model_so_po_billing_report"/>
+			<field name="state">code</field>
+			<field name="code">
+				action = model.generate_billing_report()
+			</field>
+		</record>
+
+		<menuitem name="Billing Report" id="menu_so_po_billing_report"
+				  parent="ppts_inventory_customization.menu_project_report"
+				  action="action_so_po_billing_report"
+				  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager"/>
+
+		<record id="so_po_billing_report_tree_view" model="ir.ui.view">
+			<field name="name">so.po.billing.report.tree</field>
+			<field name="model">so.po.billing.report</field>
+			<field name="arch" type="xml">
+				<tree create="0">
+					<field name="name"/>
+					<field name="partner_id"/>
+					<field name="order_date" optional="hide"/>
+					<field name="company_id" optional="hide"/>
+					<!-- <field name="product_ids" widget="many2many_tags"/> -->
+					<field name="product_name"/>
+					<field name="currency_id" invisible="1"/>
+					<field name="amount_untaxed"/>
+					<field name="amount_tax" optional="hide"/>
+					<field name="amount" optional="hide"/>
+					<field name="to_invoice" invisible="1"/>
+					<field name="inv_total"/>
+					<field name="to_invoice_untaxed" string="To Invoice"/>
+					<field name="inv_due" optional="hide"/>
+					<field name="total_paid" optional="hide"/>
+					<field name="type" invisible="1"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="so_po_billing_report_search" model="ir.ui.view">
+		<field name="name">so.po.billing.report</field>
+		<field name="model">so.po.billing.report</field>
+		<field name="arch" type="xml">
+			<search string="Search">
+				<filter string="Amount Due" name="group_by_inv_due" domain="[('inv_due', '!=', 0)]"/>
+				<field name="name" string="Order" filter_domain="[('name', 'ilike', self)]"/>
+				<field name="partner_id" string="Customer/Vendor" filter_domain="[('partner_id', 'ilike', self)]"/>
+				<separator/>
+				<field name="type"/>
+				<field name="partner_id"/>
+				<field name="company_id"/>
+				<group expand="0" string="Group By">
+					<filter name="group_type" string="Type" context="{'group_by': 'type'}" help="Group by Type"/>
+					<filter name="group_partner" string="Customer/Vendor" context="{'group_by': 'partner_id'}" help="Group by Partner"/>
+					<filter name="group_company_id" string="Company" context="{'group_by': 'company_id'}" help="Group by Company"/>
+				</group>
+			</search>
+		</field>
+	</record>
+
+	</data>
+</odoo>

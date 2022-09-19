@@ -1,0 +1,167 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* xs_purchase_advance_payment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-30 17:50+0000\n"
+"PO-Revision-Date: 2020-08-30 17:50+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: xs_purchase_advance_payment
+#: code:addons/xs_purchase_advance_payment/wizard/purchase_advance_payment_wizard.py:0
+#: model:ir.actions.act_window,name:xs_purchase_advance_payment.action_purchase_voucher_wizard
+#: model_terms:ir.ui.view,arch_db:xs_purchase_advance_payment.purchase_order_form_change_button
+#: model_terms:ir.ui.view,arch_db:xs_purchase_advance_payment.view_account_purchase_voucher_wizard
+#, python-format
+msgid "Advance Payment"
+msgstr "Acompte"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard__amount_advance
+msgid "Amount advanced"
+msgstr "Montant avancé"
+
+#. module: xs_purchase_advance_payment
+#: code:addons/xs_purchase_advance_payment/wizard/purchase_advance_payment_wizard.py:0
+#, python-format
+msgid "Amount of advance is greater than residual amount on purchase."
+msgstr "Le montant de l'avance est supérieur au montant résiduel à l'achat."
+
+#. module: xs_purchase_advance_payment
+#: code:addons/xs_purchase_advance_payment/wizard/purchase_advance_payment_wizard.py:0
+#, python-format
+msgid "Amount of advance must be positive."
+msgstr "Le montant de l'avance doit être positif."
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard__amount_total
+msgid "Amount total"
+msgstr "Montant total"
+
+#. module: xs_purchase_advance_payment
+#: model_terms:ir.ui.view,arch_db:xs_purchase_advance_payment.view_account_purchase_voucher_wizard
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard__create_date
+msgid "Created on"
+msgstr "Créé sur"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard__currency_amount
+msgid "Curr. amount"
+msgstr "Montant en devise"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard__currency_id
+msgid "Currency"
+msgstr "Devise"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard__date
+msgid "Date"
+msgstr "Date"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard__display_name
+msgid "Display Name"
+msgstr "Afficher un nom"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard__exchange_rate
+msgid "Exchange rate"
+msgstr "Taux de change"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard__id
+msgid "ID"
+msgstr "ID"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard__journal_id
+msgid "Journal"
+msgstr "Journal"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: xs_purchase_advance_payment
+#: model_terms:ir.ui.view,arch_db:xs_purchase_advance_payment.view_account_purchase_voucher_wizard
+msgid "Make Advance Payment"
+msgstr "Effectuer un paiement anticipé"
+
+#. module: xs_purchase_advance_payment
+#: model_terms:ir.ui.view,arch_db:xs_purchase_advance_payment.view_account_purchase_voucher_wizard
+msgid "Operation"
+msgstr "Opération"
+
+#. module: xs_purchase_advance_payment
+#: model_terms:ir.ui.view,arch_db:xs_purchase_advance_payment.purchase_order_form_change_button
+msgid "Pay Purchase Advance"
+msgstr "Payer une avance d'achat"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_purchase_order__account_payment_ids
+msgid "Pay Purchase Advanced"
+msgstr "Payer l'achat avancé"
+
+#. module: xs_purchase_advance_payment
+#: model_terms:ir.ui.view,arch_db:xs_purchase_advance_payment.view_account_purchase_voucher_wizard
+msgid "Payment Method"
+msgstr "Mode de paiement"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model,name:xs_purchase_advance_payment.model_account_payment
+msgid "Payments"
+msgstr "Paiements"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_payment__purchase_id
+msgid "Purchase"
+msgstr "achat"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model,name:xs_purchase_advance_payment.model_purchase_order
+msgid "Purchase Order"
+msgstr "Bon de commande"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_account_purchase_voucher_wizard__payment_ref
+msgid "Ref."
+msgstr "Référence"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model.fields,field_description:xs_purchase_advance_payment.field_purchase_order__amount_resisual
+msgid "Residual amount"
+msgstr "Montant résiduel"
+
+#. module: xs_purchase_advance_payment
+#: model:ir.model,name:xs_purchase_advance_payment.model_account_purchase_voucher_wizard
+msgid "account.purchase.voucher.wizard"
+msgstr "account.purchase.voucher.wizard"

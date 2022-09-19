@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="create_container_wizard_form" model="ir.ui.view">
+		<field name="name">create.container.wizard.form</field>
+		<field name="model">create.container.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Create Container">
+				<group>
+					<group>
+						<field name="project_id" options="{'no_create_edit': True, 'no_open': True }"/>
+						<!-- <field name="project_entry_line_id" options="{'no_create_edit': True}" attrs="{'invisible': [('action_type', '!=', 'cross_dock')],'required': [('action_type', '=', 'cross_dock')]}"/> -->
+						<field name="picking_id" options="{'no_create_edit': True}"/>
+						<field name="partner_id" options="{'no_create_edit': True}"/>
+						<field name="container_type_id" options="{'no_create_edit': True}" attrs="{'invisible': [('action_type', '=', 'internal')],'required': [('action_type', '!=', 'internal')]}"/>
+						<field name="net_weight_of_shipment" style="pointer-events: none;" string='Shipment Gross Weight' />
+						<field name="allocated_weight" style="pointer-events: none;" />
+						<field name="unallocated_weight" style="pointer-events: none;" />
+						<!-- <field name="crossdock_allocated_weight" style="pointer-events: none;" attrs="{'invisible': [('action_type', '!=', 'cross_dock')]}" />
+						<field name="crossdock_unallocated_weight" style="pointer-events: none;" attrs="{'invisible': [('action_type', '!=', 'cross_dock')]}" /> -->
+						<field name="gross_weight" attrs="{'invisible': [('action_type', '=', 'internal')]}" />
+						<field name="tare_weight" style="pointer-events: none;"/>
+						<field name="extra_tare"/>
+						<field name="company_id" invisible="1"/>
+						<field name="quantity" attrs="{'invisible': [('action_type', '=', 'internal')]}" />
+						<!--<field name="cross_dock"/>-->
+					</group>
+					<group>
+						<field name="cnt_created" invisible="1"/>
+						<field name="fifteen_day_notice" invisible="1"/>
+						<field name="fifteen_days_date" readonly="1"/>
+						<field name="action_type" required="1"/>
+						<field name="external_action_type" attrs="{'required': [('action_type', '=', 'external')],'invisible': [('action_type', '!=', 'external')]}" />
+						<field name='main_product_id' required="1" options="{'no_create_edit': True,'no_open': True}"/>
+						<field name="sub_product_id" attrs="{'required': [('action_type', '=', 'internal')]}" options="{'no_create_edit': True,'no_open': True}"/>
+						<field name="confirmation"/>
+						<field name="non_conformity_type" attrs="{'required': [('confirmation', '=', 'non_conformity')],'invisible': [('confirmation', '!=', 'non_conformity')]}"/>
+						<field name="location_id" options="{'no_create_edit': True, 'no_open': True }"/>
+						<field name="container_count" attrs="{'invisible': [('action_type', 'in', ('internal'))],'required': [('action_type', '!=', 'internal')]}" />
+						<field name="returnable_container" string="Reusable Container" attrs="{'invisible': [('action_type', '=', 'internal')]}"/>
+						<field name="is_registered_package" attrs="{'invisible': [('action_type', 'in', ('internal'))]}"/>
+						<field name="is_refining" invisible="1"/>
+						<field name="add_desc" attrs="{'invisible': [('is_refining', '=', False)]}" />
+						<field name="description" attrs="{'invisible': [('add_desc', '=', False)],'required': [('add_desc', '!=', False)]}"/>
+						<!-- <field name="recipient_container_id"
+							   context="{'default_content_type_id': sub_product_id,'default_related_company_id':company_id,'default_container_type_id':container_type_id,'default_is_vrac':True}"
+							   attrs="{'invisible': [('action_type', '!=', 'internal')],'required': [('action_type', '=', 'internal')]}"/>
+						<field name="recipient_container_dup" attrs="{'invisible': [('recipient_container_dup', '=', False)]}"/>
+						<field name="operator_id" options="{'no_create_edit': True}" attrs="{'invisible': [('action_type', '!=', 'internal')],'required': [('action_type', '=', 'internal')]}"/> -->
+					</group>
+				</group>
+				<group string="Container Details" attrs="{'invisible': [('action_type', '!=', 'internal')]}">
+					<field name="container_lines" nolabel="1" attrs="{'readonly': [('cnt_created', '!=', False)]}"
+						   context="{'default_container_type_id': container_type_id,'default_location_id':location_id,'default_sub_product_id': sub_product_id,'default_cross_dock':True}">
+						<tree editable="bottom">
+							<field name ="container_type_id" required="1"/>
+							<field name ="tare_weight"/>
+							<field name ="absolute_tare_weight" />
+							<field name ="weight" required="1"/>
+							<field name="number_of_pieces_qty" required="1"/>
+							<field name ="location_id" invisible="1"/>
+							<field name ="sub_product_id" invisible="1"/>
+							<field name ="cross_dock" invisible="1"/>
+							<field name ="recp_id" invisible="1"/>
+							<field name ="rcp_name" invisible="1"/>
+							<field name ="is_second_process"/>
+						</tree>
+					</field>
+				</group>
+				<group string="Notes">
+					<field name="notes" nolabel="1"/>
+				</group>
+				<notebook attrs="{'invisible': [('cnt_created', '=', False)]}">
+					<page string="Containers" attrs="{'invisible': [('cnt_created', '=', False)]}">
+						<field name="container_ids" readonly="1">
+							<tree>
+								<field name='name'/>
+								<field name='project_id'/>
+								<field name='picking_id'/>
+								<field name="partner_id"/>
+								<field name='container_type_id'/>
+								<field name="main_product_id"/>
+								<field name="sub_product_id"/>
+								<field name='gross_weight'/>
+								<field name='net_weight'/>
+							</tree>
+						</field>
+					</page>
+					<page string="Fractions" attrs="{'invisible': [('cnt_created', '=', False)]}">
+						<field name="fraction_ids" readonly="1">
+							<tree>
+								<field name='name'/>
+								<field name='project_id'/>
+								<field name='source_container_id'/>
+								<field name='supplier_id'/>
+								<field name='main_product_id'/>
+								<field name='sub_product_id'/>
+							</tree>
+						</field>
+					</page>
+				</notebook>
+				<footer>
+					<button name="action_create_containers" string="Create Containers" type="object" class="btn btn-sm btn-primary" attrs="{'invisible': [('action_type', 'in',('internal'))]}"/>
+					<button name="action_complete_cross_dock" string="Complete Internal Process" attrs="{'invisible': ['|',('cnt_created', '!=', False),('action_type', '!=', 'internal')]}" type="object" class="btn btn-sm btn-primary"/>
+					<!-- <button name="create_vrac_process" string="Complete Vrac" attrs="{'invisible': [('action_type', '!=', 'loose')]}" type="object" class="btn btn-sm btn-primary"/> -->
+					<button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+					<!--<button name="action_open_containers" string="Open Container" type="object" class="btn btn-sm btn-primary"/>-->
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="create_container_action" model="ir.actions.act_window">
+		<field name="name">Create Container</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">create.container.wizard</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="create_container_wizard_form"/>
+		<field name="target">new</field>
+	</record>
+</odoo>

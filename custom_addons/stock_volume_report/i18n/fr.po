@@ -1,0 +1,178 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_volume_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e-20191017\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-07 12:14+0000\n"
+"PO-Revision-Date: 2020-12-07 12:14+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__name
+msgid "Container"
+msgstr "Récipient"
+
+#. module: stock_volume_report
+#: model_terms:ir.ui.view,arch_db:stock_volume_report.stock_status_line_search
+msgid "Container Sequence"
+msgstr ""
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__type
+#: model_terms:ir.ui.view,arch_db:stock_volume_report.stock_status_line_search
+msgid "Container Type"
+msgstr "Type de contenant"
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status__create_uid
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status__create_date
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__currency_id
+msgid "Currency"
+msgstr "Devise"
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status__display_name
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__display_name
+msgid "Display Name"
+msgstr "Afficher Nom"
+
+#. module: stock_volume_report
+#: model:ir.model.fields.selection,name:stock_volume_report.selection__stock_status_line__type__donor_containers
+msgid "Donor Containers"
+msgstr ""
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__gross_weight
+#: model_terms:ir.ui.view,arch_db:stock_volume_report.stock_status_tree_view
+msgid "Gross Weight"
+msgstr "Poids brut"
+
+#. module: stock_volume_report
+#: model_terms:ir.ui.view,arch_db:stock_volume_report.stock_status_line_search
+msgid "Group By"
+msgstr "Regrouper par"
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status__id
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status____last_update
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status__write_uid
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status__write_date
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__net_weight
+#: model_terms:ir.ui.view,arch_db:stock_volume_report.stock_status_tree_view
+msgid "Net Weight"
+msgstr "Poids Net"
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__primary_id
+msgid "Primary Content Type"
+msgstr "Type de contenu principal"
+
+#. module: stock_volume_report
+#: model_terms:ir.ui.view,arch_db:stock_volume_report.stock_status_line_search
+msgid "Primary Type"
+msgstr "Matière"
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__rc
+msgid "RC"
+msgstr ""
+
+#. module: stock_volume_report
+#: model:ir.model.fields.selection,name:stock_volume_report.selection__stock_status_line__type__recipient_containers
+msgid "Recipient Containers"
+msgstr ""
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__remaining_weight
+msgid "Remaining Weight"
+msgstr "Solde du poids"
+
+#. module: stock_volume_report
+#: model_terms:ir.ui.view,arch_db:stock_volume_report.stock_status_line_search
+msgid "Search"
+msgstr "Rechercher"
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__secondary_id
+msgid "Secondary Content Type"
+msgstr "Type de contenu secondaire"
+
+#. module: stock_volume_report
+#: model_terms:ir.ui.view,arch_db:stock_volume_report.stock_status_line_search
+msgid "Secondary Type"
+msgstr "Sous-Matière"
+
+#. module: stock_volume_report
+#: model_terms:ir.ui.view,arch_db:stock_volume_report.stock_volume_report_wizard_form
+msgid "Show Stock Status"
+msgstr ""
+
+#. module: stock_volume_report
+#: code:addons/stock_volume_report/wizard/stock_volume_wizard.py:0
+#: model:ir.actions.act_window,name:stock_volume_report.action_stock_status_line
+#: model:ir.actions.act_window,name:stock_volume_report.stock_volume_report_wizard_action
+#: model:ir.ui.menu,name:stock_volume_report.menu_stock_status
+#: model_terms:ir.ui.view,arch_db:stock_volume_report.stock_status_tree_view
+#: model_terms:ir.ui.view,arch_db:stock_volume_report.stock_volume_report_wizard_form
+#, python-format
+msgid "Stock Status"
+msgstr "État des stocks"
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__stock_value
+msgid "Stock Value"
+msgstr ""
+
+#. module: stock_volume_report
+#: model:ir.model.fields,field_description:stock_volume_report.field_stock_status_line__volume
+#: model_terms:ir.ui.view,arch_db:stock_volume_report.stock_status_tree_view
+msgid "Volume"
+msgstr ""
+
+#. module: stock_volume_report
+#: model:ir.model,name:stock_volume_report.model_stock_status
+msgid "stock.status"
+msgstr ""
+
+#. module: stock_volume_report
+#: model:ir.model,name:stock_volume_report.model_stock_status_line
+msgid "stock.status.line"
+msgstr ""

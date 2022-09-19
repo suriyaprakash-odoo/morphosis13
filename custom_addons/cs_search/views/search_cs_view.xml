@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <menuitem id="menu_search_cs_main"
+            name="Search CS"
+            parent="ppts_inventory_customization.menu_search_main_project"
+            action="action_search_cs"
+            groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager"
+            sequence="2"/>
+
+</odoo>

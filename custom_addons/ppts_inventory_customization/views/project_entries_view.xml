@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="project_entries_form_view_inherit" model="ir.ui.view">
+			<field name="name">project.entries.form</field>
+			<field name="model">project.entries</field>
+			<field name="inherit_id" ref="ppts_project_entries.project_entries_form_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//form/group/group[2]" position="after">
+					<separator string="Container Details"/>
+					<field name="container_type_line_ids">
+						<tree editable="bottom">
+							<field name="container_type_id" required="1"/>
+							<field name="container_length"/>
+							<field name="container_width"/>
+							<field name="container_height"/>
+							<field name="final_container_height"/>
+							<field name="container_count" required="1"/>
+						</tree>
+					</field>
+				</xpath>
+				<xpath expr="//tree/field[@name='product_id']" position="after">
+					<field name="container_type_line_ids" string="Container Details"/>
+					<field name="container_count" invisible="1"/>
+				</xpath>
+
+				<!--<xpath expr="//page[@name='refining']/field[@name='silver_cost_ids']/tree/field[@name='analysis_for_certification']" position="before">
+					<field name="rc_container_ids" widget="many2many_tags" />
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='silver_cost_ids']/form/group/group[1]/field[@name='analysis_for_certification']" position="before">
+					<label for="rc_container_ids" string="Containers"/>
+					<div>
+						<field name="rc_container_ids" widget="many2many_tags" class="oe_inline"/>
+						<button name="update_actual_result" string="Update" type="object" class="oe_link"/>
+					</div>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='silver_cost_ids']/form/group" position="after">
+					<group string="Donor Containers">
+						<field name="container_ids" readonly="1" nolabel="1">
+							<tree>
+								<field name="name"/>
+								<field name="main_product_id"/>
+							</tree>
+						</field>
+					</group>
+				</xpath>
+
+				<xpath expr="//page[@name='refining']/field[@name='gold_cost_ids']/tree/field[@name='analysis_for_certification']" position="before">
+					<field name="rc_container_ids" widget='many2many_tags'/>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='gold_cost_ids']/form/group/group[1]/field[@name='analysis_for_certification']" position="before">
+					<label for="rc_container_ids" string="Containers"/>
+					<div>
+						<field name="rc_container_ids" widget="many2many_tags" class="oe_inline"/>
+						<button name="update_actual_result" string="Update" type="object" class="oe_link"/>
+					</div>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='gold_cost_ids']/form/group" position="after">
+					<group string="Donor Containers" attrs="{'invisible': [('container_ids', '=', False)]}">
+						<field name="container_ids" readonly="1" nolabel="1">
+							<tree>
+								<field name="name"/>
+								<field name="main_product_id"/>
+							</tree>
+						</field>
+					</group>
+				</xpath>
+
+				<xpath expr="//page[@name='refining']/field[@name='palladium_cost_ids']/tree/field[@name='analysis_for_certification']" position="before">
+					<field name="rc_container_ids" widget='many2many_tags'/>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='palladium_cost_ids']/form/group/group[1]/field[@name='analysis_for_certification']" position="before">
+					<label for="rc_container_ids" string="Containers"/>
+					<div>
+						<field name="rc_container_ids" widget="many2many_tags" class="oe_inline"/>
+						<button name="update_actual_result" string="Update" type="object" class="oe_link"/>
+					</div>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='palladium_cost_ids']/form/group" position="after">
+					<group string="Donor Containers" attrs="{'invisible': [('container_ids', '=', False)]}">
+						<field name="container_ids" readonly="1" nolabel="1">
+							<tree>
+								<field name="name"/>
+								<field name="main_product_id"/>
+							</tree>
+						</field>
+					</group>
+				</xpath>
+
+				<xpath expr="//page[@name='refining']/field[@name='platinum_cost_ids']/tree/field[@name='analysis_for_certification']" position="before">
+					<field name="rc_container_ids" widget='many2many_tags'/>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='platinum_cost_ids']/form/group/group[1]/field[@name='analysis_for_certification']" position="before">
+					<label for="rc_container_ids" string="Containers"/>
+					<div>
+						<field name="rc_container_ids" widget="many2many_tags" class="oe_inline"/>
+						<button name="update_actual_result" string="Update" type="object" class="oe_link"/>
+					</div>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='platinum_cost_ids']/form/group" position="after">
+					<group string="Donor Containers" attrs="{'invisible': [('container_ids', '=', False)]}">
+						<field name="container_ids" readonly="1" nolabel="1">
+							<tree>
+								<field name="name"/>
+								<field name="main_product_id"/>
+							</tree>
+						</field>
+					</group>
+				</xpath>
+
+				<xpath expr="//page[@name='refining']/field[@name='copper_cost_ids']/tree/field[@name='analysis_for_certification']" position="before">
+					<field name="rc_container_ids" widget='many2many_tags'/>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='copper_cost_ids']/form/group/group[1]/field[@name='analysis_for_certification']" position="before">
+					<label for="rc_container_ids" string="Containers"/>
+					<div>
+						<field name="rc_container_ids" widget="many2many_tags" class="oe_inline"/>
+						<button name="update_actual_result" string="Update" type="object" class="oe_link"/>
+					</div>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='copper_cost_ids']/form/group" position="after">
+					<group string="Donor Containers" attrs="{'invisible': [('container_ids', '=', False)]}">
+						<field name="container_ids" readonly="1" nolabel="1">
+							<tree>
+								<field name="name"/>
+								<field name="main_product_id"/>
+							</tree>
+						</field>
+					</group>
+				</xpath>
+
+				<xpath expr="//page[@name='refining']/field[@name='rhodium_cost_ids']/tree/field[@name='analysis_for_certification']" position="before">
+					<field name="rc_container_ids" widget='many2many_tags'/>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='rhodium_cost_ids']/form/group/group[1]/field[@name='analysis_for_certification']" position="before">
+					<label for="rc_container_ids" string="Containers"/>
+					<div>
+						<field name="rc_container_ids" widget="many2many_tags" class="oe_inline"/>
+						<button name="update_actual_result" string="Update" type="object" class="oe_link"/>
+					</div>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='rhodium_cost_ids']/form/group" position="after">
+					<group string="Donor Containers" attrs="{'invisible': [('container_ids', '=', False)]}">
+						<field name="container_ids" readonly="1" nolabel="1">
+							<tree>
+								<field name="name"/>
+								<field name="main_product_id"/>
+							</tree>
+						</field>
+					</group>
+				</xpath>
+
+				<xpath expr="//page[@name='refining']/field[@name='ruthenium_cost_ids']/tree/field[@name='analysis_for_certification']" position="before">
+					<field name="rc_container_ids" widget='many2many_tags'/>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='ruthenium_cost_ids']/form/group/group[1]/field[@name='analysis_for_certification']" position="before">
+					<label for="rc_container_ids" string="Containers"/>
+					<div>
+						<field name="rc_container_ids" widget="many2many_tags" class="oe_inline"/>
+						<button name="update_actual_result" string="Update" type="object" class="oe_link"/>
+					</div>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='ruthenium_cost_ids']/form/group" position="after">
+					<group string="Donor Containers" attrs="{'invisible': [('container_ids', '=', False)]}">
+						<field name="container_ids" readonly="1" nolabel="1">
+							<tree>
+								<field name="name"/>
+								<field name="main_product_id"/>
+							</tree>
+						</field>
+					</group>
+				</xpath>
+
+				<xpath expr="//page[@name='refining']/field[@name='iridium_cost_ids']/tree/field[@name='analysis_for_certification']" position="before">
+					<field name="rc_container_ids" widget='many2many_tags'/>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='iridium_cost_ids']/form/group/group[1]/field[@name='analysis_for_certification']" position="before">
+					<label for="rc_container_ids" string="Containers"/>
+					<div>
+						<field name="rc_container_ids" widget="many2many_tags" class="oe_inline"/>
+						<button name="update_actual_result" string="Update" type="object" class="oe_link"/>
+					</div>
+				</xpath>
+				<xpath expr="//page[@name='refining']/field[@name='iridium_cost_ids']/form/group" position="after">
+					<group string="Donor Containers" attrs="{'invisible': [('container_ids', '=', False)]}">
+						<field name="container_ids" readonly="1" nolabel="1">
+							<tree>
+								<field name="name"/>
+								<field name="main_product_id"/>
+							</tree>
+						</field>
+					</group>
+				</xpath>-->
+			</field>
+		</record>
+
+		<menuitem name="Container Details Report" id="menu_container_details_report" parent="ppts_inventory_customization.menu_project_report" action="ppts_project_entries.action_container_details_report"
+				  groups='ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager' sequence="2"/>
+
+	</data>
+</odoo>

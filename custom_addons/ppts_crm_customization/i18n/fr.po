@@ -1,0 +1,315 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ppts_crm_customization
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-19 13:53+0000\n"
+"PO-Revision-Date: 2019-12-19 13:53+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ppts_crm_customization
+#: model:mail.template,body_html:ppts_crm_customization.email_template_lead_approved
+msgid ""
+"\n"
+"\t\t\t\t\n"
+"                    <p>Hi Team,</p>\n"
+"                    <p>A Lead: <b>${object.name}</b> is approved. So kindly check and proceed further.</p>\n"
+"                    <br/>\n"
+"                    <p>Thanks,</p>\n"
+"                    <p>${object.company_id.name}</p>\n"
+"                    <p><i>Morphosis Group</i></p>\n"
+"                \n"
+"\t\t\t"
+msgstr ""
+"\n"
+"\n"
+"\n <p>Bonjour,</p>\n"
+"\n <p>Votre demande d'autorisation de la piste/opportunité <b>${object.name}</b> est approuvéé.Veuillez donc vérifier et continuer.</p>\n"
+"\n <p>Merci,</p>"
+"\n <p>${object.company_id.name}</p>\n"
+"
+
+#. module: ppts_crm_customization
+#: model:mail.template,body_html:ppts_crm_customization.email_template_lead_rejected
+msgid ""
+"\n"
+"\t\t\t\t\n"
+"                    <p>Hi Team,</p>\n"
+"                    <p>A Lead: <b>${object.name}</b> is rejected.</p>\n"
+"                    <br/>\n"
+"                    <p>Thanks,</p>\n"
+"                    <p>${object.company_id.name}</p>\n"
+"                    <p><i>Morphosis Group</i></p>\n"
+"                \n"
+"\t\t\t"
+msgstr ""
+"\n"
+"\n"
+"\n <p>Bonjour,</p>\n"
+"\n <p>Votre demande d'autorisation de la piste/opportunité <b>${object.name}</b> est refusée.</p>\n"
+"\n <p>Merci,</p>"
+"\n <p>${object.company_id.name}</p>\n"
+"
+
+#. module: ppts_crm_customization
+#: model:mail.template,body_html:ppts_crm_customization.email_template_approve_lead
+msgid ""
+"\n"
+"\t\t\t\t\n"
+"                    <p>Hi Team,</p>\n"
+"                    <p>A Lead: <b>${object.name}</b> is waiting for approval. So kindly check and approve.</p>\n"
+"                    <br/>\n"
+"                    <p>Thanks,</p>\n"
+"                    <p>${object.company_id.name}</p>\n"
+"                    <p><i>Morphosis Group</i></p>\n"
+"                \n"
+"\t\t\t"
+msgstr ""
+"\n"
+"\n"
+"\n <p>Bonjour,</p>\n"
+"\n <p>SVP me donner votre accord pour la piste/opportunité <b>${object.name}</b></p>\n"
+"\n <p>Merci,</p>"
+"\n <p>${object.company_id.name}</p>\n"
+"
+
+#. module: ppts_crm_customization
+#: model_terms:ir.ui.view,arch_db:ppts_crm_customization.crm_custom_lead_form_inherited
+msgid "<span class=\"o_stat_text\">Purchase Orders</span>"
+msgstr "<span class=\"o_stat_text\">Bonnes de Commande</span>"
+
+#. module: ppts_crm_customization
+#: model_terms:ir.ui.view,arch_db:ppts_crm_customization.sale_crm_case_form_view_oppor_inherited
+msgid "<span class=\"o_stat_text\">Sale Orders</span>"
+msgstr "<span class=\"o_stat_text\">Bon de vente</span>"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_lead__is_approval_mail_sent
+msgid "Approval Mail Sent"
+msgstr "Courrier d'approbation envoyé"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_lead__is_approval
+msgid "Approval required"
+msgstr "Approuval requis"
+
+#. module: ppts_crm_customization
+#: model_terms:ir.ui.view,arch_db:ppts_crm_customization.crm_custom_lead_form_inherited
+msgid "Approve Lead"
+msgstr ""
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_lead__is_approved
+msgid "Approved"
+msgstr "Approuver la pistes"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__lead_id
+msgid "CRM Ref"
+msgstr "Réf CRM"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__container_ids
+msgid "Containers"
+msgstr "Contenants"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__create_date
+msgid "Created on"
+msgstr "Créé sur"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__currency_id
+msgid "Currency"
+msgstr "Devise"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__description
+msgid "Description"
+msgstr "La description"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__display_name
+msgid "Display Name"
+msgstr "Afficher un nom"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__estimated_transport_cost
+msgid "Estimated Transport Cost"
+msgstr "Coût de transport estimé"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__id
+msgid "ID"
+msgstr ""
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: ppts_crm_customization
+#: model:mail.template,subject:ppts_crm_customization.email_template_approve_lead
+msgid "Lead Approval Request"
+msgstr ""
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_lead__lead_type
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__parent_lead_type
+msgid "Lead Type"
+msgstr "Type de piste"
+
+#. module: ppts_crm_customization
+#: model:ir.model,name:ppts_crm_customization.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Piste/opportunité"
+
+#. module: ppts_crm_customization
+#: model_terms:ir.ui.view,arch_db:ppts_crm_customization.crm_custom_lead_form_inherited
+msgid "New Purchase Quotation"
+msgstr "Nouvelle Offre"
+
+#. module: ppts_crm_customization
+#: model_terms:ir.ui.view,arch_db:ppts_crm_customization.sale_crm_case_form_view_oppor_inherited
+msgid "New Sale Quotation"
+msgstr "Nouveau Devis"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_lead__po_quotation_count
+msgid "Number of Quotations"
+msgstr "Nombre de citations"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_lead__po_order_count
+msgid "Number of Sale Orders"
+msgstr "Nombre d'ordres de vente"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__offer_price
+msgid "Offer Price"
+msgstr "Prix offert"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_purchase_order__opportunity_id
+msgid "Opportunity"
+msgstr "Opportunité"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__process_type
+msgid "Process"
+msgstr "Process"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__product_id
+msgid "Product"
+msgstr "Produit"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_lead__product_lines
+msgid "Product Lines"
+msgstr "Chaînes de production"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__production_cost
+msgid "Production Cost"
+msgstr "Prix de Revient"
+
+#. module: ppts_crm_customization
+#: model_terms:ir.ui.view,arch_db:ppts_crm_customization.crm_custom_lead_form_inherited
+msgid "Products"
+msgstr "Des produits"
+
+#. module: ppts_crm_customization
+#: model_terms:ir.ui.view,arch_db:ppts_crm_customization.crm_custom_lead_form_inherited
+msgid "Project Owner"
+msgstr "Vendeur"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields.selection,name:ppts_crm_customization.selection__crm_lead__lead_type__purchase
+#: model:ir.model.fields.selection,name:ppts_crm_customization.selection__crm_product_line__parent_lead_type__purchase
+msgid "Purchase"
+msgstr "achat"
+
+#. module: ppts_crm_customization
+#: model:ir.model,name:ppts_crm_customization.model_purchase_order
+msgid "Purchase Order"
+msgstr "Commande fournisseur"
+
+#. module: ppts_crm_customization
+#: model_terms:ir.ui.view,arch_db:ppts_crm_customization.crm_custom_lead_form_inherited
+msgid "Purchase Quotations"
+msgstr ""
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__quantity
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields.selection,name:ppts_crm_customization.selection__crm_lead__lead_type__sales
+#: model:ir.model.fields.selection,name:ppts_crm_customization.selection__crm_product_line__parent_lead_type__sales
+msgid "Sales"
+msgstr "Ventes"
+
+#. module: ppts_crm_customization
+#: model_terms:ir.ui.view,arch_db:ppts_crm_customization.sale_crm_case_form_view_oppor_inherited
+msgid "Sales Quotations"
+msgstr "Devis de vente"
+
+#. module: ppts_crm_customization
+#: model_terms:ir.ui.view,arch_db:ppts_crm_customization.crm_custom_lead_form_inherited
+msgid "Send for Approval"
+msgstr "Envoyer pour approuval"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_lead__po_amount_total
+msgid "Sum of Orders"
+msgstr "Somme des commandes"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__price
+msgid "Target Sale/Purchase Price"
+msgstr "Prix de vente/achat cible"
+
+#. module: ppts_crm_customization
+#: model_terms:ir.ui.view,arch_db:ppts_crm_customization.crm_custom_lead_form_inherited
+msgid "Team"
+msgstr "Équipe"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,field_description:ppts_crm_customization.field_crm_product_line__uom_id
+msgid "Unit of Measure"
+msgstr "Unité de mesure"
+
+#. module: ppts_crm_customization
+#: model:ir.model.fields,help:ppts_crm_customization.field_crm_lead__po_amount_total
+msgid "Untaxed Total of Confirmed Orders"
+msgstr "Total des commandes confirmées non taxées"
+
+#. module: ppts_crm_customization
+#: model:ir.model,name:ppts_crm_customization.model_crm_product_line
+msgid "crm.product.line"
+msgstr ""

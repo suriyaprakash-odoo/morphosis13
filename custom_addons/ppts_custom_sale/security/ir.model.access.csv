@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_container_product_id_user,stock.container.line,model_stock_container_line,sales_team.group_sale_salesman,1,1,1,1
+access_process_type_user,process.type,model_process_type,sales_team.group_sale_salesman,1,1,1,1
+access_sale_user_logistics,logistics.management,ppts_logistics.model_logistics_management,sales_team.group_sale_salesman,1,1,0,0
+access_sale_user_project,project.entries,ppts_project_entries.model_project_entries,sales_team.group_sale_salesman,1,1,0,0

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="non_conformity_wizard_form" model="ir.ui.view">
+		<field name="name">non.conformity.wizard.form</field>
+		<field name="model">non.conformity.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Invoice Verified">
+				<group>
+					<group>
+						<field name="conformity_type"/>
+					</group>
+					<group>
+						<field name="company_id" invisible="1"/>
+						<field name="quarantine_location" options="{'no_create_edit': True}"/>
+					</group>
+				</group>
+				<footer>
+					<button name="move_to_quarantine" string="Confirm" type="object" class="btn btn-sm btn-primary"/>
+					<button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+					<span class="alert alert-warning" role="alert" style="float:right">Container will be moved to Quarantine, Alert mail will be sent to the developer</span>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="non_conformity_action" model="ir.actions.act_window">
+		<field name="name">Non Conformity</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">non.conformity.wizard</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="non_conformity_wizard_form"/>
+		<field name="target">new</field>
+	</record>
+</odoo>

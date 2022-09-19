@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            string="Picking List"
+            id="report_container_picking_list"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            name="ppts_inventory_customization.report_container_picking_list_action"
+            file="ppts_inventory_customization.report_container_picking_list_action"
+            print_report_name="'%s - %s' % (object.name, (object.origin))"
+        />
+
+    </data>
+</odoo>

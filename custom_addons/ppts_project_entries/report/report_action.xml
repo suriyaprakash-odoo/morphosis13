@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <report
+            string="Logistics Request"
+            id="report_logistic_request"
+            model="project.entries"
+            report_type="qweb-pdf"
+            name="ppts_project_entries.report_logistics_request_action"
+            file="ppts_project_entries.report_logistics_request_action"
+            print_report_name="'Logistics Request'"
+        />
+
+
+        <report
+            string="Mask PO Report"
+            id="report_mask_po"
+            model="purchase.order"
+            report_type="qweb-pdf"
+            name="ppts_project_entries.report_mask_purchaseorder"
+            file="ppts_project_entries.report_mask_purchaseorder"
+            print_report_name="'Mask Purchase Order'"
+        />
+
+    </data>
+</odoo>

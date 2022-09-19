@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<odoo>
+	<record id="reconfirm_wizard_form" model="ir.ui.view">
+		<field name="name">reconfirm.wizard.form</field>
+		<field name="model">reconfirm.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Invoice Verified">
+				<group>
+					<group>
+						<field name="sort_possible"/>
+						<field name="supplier_agreed" attrs="{'invisible':[('sort_possible','=','not_possible')]}"/>
+						<field name="return_container" attrs="{'invisible':[('sort_possible','=','possible')]}"/>
+					</group>
+					<group>
+						<field name="company_id" invisible="1"/>
+						<field name="penalty_amount" attrs="{'invisible':[('sort_possible','=','not_possible')],'required':[('sort_possible','=','possible')]}"/>
+						<field name="location_id" options="{'no_create_edit': True}" required="1"/>
+					</group>
+				</group>
+				<footer>
+					<button name="reconfirm_container" string="Confirm" type="object" class="btn btn-sm btn-primary"/>
+					<button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+					<!--<span class="alert alert-warning" role="alert" style="float:right">Container will be moved to Quarantine, Alert mail will be sent to the developer</span>-->
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="reconfirm_wizard_action" model="ir.actions.act_window">
+		<field name="name">Reconfirm Container</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">reconfirm.wizard</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="reconfirm_wizard_form"/>
+		<field name="target">new</field>
+	</record>
+</odoo>

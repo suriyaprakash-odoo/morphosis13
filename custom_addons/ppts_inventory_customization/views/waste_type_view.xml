@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="waste_type_master_form_view" model="ir.ui.view">
+		<field name="name">waste.type.form</field>
+		<field name="model">waste.type</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<group>
+							<field name="name"/>
+						</group>
+						<group>
+							<field name="category"/>
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="waste_type_master_tree_view" model="ir.ui.view">
+		<field name="name">waste.type.tree</field>
+		<field name="model">waste.type</field>
+		<field name="arch" type="xml">
+			<tree string="Waste Type">
+				<field name="name"/>
+				<field name="category"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_waste_type_master" model="ir.actions.act_window">
+		<field name="name">Waste Types</field>
+		<field name="res_model">waste.type</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem name="Waste Type" id="menu_waste_type_master" parent="stock.menu_stock_inventory_control" action="action_waste_type_master" groups="stock.group_stock_manager"/>
+
+</odoo>

@@ -1,0 +1,319 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* ppts_custom_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-01-09 10:01+0000\n"
+"PO-Revision-Date: 2020-01-09 10:01+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: ppts_custom_sale
+#: model:mail.template,body_html:ppts_custom_sale.email_template_demand_for_logistics
+msgid ""
+"\n"
+"                \n"
+"                    <p>Hi Team,</p>\n"
+"                    <p>Greetings of the Day!</p>\n"
+"                    <p>A Sale Quotation/Order: <strong>${object.name}</strong> has been created.So kindly allocate logistics for the same.</p>\n"
+"                    <br/>\n"
+"                    <p>Thanks,</p>\n"
+"                    <p>${object.company_id.name}</p>\n"
+"                    <p><i>Morphosis Group</i></p>\n"
+"                \n"
+"            "
+msgstr ""
+"\n"
+"\n"
+"\n <p>Bonjour,</p>\n"
+"\n <p>Le bon de commande <strong>${object.name}</strong> doit être livré à l'adresse <strong>${object.partner_id.name}</strong>. Il s'agit d'une charge (pleine) (palettes X). La date d'expédition demandée est XXX</p>\n"
+"\n <p>Merci,</p>\n"
+"\n <p>${object.company_id.name}</p>\n"
+"
+
+#. module: ppts_custom_sale
+#: model:mail.template,body_html:ppts_custom_sale.email_template_send_notification
+msgid ""
+"\n"
+"                \n"
+"                    <p>Hi Team,</p>\n"
+"                    <p>Greetings of the Day!</p>\n"
+"                    <p>We are sending a shipment for <strong>${object.partner_id.name}</strong>.</p>\n"
+"                    <p>Kindly check Sale Order/Quotation: <strong>${object.name}</strong> for additional informations.</p>\n"
+"                    <br/>\n"
+"                    <p>Thanks,</p>\n"
+"                    <p>${object.company_id.name}</p>\n"
+"                    <p><i>Morphosis Group</i></p>\n"
+"                \n"
+"            "
+msgstr ""
+"\n"
+"\n"
+"\n <p>Bonjour,</p>\n"
+"\n <p>l'acheteur <strong>${object.partner_id.name}</strong> va enlever un lot le <strong>${object.order_pickup_date}</strong>.  SVP organiser le crénau d'enlèvement avec leur transporteur.</p>\n"
+"\n <p>Merci,</p>\n"
+"\n <p>${object.company_id.name}</p>\n"
+"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_picking_list__actual_weight
+msgid "Actual Weight"
+msgstr "Vrai poids"
+
+#. module: ppts_custom_sale
+#: model_terms:ir.ui.view,arch_db:ppts_custom_sale.view_sale_picking_list
+msgid "Add Containers"
+msgstr "Ajouter des conteneurs"
+
+#. module: ppts_custom_sale
+#: model_terms:ir.ui.view,arch_db:ppts_custom_sale.view_order_form_container_inherited
+msgid "Alert Logistics"
+msgstr "Alert Logistics"
+
+#. module: ppts_custom_sale
+#: model:mail.template,subject:ppts_custom_sale.email_template_demand_for_logistics
+msgid "Allocate Logistics"
+msgstr "Demande d'expédition"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields.selection,name:ppts_custom_sale.selection__sale_order__state__logistics
+msgid "Assign Logistics"
+msgstr "Transfert à Logistique"
+
+#. module: ppts_custom_sale
+#: model_terms:ir.ui.view,arch_db:ppts_custom_sale.view_sale_picking_list
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields.selection,name:ppts_custom_sale.selection__sale_order__state__cancel
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: ppts_custom_sale
+#: code:addons/ppts_custom_sale/models/sale.py:0
+#: code:addons/ppts_custom_sale/models/sale.py:0
+#, python-format
+msgid "Compose Email"
+msgstr "Rédiger un email"
+
+#. module: ppts_custom_sale
+#: model_terms:ir.ui.view,arch_db:ppts_custom_sale.view_order_form_container_inherited
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_order_line__container_id
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_picking_list__container_ids
+msgid "Container"
+msgstr "Récipient"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields.selection,name:ppts_custom_sale.selection__sale_order__sale_by__container
+msgid "Containers"
+msgstr "Conteneurs"
+
+#. module: ppts_custom_sale
+#: model_terms:ir.ui.view,arch_db:ppts_custom_sale.view_order_form_container_inherited
+msgid "Create Transport Request"
+msgstr "Création demande logistique"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_process_type__create_uid
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_picking_list__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_process_type__create_date
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_picking_list__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: ppts_custom_sale
+#: model_terms:ir.ui.view,arch_db:ppts_custom_sale.view_order_form_container_inherited
+msgid "Demand for Logistics"
+msgstr "Demande de Logistique"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_process_type__display_name
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_picking_list__display_name
+msgid "Display Name"
+msgstr "Afficher Nom"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_process_type__estimated_production_cost
+msgid "Esmitated Production Cost"
+msgstr "Coût estimé"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_process_type__id
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_picking_list__id
+msgid "ID"
+msgstr ""
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_process_type____last_update
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_picking_list____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_process_type__write_uid
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_picking_list__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_process_type__write_date
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_picking_list__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields.selection,name:ppts_custom_sale.selection__sale_order__state__done
+msgid "Locked"
+msgstr "Bloqué"
+
+#. module: ppts_custom_sale
+#: model:mail.template,subject:ppts_custom_sale.email_template_send_notification
+msgid "Logistics Notification"
+msgstr "Planification Enlèvement"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_order__no_of_container
+msgid "Number of Containers"
+msgstr "Nombre de contenants"
+
+#. module: ppts_custom_sale
+#: code:addons/ppts_custom_sale/models/sale.py:0
+#: code:addons/ppts_custom_sale/models/sale.py:0
+#, python-format
+msgid "Please Assign containers for all the line items"
+msgstr "Veuillez attribuer des conteneurs pour tous les éléments de campagne"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_process_type__name
+msgid "Process Name"
+msgstr "Nom du process"
+
+#. module: ppts_custom_sale
+#: model:ir.actions.act_window,name:ppts_custom_sale.action_process_type_view
+#: model:ir.ui.menu,name:ppts_custom_sale.menu_process_type_master
+#: model_terms:ir.ui.view,arch_db:ppts_custom_sale.process_type_form_view
+#: model_terms:ir.ui.view,arch_db:ppts_custom_sale.process_type_tree_view
+msgid "Process Type"
+msgstr "Type de processus"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_picking_list__product_id
+msgid "Product"
+msgstr "Article"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields.selection,name:ppts_custom_sale.selection__sale_order__state__draft
+msgid "Quotation"
+msgstr "Devis"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields.selection,name:ppts_custom_sale.selection__sale_order__state__sent
+msgid "Quotation Sent"
+msgstr "Devis envoyé"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_order__transport_rfq_count
+msgid "RFQ Count"
+msgstr "Nombre de RFQ"
+
+#. module: ppts_custom_sale
+#: model:ir.actions.act_window,name:ppts_custom_sale.action_sale_picking_list
+msgid "Sale Picking List"
+msgstr "Liste de sélection de vente"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_order__sale_by
+msgid "Sale by"
+msgstr "Vente par"
+
+#. module: ppts_custom_sale
+#: model:ir.model,name:ppts_custom_sale.model_sale_order
+#: model:ir.model.fields.selection,name:ppts_custom_sale.selection__sale_order__state__sale
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: ppts_custom_sale
+#: model:ir.model,name:ppts_custom_sale.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de bons de commande"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_picking_list__sales_weight
+msgid "Sales Weight"
+msgstr "Poids des ventes"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_order__state
+msgid "Status"
+msgstr "État"
+
+#. module: ppts_custom_sale
+#: code:addons/ppts_custom_sale/models/sale.py:0
+#: model_terms:ir.ui.view,arch_db:ppts_custom_sale.view_order_form_container_inherited
+#, python-format
+msgid "Transport RFQ"
+msgstr "Transport RFQ"
+
+#. module: ppts_custom_sale
+#: code:addons/ppts_custom_sale/models/sale.py:0
+#: code:addons/ppts_custom_sale/models/sale.py:0
+#, python-format
+msgid "Transport Request"
+msgstr "Demande de transport"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_order__transport_request_count
+msgid "Transport Requests"
+msgstr "Demandes de transport"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_order__is_transport
+msgid "Transported by us?"
+msgstr "Transport par nous-mêmes"
+
+#. module: ppts_custom_sale
+#: model_terms:ir.ui.view,arch_db:ppts_custom_sale.view_sale_picking_list
+msgid "Unload Container"
+msgstr "Décharger le conteneur"
+
+#. module: ppts_custom_sale
+#: model_terms:ir.ui.view,arch_db:ppts_custom_sale.view_order_form_container_inherited
+msgid "View Transpors"
+msgstr "Voir les transports"
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_order_line__weight
+#: model:ir.model.fields.selection,name:ppts_custom_sale.selection__sale_order__sale_by__weight
+msgid "Weight"
+msgstr "Poids"
+
+#. module: ppts_custom_sale
+#: model:ir.model,name:ppts_custom_sale.model_process_type
+msgid "process.type"
+msgstr ""
+
+#. module: ppts_custom_sale
+#: model:ir.model,name:ppts_custom_sale.model_sale_picking_list
+msgid "sale.picking.list"
+msgstr ""
+
+#. module: ppts_custom_sale
+#: model:ir.model.fields,field_description:ppts_custom_sale.field_sale_order__buyer_ref
+msgid "Buyer Reference"
+msgstr "Référence Client"

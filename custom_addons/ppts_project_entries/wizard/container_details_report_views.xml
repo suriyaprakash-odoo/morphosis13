@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+		<record id="view_container_details_report" model="ir.ui.view">
+	        <field name="name">container.details.report.view.form</field>
+	        <field name="model">container.details.report</field>
+	        <field name="arch" type="xml">
+	            <form string="Container Details Report">
+	            	<sheet>
+						<group>
+							<group>
+								<field name="project_id" required="1" options="{'no_create_edit': True}" />
+							</group>
+							<group></group>
+						</group>
+					</sheet>
+	                <footer>
+	                    <button name="container_details_report" string="Generate Report" type="object" class="btn-primary"/>
+	                    <button string="Cancel" class="btn-secondary" special="cancel" />
+	                </footer>
+				</form>
+			</field>
+		</record>
+
+
+		<record id="action_container_details_report" model="ir.actions.act_window">
+			<field name="name">Container Details Report</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">container.details.report</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="view_container_details_report" />
+			<field name="target">new</field>
+		</record>
+
+		<record id="view_container_details_report_excel" model="ir.ui.view">
+			<field name="name">Container Details Report</field>
+			<field name="model">container.report</field>
+			<field name="arch" type="xml">
+				<form string="Container Details Report">
+					<group>
+						<field name="container_details_xml" readonly="1" filename="container_details_char" />
+						<field name="container_details_char" invisible="1" />
+					</group>
+					<footer>
+						<button name="cancel" string="Close" special="cancel"
+							class="oe_link" />
+					</footer>
+				</form>
+			</field>
+		</record>
+	</data>
+</odoo>

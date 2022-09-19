@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_stock_quant_tree_editable_inventory_new" model="ir.ui.view">
+		<field name="name">stock.quant.tree</field>
+		<field name="model">stock.quant</field>
+		<field name="inherit_id" ref="stock.view_stock_quant_tree_editable"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='owner_id']" position="after">
+				<field name="reuse_barcode"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="view_picking_type_form_inventory_new" model="ir.ui.view">
+		<field name="name">stock.picking..type.form</field>
+		<field name="model">stock.picking.type</field>
+		<field name="inherit_id" ref="stock.view_picking_type_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='show_operations']" position="after">
+				<field name="for_container"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="stock_picking_form_inherited_inventory_new" model="ir.ui.view">
+		<field name="name">stock.picking.form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='origin']" position="before">
+				<field name="transport_id" invisible="1"/>
+				<field name="reuse_id" invisible="1"/>
+				<field name="check_validate_button" invisible="1"/>
+				<field name="check_move_to_reception_button" invisible="1"/>
+			</xpath>
+		</field>
+	</record>
+
+
+	<record id="logistics_management_form_view_inherit" model="ir.ui.view">
+		<field name="name">logistics.management.form</field>
+		<field name="model">logistics.management</field>
+		<field name="inherit_id" ref="ppts_logistics.logistics_management_form_view"/>
+		<field name="arch" type="xml">
+			<field name="logistics_for" position="before">
+				<field name="send_containers"  attrs="{'invisible': [('transport_type', '!=', 'drop_off')]}"/>
+			</field>
+			<xpath expr="//field[@name='logistics_for']" position="attributes">
+				<attribute name="attrs">{'required': [('send_containers', '=', False)]}</attribute>
+			</xpath>
+			<xpath expr="//notebook" position="inside">
+				<page string="Container Details" attrs="{'invisible': [('send_containers', '=', False)]}">
+					<field name="container_line_ids">
+						<tree editable="bottom">
+							<field name="product_id" required="1" options="{'no_create_edit': True}"/>
+							<field name="quantity" required="1"/>
+						</tree>
+					</field>
+				</page>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="view_stock_move_line_detailed_operation_tree_new" model="ir.ui.view">
+            <field name="name">stock.move.line.operations.tree</field>
+            <field name="model">stock.move.line</field>
+            <field name="priority">1000</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" decoration-muted="(state == 'done' and is_locked == True)" decoration-danger="qty_done&gt;product_uom_qty and state!='done'" decoration-success="qty_done==product_uom_qty and state!='done' and not result_package_id">
+                    <field name="state" invisible="1"/>
+					<field name="product_id" required="1" attrs="{'readonly': ['|', ('state', '=', 'done'), ('move_id', '!=', False)]}"/>
+                    <field name="company_id" invisible="1"/>
+                    <field name="move_id" invisible="1"/>
+                    <field name="location_id" options="{'no_create': True}"  groups="stock.group_stock_multi_locations"/>
+                    <field name="location_dest_id" options="{'no_create': True}" groups="stock.group_stock_multi_locations" invisible="1"/>
+                    <field name="package_id" groups="stock.group_tracking_lot" invisible="1"/>
+                    <field name="result_package_id" groups="stock.group_tracking_lot"  invisible="1"/>
+                    <field name="lots_visible" invisible="1"/>
+                    <field name="owner_id"  invisible="1" groups="stock.group_tracking_owner" />
+                    <field name="lot_id" groups="stock.group_production_lot" attrs="{'invisible': [('lots_visible', '=', False)]}" context="{'default_product_id': product_id, 'default_company_id': company_id}"/>
+                    <field name="lot_name"  invisible="1" groups="stock.group_production_lot" attrs="{'invisible': [('lots_visible', '=', False)]}" context="{'default_product_id': product_id}"/>
+                    <field name="is_initial_demand_editable" invisible="1"/>
+                    <field name="product_uom_qty" readonly="1" invisible="1"/>
+                    <field name="is_locked" invisible="1"/>
+                    <field name="qty_done" attrs="{'readonly': [('state', 'in', ('done', 'cancel')), ('is_locked', '=', True)]}" force_save="1"/>
+					<field name="product_uom_id" force_save="1" attrs="{'readonly': [('state', '!=', 'draft')]}" groups="uom.group_uom"/>
+                </tree>
+            </field>
+        </record>
+
+</odoo>

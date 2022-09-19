@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_register_chronopost" model="ir.ui.view">
+        <field name="name">register.chronopost.view.form</field>
+        <field name="model">register.chronopost</field>
+        <field name="arch" type="xml">
+            <form string="Register chronopost">
+            	<sheet>
+					<group>
+						<group>
+							<field name="project_id" style="pointer-events: none;" />
+							<field name="shipment_id" style="pointer-events: none;" />
+							<field name="logistics_partner_id" required="1" options="{'no_create_edit': True}"/>
+						</group>
+						<field name="container_line_ids">
+							<tree editable="bottom" create="false">
+								<field name="container_id" required="1" options="{'no_create_edit': True}" style="pointer-events: none;" />
+								<field name="chronopost_number" required="1" options="{'no_create_edit': True}" style="pointer-events: none;" />
+								<field name="source_location_id" required="1" options="{'no_create_edit': True}" style="pointer-events: none;" />
+								<field name="destination_location_id" options="{'no_create_edit': True}" attrs="{'required':[('not_received','=',False)]}"/>
+								<field name="have_batteries" />
+								<field name="batteries_weight" attrs="{'required':[('have_batteries','!=',False)]}"/>
+								<field name="not_received" />
+								<field name="not_received_reason" attrs="{'required':[('not_received','!=',False)]}"/>
+							</tree>
+						</field>
+					</group>
+				</sheet>
+                <footer>
+                    <button name="register_chronopost" string="Register Chronopost" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="action_register_chronopost" model="ir.actions.act_window">
+		<field name="name">Register chronopost</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">register.chronopost</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_register_chronopost" />
+		<field name="target">new</field>
+	</record>
+
+</odoo>

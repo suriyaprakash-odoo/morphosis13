@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+      
+      <template id="report_transport_po_document">
+            <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=o.logistics_id.partner_id.lang)"/>
+                  <div>
+                        <div class="col-12" style="float:left">
+                              <p t-if="o.logistics_id.logistics_for == 'purchase'"><strong>Project : <span t-field="o.logistics_id.origin.name"/></strong></p>
+                              <p t-if="o.logistics_id.logistics_for == 'sale'"><strong>Sale Order : <span t-field="o.logistics_id.sales_origin.name"/></strong></p>
+                        </div>
+                        <div class="col-12" style="float:left">
+                              <p><strong>Transport Details</strong></p>
+                              <div class="col-6" style="float:left;">
+                                    <p><strong>Pickup Address: </strong></p>
+                                    <p>
+                                          <span t-if="o.logistics_id.pickup_partner_id.company_type == 'company'">
+                                                <span t-field="o.logistics_id.pickup_partner_id.name"/>
+                                          </span>
+                                          <span t-if="o.logistics_id.pickup_partner_id.company_type == 'person'">
+                                                <span t-if="o.logistics_id.pickup_partner_id.parent_id">
+                                                      <span t-field="o.logistics_id.pickup_partner_id.parent_id.name"/>
+                                                </span>
+                                                <span t-else="">
+                                                      <span t-field="o.logistics_id.pickup_partner_id.name"/>
+                                                </span>
+                                          </span>
+                                    </p>
+                                    <p><span t-field="o.logistics_id.pickup_street"/> <span t-if="o.logistics_id.pickup_street2"><span t-field="o.logistics_id.pickup_street2"/></span> <span t-field="o.logistics_id.pickup_city"/></p>
+                                    <p><span t-field="o.logistics_id.pickup_state_id.name"/> - <span t-field="o.logistics_id.pickup_zip"/> <span t-field="o.logistics_id.pickup_countries_id.name"/></p>
+                                    <p t-if="o.logistics_id.pickup_partner_id.phone">Phone : <span t-field="o.logistics_id.pickup_partner_id.phone"/></p>
+                                    <p t-if="o.logistics_id.pickup_partner_id.mobile">Mobile : <span t-field="o.logistics_id.pickup_partner_id.mobile"/></p>
+                                    <p><strong>Contact : </strong><span t-field="o.logistics_id.pickup_partner_id.name"/></p>
+                                    <p t-if="o.logistics_id.morning_opening_hours_start"><strong>Morning Opening Hours : </strong><span t-field="o.logistics_id.morning_opening_hours_start" /> - <span t-field="o.logistics_id.morning_opening_hours_end" /></p>
+                                    <p t-if="o.logistics_id.evening_opening_hours_start"><strong>Evening Opening Hours : </strong><span t-field="o.logistics_id.evening_opening_hours_start" /> - <span t-field="o.logistics_id.evening_opening_hours_end" /></p>
+                              </div>
+                              <div class="col-6" style="float:left;">
+                                    <p><strong>Destination Address: </strong></p>
+                                    <p><span t-field="o.logistics_id.delivery_partner_id.name"/></p>
+                                    <p><span t-field="o.logistics_id.delivery_street"/> <span t-if="o.logistics_id.delivery_street2"><span t-field="o.logistics_id.delivery_street2"/></span> <span t-field="o.logistics_id.delivery_city"/></p>
+                                    <p><span t-field="o.logistics_id.delivery_state_id.name"/> - <span t-field="o.logistics_id.delivery_zip"/> <span t-field="o.logistics_id.delivery_countries_id.name"/></p>
+                                    <p t-if="o.logistics_id.delivery_partner_id.phone">Phone : <span t-field="o.logistics_id.delivery_partner_id.phone"/></p>
+                                    <p t-if="o.logistics_id.delivery_partner_id.mobile">Mobile : <span t-field="o.logistics_id.delivery_partner_id.mobile"/></p>
+                                    <p><strong>Contact : </strong>M.Vincent 0232727414, C.Boutin 0232727418</p>
+                                    <p><strong>Opening Hours : </strong>8h-16h30(8h-15h30 le vendredi)</p>
+                              </div>
+                        </div>
+                        <div class="col-12" style="float:left">
+                              <div class="col-6" style="float:left">
+                                    <p><strong>Pickup date: </strong></p>
+                                    <p><span t-field="o.logistics_id.pickup_date"/></p>                        
+                              </div>
+                              <div class="col-6" style="float:left">
+                                    <p><strong>Expected delivery date: </strong></p>
+                                    <p><span t-field="o.logistics_id.expected_delivery"/></p>
+                              </div>
+                        </div>
+                        <div class="col-12" style="float:left">
+                              <p><strong>Load Details</strong></p>
+                              <div class="col-6" style="float:left">
+                                    <p><strong>Material : </strong>DEEE</p>
+                                    <p><strong>Number of containers : </strong><span t-field="o.logistics_id.no_of_container"/></p>
+                                    <p><strong>Linear Meter : </strong><span t-if="o.logistics_id.is_full_load != True"><span t-field="o.logistics_id.linear_meter"/></span><span t-if="o.logistics_id.is_full_load">N/A</span></p>
+                              </div>
+                              <div class="col-6" style="float:left">
+                                    <p><strong>Weight of Load(Kg) : </strong><span t-field="o.logistics_id.gross_weight"/></p>
+                                    <p><strong>Full Load : </strong><span t-if="o.logistics_id.is_full_load">Yes</span><span t-if="o.logistics_id.is_full_load != True">No</span></p>
+                              </div>
+                        </div>
+                        <div class="col-12" style="float:left">
+                              <p><strong>Lorry Details</strong></p>
+                              <div class="col-6" style="float:left">
+                                    <p><strong>Type of Lorry : </strong><span t-field="o.logistics_id.lorry_type"/></p>
+                              </div>
+                              <div class="col-6" style="float:left">
+                                    <p><strong>Tail Lift : </strong><span t-if="o.logistics_id.is_tail_lift">Yes</span><span t-if="o.logistics_id.is_tail_lift != True">No</span></p>
+                              </div>
+                        </div>
+                        <div class="col-12" style="float:left" t-if="o.logistics_id.transport_cost != 0">
+                              <p><strong>Price Details</strong></p>
+                              <div class="col-6" style="float:left">
+                                    <p><strong>Agreed Price : </strong><span t-field="o.logistics_id.transport_cost" /></p>
+                              </div>
+                        </div>
+                        <div class="col-12" style="float:left" t-if="o.logistics_id.notes">
+                              <p><strong>Additional Informations</strong></p>
+                              <p><span t-field="o.logistics_id.notes" /></p>
+                        </div>
+                        <br/>
+                        <div class="col-12 text-center" style="float:left;color:red;">
+                              <p>***ATTENTION TRANSPORT SOUS ATTESTATION DE TRANSPORTS DE DECHETS DGX ET NON DGX***</p>
+                              <p>***LE CHAUFFEUR DOIT L’AVOIR IMPERATIVEMENT DANS SON CAMION***</p>
+                              <p>***REAFFRETEMENT INTERDIT***</p>
+                        </div>
+                  </div>
+            </t>            
+      </template>
+
+
+      <template id="report_transport_po">
+          <t t-call="web.html_container">
+              <t t-foreach="docs" t-as="o">
+                  <t t-call="ppts_logistics.report_transport_po_document" t-lang="o.logistics_id.partner_id.lang"/>
+              </t>
+          </t>
+      </template>
+
+</odoo>

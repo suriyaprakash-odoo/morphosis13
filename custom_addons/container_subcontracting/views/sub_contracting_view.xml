@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record id="project_container_form_view_inherit_new" model="ir.ui.view">
+		<field name="name">project.container.form</field>
+		<field name="model">project.container</field>
+		<field name="inherit_id" ref="ppts_inventory_customization.project_container_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='main_product_id']" position="before">
+				<field name="sub_contract" attrs="{'readonly': [('state', 'not in', ('new','confirmed'))]}"/>
+				<field name="subcontract_rcvd" invisible="1"/>
+			</xpath>
+
+			<xpath expr="//div[@name='button_box']" position="inside">
+				<button class="oe_stat_button" type="object" style="width: 150px;text-align:center;"
+						attrs="{'invisible': ['|','|',('state','=','subcontract'),('sub_contract', '=', False)
+						,('sub_contract_po_id','!=',False)]}"
+						name="create_subcontract_po" icon="fa-retweet" string="Subcontract PO">
+				</button>
+			</xpath>
+
+			<xpath expr="//notebook" position="inside">
+				<page string="Subcontract Details" attrs="{'invisible': [('sub_contract', '=', False)]}">
+					<group>
+						<field name="sub_contract_po_id" readonly="1"/>
+						<field name="out_shipment_id" readonly="1"/>
+						<field name="in_shipment_id" readonly="1"/>
+					</group>
+				</page>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="stock_picking_form_inherited_inventory_inherit" model="ir.ui.view">
+		<field name="name">stock.picking.form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='origin']" position="before">
+				<field name="sub_contract" invisible="1"/>
+				<field name="container_id" attrs="{'invisible':[('sub_contract','=',False)]}"/>
+			</xpath>
+			<xpath expr="//notebook/page[3]/field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="after">
+				<field name="sub_container_ids" widget="many2many_tags"/>
+			</xpath>
+
+			<xpath expr="//div[@name='button_box']" position="inside">
+				<button name="create_subcontract_fractions"	string="Create Fractions" type="object" class="oe_stat_button" icon="fa-th"
+			attrs="{'invisible':['|','|',('sub_contract','=',False),('picking_type_code', '!=', 'incoming'), ('state', '!=', 'done')]}"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="project_container_filters" model="ir.ui.view">
+		<field name="name">project.container.search</field>
+		<field name="model">project.container</field>
+		<field name="inherit_id" ref="ppts_inventory_customization.project_container_filters"/>
+		<field name="arch" type="xml">
+			<xpath expr="//filter[@name='fifteen_day_notice']" position="after">
+				<filter string="Subcontract" name="subcontract" domain="[('sub_contract','!=', False)]"/>
+			</xpath>
+		</field>
+	</record>
+
+
+	<record id="stock_picking_form_inherited_new" model="ir.ui.view">
+		<field name="name">stock.picking.form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="ppts_inventory_customization.stock_picking_form_inherited"/>
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='%(ppts_inventory_customization.create_container_action)d']" position="attributes">
+				<attribute name="attrs">{'invisible': ['|','|',('sub_contract','!=',False), ('picking_type_code', '!=', 'incoming'), ('state', 'not in', ('reception','production'))]}</attribute>
+			</xpath>
+
+			<xpath expr="//button[@name='action_create_containers']" position="attributes">
+				<attribute name="attrs">{'invisible': ['|','|',('sub_contract','!=',False), ('picking_type_code', '!=', 'incoming'), ('state', 'not in', ('reception','production','sorted_treated','done'))]}</attribute>
+			</xpath>
+
+		</field>
+	</record>
+
+</odoo>

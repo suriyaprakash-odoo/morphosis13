@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="view_search_cs" model="ir.ui.view">
+		<field name="name">search.search.cs.form</field>
+		<field name="model">search.cs</field>
+		<field name="arch" type="xml">
+			<form string="Search Project">
+				<sheet>
+					<group>
+						<field name="cs_number" required="1" placeholder="Scan/enter container number"/>
+						<field name="int_project" invisible="1"/>
+					</group>
+				</sheet>
+				<footer>
+					<button name="search_and_open_containers" string="Open Containers" type="object" class="btn-primary"/>
+					<button string="Cancel" class="btn-secondary" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="action_search_cs" model="ir.actions.act_window">
+		<field name="name">Search CS</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">search.cs</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_search_cs"/>
+		<field name="target">new</field>
+	</record>
+
+</odoo>

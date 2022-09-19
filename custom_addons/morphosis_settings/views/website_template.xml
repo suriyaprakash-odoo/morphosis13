@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="brand_promotion_inherit" inherit_id="web.brand_promotion" name="Brand Promotion">
+		<xpath expr="//div[@class='o_brand_promotion']" position="attributes">
+			<attribute name="style">display:none</attribute>
+		</xpath>
+	</template>
+
+</odoo>

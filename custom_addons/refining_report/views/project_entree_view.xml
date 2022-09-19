@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="project_entries_form_view_inherited" model="ir.ui.view">
+		<field name="name">project.entries.form</field>
+		<field name="model">project.entries</field>
+		<field name="inherit_id" ref="ppts_project_entries.project_entries_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//page[@name='refining']/separator[2]" position="after">
+				<button name="print_refining_report" type="object" string="Refining Report" class="oe_highlight"/>
+				<separator/>
+			</xpath>
+			<xpath expr="//field[@name='extra_sales_cost']" position="after">
+				<field name="metal_profit" attrs="{'invisible' : [('project_type', '!=', 'refine')]}"/>
+			</xpath>
+
+		</field>
+	</record>
+
+	<record id="refining_report_view" model="ir.ui.view">
+		<field name="name">Refining Report</field>
+		<field name="model">refining.report</field>
+		<field name="arch" type="xml">
+			<form string="Refining Report">
+				<group>
+					<field name="refining_report_xl" readonly="1" filename="name"/>
+					<field name="name" invisible="1"/>
+				</group>
+				<footer>
+					<button name="cancel" string="Close" special="cancel" class="oe_link"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+</odoo>

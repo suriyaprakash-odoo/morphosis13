@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<odoo>
+	
+	<record id="update_initial_demand_warnig_form" model="ir.ui.view">
+		<field name="name">update.initial.demand</field>
+		<field name="model">update.initial.demand</field>
+		<field name="arch" type="xml">
+			<form string="Update Initial Demand">				
+				<sheet>
+					<group>
+						<group>
+							<field name="is_vrac_sale"/>
+							<field name="selling_weight" attrs="{'invisible':[('is_vrac_sale','=', False)]}"/>
+							<field name="container_ids" widget="many2many_tags" attrs="{'invisible':[('is_vrac_sale','=', False)]}"/>
+						</group>
+						<group>
+							<button name="get_fraction_list" string="Get Fractions" type="object" class="oe_link" attrs="{'invisible':[('is_vrac_sale','=', False)]}"/>
+						</group>
+						<field name="wizard_line_ids" readonly="1" attrs="{'invisible':[('is_vrac_sale','=', False)]}">
+							<tree editable="bottom">
+								<field name="fraction_id"/>
+								<field name="weight_of_fraction"/>
+								<field name="line_id" invisible="1"/>
+							</tree>
+						</field>
+						<div>Do you want to update the Initial Demand and quantity in Sale Order? </div>
+					</group>	
+				</sheet>				
+				<footer>
+					<button name="update_initial_demand" string="Yes" type="object"
+						class="btn btn-sm btn-primary" />
+					<button string="Cancel" class="btn btn-sm btn-default"
+						special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_update_initial_demand_warnig_form" model="ir.actions.act_window">
+		<field name="name">Update Initial Demand</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">update.initial.demand</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="update_initial_demand_warnig_form" />
+		<field name="target">new</field>
+	</record>
+
+</odoo>

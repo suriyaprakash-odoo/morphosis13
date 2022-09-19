@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="report_container_picking_list_template">
+		<t t-call="web.external_layout">
+			<t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+			<div class="page">
+				<div class="row">
+					<div>
+						<!--<style>
+							.borderless td, .borderless th {
+							border: none;
+							}
+						</style>-->
+						<table class="table">
+							<tbody>
+								<tr style="border: none;">
+									<td>
+										<span style="font-weight:bold">Picking List </span>
+									</td>
+									<td>
+										<span t-field="o.name"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span style="font-weight:bold">Origin </span>
+									</td>
+									<td>
+										<span t-field="o.origin"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span style="font-weight:bold">Partner </span>
+									</td>
+									<td>
+										<span t-field="o.partner_id"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span style="font-weight:bold">Buyer Reference </span>
+									</td>
+									<td>
+										<span t-field="o.buyer_ref"/>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<br/>
+				<br/>
+				<table class="table table-sm">
+					<thead>
+						<tr>
+							<th>
+								<strong>Product</strong>
+							</th>
+							<th>
+								<strong>Quantity</strong>
+							</th>
+							<th style="text-align:center;">
+								Container Details
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<t t-foreach="o.move_ids_without_package" t-as="line">
+							<tr>
+								<td>
+									<span t-field="line.product_id"/>
+								</td>
+								<td>
+									<span t-field="line.product_qty"/>
+									<span t-field="line.product_uom"/>
+								</td>
+								<td>
+									<table class="" style="width:500px;">
+										<tr>
+											<th>
+												Container
+											</th>
+											<th>
+												Location
+											</th>
+											<th>
+												Weight
+											</th>
+										</tr>
+										<tbody>
+											<t t-foreach="line.container_ids" t-as="inline">
+												<tr>
+													<td>
+														<span t-field="inline.name"/>
+													</td>
+													<td>
+														<span t-field="inline.location_id"/>
+													</td>
+													<td>
+														<span t-field="inline.net_weight"/>
+													</td>
+												</tr>
+											</t>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						</t>
+					</tbody>
+				</table>
+			</div>
+		</t>
+	</template>
+
+
+	<template id="report_container_picking_list_action">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<t t-call="ppts_inventory_customization.report_container_picking_list_template" t-lang="o.partner_id.lang"/>
+			</t>
+		</t>
+	</template>
+</odoo>

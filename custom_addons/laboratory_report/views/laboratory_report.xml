@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="lab_report_sequence" model="ir.sequence">
+		<field name="name">Laboratory Sequence</field>
+		<field name="code">lab.report.seq</field>
+		<field name="prefix">RA/%(y)s/%(woy)s/</field>
+		<field name="padding">2</field>
+		<field name="company_id" eval="False"/>
+	</record>
+
+	<record id="laboratory_report_form_view" model="ir.ui.view">
+		<field name="name">laboratory.report.form</field>
+		<field name="model">laboratory.report</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<h1>
+						<field name="name" readonly="1"/>
+					</h1>
+					<group>
+						<group>
+							<field name="project_id" required="1"/>
+							<field name="partner_id" required="1"/>
+							<field name="user_id" required="1"/>
+							<field name="metal_type"/>
+							<field name="sample_description"/>
+						</group>
+						<group>
+							<field name="sent_date"/>
+							<field name="received_date"/>
+							<field name="report_date"/>
+							<field name="requested_date"/>
+							<field name="actual_report_date"/>
+						</group>
+					</group>
+					
+					<notebook>
+						<page string="Documents">
+							<field name="document_ids">
+								<tree editable="bottom">
+									<field name="name" required="1"/>
+									<field name="file_char" invisible="1"/>
+									<field name="project_doc" widget="binary" filename="file_char" required="1"/>
+								</tree>
+								<form>
+									<group>
+										<field name="name"/>
+										<field name="file_char" invisible="1"/>
+										<field name="project_doc" widget="binary" filename="file_char"/>
+									</group>
+								</form>
+							</field>
+						</page>
+						<page string="Métaux à analyser">
+							<separator string="Metals"/>
+								<span style="font-weight: bold;">Silver
+									<field name="silver" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<span style="font-weight: bold;">Gold
+									<field name="gold" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<span style="font-weight: bold;">Palladium
+									<field name="palladium" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<span style="font-weight: bold;">Platinum
+									<field name="platinum" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<span style="font-weight: bold;">Copper
+									<field name="copper" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<span style="font-weight: bold;">Rhodium
+									<field name="rhodium" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<span style="font-weight: bold;">Ruthenium
+									<field name="ruthenium" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+								<span style="font-weight: bold;">Iridium
+									<field name="iridium" style="margin-left: 6px;margin-right: 20px;"/>
+								</span>
+							<separator/>
+
+							<separator string="Silver Analysis" attrs="{'invisible' : [('silver', '=', False)]}"/>
+							<field name="silver_analysis_ids" attrs="{'invisible' : [('silver', '=', False)]}">
+								<tree>
+									<field name="container_id"/>
+									<field name="refining_sample_id"/>
+									<field name="quantity"/>
+									<field name="estimated_result"/>
+									<field name="actual_result"/>
+								</tree>
+								<form>
+									<group>
+										<group>
+											<field name="laboratory_id" invisible="1"/>
+											<field name="project_id"/>
+											<field name="container_id" required="1" domain="[('project_id.id','=',project_id)]"/>
+											<field name="refining_sample_id" required="1" domain="[('sample_line_id.id','=',project_id)]"/>
+											<field name="quantity" required="1"/>
+										</group>
+										<group>
+											
+											<field name="estimated_result" required="1"/>
+											<field name="actual_result" required="1"/>
+											
+										</group>
+									</group>
+								</form>
+							</field>
+
+							<separator string="Gold Analysis" attrs="{'invisible' : [('gold', '=', False)]}"/>
+							<field name="gold_analysis_ids" attrs="{'invisible' : [('gold', '=', False)]}">
+								<tree>
+									<field name="container_id"/>
+									<field name="refining_sample_id"/>
+									<field name="quantity"/>
+									<field name="estimated_result"/>
+									<field name="actual_result"/>
+								</tree>
+								<form>
+									<group>
+										<group>
+											<field name="laboratory_id" invisible="1"/>
+											<field name="project_id"/>
+											<field name="container_id" required="1" domain="[('project_id.id','=',project_id)]"/>
+											<field name="refining_sample_id" required="1" domain="[('sample_line_id.id','=',project_id)]"/>
+											<field name="quantity" required="1"/>
+										</group>
+										<group>
+											
+											<field name="estimated_result" required="1"/>
+											<field name="actual_result" required="1"/>
+											
+										</group>
+									</group>
+								</form>
+							</field>
+
+							<separator string="Palladium Analysis" attrs="{'invisible' : [('palladium', '=', False)]}"/>
+							<field name="palladium_analysis_ids" attrs="{'invisible' : [('palladium', '=', False)]}">
+								<tree>
+									<field name="container_id"/>
+									<field name="refining_sample_id"/>
+									<field name="quantity"/>
+									<field name="estimated_result"/>
+									<field name="actual_result"/>
+								</tree>
+								<form>
+									<group>
+										<group>
+											<field name="laboratory_id" invisible="1"/>
+											<field name="project_id"/>
+											<field name="container_id" required="1" domain="[('project_id.id','=',project_id)]"/>
+											<field name="refining_sample_id" required="1" domain="[('sample_line_id.id','=',project_id)]"/>
+											<field name="quantity" required="1"/>
+										</group>
+										<group>
+											
+											<field name="estimated_result" required="1"/>
+											<field name="actual_result" required="1"/>
+											
+										</group>
+									</group>
+								</form>
+							</field>
+
+							<separator string="Platinum Analysis" attrs="{'invisible' : [('platinum', '=', False)]}"/>
+							<field name="platinum_analysis_ids" attrs="{'invisible' : [('platinum', '=', False)]}">
+								<tree>
+									<field name="container_id"/>
+									<field name="refining_sample_id"/>
+									<field name="quantity"/>
+									<field name="estimated_result"/>
+									<field name="actual_result"/>
+								</tree>
+								<form>
+									<group>
+										<group>
+											<field name="laboratory_id" invisible="1"/>
+											<field name="project_id"/>
+											<field name="container_id" required="1" domain="[('project_id.id','=',project_id)]"/>
+											<field name="refining_sample_id" required="1" domain="[('sample_line_id.id','=',project_id)]"/>
+											<field name="quantity" required="1"/>
+										</group>
+										<group>
+											
+											<field name="estimated_result" required="1"/>
+											<field name="actual_result" required="1"/>
+											
+										</group>
+									</group>
+								</form>
+							</field>
+
+							<separator string="Copper Analysis" attrs="{'invisible' : [('copper', '=', False)]}"/>
+							<field name="copper_analysis_ids" attrs="{'invisible' : [('copper', '=', False)]}">
+								<tree>
+									<field name="container_id"/>
+									<field name="refining_sample_id"/>
+									<field name="quantity"/>
+									<field name="estimated_result"/>
+									<field name="actual_result"/>
+								</tree>
+								<form>
+									<group>
+										<group>
+											<field name="laboratory_id" invisible="1"/>
+											<field name="project_id"/>
+											<field name="container_id" required="1" domain="[('project_id.id','=',project_id)]"/>
+											<field name="refining_sample_id" required="1" domain="[('sample_line_id.id','=',project_id)]"/>
+											<field name="quantity" required="1"/>
+										</group>
+										<group>
+											
+											<field name="estimated_result" required="1"/>
+											<field name="actual_result" required="1"/>
+											
+										</group>
+									</group>
+								</form>
+							</field>
+							
+
+							<separator string="Rhodium Analysis" attrs="{'invisible' : [('rhodium', '=', False)]}"/>
+							<field name="rhodium_analysis_ids" attrs="{'invisible' : [('rhodium', '=', False)]}">
+								<tree>
+									<field name="container_id"/>
+									<field name="refining_sample_id"/>
+									<field name="quantity"/>
+									<field name="estimated_result"/>
+									<field name="actual_result"/>
+								</tree>
+								<form>
+									<group>
+										<group>
+											<field name="laboratory_id" invisible="1"/>
+											<field name="project_id"/>
+											<field name="container_id" required="1" domain="[('project_id.id','=',project_id)]"/>
+											<field name="refining_sample_id" required="1" domain="[('sample_line_id.id','=',project_id)]"/>
+											<field name="quantity" required="1"/>
+										</group>
+										<group>
+											
+											<field name="estimated_result" required="1"/>
+											<field name="actual_result" required="1"/>
+											
+										</group>
+									</group>
+								</form>
+							</field>
+
+							<separator string="Ruthenium Analysis" attrs="{'invisible' : [('ruthenium', '=', False)]}"/>
+							<field name="ruthenium_analysis_ids" attrs="{'invisible' : [('ruthenium', '=', False)]}">
+								<tree>
+									<field name="container_id"/>
+									<field name="refining_sample_id"/>
+									<field name="quantity"/>
+									<field name="estimated_result"/>
+									<field name="actual_result"/>
+								</tree>
+								<form>
+									<group>
+										<group>
+											<field name="laboratory_id" invisible="1"/>
+											<field name="project_id"/>
+											<field name="container_id" required="1" domain="[('project_id.id','=',project_id)]"/>
+											<field name="refining_sample_id" required="1" domain="[('sample_line_id.id','=',project_id)]"/>
+											<field name="quantity" required="1"/>
+										</group>
+										<group>
+											
+											<field name="estimated_result" required="1"/>
+											<field name="actual_result" required="1"/>
+											
+										</group>
+									</group>
+								</form>
+							</field>
+
+							<separator string="Iridium Analysis" attrs="{'invisible' : [('iridium', '=', False)]}"/>
+							<field name="iridium_analysis_ids" attrs="{'invisible' : [('iridium', '=', False)]}">
+								<tree>
+									<field name="container_id"/>
+									<field name="refining_sample_id"/>
+									<field name="quantity"/>
+									<field name="estimated_result"/>
+									<field name="actual_result"/>
+								</tree>
+								<form>
+									<group>
+										<group>
+											<field name="laboratory_id" invisible="1"/>
+											<field name="project_id"/>
+											<field name="container_id" required="1" domain="[('project_id.id','=',project_id)]"/>
+											<field name="refining_sample_id" required="1" domain="[('sample_line_id.id','=',project_id)]"/>
+											<field name="quantity" required="1"/>
+										</group>
+										<group>
+											
+											<field name="estimated_result" required="1"/>
+											<field name="actual_result" required="1"/>
+											
+										</group>
+									</group>
+								</form>
+							</field>
+
+						</page>
+					</notebook>
+					<separator string="Notes"/>
+					<field name="description"/>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="laboratory_report_tree_view" model="ir.ui.view">
+		<field name="name">laboratory.report</field>
+		<field name="model">laboratory.report</field>
+		<field name="arch" type="xml">
+			<tree string="Laboratory Report">
+				<field name="name"/>
+				<field name="project_id"/>
+				<field name="partner_id"/>
+				<field name="user_id"/>
+				<field name="sent_date"/>
+				<field name="received_date"/>
+				<field name="report_date"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_laboratory_report" model="ir.actions.act_window">
+		<field name="name">Laboratory Report</field>
+		<field name="res_model">laboratory.report</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem name="Laboratory Report" id="menu_laboratory_report"
+			  parent="ppts_inventory_customization.menu_project_report"
+			  action="action_laboratory_report"
+			  groups="ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager"/>
+</odoo>

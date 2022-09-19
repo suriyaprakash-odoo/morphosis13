@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<!-- Sequences for internal.project -->
+	<record id="seq_internal_project" model="ir.sequence">
+		<field name="name">Internal Project Sequence</field>
+		<field name="code">internal.project.seq</field>
+		<field name="prefix">PI/%(y)s/%(woy)s/</field>
+		<field name="padding">4</field>
+		<field name="company_id" eval="False"/>
+	</record>
+
+	<record id="seq_internal_project_grinding" model="ir.sequence">
+		<field name="name">Internal Project BRO</field>
+		<field name="code">internal.project.bro</field>
+		<field name="prefix">PI/%(y)s/%(woy)s/BRO/</field>
+		<field name="padding">4</field>
+		<field name="company_id" eval="False"/>
+	</record>
+
+	<record id="seq_internal_project_dismantling" model="ir.sequence">
+		<field name="name">Internal Project DEM</field>
+		<field name="code">internal.project.dem</field>
+		<field name="prefix">PI/%(y)s/%(woy)s/DEM/</field>
+		<field name="padding">4</field>
+		<field name="company_id" eval="False"/>
+	</record>
+
+	<record id="seq_internal_project_repackaging" model="ir.sequence">
+		<field name="name">Internal Project REC</field>
+		<field name="code">internal.project.rec</field>
+		<field name="prefix">PI/%(y)s/%(woy)s/REC/</field>
+		<field name="padding">4</field>
+		<field name="company_id" eval="False"/>
+	</record>
+
+	<record id="seq_internal_project_sorting" model="ir.sequence">
+		<field name="name">Internal Project TRI</field>
+		<field name="code">internal.project.tri</field>
+		<field name="prefix">PI/%(y)s/%(woy)s/TRI/</field>
+		<field name="padding">4</field>
+		<field name="company_id" eval="False"/>
+	</record>
+
+	<record id="seq_internal_project_vrac" model="ir.sequence">
+		<field name="name">Internal Project VRA</field>
+		<field name="code">internal.project.vra</field>
+		<field name="prefix">PI/%(y)s/%(woy)s/VRA/</field>
+		<field name="padding">4</field>
+		<field name="company_id" eval="False"/>
+	</record>
+
+	<record id="seq_internal_project_sorting_vrac" model="ir.sequence">
+		<field name="name">Internal Project SVRA</field>
+		<field name="code">internal.project.svra</field>
+		<field name="prefix">PI/%(y)s/%(woy)s/SVRA/</field>
+		<field name="padding">4</field>
+		<field name="company_id" eval="False"/>
+	</record>
+
+	<record id="seq_internal_project_test" model="ir.sequence">
+		<field name="name">Internal Project TES</field>
+		<field name="code">internal.project.tes</field>
+		<field name="prefix">PI/%(y)s/%(woy)s/TES/</field>
+		<field name="padding">4</field>
+		<field name="company_id" eval="False"/>
+	</record>
+
+
+	<record id="inernal_project_view_form" model="ir.ui.view">
+		<field name="name">internal.project.form</field>
+		<field name="model">internal.project</field>
+		<field name="arch" type="xml">
+			<form string="Internal Project">
+				<header>
+					<button name="action_create_second_process" type="object" class="oe_highlight" string="Create Containers" attrs="{'invisible': ['|',('state', '=', 'done'),('action_type', '=', 'vrac')]}"/>
+					<button name="%(internal_project.action_complete_vrac_process)d" type="action" class="oe_highlight" string="Complete VRAC Process" attrs="{'invisible': ['|',('state', '=', 'done'),('action_type', '!=', 'vrac')]}"/>
+					<field name="state" widget="statusbar"/>
+				</header>
+				<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button class="oe_stat_button" type="object" name="action_view_project_containers" icon="fa-cube" attrs="{'invisible': ['|',('state', '=', 'new'),('action_type', '=', 'vrac')]}">
+							<field name="rc_container_count" widget="statinfo" string="Containers"/>
+						</button>
+						<button class="oe_stat_button" type="object" name="action_view_vrac_fractions" icon="fa-th" string="Fraction" attrs="{'invisible': ['|',('state', '=', 'new'),('action_type', '!=', 'vrac')]}">
+							<!-- <field name="rc_container_count" widget="statinfo" string="Containers"/> -->
+						</button>
+					</div>
+					<h1 class="d-none d-md-block">
+						<field name="name" readonly="1"/>
+					</h1>
+					<group>
+						<group>
+							<field name="action_type" required="1" attrs="{'readonly':[('state','!=','new')]}"/>
+							<field name="partner_id" required="1" options="{'no_create_edit': True}" attrs="{'readonly':[('state','!=','new')]}"/>
+						</group>
+						<group>
+							<!--<field name="content_type_id"/>-->
+							<field name="company_id" invisible="1"/>
+							<field name="location_id" attrs="{'readonly':[('state','!=','new')]}" options="{'no_create_edit': True}"/>
+							<field name="currency_id" invisible="1"/>
+						</group>
+					</group>
+					<group string="Cost" attrs="{'invisible':[('state','!=','done')]}">
+						<field name="final_production_cost"/>
+					</group>
+					<group>
+						<field name="project_containers" invisible="1"/>
+					</group>
+					<notebook>
+						<page string="Container">
+							<field name="container_ids" context="{'group_by':'content_type_id'}">
+								<tree>
+									<field name="name"/>
+									<field name="content_type_id"/>
+									<field name="net_weight"/>
+									<field name="forecast_sale_price"/>
+								</tree>
+							</field>
+							<group class="oe_subtotal_footer oe_right" name="rc_cost">
+								<field name="container_count"/>
+								<field name="net_weight"/>
+								<field name="production_cost"/>
+							</group>
+							<div class="oe_clear"/>
+						</page>
+					</notebook>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="internal_project_tree_view" model="ir.ui.view">
+		<field name="name">internal.project.tree</field>
+		<field name="model">internal.project</field>
+		<field name="arch" type="xml">
+			<tree string="Internal Project">
+				<field name="name"/>
+				<field name="partner_id"/>
+				<field name="content_type_id"/>
+				<field name="location_id"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="action_internal_project" model="ir.actions.act_window">
+		<field name="name">Internal Project</field>
+		<field name="res_model">internal.project</field>
+		<!--<field name="search_view_id" ref="project_entries_filters"/>-->
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem name="Internal Project" id="menu_internal_project" parent="ppts_project_entries.menu_project_custom" action="action_internal_project"
+			  groups='ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager' sequence="4"/>
+
+
+	<record id="project_container_form_view_inherit" model="ir.ui.view">
+		<field name="name">project.container.form</field>
+		<field name="model">project.container</field>
+		<field name="inherit_id" ref="ppts_inventory_customization.project_container_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='project_id']" position="after">
+				<field name="internal_project_id" attrs="{
+								'readonly':[('state','not in',('new','confirmed'))],
+								'invisible':[('second_process' , '!=' , True)]
+								}" options="{'no_create_edit': True}"/>
+				<field name="second_process_cost" invisible="1"/>
+				<field name="parent_rc_id" attrs="{
+								'readonly':[('state','not in',('new','confirmed'))],
+								'invisible':[('second_process' , '!=' , True)]
+								}" options="{'no_create_edit': True}"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="project_fractions_form_view_inherit" model="ir.ui.view">
+		<field name="name">project.fraction.form</field>
+		<field name="model">project.fraction</field>
+		<field name="inherit_id" ref="ppts_inventory_customization.project_fractions_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='project_id']" position="after">
+				<field name="internal_project_id" attrs="{'readonly':[('state','!=','new')],'invisible':[('second_process', '=', False)]}" options="{'no_create_edit': True}" readonly="1"/>
+				<field name="parent_rc_id" invisible="1"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="project_container_tree_view_internal_project" model="ir.ui.view">
+		<field name="name">project.container.tree</field>
+		<field name="model">project.container</field>
+		<field name="arch" type="xml">
+			<tree string="Project Container">
+				<field name='name'/>
+				<field name='internal_project_id'/>
+				<field name='parent_rc_id'/>
+				<field name="partner_id"/>
+				<field name='container_type_id'/>
+				<field name="main_product_id"/>
+				<field name="sub_product_id"/>
+				<field name='gross_weight' sum="Gross Weight"/>
+				<field name='net_weight' sum="Fraction Net Weight"/>
+				<field name="volume" sum="Volume"/>
+				<field name="supervisor_id"/>
+				<field name="location_id"/>
+				<field name="action_date"/>
+				<field name="state"/>
+			</tree>
+		</field>
+	</record>
+
+
+</odoo>

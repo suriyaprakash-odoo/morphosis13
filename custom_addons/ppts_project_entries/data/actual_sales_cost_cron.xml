@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+		<record id="update_acutal_sale_cost_cron" model="ir.cron">
+			<field name="name">Update Actual Sales Cost</field>
+			<field name="model_id" ref="model_project_entries" />
+			<field name="state">code</field>
+			<field name="code">model.update_actual_sales_cost_cron()</field>
+			<field name="interval_number">1</field>
+			<field name="interval_type">hours</field>
+			<field name="numbercall">-1</field>
+			<field name="doall" eval="False" />
+		</record>
+
+	</data>
+</odoo>

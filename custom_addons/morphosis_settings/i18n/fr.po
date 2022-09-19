@@ -1,0 +1,66 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* morphosis_settings
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e-20191017\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-19 14:25+0000\n"
+"PO-Revision-Date: 2019-12-19 14:25+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: morphosis_settings
+#: model:ir.model.fields,field_description:morphosis_settings.field_res_company__purchase_threshold_percentage
+msgid "Approval Threshold(%)"
+msgstr "Seuil d'approbation (%)"
+
+#. module: morphosis_settings
+#: model:ir.model,name:morphosis_settings.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: morphosis_settings
+#: model:ir.model.fields,field_description:morphosis_settings.field_res_company__contract_rate
+msgid "Contract Rate"
+msgstr "Taux de contrat"
+
+#. module: morphosis_settings
+#: model:ir.model.fields,field_description:morphosis_settings.field_res_company__ea_rate
+msgid "EA Rate"
+msgstr "Taux EA"
+
+#. module: morphosis_settings
+#: model_terms:ir.ui.view,arch_db:morphosis_settings.view_company_form_inherit
+msgid "Hourly Rates"
+msgstr "Taux horaires"
+
+#. module: morphosis_settings
+#: model_terms:ir.ui.view,arch_db:morphosis_settings.view_company_form_inherit
+msgid "Purchase"
+msgstr "Achats"
+
+#. module: morphosis_settings
+#: model:ir.model.fields,field_description:morphosis_settings.field_res_company__purchase_limit
+msgid "Purchase Limit"
+msgstr "Limite d'achat"
+
+#. module: morphosis_settings
+#: model:ir.model.fields,field_description:morphosis_settings.field_res_company__margin_percentage
+msgid "Sale Margin(%)"
+msgstr "Marge de vente(%)"
+
+#. module: morphosis_settings
+#: model_terms:ir.ui.view,arch_db:morphosis_settings.view_company_form_inherit
+msgid "Sales"
+msgstr "Vente"
+
+#. module: morphosis_settings
+#: model:ir.model.fields,field_description:morphosis_settings.field_res_company__standard_rate
+msgid "Standard Rate"
+msgstr "Taux standard"

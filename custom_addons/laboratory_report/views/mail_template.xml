@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="email_template_alert_laboratory_notification" model="mail.template">
+        <field name="name">Laboratory Notification Alert</field>
+        <field name="subject">Laboratory Notification</field>
+        <field name="email_from">${object.company_id.partner_id.email}</field>
+        <field name="email_to">aurelia.benney@weeecycling.com,matthieu.macaud@weeecycling.com</field>
+        <field name="model_id" ref="ppts_project_entries.model_project_entries"/>
+        <field name="auto_delete" eval="False"/>
+        <field name="body_html">
+            <![CDATA[
+                <p>Bonjour,</p>
+                <p>Le projet <strong>${object.name}</strong> a besoin d’une analyse avant traitement.Vous trouverez dans les notes et les documents les informations nécessaires à cette analyse.
+                </p>
+                <p>Merci</p>
+                <p>${object.company_id.name}</p>
+            ]]>
+        </field>
+    </record>
+</odoo>

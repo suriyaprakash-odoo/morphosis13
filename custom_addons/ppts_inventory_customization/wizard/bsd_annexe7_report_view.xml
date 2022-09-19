@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="view_bsd_annexe_report" model="ir.ui.view">
+            <field name="name">bsd.annexe.report.form</field>
+            <field name="model">bsd.annexe.report</field>
+            <field name="arch" type="xml">
+                <form string="BSD/Annexe7 Report">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="from_date" required="1" />
+                            </group>
+                            <group>
+                                <field name="to_date" required="1" />
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="view_bsd_annexe_report" string="Generate Report" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_bsd_annexe_report" model="ir.actions.act_window">
+            <field name="name">BSD/Annexe7 Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bsd.annexe.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_bsd_annexe_report" />
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="BSD/Annexe7 Report" id="menu_bsd_annexe_report" parent="ppts_inventory_customization.menu_project_report" action="action_bsd_annexe_report"/>
+
+        <record id="bad_annexe_report_tree_view" model="ir.ui.view">
+            <field name="name">logistics.report.tree</field>
+            <field name="model">logistics.report</field>
+            <field name="arch" type="xml">
+                <tree create="0">
+                    <field name="waste_form"/>
+                    <field name="waste_code"/>
+                    <field name="expected_delivery"/>
+                    <field name="number_bsd"/>
+                    <field name="pretreatment_code"/>
+                    <field name="destination_company"/>
+                    <field name="destination_siret"/>
+                    <field name="delivery_address"/>
+                    <field name="transporter_name"/>
+                    <field name="transporter_address"/>
+                    <field name="recipit"/>
+                    <field name="expiration_date"/>
+                    <field name="reception_date"/>
+                    <field name="buyer_treatment_date"/>
+                    <field name="handler"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

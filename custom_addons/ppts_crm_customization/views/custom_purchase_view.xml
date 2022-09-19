@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="purchase_order_form_inherited" model="ir.ui.view">
+		<field name="name">purchase.order.customization</field>
+		<field name="model">purchase.order</field>
+		<field name="inherit_id" ref="purchase.purchase_order_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//notebook/page[2]//group[@name='other_info']" position="inside">
+				<field name="opportunity_id"/>
+			</xpath>
+			<xpath expr="//field[@name='amount_untaxed']" position="after">
+				<field name="amount_from_offer" widget="monetary" options="{'currency_field': 'currency_id'}" attrs="{'invisible': [('opportunity_id', '=', False)]}"/>
+			</xpath>
+		</field>
+	</record>
+</odoo>

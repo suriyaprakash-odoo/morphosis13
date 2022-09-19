@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_search_chronopost_project" model="ir.ui.view">
+        <field name="name">search.chronopost.project.view.form</field>
+        <field name="model">search.chronopost.project</field>
+        <field name="arch" type="xml">
+            <form string="Search Project">
+            	<sheet>
+					<group>
+						<field name="chronopost_number" required="1" options="{'no_create_edit': True}" />
+					</group>
+				</sheet>
+                <footer>
+                    <button name="search_and_open_project" string="Search and Open Project" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="action_search_chronopost_project" model="ir.actions.act_window">
+		<field name="name">Search Project</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">search.chronopost.project</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_search_chronopost_project" />
+		<field name="target">new</field>
+	</record>
+
+</odoo>

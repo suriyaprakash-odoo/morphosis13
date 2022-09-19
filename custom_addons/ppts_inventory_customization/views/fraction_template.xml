@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="fraction_template_view_form" model="ir.ui.view">
+		<field name="name">fraction.template.form</field>
+		<field name="model">fraction.template</field>
+		<field name="arch" type="xml">
+			<form string="Project Template">
+				<sheet>
+					<group>
+						<group>
+							<field name="name" required="1"/>
+							<field name="main_product_id" required="1" options="{'no_create_edit': True}"/>
+						</group>
+						<group>
+							<field name="product_ids" widget="many2many_tags" required="1" options="{'no_create_edit': True}"/>
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="project_entries_tree_view" model="ir.ui.view">
+		<field name="name">fraction.template.tree</field>
+		<field name="model">fraction.template</field>
+		<field name="arch" type="xml">
+			<tree>
+				<field name="name"/>
+				<field name="main_product_id"/>
+				<field name="product_ids"/>
+			</tree>
+		</field>
+	</record>
+
+
+	<record id="action_fraction_template" model="ir.actions.act_window">
+		<field name="name">Fraction Template</field>
+		<field name="res_model">fraction.template</field>
+		<!--<field name="search_view_id" ref="project_entries_filters"/>-->
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<menuitem name="Fraction Template" id="menu_fraction_template" parent="ppts_inventory_customization.menu_project_configuration_main" action="action_fraction_template"
+			  groups='ppts_inventory_customization.group_production_supervisor,ppts_inventory_customization.group_production_manager'/>
+
+
+</odoo>

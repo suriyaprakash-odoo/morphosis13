@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_move_form_inherit" model="ir.ui.view">
+		<field name="name">account.move.form</field>
+		<field name="model">account.move</field>
+		<field name="inherit_id" ref="account.view_move_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='action_reverse']" position="before">
+				<button name="send_for_approval" type="object" string="Send for Approval" class="oe_highlight"
+						attrs="{'invisible': ['|','|',('type','!=','in_invoice'),('state','!=','draft'),('approval_required','=', False)]}"/>
+				<button name="approve_bill" type="object" string="Approve" class="oe_highlight" attrs="{'invisible': [('state','!=','approval')]}"/>
+			</xpath>
+			<xpath expr="//button[@name='action_post']" position="attributes">
+				<attribute name="attrs">
+					{'invisible': ['|', ('state', '!=', 'draft'),('approval_required','!=', False)]}
+				</attribute>
+			</xpath>
+
+			<xpath expr="//field[@name='invoice_origin']" position="replace">
+			</xpath>
+
+			<xpath expr="//field[@name='ref']" position="after">
+				<field name="approval_required" invisible="1"/>
+				<field name="approver_id" attrs="{'invisible': ['|',('type','!=','in_invoice'),('approval_required','=', False)],
+				'required':[('approval_required','!=', False)],'readonly':[('state','!=', 'draft')]}"/>
+				<field name="invoice_origin" string="Source Document" readonly="0" attrs="{'invisible': [('invoice_origin', '=', False)]}"/>
+			</xpath>
+
+
+		</field>
+	</record>
+
+
+	<record id="action_invoice_approve" model="ir.actions.act_window">
+		<field name="name">Bill Approval</field>
+		<field name="res_model">account.move</field>
+		<field name="domain">[('type','=','in_invoice'),('state','=','approval'),('approver_id.id','=',uid)]</field>
+		<field name="view_mode">tree,form</field>
+		<field name="view_id" ref="account.view_invoice_tree"/>
+	</record>
+
+	<menuitem name="Bill Approval" id="menu_invoice_approve" parent="ppts_project_entries.menu_project_custom"
+			  action="action_invoice_approve" groups='group_approve_bills' sequence="05"/>
+
+</odoo>

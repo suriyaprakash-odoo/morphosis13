@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="template_send_for_approval" model="mail.template">
+			<field name="name">Bill Approval Notification</field>
+			<field name="subject">Facture pour Approbation</field>
+			<field name="email_to">${object.approver_id.login}</field>
+			<field name="model_id" ref="account.model_account_move"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Bonjour</p>
+
+                    <p>
+						Il y a une facture en attente de votre approbation :
+                    <br/>
+        
+                    % if object.invoice_origin
+                    	<p><strong>${object.invoice_origin}</strong> </p>
+                    % endif
+                    <br/>
+                    <p>De la part de: <strong>${object.partner_id.name}</strong></p>
+                    <br/>
+                    <p>Pour un montant de: <strong>${format_amount(object.amount_total, object.currency_id)}</p>
+                    <br/>
+					<br/>
+
+					<a href="${ctx.get('url')}"
+						style="background-color: #875A7B; padding: 10px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 15px;text-transform:uppercase;">Click to Open</a>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+
+                    <p>Thanks,</p>
+                    <p>${object.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+			</field>
+		</record>
+	</data>
+</odoo>

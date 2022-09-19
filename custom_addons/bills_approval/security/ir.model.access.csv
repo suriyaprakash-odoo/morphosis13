@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_move_approver,account.move.approve,account.model_account_move,bills_approval.group_approve_bills,1,0,0,0
+accoun_account_tag_approver,account.account.tag.access,account.model_account_account_tag,bills_approval.group_approve_bills,1,0,0,0

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="email_template_approve_lead" model="mail.template">
+			<field name="name">Lead Approval Request</field>
+			<field name="subject">Lead Approval Request</field>
+			<field name="email_from">${object.user_id.login}</field>
+			<field name="email_to">gaël.Renaux@morphosis.fr</field>
+			<field name="model_id" ref="ppts_crm_customization.model_crm_lead"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Hi Team,</p>
+                    <p>A Lead: <b>${object.name}</b> is waiting for approval. So kindly check and approve.</p>
+                    <br/>
+                    <p>Thanks,</p>
+                    <p>${object.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+			</field>
+		</record>
+		<record id="email_template_approval_sent" model="mail.template">
+			<field name="name">Lead Approval Sent</field>
+			<field name="subject">Lead Approval Sent</field>
+			<field name="email_from">${object.company_id.partner_id.email}</field>
+			<field name="email_to">${object.user_id.login}</field>
+			<field name="model_id" ref="ppts_crm_customization.model_crm_lead"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Hi Team,</p>
+                    <p>A Lead: <b>${object.name}</b> has been sent for approval.</p>
+                    <br/>
+                    <p>Thanks,</p>
+                    <p>${object.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+			</field>
+		</record>
+		<record id="email_template_lead_approved" model="mail.template">
+			<field name="name">Lead Approved</field>
+			<field name="subject">Lead Approved</field>
+			<field name="email_from">${object.team_id.user_id.login}</field>
+			<field name="email_to">${object.user_id.login}</field>
+			<field name="model_id" ref="ppts_crm_customization.model_crm_lead"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Hi Team,</p>
+                    <p>A Lead: <b>${object.name}</b> is approved. So kindly check and proceed further.</p>
+                    <br/>
+                    <p>Thanks,</p>
+                    <p>${object.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+			</field>
+		</record>
+		<record id="email_template_lead_rejected" model="mail.template">
+			<field name="name">Lead Rejeccted</field>
+			<field name="subject">Lead Rejected</field>
+			<field name="email_from">${object.team_id.user_id.login}</field>
+			<field name="email_to">${object.user_id.login}</field>
+			<field name="model_id" ref="ppts_crm_customization.model_crm_lead"/>
+			<field name="auto_delete" eval="False"/>
+			<field name="body_html">
+				<![CDATA[
+                    <p>Hi Team,</p>
+                    <p>A Lead: <b>${object.name}</b> is rejected.</p>
+                    <br/>
+                    <p>Thanks,</p>
+                    <p>${object.company_id.name}</p>
+                    <p><i>Morphosis Group</i></p>
+                ]]>
+			</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="project_entries_form_view_inherited_new" model="ir.ui.view">
+		<field name="name">project.entries.form</field>
+		<field name="model">project.entries</field>
+		<field name="inherit_id" ref="ppts_project_entries.project_entries_form_view"/>
+		<field name="arch" type="xml">
+
+
+			<xpath expr="//button[@name='action_alert_logistics']" position="after">
+
+				<button name="action_alert_laboratory_notification" id="action_alert_laboratory_notification" string="Laboratory Notification" class="btn-primary" type="object"
+				attrs="{'invisible': ['|',('status', '!=', 'quote'),('lab_test', '!=', True)]}"
+				groups='ppts_project_entries.group_project_entries_officer'/>
+			</xpath>
+
+			<!--  -->
+			<xpath expr="//div[@name='button_box']" position="inside">
+				<button name="create_lab_report_request" string="Laboratory Report" attrs="{'invisible' : [('lab_test', '=' , False)]}"
+						type="object" class="oe_stat_button" icon="fa-flask"/>
+			</xpath>
+
+			<xpath expr="//field[@name='project_type']" position="after">
+				<field name="lab_test"  attrs="{'invisible' : [('project_type', '!=' , 'refine')]}"/>
+				<field name="lab_report_id" invisible="1"/>
+			</xpath>
+
+		</field>
+	</record>
+
+</odoo>

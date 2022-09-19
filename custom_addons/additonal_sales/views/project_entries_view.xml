@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="project_entries_form_view_inherited" model="ir.ui.view">
+			<field name="name">project.entries.form</field>
+			<field name="model">project.entries</field>
+			<field name="inherit_id" ref="ppts_project_entries.project_entries_form_view"/>
+			<field name="arch" type="xml">
+				<xpath expr="//button[@name='additional_purchase_order']" position="before">
+					<button name="additional_sales_order" string="Additional Sales" class="oe_stat_button" icon="fa-eur"
+							 type="object"/>
+							 <!-- attrs="{'invisible': [('project_type','!=','refine')]}" -->
+				</xpath>
+				<xpath expr="//notebook/page[3]" position="after">
+					<page string="Additional Sales" >
+					<!-- attrs="{'invisible': [('project_type','!=','refine')]}" -->
+						<field name="sale_order_ids">
+							<tree editable="bottom">
+								<field name="sale_id" required="1"/>
+								<field name="untaxed_amount" sum="Untaxed Amount"/>
+								<field name="amount" sum="Amount"/>
+								<field name="description"/>
+							</tree>
+							<form>
+								<group>
+									<field name="sale_id"/>
+									<field name="untaxed_amount"/>
+									<field name="amount"/>
+									<field name="description"/>
+								</group>
+							</form>
+						</field>
+					</page>
+				</xpath>
+
+				<xpath expr="//field[@name='estimated_extra_purchase_cost']" position="after">
+					<field name="estimated_extra_sales" attrs="{'readonly' : [('status', 'not in' , 'quote')]}"/>
+				</xpath>
+				<xpath expr="//field[@name='production_cost_with_offer']" position="after">
+					<field name="extra_sales_cost"/>
+					<field name="calculated_service_profit"/>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

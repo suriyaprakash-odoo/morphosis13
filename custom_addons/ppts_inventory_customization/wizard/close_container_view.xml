@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<record id="resuse_barcode_seq" model="ir.sequence">
+		<field name="name">Reuse Container Barcode</field>
+		<field name="code">reuse.barcode</field>
+		<field name="prefix">CMTC/%(y)s/%(woy)s/</field>
+		<field name="padding">2</field>
+		<field name="company_id" eval="False"/>
+	</record>
+
+	<record id="close_container_wizard_form" model="ir.ui.view">
+		<field name="name">close.container.wizard.form</field>
+		<field name="model">close.container.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Invoice Verified">
+				<group>
+					<group>
+						<field name="contractor_rate"/>
+						<field name="ea_rate"/>
+						<field name="standard_rate"/>
+					</group>
+					<group>
+						<field name="weight_ok"/>
+						<field name="quality_ok"/>
+						<!--<field name="returnable_container"/>-->
+					</group>
+				</group>
+
+				<notebook>
+					<page string="Containers">
+						<div style="float:right;margin-right: 20px;">
+							<field name="select_all"/>
+							<span style="font-weight: bold; padding-left:4px;">Select All</span>
+						</div>
+						<field name="container_line" nolabel="1">
+							<tree editable="bottom" create="false">
+								<field name="container_id" options="{'no_create_edit': True}"/>
+								<field name="primary_product" readonly="1"/>
+								<field name="gross_weight" readonly="1"/>
+								<field name="net_weight" readonly="1"/>
+								<field name="scrap_weight" readonly="1"/>
+								<field name="weight_difference" readonly="1"/>
+								<field name="count" readonly="1"/>
+								<field name="close_container"/>
+							</tree>
+						</field>
+						<separator string="Reusable Containers"/>
+						<field name="lot_ids" nolabel="1">
+							<tree editable="bottom" create="false">
+								<field name="container_id" options="{'no_create_edit': True}" required="1"/>
+								<field name="location_id" required="1" options="{'no_create_edit': True}"/>
+								<field name="reuse_barcode"/>
+								<field name="dest_location_id" required="1" options="{'no_create_edit': True}"/>
+								<field name="lot_id" required="1" options="{'no_create_edit': True}"/>
+								<field name="product_id" required="1" options="{'no_create_edit': True}"/>
+								<field name="generate_barcode"/>
+								<field name="close"/>
+							</tree>
+						</field>
+					</page>
+				</notebook>
+				<footer>
+					<button name="action_close_container" string="Close Container" type="object" class="btn btn-sm btn-primary"/>
+					<button string="Cancel" class="btn btn-sm btn-default" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="close_container_action" model="ir.actions.act_window">
+		<field name="name">Close Container</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">close.container.wizard</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="close_container_wizard_form"/>
+		<field name="target">new</field>
+	</record>
+</odoo>

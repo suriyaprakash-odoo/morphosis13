@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<record id="view_partially_sell_containers" model="ir.ui.view">
+		<field name="name">sell.partially.view.form</field>
+		<field name="model">sell.partially</field>
+		<field name="arch" type="xml">
+			<form string="Partially Sell Container">
+				<sheet>
+					<group>
+						<group>
+							<field name="partner_id" required="1"/>
+							<field name="container_id" readonly="1"/>
+						</group>
+						<group>
+							<label for="selling_weight" string="Weight to sell"/>
+							<div>
+								<field name="selling_weight" class="oe_inline" required="1"/>
+								<button name="get_fraction_list" string="Get Fractions" type="object" class="oe_link"/>
+							</div>
+							<field name="fraction_weight" invisible="1"/>
+						</group>
+						<field name="wizard_line_ids" readonly="1">
+							<tree editable="bottom">
+								<field name="fraction_id"/>
+								<field name="weight_of_fraction"/>
+								<field name="line_id" invisible="1"/>
+							</tree>
+						</field>
+					</group>
+				</sheet>
+				<footer>
+					<button name="sell_container" string="Sell Container" type="object" class="btn-primary"/>
+					<button string="Cancel" class="btn-secondary" special="cancel"/>
+				</footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="action_partially_sell_containers" model="ir.actions.act_window">
+		<field name="name">Partially Sell Container</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sell.partially</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_partially_sell_containers"/>
+		<field name="target">new</field>
+	</record>
+
+</odoo>

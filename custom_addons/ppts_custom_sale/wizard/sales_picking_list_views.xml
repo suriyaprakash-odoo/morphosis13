@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_sale_picking_list" model="ir.ui.view">
+        <field name="name">sale.picking.list.view.form</field>
+        <field name="model">sale.picking.list</field>
+        <field name="arch" type="xml">
+            <form string="Unload Container">
+            	<sheet>
+					<group>
+						<field name="container_ids" widget="many2many_tags" />	
+					</group>
+					<group>
+						<group>
+							<field name="product_id" invisible='1'/>
+							<field name="sales_weight" readonly='1'/>
+						</group>
+						<group>
+							<field name="actual_weight" />
+						</group>
+					</group>
+				</sheet>
+                <footer>
+                    <button name="add_containers" string="Add Containers" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+			</form>
+		</field>
+	</record>
+
+
+	<record id="action_sale_picking_list" model="ir.actions.act_window">
+		<field name="name">Sale Picking List</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.picking.list</field>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_sale_picking_list" />
+		<field name="target">new</field>
+	</record>
+
+</odoo>
